@@ -1,0 +1,42 @@
+.header .topPanel {
+  padding: 0 0px 10px 10px;
+}
+
+.header .topPanel .logo {
+  float: left;
+  margin: 4px 0 0px 0px;
+  font-size: 20pt;
+}
+
+.header .topPanel .topButtons {
+  float: right;
+  margin: 14px 10px 0 0px;
+}
+
+.header .topPanel .topButtons .topButton {
+  padding: 8px 12px;
+  margin: 0 4px 0px 0px;
+  font-size: 11pt;
+  border: 1px solid #eee;
+}
+
+.mainHeader {
+  height: 350px;
+  background-color: #ddd;
+}
+
+.mainHeader .title {
+  margin-top: 120px;
+  font-size: 24pt;
+  text-align: center;
+}
+
+.container2 {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.footer {
+  height: 200px;
+  background-color: #55a;
+}

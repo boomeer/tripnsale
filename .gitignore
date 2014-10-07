@@ -1,0 +1,7 @@
+*.egg-info
+*.save
+*.pyc
+*.sw*
+*__pycache__
+*~
+*/migrations

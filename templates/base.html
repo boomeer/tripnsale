@@ -1,0 +1,49 @@
+{% load bootstrap3 %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="{% static "css/base.css" %}">
+    {% block own_head %}{% endblock %}
+</head>
+<body>
+    <div class="header row container-fluid">
+        <div class="topPanel container-fluid">
+            <div class="col-md-6">
+                <div class="logo">
+                    Trip&amp;Sale
+                </div>
+            </div>
+            <div class="col-md-6">
+                <span class="topButtons">
+                    <span class="regButton topButton">
+                        Регистрация
+                    </span>
+                    <span class="loginButton topButton">
+                        Войти
+                    </span>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="mainHeader row container-fluid container2">
+        <div class="title">
+            Крутой слоган
+        </div>
+    </div>
+    <div class="main">
+        {% block main %}{% endblock %}
+    </div>
+    <div class="footer">
+        FOOTER
+    </div>
+</body>
+</html>

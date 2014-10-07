@@ -1,0 +1,47 @@
+.acts {
+  height: 120px;
+  background-color: #ddf;
+}
+
+.acts .actButtons {
+  margin-top: 20px;
+}
+
+.tripsTitle {
+  font-size: 20pt;
+  text-align: center;
+  background-color: #f8f8ff;
+}
+
+.buysTitle {
+  font-size: 20pt;
+  text-align: center;
+  background-color: #f8f8ff;
+}
+
+.buys .buyItemWrapper {
+  margin-bottom: 10px;
+  border: 1px solid #f8f8ff;
+}
+
+.buys .buyItemWrapper .buyItem {
+  padding: 6px 10px;
+  border: 1px solid #eee;
+}
+
+.buys .buyItemWrapper .buyItem .userPart .userPic {
+  height: 50px;
+  background-color: #eee;
+}
+
+.buys .buyItemWrapper .buyItem .mainPart {
+  vertical-align: top;
+}
+
+.buys .buyItemWrapper .buyItem .mainPart .buyTitle {
+  font-weight: 900;
+}
+
+.buys .buyItemWrapper .buyItem .buyCostWrapper .buyCost {
+  float: right;
+}

@@ -55,7 +55,7 @@
                 <tbody>
                     {% for sale in sales %}
                         <tr>
-                            <td>{{ sale.username }}</td>
+                            <td>{{ sale.owner.username }}</td>
                             <td>{{ sale.fr }}</td>
                             <td>{{ sale.frTime }}</td>
                             <td>{{ sale.to }}</td>
@@ -84,7 +84,7 @@
                                     <img src="">
                                 </div>
                                 <div class="username">
-                                    username
+                                    {{ buy.owner.username }}
                                 </div>
                             </div>
                             <div class="mainPart col-md-11">

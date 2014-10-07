@@ -1,7 +1,4 @@
 from django.shortcuts import (
-    render,
-    HttpResponse,
-    render_to_response,
     redirect,
 )
 from django.template import RequestContext
@@ -11,6 +8,12 @@ from offer.models import (
 )
 from util.utils import (
     SafeView,
+    RenderToResponse,
+    CheckPost,
+)
+from user.utils import (
+    GetCurrentUser,
+    CheckAuth,
 )
 from datetime import datetime
 
@@ -19,41 +22,47 @@ from datetime import datetime
 def MainView(request):
     buys = BuyOffer.objects.all()
     sales = SaleOffer.objects.all()
-    return render_to_response("offer/main.html", RequestContext(request, {
+    return RenderToResponse("offer/main.html", request, {
         "buys": buys,
         "sales": sales,
-    }))
+    })
 
 
 @SafeView
-def BuyOfferAdd(request):
+def BuyOfferAddView(request):
     params = request.REQUEST
     act = params.get("act", "")
     if act == "add":
+        CheckPost(request)
+        CheckAuth(request)
         buy = BuyOffer(
             title=params.get("title", ""),
             costFrom=params.get("costFrom", None),
             costTo=params.get("costTo", None),
+            owner=GetCurrentUser(request),
         )
         buy.save()
         return redirect("/")
-    return render_to_response("offer/buy/add.html", RequestContext(request, {
-    }))
+    return RenderToResponse("offer/buy/add.html", request, {
+    })
 
 
 @SafeView
-def SaleOfferAdd(request):
+def SaleOfferAddView(request):
     params = request.REQUEST
     act = params.get("act", "")
     if act == "add":
+        CheckPost(request)
+        CheckAuth(request)
         sale = SaleOffer(
             fr=params.get("from", ""),
             frTime=datetime.strptime(params.get("fromTime", ""), "%d.%m.%Y"),
             to=params.get("to", ""),
             toTime=datetime.strptime(params.get("toTime", ""), "%d.%m.%Y"),
             deposit=params.get("deposit", None),
+            owner=GetCurrentUser(request),
         )
         sale.save()
         return redirect("/")
-    return render_to_response("offer/sale/add.html", RequestContext(request, {
-    }))
+    return RenderToResponse("offer/sale/add.html", request, {
+    })

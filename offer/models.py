@@ -1,19 +1,14 @@
 from django.db import models
 from util.utils import TsExc
 import util.models
+from user.models import User
 from datetime import datetime
-
-
-class TlsMustBeListErr(TsExc):
-    pass
-
-class TsMustBePairOfDatesErr(TsExc):
-    pass
 
 
 class Offer(util.models.ContentHolder):
     class Meta:
         abstract = True
+    owner = models.ForeignKey(User, default=None, blank=True, null=True)
 
 
 class BuyOffer(Offer):

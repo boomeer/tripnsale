@@ -10,4 +10,5 @@ urlpatterns = patterns('',
 
     url('^admin/', include(admin.site.urls)),
     url('^', include('offer.urls')),
+    url('^user/', include('user.urls')),
 )

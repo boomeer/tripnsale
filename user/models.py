@@ -1,6 +1,9 @@
 from django.db import models
-import django.contrib.auth.models as auth_models
+import django.contrib.auth.models as authModels
 
 
-class User(auth_models.User):
-    pass
+class User(authModels.User):
+    remoteAddr = models.TextField(default="")
+    regRemoteAddr = models.TextField(default="")
+    country = models.TextField(default="")
+    city = models.TextField(default="")

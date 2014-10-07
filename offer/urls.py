@@ -4,6 +4,6 @@ from offer.views import *
 
 urlpatterns = patterns('',
     url("^$", MainView),
-    url("^buy/$", BuyOfferAdd),
-    url("^sale/$", SaleOfferAdd),
+    url("^buy/$", BuyOfferAddView),
+    url("^sale/$", SaleOfferAddView),
 )

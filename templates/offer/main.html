@@ -6,13 +6,13 @@
 {% endblock %}
 
 {% block main %}
-    <div class="mainHeaderWrapper row">
-        <div class="mainHeader row container-fluid container2">
+    <div class="mainHeaderWrapper container-fluid">
+        <div class="mainHeader row container2">
             <div class="title">
                 Крутой слоган
             </div>
         </div>
-        <div class="acts row container-fluid container2">
+        <div class="acts row container2">
             <div class="actButtons col-md-8 col-md-offset-2">
                 <div class="col-md-6">
                     <a href="/sale" type="button" class="btn btn-default btn-lg btn-block">Еду</a>
@@ -23,10 +23,10 @@
             </div>
         </div>
     </div>
-    <div class="tripsTitle row">
+    <div class="tripsTitle container-fluid">
         Путешествуют
     </div>
-    <div class="trips row container2">
+    <div class="trips container-fluid container2">
         <div class="tripsFilter col-md-2 col-md-offset-1">
             <form class="form-horizontal" role="form">
                 <div class="form-group">
@@ -75,17 +75,17 @@
 
         </div>
     </div>
-    <div class="buysTitle row">
+    <div class="buysTitle container-fluid">
         Хотят приобрести
     </div>
-    <div class="buys row container2">
+    <div class="buys container-fluid container2">
         <div class="col-md-2 col-md-offset-1">
         </div>
         <div class="buysList col-md-8">
             {% for buy in buys %}
                 <div class="buyItemWrapper">
                     <div class="buyItem">
-                        <div class="row container-fluid">
+                        <div class="container-fluid">
                             <div class="userPart col-md-1">
                                 <div class="userPic">
                                     <img src="">
@@ -102,7 +102,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="buyCostWrapper row container-fluid">
+                        <div class="buyCostWrapper container-fluid">
                             <div class="buyCost">
                                 Цена от {{ buy.costFrom }} до {{ buy.costTo }}
                             </div>

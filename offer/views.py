@@ -23,6 +23,7 @@ def MainView(request):
     buys = BuyOffer.objects.all()
     sales = SaleOffer.objects.all()
     return RenderToResponse("offer/main.html", request, {
+        "fullFirstPage": True,
         "buys": buys,
         "sales": sales,
     })

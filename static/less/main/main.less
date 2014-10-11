@@ -3,7 +3,6 @@
 
 .mainHeaderWrapper {
     margin-bottom: 20px;
-    background: url("/static/img/bg_passport2.jpg");
 
     .mainHeader {
         height: 450px;
@@ -17,14 +16,47 @@
     }
 
     .acts {
-        height: 120px;
-        background-color: rgba(100, 100, 150, 0.8);
+        position: absolute;
+        width: 100%;
+        bottom: 0px;
+        height: 15%;
+        background-color: rgba(40, 40, 60, 0.8);
 
         .actButtons {
-            margin-top: 20px;
+            position: absolute;
+            width: 66.66667%;
+            left: 16.66667%;
+            top: 30%;
+            height: 40%;
 
-            .btn {
+            .actBtn {
+                position: absolute;
+                border: 1px solid #ccc;
                 background-color: #eee;
+                width: 40%;
+                height: 100%;
+
+                .actBtnText {
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    color: #000;
+                    font-size: 12pt;
+                    transform: translate(-50%, -50%);
+                }
+            }
+
+            .actBtn:hover {
+                text-decoration: none;
+                background-color: #ddd;
+            }
+
+            .actBtnSale {
+                left: 8%;
+            }
+
+            .actBtnBuy {
+                right: 8%;
             }
         }
     }

@@ -5,24 +5,30 @@
     <link rel="stylesheet" href="{% static "css/main/main.css" %}">
 {% endblock %}
 
-{% block main %}
+{% block firstPageMain %}
     <div class="mainHeaderWrapper container-fluid">
         <div class="mainHeader row container2">
             <div class="title">
                 Крутой слоган
             </div>
         </div>
-        <div class="acts row container2">
-            <div class="actButtons col-md-8 col-md-offset-2">
-                <div class="col-md-6">
-                    <a href="/sale" type="button" class="btn btn-default btn-lg btn-block">Еду</a>
-                </div>
-                <div class="col-md-6">
-                    <a href="/buy" type="button" class="btn btn-default btn-lg btn-block">Куплю</a>
-                </div>
+        <div class="acts row">
+            <div class="actButtons">
+                <a href="/sale" type="button" class="actBtn actBtnSale">
+                    <span class="actBtnText">
+                        Еду
+                    </span>
+                </a>
+                <a href="/buy" type="button" class="actBtn actBtnBuy">
+                    <span class="actBtnText">
+                        Куплю
+                    </span>
+                </a>
             </div>
         </div>
     </div>
+{% endblock %}
+{% block main %}
     <div class="tripsTitle container-fluid">
         Путешествуют
     </div>

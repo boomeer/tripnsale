@@ -16,47 +16,6 @@
     {% block own_head %}{% endblock %}
 </head>
 <body>
-    <div class="firstPage {% if fullFirstPage %}fullFirstPage{% endif %}">
-        <div class="header container-fluid">
-            <div class="topPanel row container-fluid">
-                <div class="col-md-6">
-                    <div class="logo">
-                        <a href="/">Trip&amp;Sale</a>
-                    </div>
-                </div>
-                <div class="col-md-6 authPanel">
-                    {% if profileOwner %}
-                        <span class="userPanel">
-                            <span class="usernameButton">
-                                {{ profileOwner.username }}
-                            </span>
-                            <a href="/user/logout">
-                                <span class="logoutButton">
-                                    Выйти
-                                </span>
-                            </a>
-                        </span>
-                    {% else %}
-                        <span class="topButtons">
-                            <a href="/user/auth">
-                                <button type="button" class="btn btn-default authButton topButton">
-                                    Регистрация / Вход
-                                </button>
-                            </a>
-                        </span>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-        <div class="firstPageMain">
-            {% block firstPageMain %}{% endblock %}
-        </div>
-    </div>
-    <div class="main">
-        {% block main %}{% endblock %}
-    </div>
-    <div class="footer">
-        FOOTER
-    </div>
+    {% block main %}{% endblock %}
 </body>
 </html>

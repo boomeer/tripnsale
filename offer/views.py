@@ -67,3 +67,15 @@ def SaleOfferAddView(request):
         return redirect("/")
     return RenderToResponse("offer/sale/add.html", request, {
     })
+
+
+@SafeView
+def SaleFilterView(request):
+    params = request.REQUEST
+    sales = SaleOffer.objects.filter(
+        fr__startswith=params.get("from", ""),
+        to__startswith=params.get("to", ""),
+    ).all()
+    return RenderToResponse("offer/sale/filter.html", request, {
+        "sales": sales,
+    })

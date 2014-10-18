@@ -6,4 +6,5 @@ urlpatterns = patterns('',
     url("^$", MainView),
     url("^buy/$", BuyOfferAddView),
     url("^sale/$", SaleOfferAddView),
+    url("^sale/filter/$", SaleFilterView),
 )

@@ -2,166 +2,178 @@
 {% load static %}
 
 {% block own_head %}
-    <script src="{% static "js/offer/main.js" %}"></script>
-    <link rel="stylesheet" href="{% static "css/main/main.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "ext/fullpage/jquery.fullPage.css" %}"/>
+    <script src="{% static "ext/fullpage/vendors/jquery.easings.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "ext/fullpage/vendors/jquery.slimscroll.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "ext/fullpage/jquery.fullPage.js" %}"></script>
+
+    <script src="{% static "offer/main.js" %}"></script>
+    <link rel="stylesheet" href="{% static "css/offer/main.css" %}"/>
 {% endblock %}
 
 {% block main %}
-    <div class="mainPage page">
-        <div class="header container-fluid">
-            <div class="topPanel row container-fluid">
-                <div class="col-md-6">
-                    <div class="logo">
-                        <a href="/">Trip&amp;Sale</a>
-                    </div>
+    <div class="topPanelWrapper container-fluid">
+        <div class="topPanel row container-fluid">
+            <div class="col-md-6">
+                <div class="logo">
+                    <a href="/">Trip&amp;Sale</a>
                 </div>
-                <div class="col-md-6 authPanel">
-                    {% if profileOwner %}
-                        <span class="userPanel">
-                            <span class="usernameButton">
-                                {{ profileOwner.username }}
+            </div>
+            <div class="col-md-6 authPanel">
+                {% if profileOwner %}
+                    <span class="userPanel">
+                        <span class="usernameButton">
+                            {{ profileOwner.username }}
+                        </span>
+                        <a href="/user/logout">
+                            <span class="logoutButton">
+                                Выйти
                             </span>
-                            <a href="/user/logout">
-                                <span class="logoutButton">
-                                    Выйти
+                        </a>
+                    </span>
+                {% else %}
+                    <span class="topButtons">
+                        <a href="/user/auth">
+                            <button type="button" class="btn btn-default authButton topButton">
+                                Регистрация / Вход
+                            </button>
+                        </a>
+                    </span>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div id="allPagesWrapper">
+        <div class="mainPage section">
+            <div class="mainPageMain pageInner">
+                <div class="mainHeaderWrapper container-fluid">
+                    <div class="mainHeader row container2">
+                        <div class="title">
+                            Крутой слоган
+                        </div>
+                    </div>
+                    <div class="acts row">
+                        <div class="actButtons">
+                            <a href="/sale" type="button" class="actBtn actBtnSale">
+                                <span class="actBtnText">
+                                    Еду
                                 </span>
                             </a>
-                        </span>
-                    {% else %}
-                        <span class="topButtons">
-                            <a href="/user/auth">
-                                <button type="button" class="btn btn-default authButton topButton">
-                                    Регистрация / Вход
-                                </button>
+                            <a href="/buy" type="button" class="actBtn actBtnBuy">
+                                <span class="actBtnText">
+                                    Куплю
+                                </span>
                             </a>
-                        </span>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-        <div class="mainPageMain">
-            <div class="mainHeaderWrapper container-fluid">
-                <div class="mainHeader row container2">
-                    <div class="title">
-                        Крутой слоган
-                    </div>
-                </div>
-                <div class="acts row">
-                    <div class="actButtons">
-                        <a href="/sale" type="button" class="actBtn actBtnSale">
-                            <span class="actBtnText">
-                                Еду
-                            </span>
-                        </a>
-                        <a href="/buy" type="button" class="actBtn actBtnBuy">
-                            <span class="actBtnText">
-                                Куплю
-                            </span>
-                        </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="tripsPage page">
-        <div class="tripsTitle container-fluid">
-            Путешествуют
-        </div>
-        <div class="trips container-fluid container2">
-            <div class="tripsFilter col-md-2 col-md-offset-1">
-                <form class="form-horizontal" role="form">
-                    <div class="form-group">
-                        <div class="col-md-7">
-                            <input type="text" id="tripsFilterFrom" class="form-control" placeholder="Откуда">
-                        </div>
-                        <div class="col-md-5">
-                            <input type="text" class="form-control" placeholder="Время">
-                        </div>
+        <div class="tripsPage section">
+            <div class="pageInner">
+                <div class="tripsTitle container-fluid">
+                    Путешествуют
+                </div>
+                <div class="trips container-fluid container2">
+                    <div class="tripsFilter col-md-2 col-md-offset-1">
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <div class="col-md-7">
+                                    <input type="text" id="tripsFilterFrom" class="form-control" placeholder="Откуда">
+                                </div>
+                                <div class="col-md-5">
+                                    <input type="text" class="form-control" placeholder="Время">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-7">
+                                    <input type="text" id="tripsFilterTo" class="form-control" placeholder="Куда">
+                                </div>
+                                <div class="col-md-5">
+                                    <input type="text" class="form-control" placeholder="Время">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <input type="button" id="tripsFilterApply" class="btn btn-default form-control" value="Применить">
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                    <div class="form-group">
-                        <div class="col-md-7">
-                            <input type="text" id="tripsFilterTo" class="form-control" placeholder="Куда">
-                        </div>
-                        <div class="col-md-5">
-                            <input type="text" class="form-control" placeholder="Время">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-12">
-                            <input type="button" id="tripsFilterApply" class="btn btn-default form-control" value="Применить">
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="tripsList col-md-8">
-                <table class="table table-bordered table-hover table-condensed">
-                    <thead>
-                        <tr>
-                            <th>Имя</th>
-                            <th>Отправляюсь</th>
-                            <th></th>
-                            <th>Прибываю</th>
-                            <th></th>
-                            <th>Депозит</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for sale in sales %}
-                            <tr>
-                                <td>{{ sale.owner.username }}</td>
-                                <td>{{ sale.fr }}</td>
-                                <td>{{ sale.frTime }}</td>
-                                <td>{{ sale.to }}</td>
-                                <td>{{ sale.toTime }}</td>
-                                <td>{{ sale.deposit }}</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+                    <div class="tripsList col-md-8">
+                        <table class="table table-bordered table-hover table-condensed">
+                            <thead>
+                                <tr>
+                                    <th>Имя</th>
+                                    <th>Отправляюсь</th>
+                                    <th></th>
+                                    <th>Прибываю</th>
+                                    <th></th>
+                                    <th>Депозит</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for sale in sales %}
+                                    <tr>
+                                        <td>{{ sale.owner.username }}</td>
+                                        <td>{{ sale.fr }}</td>
+                                        <td>{{ sale.frTime }}</td>
+                                        <td>{{ sale.to }}</td>
+                                        <td>{{ sale.toTime }}</td>
+                                        <td>{{ sale.deposit }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
 
-            </div>
-        </div>
-    </div>
-    <div class="buysPage page">
-        <div class="buysTitle container-fluid">
-            Хотят приобрести
-        </div>
-        <div class="buys container-fluid container2">
-            <div class="col-md-2 col-md-offset-1">
-            </div>
-            <div class="buysList col-md-8">
-                {% for buy in buys %}
-                    <div class="buyItemWrapper">
-                        <div class="buyItem">
-                            <div class="container-fluid">
-                                <div class="userPart col-md-1">
-                                    <div class="userPic">
-                                        <img src="">
-                                    </div>
-                                    <div class="username">
-                                        {{ buy.owner.username }}
-                                    </div>
-                                </div>
-                                <div class="mainPart col-md-11">
-                                    <div class="buyTitle">
-                                        {{ buy.title }}
-                                    </div>
-                                    <div class="buyContent">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="buyCostWrapper container-fluid">
-                                <div class="buyCost">
-                                    Цена от {{ buy.costFrom }} до {{ buy.costTo }}
-                                </div>
-                            </div>
-                        </div>
                     </div>
-                {% endfor %}
-           </div>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="footer">
-        FOOTER
+        <div class="buysPage section">
+            <div class="pageInner">
+                <div class="buysTitle container-fluid">
+                    Хотят приобрести
+                </div>
+                <div class="buys container-fluid container2">
+                    <div class="col-md-2 col-md-offset-1">
+                    </div>
+                    <div class="buysList col-md-8">
+                        {% for buy in buys %}
+                            <div class="buyItemWrapper">
+                                <div class="buyItem">
+                                    <div class="container-fluid">
+                                        <div class="userPart col-md-1">
+                                            <div class="userPic">
+                                                <img src="">
+                                            </div>
+                                            <div class="username">
+                                                {{ buy.owner.username }}
+                                            </div>
+                                        </div>
+                                        <div class="mainPart col-md-11">
+                                            <div class="buyTitle">
+                                                {{ buy.title }}
+                                            </div>
+                                            <div class="buyContent">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="buyCostWrapper container-fluid">
+                                        <div class="buyCost">
+                                            Цена от {{ buy.costFrom }} до {{ buy.costTo }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                   </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer section">
+            FOOTER
+        </div>
     </div>
 {% endblock %}

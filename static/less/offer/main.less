@@ -1,0 +1,167 @@
+@titleFontSize: 20pt;
+@titleBgColor: #f8f8ff;
+@topPanelHeight: 60px;
+
+
+.topPanelWrapper  {
+    position: fixed;
+    width: 100%;
+    z-index: 10000;
+    height: @topPanelHeight;
+    
+    .topPanel {
+        height: 100%;
+        padding: 0px 0px 10px 10px;
+        background-color: rgba(0, 0, 20, 0.6);
+
+        .logo {
+            margin: 4px 0px 0px 0px;
+            float: left;
+            font-size: 20pt;
+        }
+        .topButtons {
+            margin: 14px 10px 0px 0px;
+            float: right;
+        }
+    }
+}
+
+.pageInner {
+    height: 100%;
+    padding-top: @topPanelHeight;
+}
+
+#allPagesWrapper {
+    .mainPage {    
+        background: url("/static/bg_passport3.jpg") center no-repeat;
+        background-size: cover;
+
+        .mainPageMain {
+            .mainHeaderWrapper {
+                margin-bottom: 20px;
+
+                .mainHeader {
+                    position: absolute;
+                    height: 85%;
+                    width: 100%;
+                    
+                    .title {
+                        margin-top:  120px;
+                        text-align: center;
+                        font-size: 36pt;
+                        color: #fff;
+                    }
+                }
+
+                .acts {
+                    position: absolute;
+                    width: 100%;
+                    bottom: 0px;
+                    height: 15%;
+                    background-color: rgba(40, 40, 60, 0.8);
+
+                    .actButtons {
+                        position: absolute;
+                        width: 66.66667%;
+                        left: 16.66667%;
+                        top: 30%;
+                        height: 40%;
+
+                        .actBtn {
+                            position: absolute;
+                            border: 1px solid #ccc;
+                            background-color: #eee;
+                            width: 40%;
+                            height: 100%;
+
+                            .actBtnText {
+                                position: absolute;
+                                left: 50%;
+                                top: 50%;
+                                color: #000;
+                                font-size: 12pt;
+
+                                -webkit-transform: translate(-50%, -50%);
+                                   -moz-transform: translate(-50%, -50%);
+                                    -ms-transform: translate(-50%, -50%);
+                                     -o-transform: translate(-50%, -50%);
+                                        transform: translate(-50%, -50%);
+                            }
+                        }
+
+                        .actBtn:hover {
+                            text-decoration: none;
+                            background-color: #ddd;
+                        }
+
+                        .actBtnSale {
+                            left: 8%;
+                        }
+
+                        .actBtnBuy {
+                            right: 8%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .tripsPage {
+        margin-bottom: 20px;
+        background-color: rgba(255, 255, 255, 0);
+
+        .tripsTitle {
+            text-align: center;
+            font-size: @titleFontSize;
+            background-color: @titleBgColor;
+        }
+
+        .trips {
+        }
+    }
+
+    .buysPage {
+        .buysTitle {
+            text-align: center;
+            font-size: @titleFontSize;
+            background-color: @titleBgColor;
+        }
+
+        .buys {
+            .buyItemWrapper {
+                border: 1px solid #f8f8ff;
+                margin-bottom: 10px;
+                
+                .buyItem {
+                    border: 1px solid #eee;
+                    padding: 6px 10px;
+
+                    .userPart {
+                        .userPic {
+                            height: 50px;
+                            background-color: #eee;
+                        }
+                        .username {
+                        }
+                    }
+                    .mainPart {
+                        vertical-align: top;
+
+                        .buyTitle {
+                            font-weight: 900;
+                        }
+
+                        .buyContent {
+                        }
+                    }
+                    .buyCostWrapper {
+                        .buyCost {
+                            float: right;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

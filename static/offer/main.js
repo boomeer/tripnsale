@@ -10,11 +10,13 @@ function TripsRefresh()
 }
 
 
-$(function() {
+$(document).ready(function() {
     $("#tripsFilterApply").on("click", function() {
         TripsRefresh();
     });
     $("#tripsFilterFrom").on("input", function() {
         TripsRefresh();
     });
+
+    $("#allPagesWrapper").fullpage();
 });

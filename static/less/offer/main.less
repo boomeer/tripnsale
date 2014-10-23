@@ -29,6 +29,7 @@
 .pageInner {
     height: 100%;
     padding-top: @topPanelHeight;
+    font-size: 12pt;
 }
 
 #allPagesWrapper {
@@ -58,7 +59,34 @@
                     width: 100%;
                     bottom: 0px;
                     height: 15%;
-                    background-color: rgba(40, 40, 60, 0.8);
+
+                    .actBtn {
+                        position: absolute;
+                        border-radius: 2px;
+                        background-color: rgba(255, 255, 255, 0.5);
+                        width: 40%;
+                        height: 100%;
+
+                        .actBtnText {
+                            position: absolute;
+                            left: 50%;
+                            top: 50%;
+                            color: #fff;
+                            font-weight: 900;
+                            font-size: 12pt;
+
+                            -webkit-transform: translate(-50%, -50%);
+                               -moz-transform: translate(-50%, -50%);
+                                -ms-transform: translate(-50%, -50%);
+                                 -o-transform: translate(-50%, -50%);
+                                    transform: translate(-50%, -50%);
+                        }
+                    }
+
+                    .actBtn:hover {
+                        text-decoration: none;
+                        background-color: rgba(0, 0, 0, 0.5);
+                    }
 
                     .actButtons {
                         position: absolute;
@@ -66,33 +94,6 @@
                         left: 16.66667%;
                         top: 30%;
                         height: 40%;
-
-                        .actBtn {
-                            position: absolute;
-                            border: 1px solid #ccc;
-                            background-color: #eee;
-                            width: 40%;
-                            height: 100%;
-
-                            .actBtnText {
-                                position: absolute;
-                                left: 50%;
-                                top: 50%;
-                                color: #000;
-                                font-size: 12pt;
-
-                                -webkit-transform: translate(-50%, -50%);
-                                   -moz-transform: translate(-50%, -50%);
-                                    -ms-transform: translate(-50%, -50%);
-                                     -o-transform: translate(-50%, -50%);
-                                        transform: translate(-50%, -50%);
-                            }
-                        }
-
-                        .actBtn:hover {
-                            text-decoration: none;
-                            background-color: #ddd;
-                        }
 
                         .actBtnSale {
                             left: 8%;
@@ -118,6 +119,57 @@
         }
 
         .trips {
+            .tripItem {
+                border: 1px solid #eee;
+                margin: 1px 0px;
+                padding: 3px 6px;
+
+                .tripSection {
+                    vertical-align: top;
+                    display: inline-block;
+
+                    .tripSectionTitle {
+                        font-weight: 900;
+                        font-size: 10pt;
+                    }
+
+                    .tripSectionContent {
+                        font-size: 11pt;
+                    }
+                }
+
+                .tripFrom {
+                    width: 20%;
+                }
+
+                .tripTo {
+                    width: 20%;
+                }
+
+                .tripDates {
+                    width: 25%;
+
+                    .tripSectionContent {
+                        font-size: 9pt;
+                    }
+                }
+
+                .tripDeposit {
+                    width: 15%;
+                }
+
+                .tripOwner {
+                    width: 10%;
+
+                    .tripSectionContent {
+                        .tripOwnerAv {
+                            img {
+                                border: 1px solid #ddd;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 

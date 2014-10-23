@@ -1,25 +1,52 @@
-<table class="table table-bordered table-hover table-condensed">
-    <thead>
-        <tr>
-            <th>Имя</th>
-            <th>Отправляюсь</th>
-            <th></th>
-            <th>Прибываю</th>
-            <th></th>
-            <th>Депозит</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for sale in sales %}
-            <tr>
-                <td>{{ sale.owner.username }}</td>
-                <td>{{ sale.fr }}</td>
-                <td>{{ sale.frTime }}</td>
-                <td>{{ sale.to }}</td>
-                <td>{{ sale.toTime }}</td>
-                <td>{{ sale.deposit }}</td>
-            </tr>
-        {% endfor %}
-    </tbody>
-</table>
+{% for sale in sales %}
+    <div class="tripItem">
+        <div class="tripFrom tripSection">
+            <div class="tripSectionTitle">
+                Откуда
+            </div>
+            <div class="tripSectionContent">
+                {{ sale.fr }}
+            </div>
+        </div>
+        <div class="tripTo tripSection">
+            <div class="tripSectionTitle">
+                Куда
+            </div>
+            <div class="tripSectionContent">
+                {{ sale.to }}
+            </div>
+        </div>
+        <div class="tripDates tripSection">
+            <div class="tripSectionTitle">
+                Когда
+            </div>
+            <div class="tripSectionContent">
+                <div>
+                    {{ sale.frTime|date:"d.m.Y" }} -
+                </div>
+                <div>
+                    {{ sale.toTime|date:"d.m.Y" }}
+                </div>
+            </div>
+        </div>
+        <div class="tripDeposit tripSection">
+            <div class="tripSectionTitle">
+                Депозит
+            </div>
+            <div class="tripSectionContent">
+                {{ sale.deposit }}
+            </div>
+        </div>
+        <div class="tripOwner tripSection">
+            <div class="tripSectionContent">
+                <div class="tripOwnerAv">
+                    <img src="{{ sale.owner.avatarUrl }}" width="100%">
+                </div>
+                <div class="tripOwnerName">
+                    {{ sale.owner.first_name }} {{ sale.owner.last_name }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
 

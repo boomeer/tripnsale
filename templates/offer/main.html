@@ -2,10 +2,8 @@
 {% load static %}
 
 {% block own_head %}
-    <link rel="stylesheet" type="text/css" href="{% static "ext/fullpage/jquery.fullPage.css" %}"/>
-    <script src="{% static "ext/fullpage/vendors/jquery.easings.min.js" %}"></script>
-    <script type="text/javascript" src="{% static "ext/fullpage/vendors/jquery.slimscroll.min.js" %}"></script>
-    <script type="text/javascript" src="{% static "ext/fullpage/jquery.fullPage.js" %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static "ext/onepage-scroll/onepage-scroll.css" %}"/>
+    <script type="text/javascript" src="{% static "ext/onepage-scroll/jquery.onepage-scroll.min.js" %}"></script>
 
     <script src="{% static "offer/main.js" %}"></script>
     <link rel="stylesheet" href="{% static "css/offer/main.css" %}"/>
@@ -45,7 +43,7 @@
     </div>
 
     <div id="allPagesWrapper">
-        <div class="mainPage section">
+        <section class="mainPage section">
             <div class="mainPageMain pageInner">
                 <div class="mainHeaderWrapper container-fluid">
                     <div class="mainHeader row container2">
@@ -69,8 +67,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="tripsPage section">
+        </section>
+        <section class="tripsPage section">
             <div class="pageInner">
                 <div class="tripsTitle container-fluid">
                     Путешествуют
@@ -156,8 +154,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="buysPage section">
+        </section>
+        <section class="buysPage section">
             <div class="pageInner">
                 <div class="buysTitle container-fluid">
                     Хотят приобрести
@@ -197,9 +195,9 @@
                    </div>
                 </div>
             </div>
-        </div>
-        <div class="footer section">
+        </section>
+        <section class="footer section">
             FOOTER
-        </div>
+        </section>
     </div>
 {% endblock %}

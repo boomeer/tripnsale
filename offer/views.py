@@ -76,6 +76,18 @@ def SaleFilterView(request):
         fr__startswith=params.get("from", ""),
         to__startswith=params.get("to", ""),
     ).all()
+    page = params.get("page", 1)
+    count = params.get("count", 5)
+    block = sales[(page-1)*count:page*count]
     return RenderToResponse("offer/sale/filter.html", request, {
         "sales": sales,
+        "block": block,
+    })
+
+
+@SafeView
+def SaleView(request, id):
+    sale = SaleOffer.objects.get(id=id)
+    return RenderToResponse("offer/sale/view.html", request, {
+        "sale": sale,
     })

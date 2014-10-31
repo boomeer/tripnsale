@@ -1,12 +1,14 @@
 @titleFontSize: 20pt;
 @titleBgColor: #f8f8ff;
 @topPanelHeight: 60px;
+@topPanelZ: 10000;
+@tripViewZ: 20000;
 
 
 .topPanelWrapper  {
     position: fixed;
     width: 100%;
-    z-index: 10000;
+    z-index: @topPanelZ;
     height: @topPanelHeight;
     
     .topPanel {
@@ -22,6 +24,45 @@
         .topButtons {
             margin: 14px 10px 0px 0px;
             float: right;
+        }
+    }
+}
+
+.tripViewBg {
+    position: fixed;
+    z-index: @tripViewZ;
+    top: 0px;
+    height: 100%;
+    width: 100%;
+    
+    .tripViewGoBack {
+        position: absolute;
+        z-index: @tripViewZ + 10;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    .tripViewGoBack:hover {
+        background-color: rgba(0, 0, 0, 0.2);
+    }
+    
+    .tripView {
+        position: absolute;
+        z-index: @tripViewZ + 20;
+        top: @topPanelHeight;
+        bottom: @topPanelHeight;
+        left: 10%;
+        right: 10%;
+        background-color: #fff;
+
+        .tripViewTitle {
+            background-color: #aaa;
+            
+            .tripViewCloseBtn {
+                position: relative;
+                right: 0;
+            }
         }
     }
 }
@@ -119,52 +160,62 @@
         }
 
         .trips {
-            .tripItem {
-                border: 1px solid #eee;
-                margin: 1px 0px;
-                padding: 3px 6px;
+            height: 100%;
+            
+            .tripsList {
+                height: 100%;
 
-                .tripSection {
-                    vertical-align: top;
-                    display: inline-block;
+                .tripItem:hover {
+                    background-color: #f4f4ff;
+                }
+                
+                .tripItem {
+                    border: 1px solid #eee;
+                    margin: 1px 0px;
+                    padding: 3px 6px;
 
-                    .tripSectionTitle {
-                        font-weight: 900;
-                        font-size: 10pt;
+                    .tripSection {
+                        vertical-align: top;
+                        display: inline-block;
+
+                        .tripSectionTitle {
+                            font-weight: 900;
+                            font-size: 10pt;
+                        }
+
+                        .tripSectionContent {
+                            font-size: 11pt;
+                        }
                     }
 
-                    .tripSectionContent {
-                        font-size: 11pt;
+                    .tripFrom {
+                        width: 20%;
                     }
-                }
 
-                .tripFrom {
-                    width: 20%;
-                }
-
-                .tripTo {
-                    width: 20%;
-                }
-
-                .tripDates {
-                    width: 25%;
-
-                    .tripSectionContent {
-                        font-size: 9pt;
+                    .tripTo {
+                        width: 20%;
                     }
-                }
 
-                .tripDeposit {
-                    width: 15%;
-                }
+                    .tripDates {
+                        width: 25%;
 
-                .tripOwner {
-                    width: 10%;
+                        .tripSectionContent {
+                            font-size: 9pt;
+                        }
+                    }
 
-                    .tripSectionContent {
-                        .tripOwnerAv {
-                            img {
-                                border: 1px solid #ddd;
+                    .tripDeposit {
+                        width: 15%;
+                    }
+
+                    .tripOwner {
+                        width: 10%;
+
+                        .tripSectionContent {
+                            .tripOwnerAv {
+                                img {
+                                    border: 1px solid #ddd;
+                                }
                             }
                         }
                     }

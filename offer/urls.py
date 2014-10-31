@@ -7,4 +7,5 @@ urlpatterns = patterns('',
     url("^buy/$", BuyOfferAddView),
     url("^sale/$", SaleOfferAddView),
     url("^sale/filter/$", SaleFilterView),
+    url("^sale/view/(?P<id>[0-9]{1,})$", SaleView),
 )

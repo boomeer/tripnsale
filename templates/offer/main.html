@@ -43,7 +43,7 @@
     </div>
 
     <div id="allPagesWrapper">
-        <section class="mainPage section">
+        <div class="mainPage section">
             <div class="mainPageMain pageInner">
                 <div class="mainHeaderWrapper container-fluid">
                     <div class="mainHeader row container2">
@@ -67,14 +67,11 @@
                     </div>
                 </div>
             </div>
-        </section>
-        <section class="tripsPage section">
+        </div>
+        <div class="tripsPage section">
             <div class="pageInner">
-                <div class="tripsTitle container-fluid">
-                    Путешествуют
-                </div>
                 <div class="trips container-fluid container2">
-                    <div class="tripsFilter col-md-2 col-md-offset-1">
+                    <div class="tripsFilter col-md-2">
                         <form class="form-horizontal" role="form">
                             <div class="form-group">
                                 <div class="col-md-7">
@@ -99,9 +96,9 @@
                             </div>
                         </form>
                     </div>
-                    <div class="tripsList col-md-8">
+                    <div class="tripsList col-md-10">
                         {% for sale in sales %}
-                            <div class="tripItem">
+                            <div class="tripItem" onClick="TripView({{ sale.id }});">
                                 <div class="tripFrom tripSection">
                                     <div class="tripSectionTitle">
                                         Откуда
@@ -141,9 +138,11 @@
                                 </div>
                                 <div class="tripOwner tripSection">
                                     <div class="tripSectionContent">
+                                        <!--
                                         <div class="tripOwnerAv">
                                             <img src="{{ sale.owner.avatarUrl }}" width="100%">
                                         </div>
+                                        -->
                                         <div class="tripOwnerName">
                                             {{ sale.owner.first_name }} {{ sale.owner.last_name }}
                                         </div>
@@ -154,8 +153,8 @@
                     </div>
                 </div>
             </div>
-        </section>
-        <section class="buysPage section">
+        </div>
+        <div class="buysPage section">
             <div class="pageInner">
                 <div class="buysTitle container-fluid">
                     Хотят приобрести
@@ -195,9 +194,11 @@
                    </div>
                 </div>
             </div>
-        </section>
-        <section class="footer section">
+        </div>
+        <div class="footer section">
             FOOTER
-        </section>
+        </div>
+    </div>
+    <div class="tripViewWrapper">
     </div>
 {% endblock %}

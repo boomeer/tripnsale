@@ -90,6 +90,9 @@ STATICFILES_DIRS = (
     "static",
 )
 
+
+STATIC_ROOT = "/var/www/tripnsale/static/"
+
 TEMPLATE_DIRS = (
     "templates",
 )

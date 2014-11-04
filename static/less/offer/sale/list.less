@@ -1,0 +1,102 @@
+@import "../../conf.less";
+
+.tripViewBg {
+    position: fixed;
+    z-index: @tripViewZ;
+    top: 0px;
+    height: 100%;
+    width: 100%;
+    
+    .tripViewGoBack {
+        position: absolute;
+        z-index: @tripViewZ + 10;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    .tripViewGoBack:hover {
+    }
+    
+    .tripView {
+        position: absolute;
+        z-index: @tripViewZ + 20;
+        top: 100px;
+        bottom: 100px;
+        left: 10%;
+        right: 10%;
+        background-color: #fff;
+
+        .tripViewCloseBtn {
+            position: relative;
+            right: 0;
+            float: right;
+        }
+    }
+}
+
+.trips {
+    height: 100%;
+    
+    .tripsList {
+        height: 100%;
+        overflow-y: scroll;
+
+        .tripItem:hover {
+            background-color: #f4f4ff;
+        }
+        
+        .tripItem {
+            border: 1px solid #eee;
+            margin: 1px 0px;
+            padding: 3px 6px;
+
+            .tripSection {
+                vertical-align: top;
+                display: inline-block;
+
+                .tripSectionTitle {
+                    font-weight: 900;
+                    font-size: 10pt;
+                }
+
+                .tripSectionContent {
+                    font-size: 11pt;
+                }
+            }
+
+            .tripFrom {
+                width: 20%;
+            }
+
+            .tripTo {
+                width: 20%;
+            }
+
+            .tripDates {
+                width: 25%;
+
+                .tripSectionContent {
+                    font-size: 9pt;
+                }
+            }
+
+            .tripDeposit {
+                width: 15%;
+            }
+
+            .tripOwner {
+                width: 10%;
+
+                .tripSectionContent {
+                    .tripOwnerAv {
+                        img {
+                            border: 1px solid #ddd;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+

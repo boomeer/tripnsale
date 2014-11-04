@@ -19,12 +19,9 @@ from datetime import datetime
 
 
 @SafeView
-def MainView(request):
-    buys = BuyOffer.objects.all()
+def SaleListView(request):
     sales = SaleOffer.objects.all()
-    return RenderToResponse("offer/main.html", request, {
-        "fullFirstPage": True,
-        "buys": buys,
+    return RenderToResponse("offer/sale/list.html", request, {
         "sales": sales,
     })
 

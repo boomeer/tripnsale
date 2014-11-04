@@ -1,0 +1,61 @@
+<div class="topPanelWrapper container-fluid">
+    <div class="topPanel row container-fluid">
+        <div class="col-md-6">
+            <div class="logo">
+                <a href="/">Trip&amp;Sale</a>
+            </div>
+        </div>
+        <div class="col-md-6 authPanel">
+            {% if profileOwner %}
+                <span class="userPanel">
+                    <a class="profileBtn userPanelItem">
+                        <i class="glyphicon glyphicon-user"></i>
+                        {{ profileOwner.username }}
+                    </a>
+                    <a class="userPanelItem" href="#">
+                        Мои поездки
+                    </a>
+                    <a class="userPanelItem" href="#">
+                        Мои заказы
+                    </a>
+                    <span class="userPanelSeparator"></span>
+                    <a class="userPanelItem" href="/user/logout">
+                        <i class="glyphicon glyphicon-log-out"></i>
+                        Выход
+                    </a>
+                </span>
+            {% else %}
+                <span class="userPanel">
+                    <a class="userRegBtn userPanelItem" href="/user/auth">
+                        Регистрация
+                    </a>
+                    <span class="userPanelSeparator"></span>
+                    <a class="userLoginBtn userPanelItem" href="#">
+                        <i class="glyphicon glyphicon-log-in"></i>
+                        Войти
+                    </a>
+                </span>
+                <div class="userLoginForm">
+                    <form class="form-horizontal" role="form" action="/user/auth/" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="act" value="login">
+                        <div class="form-group">
+                            <div class="col-sm-5 colMin">
+                                <input type="text" class="form-control" id="inputLoginUsername" name="login" placeholder="Логин">
+                            </div>
+                            <div class="col-sm-5 colMin">
+                                <input type="password" class="form-control" id="inputLoginPassword" name="password" placeholder="Пароль">
+                            </div>
+                            <div class="col-sm-2 colMin">
+                                <button type="submit" class="btn btn-default">
+                                    <i class="glyphicon glyphicon-log-in"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block own_head %}
+    <link rel="stylesheet" href="{% static "css/base_list.css" %}">
+    {% block own_head2 %}{% endblock %}
+{% endblock %}
+
+{% block main %}
+    <div class="main2Wrapper">
+        {% include "top_panel.html" %}
+        <div class="main2">
+            {% block main2 %}{% endblock %}
+        </div>
+
+        <div class="footer">
+            FOOTER
+        </div>
+    </div>
+{% endblock %}

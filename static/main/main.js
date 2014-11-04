@@ -1,35 +1,4 @@
-function TripsRefresh()
-{        
-    $(".tripsList").html("Загрузка...");
-    $.post("/sale/filter/", {
-        "from": $("#tripsFilterFrom").val(),
-        "to": $("#tripsFilterTo").val(),
-    }, function(res) {
-        $(".tripsList").html(res);
-    });
-}
-
-function TripView(id)
-{
-    $.post("sale/view/" + id, {}, function(res) {
-        $(".tripViewWrapper").html(res);
-    });
-}
-
-function TripViewClose()
-{
-    $(".tripViewWrapper").html("");
-}
-
-
 $(function() {
-    $("#tripsFilterApply").on("click", function() {
-        TripsRefresh();
-    });
-    $("#tripsFilterFrom").on("input", function() {
-        TripsRefresh();
-    });
-
     $("#allPagesWrapper").onepage_scroll({
         sectionContainer: "div.section",     // sectionContainer accepts any kind of selector in case you don't want to use section
         easing: "ease",                  // Easing options accepts the CSS3 easing animation such "ease", "linear", "ease-in",

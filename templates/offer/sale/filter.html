@@ -1,5 +1,5 @@
-{% for sale in block %}
-    <div class="tripItem">
+{% for sale in sales %}
+    <div class="tripItem" onClick="TripView({{ sale.id }});">
         <div class="tripFrom tripSection">
             <div class="tripSectionTitle">
                 Откуда
@@ -39,9 +39,11 @@
         </div>
         <div class="tripOwner tripSection">
             <div class="tripSectionContent">
+                <!--
                 <div class="tripOwnerAv">
                     <img src="{{ sale.owner.avatarUrl }}" width="100%">
                 </div>
+                -->
                 <div class="tripOwnerName">
                     {{ sale.owner.first_name }} {{ sale.owner.last_name }}
                 </div>

@@ -1,92 +1,94 @@
-{% extends "base.html" %}
+{% extends "base_simple.html" %}
 {% load static %}
 
-{% block own_head %}
+{% block own_head2 %}
     <link rel="stylesheet" href="{% static "css/user/auth.css" %}">
 {% endblock %}
 
-{% block main %}
-    <div class="authBlockWrapper authBlockWrapperReg col-lg-4 col-lg-offset-2 col-md-6 col-sm-6">
-        <div class="authBlock">
-            <div class="authTitle">
+{% block main2 %}
+    <div class="container-fluid">
+        <div class="authBlockWrapper authBlockWrapperReg col-lg-4 col-lg-offset-2 col-md-6 col-sm-6">
+            <div class="authBlock">
+                <div class="authTitle">
+                </div>
+                <form class="form-horizontal" role="form" action="" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="act" value="reg">
+                    <div class="form-group">
+                        <label for="inputFirstName" class="col-sm-3 control-label">Имя:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="inputFirstName" name="firstName" placeholder="Имя">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputLastName" class="col-sm-3 control-label">Фамилия:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="inputLastName" name="lastName" placeholder="Фамилия">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputUsername" class="col-sm-3 control-label">Ник:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="inputUsername" name="username" placeholder="Ник">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail" class="col-sm-3 control-label">Email:</label>
+                        <div class="col-sm-9">
+                            <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword" class="col-sm-3 control-label">Пароль:</label>
+                        <div class="col-sm-9">
+                            <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Пароль">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword2" class="col-sm-3 control-label"></label>
+                        <div class="col-sm-9">
+                            <input type="password" class="form-control" id="inputPassword2" name="password2" placeholder="Повторите пароль">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="inputCountry">Место проживания:</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id="inputCountry" name="country" placeholder="Страна">
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="inputCity" name="city" placeholder="Город">
+                        </div>
+                    </div>
+                    <div class="btnAuth">
+                        <button type="submit" class="btn btn-default">Зарегистрироваться</button>
+                    </div>
+                </form>
             </div>
-            <form class="form-horizontal" role="form" action="" method="post">
-                {% csrf_token %}
-                <input type="hidden" name="act" value="reg">
-                <div class="form-group">
-                    <label for="inputFirstName" class="col-sm-3 control-label">Имя:</label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" id="inputFirstName" name="firstName" placeholder="Имя">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputLastName" class="col-sm-3 control-label">Фамилия:</label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" id="inputLastName" name="lastName" placeholder="Фамилия">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputUsername" class="col-sm-3 control-label">Ник:</label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" id="inputUsername" name="username" placeholder="Ник">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputEmail" class="col-sm-3 control-label">Email:</label>
-                    <div class="col-sm-9">
-                        <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Email">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputPassword" class="col-sm-3 control-label">Пароль:</label>
-                    <div class="col-sm-9">
-                        <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Пароль">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputPassword2" class="col-sm-3 control-label"></label>
-                    <div class="col-sm-9">
-                        <input type="password" class="form-control" id="inputPassword2" name="password2" placeholder="Повторите пароль">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-sm-3" for="inputCountry">Место проживания:</label>
-                    <div class="col-sm-5">
-                        <input type="text" class="form-control" id="inputCountry" name="country" placeholder="Страна">
-                    </div>
-                    <div class="col-sm-4">
-                        <input type="text" class="form-control" id="inputCity" name="city" placeholder="Город">
-                    </div>
-                </div>
-                <div class="btnAuth">
-                    <button type="submit" class="btn btn-default">Зарегистрироваться</button>
-                </div>
-            </form>
         </div>
-    </div>
-    <div class="authBlockWrapper col-lg-4 col-md-6 col-sm-6">
-        <div class="authBlock">
-            <div class="authTitle">
+        <div class="authBlockWrapper col-lg-4 col-md-6 col-sm-6">
+            <div class="authBlock">
+                <div class="authTitle">
+                </div>
+                <form class="form-horizontal" role="form" action="" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="act" value="login">
+                    <div class="form-group">
+                        <label for="inputLogin" class="col-sm-2 control-label">Логин:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputLogin" name="login" placeholder="Логин">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPasswordLogin" class="col-sm-2 control-label">Пароль:</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" id="inputPasswordLogin" name="password" placeholder="Пароль">
+                        </div>
+                    </div>
+                    <div class="btnAuth">
+                        <button type="submit" class="btn btn-default">Войти</button>
+                    </div>
+                </form>
             </div>
-            <form class="form-horizontal" role="form" action="" method="post">
-                {% csrf_token %}
-                <input type="hidden" name="act" value="login">
-                <div class="form-group">
-                    <label for="inputLogin" class="col-sm-2 control-label">Логин:</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputLogin" name="login" placeholder="Логин">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputPasswordLogin" class="col-sm-2 control-label">Пароль:</label>
-                    <div class="col-sm-10">
-                        <input type="password" class="form-control" id="inputPasswordLogin" name="password" placeholder="Пароль">
-                    </div>
-                </div>
-                <div class="btnAuth">
-                    <button type="submit" class="btn btn-default">Войти</button>
-                </div>
-            </form>
         </div>
     </div>
 {% endblock %}

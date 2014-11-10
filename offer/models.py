@@ -14,6 +14,7 @@ class Offer(util.models.ContentHolder):
 class BuyOffer(Offer):
     costFrom = models.FloatField(default=None)
     costTo = models.FloatField(default=None)
+    guarant = models.BooleanField(default=False)
 
 
 class SaleOffer(Offer):
@@ -22,4 +23,5 @@ class SaleOffer(Offer):
     to = models.TextField(default="")
     toTime = models.DateTimeField(default=datetime.now())
     deposit = models.FloatField(default=None)
+    guarant = models.BooleanField(default=False)
 

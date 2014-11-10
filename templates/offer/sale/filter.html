@@ -35,6 +35,9 @@
             </div>
             <div class="tripSectionContent">
                 {{ sale.deposit }}
+                {% if sale.guarant %}
+                    ГАРАНТ
+                {% endif %}
             </div>
         </div>
         <div class="tripOwner tripSection">

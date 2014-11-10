@@ -23,15 +23,16 @@
             font-weight: 900;
 
             .userPanelItem {
-                padding: 8px 6px;
+                padding: 8px 4px 8px 6px;
                 cursor: pointer;
                 color: inherit;
-            }
+                border-radius: 2px;
 
-            .userPanelItem:hover {
-                padding: 7px 5px;
-                border: 1px solid #aaa;
-                text-decoration: none;
+                &:hover {
+                    padding: 7px 3px 7px 5px;
+                    text-decoration: none;
+                    border: 1px solid #555;
+                }
             }
 
             .userPanelSeparator {
@@ -54,10 +55,47 @@
             top: @topPanelHeight;
             right: 0px;
             width: 300px;
+            z-index: @topPanelZ+10;
             background-color: rgba(0, 0, 0, 0.5);
             border: 1px solid #000;
             padding: 6px 18px 0px 18px;
+
+            .form-group {
+                margin-bottom: 2px;
+            }
+
+            .userLoginFormHideBtnWrapper {
+                .userLoginFormHideBtn {
+                    color: #009;
+                }
+            }
         }
     }
 }
 
+.main-simple, .main-list {
+    .topPanelWrapper {
+        .topPanel {
+            /* size and other style preferences are in top_panel.less */
+            background-color: #eee;
+            border: solid #ddd;
+            border-width: 0px 0px 1px 0px;
+
+            .logo {
+                a {
+                    color: #222;
+                }
+            }
+
+            .userPanel {
+                .userPanelItem {
+                    color: #222;
+                }
+            }
+
+            .userLoginForm {
+                background-color: #eee;
+            }
+        }
+    }
+}

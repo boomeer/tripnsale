@@ -7,6 +7,11 @@
 
 input[type=text], input[type=password], input[type=email] {
     border-radius: 0px;
+
+    &:focus {
+        border-color: #88a;
+        box-shadow: inset 0 1px 1px rbga(0, 0, 10, 0.75);
+    }
 }
 
 .btn {

@@ -37,6 +37,7 @@ def BuyOfferAddView(request):
             title=params.get("title", ""),
             costFrom=params.get("costFrom", None),
             costTo=params.get("costTo", None),
+            guarant=params.get("guarant", False),
             owner=GetCurrentUser(request),
         )
         buy.save()
@@ -58,6 +59,7 @@ def SaleOfferAddView(request):
             to=params.get("to", ""),
             toTime=datetime.strptime(params.get("toTime", ""), "%d.%m.%Y"),
             deposit=params.get("deposit", None),
+            guarant=params.get("guarant", False),
             owner=GetCurrentUser(request),
         )
         sale.save()

@@ -1,0 +1,189 @@
+.off-screen-text {
+  text-indent: -9999px;
+  overflow: hidden;
+  text-decoration: none;
+  display: block;
+  font-size: 0;
+  text-align: start;
+}
+
+// Spacing Helpers
+.space {
+  margin: 30px 0 50px;
+}
+.space-even {
+  margin: 50px 0 50px;
+}
+.space--big {
+  margin: 75px 0;
+}
+.space--huge {
+  margin: 113px 0 79px;
+}
+.container .space--big:first-child {
+  margin-top: 0;
+}
+
+.spacer-bottom--small {margin-bottom: 10px;}
+.spacer-bottom--medium {margin-bottom: 20px;}
+.spacer-bottom--large {margin-bottom: 30px;}
+.spacer-top--small {margin-top: 30px;}
+.spacer-top--medium {margin-top: 50px;}
+.spacer-top--large {margin-top: 70px;}
+
+ul.centered {
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  li {
+    display: inline-block;
+  }
+}
+
+.group-left {
+  padding-right: 50px;
+}
+.group-right {
+  padding-left: 50px;
+}
+
+
+.relative {
+  position: relative;
+}
+.flush-right {
+  margin-right: 0;
+  padding-right: 0;
+}
+.flush-left {
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.no-top-margin {
+  margin-top: 0;
+}
+
+.no-bottom-margin {
+  margin-bottom: 0;
+}
+
+.no-margin {
+  margin-top: 0;
+  margin-bottom: 0;
+} 
+
+.col-center {
+  float: none;
+  margin: 0 auto;
+  //text-align: center
+}
+
+.caps {text-transform: uppercase}
+.caps-small {font-variant: small-caps;}
+
+a.no-underline {
+  text-decoration: none;
+}
+
+a.social {
+  text-decoration: none;
+  &:hover {
+    color: darken($text-muted, 50%);
+  }
+}
+
+.center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 40%;
+  height: 50%;
+}
+
+.caret .caret-reversed {
+  border-top-width: 0;
+  border-bottom: 4px solid black;
+}
+
+.xs {font-size: 40%;}
+
+.top {vertical-align: top;}
+
+// remove link styling 
+a.link-no-style {
+  color: $text-color;
+}
+
+// font size helpers
+.f300 {font-weight: 300;}
+.f400 {font-weight: 400;}
+.f600 {font-weight: 600;}
+.f700 {font-weight: 700;}
+.f800 {font-weight: 800;}
+
+// pull left/right on sm & xs
+@media (max-width: $screen-xs-max) {
+    .pull-left-xs {
+        float: left !important;
+    }
+    .pull-right-xs {
+        float: right !important;
+    }
+}
+
+@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+    .pull-left-sm {
+        float: left !important;
+    }
+    .pull-right-sm {
+        float: right !important;
+    }
+}
+
+// for vertical spacing at small
+.space-vert-sm {
+ @media (max-width: $screen-sm) {
+    margin: 100px auto;
+    &:after {
+      margin: 100px auto 0;
+      width: 40%;
+      content: '';
+      display: block;
+      border-top: 1px solid $fancy-line-color;
+      border-bottom: 1px solid $fancy-line-color;
+      height: .15em;
+    }
+    &:last-of-type {
+      margin-bottom: 50px;
+      &:after {
+        border: none;
+      }
+    }
+  } 
+}
+.space-vert-md {
+ @media (max-width: $screen-md-min) {
+    margin: 100px auto;
+    &:after {
+      margin: 100px auto 0;
+      width: 40%;
+      content: '';
+      display: block;
+      border-top: 1px solid $fancy-line-color;
+      border-bottom: 1px solid $fancy-line-color;
+      height: .15em;
+    }
+    &:last-of-type {
+      margin-bottom: 50px;
+      &:after {
+        border: none;
+      }
+    }
+  } 
+}
+
+.text-white {
+  color: white;
+}

@@ -1,0 +1,117 @@
+// Extra headers shared class
+.extra-header {
+  width: 100%;
+  color: $white;
+  a {
+    color: $white;
+    &:hover {
+      color: darken($white, 22);
+    }
+  }
+}
+
+ul.extra-header-socialMedia,
+ul.extra-header-socialMedia-2 {
+  li {
+    padding: 0;
+    a {}
+    @include social-media-colors($white);
+  }
+}
+
+// Extra header sizes
+$height-sm: 27px;
+$height-md: 35px;
+$height-lg: 43px;
+$height-xl: 45px;
+
+$font-sm: 12px;
+$font-md: 15px;
+$font-lg: 17px;
+$font-xl: 20px;
+
+// social media icon hover colors
+@mixin header-social($f-size, $margin-top) {
+  font-size: $f-size * 1.39;
+  margin-top: -$margin-top !important;
+}
+
+.header-small {
+  height: $height-sm;
+  font-size: $font-sm;
+  background: $brand-primary;
+  ul {
+    height: $height-sm;
+    padding-top: 6px;
+    margin-bottom: 0;
+  }
+  .extra-header-socialMedia,
+  .extra-header-socialMedia-2 {
+    @include header-social($font-sm, 2px);
+  }
+}
+
+.header-medium {
+  height: $height-md;
+  font-size: $font-md;
+  background: $brand-primary;
+  ul {
+    height: $height-md;
+    padding-top: 8px;
+    margin-bottom: 0;
+  }
+  .extra-header-socialMedia,
+  .extra-header-socialMedia-2 {
+    @include header-social($font-md, 3px);
+  }
+}
+
+.header-large {
+  height: $height-lg;
+  font-size: $font-lg;
+  background: $brand-primary;
+  ul {
+    height: $height-lg;
+    padding-top: 10px;
+    margin-bottom: 0;
+  }
+  .extra-header-socialMedia,
+  .extra-header-socialMedia-2 {
+    @include header-social($font-lg, 4px);
+  }
+}
+
+.header-xl {
+  height: $height-xl;
+  font-size: $font-xl;
+  background: $brand-primary;
+  ul {
+    height: $height-xl;
+    padding-top: 11px;
+    margin-bottom: 0;
+  }
+  .extra-header-socialMedia,
+  .extra-header-socialMedia-2 {
+    @include header-social($font-xl, 5px);
+  }
+}
+
+// Extra header content
+.extra-header-store {
+  float: right;
+  margin-left: 30px !important;
+}
+.extra-header-account {
+  float: right;
+  margin-left: 30px !important;
+}
+.extra-header-socialMedia {
+  float: right;
+}
+.extra-header-socialMedia-2 {
+  float: right;
+  margin-left: 5px !important;
+}
+.extra-header-phone {
+  float: left;
+}

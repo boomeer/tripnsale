@@ -1,0 +1,9 @@
+// Rotated & Flipped Icons
+// -------------------------
+
+.#{$ai-css-prefix}-rotate-90  { @include ai-icon-rotate(90deg, 1);  }
+.#{$ai-css-prefix}-rotate-180 { @include ai-icon-rotate(180deg, 2); }
+.#{$ai-css-prefix}-rotate-270 { @include ai-icon-rotate(270deg, 3); }
+
+.#{$ai-css-prefix}-flip-horizontal { @include ai-icon-flip(-1, 1, 0); }
+.#{$ai-css-prefix}-flip-vertical   { @include ai-icon-flip(1, -1, 2); }

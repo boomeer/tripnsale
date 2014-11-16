@@ -1,0 +1,148 @@
+.sidebar-blog {
+  margin-top: 35px;
+}
+.post-listing {
+  margin: 40px 0;
+  color: $text-color;
+}
+
+.post-listing--small {
+  color: $text-color;
+  .featured-image {
+    width: 100%;
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 0;
+  }
+  .stand-out {
+    padding: 7px;
+  }
+  p {
+    margin-bottom: 0;
+  }
+}
+
+p.post-excerpt {
+  margin-top: 10px;
+  margin-bottom: 19px;
+}
+p.post-excerpt.full {
+    max-height: 60px;
+    overflow: hidden;
+  }
+
+
+.post-image-wrap {
+  margin-bottom: 30px;
+}
+
+.tag {
+  margin-bottom: 2px;
+}
+
+.post-page-meta-wrap {
+  margin-top: -15px;
+  margin-bottom: 25px;
+  font-size: 12px;
+}
+
+.pager {
+  margin-top: 60px;
+  margin-bottom: 50px;
+}
+
+
+.dataList {
+  .post-listing-wrap {
+    margin-top: 30px;
+  }
+  @extend .row;
+  .featured-image-wrap {
+    width: 300px;
+  }
+  .post-meta-wrap {
+    padding: 5px 0;
+    border-top: 1px dotted $blog-post-listing-meta-border;
+    border-bottom: 1px dotted $blog-post-listing-meta-border;
+  }
+  ul.post-meta {
+    margin-bottom: 0;
+    li {
+      font-size: 12px;
+    }
+  }
+  .post-listing {
+    margin-bottom: 15px;
+    @extend .col-md-12;
+  }
+  .stand-out {
+    padding: 10px;
+  }
+  @include respond-to(tablet-portrait) {
+    .media-body {
+      overflow: visible;
+    }
+    .featured-image-wrap {
+      width: 100%;
+    }
+    .featured-image {
+      margin-bottom: 15px;
+    }
+    .post-listing {
+      @include make-sm-column(6);
+      margin-bottom: 15px;
+      .post-meta-wrap {
+        ul.post-meta {
+          padding: 2px 0 5px;
+          li {
+            font-size: 12px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.dataGrid {
+  .post-listing-wrap {
+    margin-top: 35px;
+  }
+  .media-body {
+    overflow: visible;
+    padding: 15px;
+  }
+  .featured-image {
+    margin-bottom: 15px;
+    border-radius: 4px 4px 0 0;
+  }
+  .stand-out {
+    border: solid 1px $blog-post-listing-border;
+    padding: 0;
+  }
+  .post-listing {
+    @include make-sm-column(6);
+    margin-bottom: 30px;
+    .post-meta-wrap {
+      ul.post-meta {
+        padding: 5px 0 0;
+        margin-top: 19px;
+        margin-bottom: -10px;
+        border-top: 1px dotted $blog-post-listing-meta-border;
+        li {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}
+
+.stand-out {
+  border-radius: 4px;
+  @include transition(background-color, 0.25s, ease);
+  display: inline-block;
+  &:hover {
+    background: $stand-out-on-hover-bg;
+    //box-shadow: 0 0 2px $stand-out-on-hover-shadow;
+    @include transition(background-color, 0.25s, ease);
+  }
+}

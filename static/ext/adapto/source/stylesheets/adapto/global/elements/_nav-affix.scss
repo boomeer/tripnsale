@@ -1,0 +1,59 @@
+// http://tutsme-webdesign.info/bootstrap-3-affix/
+
+ul.affix {
+  position: fixed;
+  top: 90px;
+}
+
+ul.affix-top {
+  position: static;
+}
+
+#affix-nav ul.nav > li > a {
+  padding: 2px 15px !important;
+}
+
+ul.nav.affix > li.active > a,
+ul.nav.affix > li.active:hover > a,
+ul.nav.affix > li.active:focus > a {
+  font-weight: bold;
+  color: #5f5a55;
+  //background: #d0c7ba
+}
+
+ul.nav.affix > li > a:hover {
+  background: $gray-light;
+  border-radius: 4px;
+}
+
+// nested nav
+#affix-nav .nav .nav {
+  display: none;
+}
+
+#affix-nav .nav > li.active .nav {
+  display: block;
+}
+
+#affix-nav .nav .nav {
+  margin-bottom: 8px;
+}
+
+#affix-nav .nav .nav > li > a {
+  padding: 3px 0px 3px 30px !important;
+  font-size: 90%;
+}
+
+ul.nav.affix > li > ul.nav > li.active > a,
+ul.nav.affix > li > ul.nav > li.active:hover > a,
+ul.nav.affix > li > ul.nav > li.active:focus > a {
+  color: #5f5a55;
+  background: #d0c7ba;
+  border-radius: 4px;
+}
+
+ul.nav.affix > li > ul.nav > li:hover > a {
+  color: #5f5a55;
+  background: $gray-light;
+  border-radius: 4px;
+}

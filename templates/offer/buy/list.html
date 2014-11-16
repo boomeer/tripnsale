@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block own_head %}
+    <script src="{% static "offer/buy/list.js" %}"></script>
+    <link rel="stylesheet" href="{% static "css/offer/buy/list.css" %}"/>
+{% endblock %}
+
+{% block main %}
+    <div class="buys container-fluid container2">
+        <div class="buysFilter col-md-2">
+            <div>
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <input type="text" id="buysTitle" class="form-control" placeholder="Название">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <input type="button" id="buysFilterApply" class="btn btn-default form-control" value="Применить">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <hr>
+            <div>
+                <a class="btn btn-default" href="/offer/buy">
+                    <i class="glyphicon glyphicon-plus"></i>
+                    Добавить
+                </a>
+            </div>
+        </div>
+        <div class="buysList col-md-10">
+            <div class="panel panel-primary">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Товар</th>
+                            <th>Описание</th>
+                            <th>Заказчик</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="buyViewWrapper">
+    </div>
+{% endblock %}

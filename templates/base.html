@@ -11,6 +11,10 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
     {% bootstrap_css %}
     {% bootstrap_javascript %}
+    <link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href="{% static "ext/adapto/assets/css/global-style_light--blue.css" %}" rel="stylesheet">
+    <link href="{% static "ext/adapto/assets/revolution-slider/css/settings.css" %}" rel="stylesheet" type="text/css" media="all" />
+
     <script src="{% static "csrf.js" %}"></script>
     <script src="{% static "top_panel.js" %}"></script>
     <link rel="stylesheet" href="{% static "css/base.css" %}">
@@ -18,7 +22,312 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {% block own_head %}{% endblock %}
 </head>
-<body>
-    {% block main %}{% endblock %}
+<body id="top">
+    <!-- Extra Header (optional) -->
+<!-- TO USE, follow these steps:
+  1. REMOVE the class "header-hidden" from the FIRST div below.
+  2. ADD ONE header size class to the same div.
+     Options are:
+       header-small
+       header-medium
+       header-large
+       header-xl
+  3. Decide which content you'd like in the extra header as seen in demo from the list below. 
+     Remove the class "header-hidden" from each list that you want.
+     Edit each list as you'd like. 
+ -->
+<div class="extra-header header-hidden">
+  <div class="container">
+    <ul class="list-inline extra-header-store header-hidden">
+      <li><a href="#"><span class="ai ai-cart"></span> Cart | 2 items</a></li>
+      <li><a href="#"><span class="ai ai-coin"></span> Checkout</a></li>
+    </ul>
+    <ul class="list-inline extra-header-account header-hidden">
+      <li><a href="#"><span class="ai ai-question"></span> HELP</a></li>
+      | <li><a href="#"><span class="ai ai-user3"></span> LOGIN</a></li>
+    </ul>
+    <ul class="list-inline extra-header-socialMedia-2 header-hidden">
+      <li class="tooltip-link" data-toggle="tooltip" data-placement="bottom" title="Linkedin"><a href="#"><span class="ai ai-linkedin"></span></a></li>
+      <li class="tooltip-link" data-toggle="tooltip" data-placement="bottom" title="Picassa"><a href="#"><span class="ai ai-picassa2"></span></a></li>
+      <li class="tooltip-link" data-toggle="tooltip" data-placement="bottom" title="Soundcloud"><a href="#"><span class="ai ai-soundcloud2"></span></a></li>
+    </ul>
+    <ul class="list-inline extra-header-socialMedia extra-header-default-content">
+      <li class="tooltip-link" data-toggle="tooltip" data-placement="bottom" title="Facebook"><a href="#"><span class="ai ai-facebook2"></span></a></li>
+      <li class="tooltip-link" data-toggle="tooltip" data-placement="bottom" title="Twitter"><a href="#"><span class="ai ai-twitter2"></span></a></li>
+      <li class="tooltip-link" data-toggle="tooltip" data-placement="bottom" title="Google+"><a href="#"><span class="ai ai-google-plus3"></span></a></li>
+    </ul>
+    <ul class="list-inline extra-header-phone extra-header-default-content">
+      <li><span class="ai ai-phone"></span> <a href="tel:+18007772323">(1800) 777-2323</a></li>
+    </ul>
+  </div>
+</div>
+    <!-- TOP HEADER / NAVIGATION BAR -->
+<header id="header" class="header slide animated" role="banner">
+  <div class="container">
+    <div class="row">
+    
+      <div class="navbar-header">
+        
+        <!-- TOGGLE BUTTON for mobile -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="ai ai-menu ai-2x ai-primary"></span>
+        </button>
+
+        <!-- sitewide logo LINK TO ROOT INDEX (home) PAGE -->
+        <a href="/" class="navbar-brand">
+          <!-- sitewide LOGO HERE (as text, image, or both) -->
+          <span class="logo-top">
+            Trip<span class="ai ai-compass"></span>Sale
+          </span>
+          <!-- Hidden text in an h1 tag for SEO purposes -->
+          <h1 class="text-hide">Adapto Theme</h1>        
+        </a> <!-- end site-wide logo link -->
+
+      </div> <!-- end navbar-header -->
+
+      <!-- NAVIGATION -->
+      <div class="collapse navbar-collapse">
+        <nav class="navbar" role="navigation">
+          <ul class="nav navbar-nav navbar-right">          
+            <li>
+                <a href="/offer/sale/list">
+                    <i class="glyphicon glyphicon-plane"></i>
+                    Поездки
+                </a>
+            </li>
+            <li>
+                <a href="/offer/buy/list">
+                    <i class="glyphicon glyphicon-briefcase"></i>
+                    Заказы
+                </a>
+            </li>
+            {% if profileOwner %}
+                <li class="dropdown">
+                    <a class="dropdown-toggle" href="#">
+                        <i class="glyphicon glyphicon-plus"></i>
+                        Добавить
+                    </a>
+                    <ul class="dropdown-menu">
+                        <span class="triangle-up"></span>
+                        <li>
+                            <a href="/offer/buy/">
+                                <i class="glyphicon glyphicon-briefcase"></i>
+                                Заказ
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/offer/sale/">
+                                <i class="glyphicon glyphicon-plane"></i>
+                                Поездку
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" href="#">
+                        <i class="glyphicon glyphicon-user"></i>
+                        {{ profileOwner.username }}
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="/user/profile">
+                                <i class="glyphicon glyphicon-user"></i>
+                                Профиль
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/user/mail">
+                                <i class="glyphicon glyphicon-envelope"></i>
+                                Сообщения
+                            </a>
+                        </li>
+                        <hr class="hr-transparent">
+                        <li>
+                            <a href="/user/logout?backref={{ url }}">
+                                <i class="glyphicon glyphicon-log-out"></i>
+                                Выход
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            {% else %}
+                <li>
+                    <a href="/user/auth">
+                        <i class="glyphicon glyphicon-collapse-up"></i>
+                        Регистрация
+                    </a>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" href="#">
+                        <i class="glyphicon glyphicon-log-in"></i>
+                        Войти
+                    </a>
+                    <ul class="dropdown-menu">
+                        <span class="triangle-up"></span>
+                        <li>
+                            <div class="userLoginForm" style="display: inline-block; width: 400px; padding-left: 30px; padding-top: 4px;">
+                                <form class="form-horizontal" style="" role="form" action="/user/auth/" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="act" value="login">
+                                    <input type="hidden" name="backref" value="{{ url }}">
+                                    <div class="form-group">
+                                        <div class="col-sm-5 colMin">
+                                            <input type="text" class="form-control" id="inputLoginUsername" name="login" placeholder="Логин">
+                                        </div>
+                                        <div class="col-sm-5 colMin">
+                                            <input type="password" class="form-control" id="inputLoginPassword" name="password" placeholder="Пароль">
+                                        </div>
+                                        <div class="col-sm-2 colMin">
+                                            <button type="submit" class="btn btn-default">
+                                                <i class="glyphicon glyphicon-log-in"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                {% endif %}
+            </ul>
+        </nav> <!-- END TOP NAVIGATION -->
+      </div> <!-- end navbar wrapper -->
+    </div> <!-- end row -->
+  </div> <!-- end container -->
+</header>
+  
+    <!-- FOR BODY background-noise: add 'bg-noise' to this div -->
+      
+    <div class="main">
+        {% block main %}{% endblock %}
+    </div>
+<!-- FOOTER -->
+<footer class="site-footer footer">
+  <div class="container">
+
+    <div class="row">
+
+      <div class="col-md-4 site-footer--col">
+        <div class="headline site-footer--heading text-center">
+          <h3>Footer Text</h3>
+        </div>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, iusto enim incidunt odio praesentium quas sed quidem fugiat magni provident illum aliquid sapiente temporibus dicta ut sequi facilis alias molestias omnis repellendus nam. Provident, natus asperiores quidem perferendis consequatur possimus tempora cupiditate harum repudiandae nam tempora cupiditate harum.</p>
+
+      </div> <!-- end col -->
+      
+      <div class="col-md-4 site-footer--col">
+        <div class="headline site-footer--heading text-center">
+          <h3>About Us</h3>
+        </div>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, iusto enim incidunt odio praesentium quas sed quidem fugiat magni provident illum aliquid sapiente temporibus dicta ut sequi facilis alias molestias omnis repellendus nam. Provident, natus asperiores quidem perferendis consequatur possimus tempora cupiditate harum repudiandae nam tempora cupiditate harum.</p>
+        <div class="clearfix"></div>
+      </div> <!-- end col -->
+
+      <div class="col-md-4 site-footer--col">        
+        <div class="headline site-footer--heading text-center">
+          <h3>Stay Informed</h3>
+        </div>
+        <p style="margin-bottom: 15px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, iusto enim incidunt odio praesentium quas sed quidem fugiat magni provident illum aliquid sapiente temporibus dicta ut sequi facilis alias molestias omnis repellendus nam.</p>
+        <form class="form-horizontal" role="form">
+          <div class="input-group" style="font-size: 12px">
+            <input type="text" class="form-control site-footer--input" placeholder="Enter email to join">
+            <span class="input-group-btn">
+              <button class="btn btn-primary btn-xs" type="submit" value="submit">Submit</button>
+            </span>
+          </div>
+        </form>
+
+      </div> <!-- end col -->
+    </div> <!-- end row -->
+
+    <!-- divider -->
+    <div class="row">
+      <div class="col-xs-12">
+        <hr class="double--inverse">
+      </div>
+    </div> <!-- end row -->
+
+    <!-- meta row -->
+    <div class="row">
+      <div class="site-footer--meta">
+        <div class="col-xs-4">
+          <p>Created by <a href="pixelandcraft.com" target="_blank">Pixel &amp; Kraft</a></p>
+        </div>
+        <span class="col-xs-4 text-center">
+          <a href="#top" title="Scroll to Top" data-toggle="smoothScroll"><i class="ai ai-2x ai-arrow-up3"></i></a>
+        </span>
+        <div class="col-xs-4 text-right">
+          <ul class="list-inline icons--social-media">
+  <li class="tooltip-link" data-toggle="tooltip" data-placement="top" title="Facebook"><a href="#"><span class="ai ai-2x ai-facebook2"></span></a></li>
+  <li class="tooltip-link" data-toggle="tooltip" data-placement="top" title="Twitter"><a href="#"><span class="ai ai-2x ai-twitter2"></span></a></li>
+  <li class="tooltip-link" data-toggle="tooltip" data-placement="top" title="Google+"><a href="#"><span class="ai ai-2x ai-google-plus3"></span></a></li>
+  <li class="tooltip-link" data-toggle="tooltip" data-placement="top" title="Linkedin"><a href="#"><span class="ai ai-2x ai-linkedin"></span></a></li>
+  <li class="tooltip-link" data-toggle="tooltip" data-placement="top" title="Picassa"><a href="#"><span class="ai ai-2x ai-picassa2"></span></a></li>
+  <li class="tooltip-link" data-toggle="tooltip" data-placement="top" title="Soundcloud"><a href="#"><span class="ai ai-2x ai-soundcloud2"></span></a></li>
+</ul>
+        </div>
+      </div> <!-- end meta -->
+    </div> <!-- end row -->
+
+  </div>  <!-- end container -->
+
+  
+</footer>
+
+    
+  
+    <!-- SCRIPTS -->
+    <!-- Global Scripts -->
+    
+    <script src="{% static "ext/adapto/assets/js/global-adapto.js" %}"></script>
+    <script src="{% static "ext/adapto/assets/js/global-bootstrap.min.js" %}"></script>
+    
+<script src="{% static "ext/adapto/assets/js/owl.carousel.min.js" %}"></script>
+<script src="{% static "ext/adapto/assets/js/wow.min.js" %}"></script>
+<script>
+  // for testimonial slider
+  var owl = $("#testimonials");
+  owl.owlCarousel({
+    singleItem: true,
+    autoPlay: 10000,
+    pagination: false
+  });
+  // Fit-vids for responsive video
+  $(".vid-wrap").fitVids();
+new WOW().init();
+</script>
+
+  
+    
+      <!-- Revolution Slider REQUIRED JS files -->
+<script src="{% static "ext/adapto/assets/revolution-slider/js/jquery.themepunch.revolution.min.js" %}"></script>
+<script src="{% static "ext/adapto/assets/revolution-slider/js/jquery.themepunch.plugins.min.js" %}"></script>
+
+<script>
+  // Revolution Slider SETTINGS
+  var revapi;
+  jQuery(document).ready(function() {
+     revapi = jQuery('.tp-banner').revolution(
+    {
+      delay:              11000,
+      startwidth:         1170,
+      startheight:        440,
+      hideThumbs:         10,
+      fullWidth:          "off",
+      forceFullWidth:     "off",
+      navigationType:     "none",
+      navigationStyle:    "square",
+      touchenabled:       "on",
+    });
+  }); //ready
+
+</script>
+    
+    
+    
+ 
+
 </body>
 </html>

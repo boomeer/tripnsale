@@ -1,0 +1,10 @@
+.sitemap-wrap {
+  font-size: 20px;
+  ul {
+    color: $brand-primary;
+    ul {
+      margin-left: 33px;
+      font-size: 16px;
+    }
+  }
+}

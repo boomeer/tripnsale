@@ -1,0 +1,22 @@
+{% extends "base_list.html" %}
+{% load static %}
+
+{% block own_head %}
+    <script src="{% static "user/im.js" %}"></script>
+    <link rel="stylesheet" href="{% static "css/user/im.css" %}"/>
+{% endblock %}
+
+{% block main %}
+    <input type="hidden" id="peer" value="{{ peer.id }}">
+    <div class="msgsWrapper container-fluid">
+        <div class="msgs col-md-offset-1 col-md-10 container-fluid">
+        </div>
+    </div>
+{% endblock %}
+
+{% block preFooter %}
+    <div class="sendMsg container">
+        <textarea id="msgContent" class="form-control" rows=1></textarea>
+        <button type="button" class="sendBtn btn btn-default">Отправить</button>
+    </div>
+{% endblock %}

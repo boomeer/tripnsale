@@ -1,0 +1,104 @@
+.home__group {
+  margin: 65px 0;
+}
+.home__group--highlight {
+  @extend .home__group;
+  background-color: $bg-highlight !important; 
+  padding: 30px 0;
+}
+
+.icon-callouts {
+  > div:hover .ai-circle-outline {
+    background-color: $brand-primary;
+    color: $body-bg;
+  }
+  .ai-circle-outline {
+    transition: all .3s ease;
+  }
+  h2 {
+    margin-bottom: 21px;
+  }  
+}
+
+.features--home {
+  margin: 50px auto 150px;
+  width: 80%;
+  @media (max-width: $screen-md-min) {
+    width: 100%;
+  }
+}
+.features--feature-wrap {
+  margin-top: 35px;
+  &:first-of-type {
+    margin-top: 35px;
+  }  
+}
+
+.home-simple--top-wrap {
+  background: url(../img/bg/polygon.jpg) no-repeat fixed center;
+  max-width: 100%;
+}
+
+.three-col-img-block {
+  text-align: center;
+  p {
+    max-width: 80%;
+    margin: 0 auto 25px;
+  }
+  a, .phone {
+    font-size: 120%;
+  }
+  /* overlay image above mobile breakpoint (only when img is visible) */
+  @media (min-width: $grid-float-breakpoint) {
+    .ai {
+      margin-top: -79px; 
+      margin-bottom: 25px; 
+    }
+  }
+}
+
+
+.home-simple--top-wrap {
+  height: 440px;
+  @extend %relative;
+}
+
+.home-simple--top-img-wrap {
+  @extend %relative;
+  @extend %bottom-0;
+  margin: 50px auto 0;
+}
+.home-img--cell,
+.home-img--tab,
+.home-img--cpu {
+  @extend %bottom-0;
+}
+.home-img--tab {
+  @extend %absolute;
+  @extend %bottom-0;
+  z-index: 100;
+  left: 9%;
+  @media (max-width: $screen-md-min) {
+    left: 0;
+  }
+  @media (max-width: $screen-xs-min) {
+    width: 35%;
+  }
+}
+.home-img--cpu  {
+  @extend %relative;
+  @extend %margin-0-auto;
+}
+.home-img--cell {
+  @extend %absolute;
+  right: 13%;
+  @extend %bottom-0;
+  z-index: 100;
+  @media (max-width: $screen-md-min) {
+    right: 0;
+  }
+  @media (max-width: $screen-xs-min) {
+    width: 20%;
+  }
+
+}

@@ -1,0 +1,329 @@
+/*  -------------------------
+/   SITE NAVIGATION
+/   -------------------------
+*/
+
+.navbar {
+  @if $top-nav-noise == true {
+    background: url(../img/bg/noise.png) repeat;
+  }
+  background-color: $top-nav-bg;
+  font-family: $font-family-nav;
+  margin-right: -15px; /* to bring it flush to container */
+  a {
+    cursor: pointer;
+    transition: none;
+    border: none;
+    color: $navbar-default-link-color;
+  }
+}
+
+.navbar-collapse {
+  padding-bottom: 13px;  
+}
+
+/* --------------------------------------------------------
+navbar styles for everything ABOVE responsive breakopint */
+
+@media (min-width: $grid-float-breakpoint) {
+
+  .triangle-up {
+    width: 0px;
+    height: 0px;
+    border-style: solid;
+    border-width: 0 8px 10px 8px;
+    border-color: transparent transparent $navbar-dropdown-triangle-up transparent;
+  }
+
+  ul.nav li.dropdown:hover {
+    ul.dropdown-menu {
+      background: $nav-dropdown-bg;
+      z-index: 520;
+      border-radius: 4px;
+      margin-right: 15px;
+    }
+    > ul {
+    display: block; /* show dropdown on hover */
+      .triangle-up {
+        position: absolute;
+        top: -10px;
+        right: 20px; 
+      }
+    }
+  }
+  
+  /* dropdown list item styles */
+  ul.nav li.dropdown ul.dropdown-menu li {
+    a {
+      padding: 5px 20px 5px 10px;
+      color: $dropdown-text-color;
+      display: block;
+      &:before {
+        font-family: 'ai';
+        content: "\e7ef";
+        opacity: 0;
+        margin-right: -5px;
+        @include transition (all, 0.2s, ease);
+      }
+    }
+    &:hover > a {
+      /* dropdown li hover */
+      background: $nav-dropdown-bg-hover;
+      color: $nav-dropdown-text-color-hover;
+      border-radius: none;
+      &:before {
+        opacity: 1;
+        margin-right: 5px;
+        @include transition (all, 0.2s, ease);
+      }
+    }
+  }
+
+  /* parent li */
+  .nav > li:hover > a, 
+  .nav li a:hover {
+    color: $parent-on-dropdown-color;
+  }
+  .nav > li.active > a {
+    color: $parent-active-color !important;
+  } 
+  
+  /* for vertical space between navbar and dropdown */
+  .nav .dropdown > .dropdown-menu:before {
+     content: "";
+     display: block;
+     height: 15px;
+     position: absolute;
+     top: -15px;
+     width: 100%;
+   }
+  .nav {
+    position: relative;
+  }
+  .nav .dropdown > .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    margin-top: 11px;
+    padding: 0;
+    min-width: 180px;
+  }
+
+  /* -------------------
+  /  DROPDOWN SUBMENU */
+
+  .dropdown-submenu {
+    position: relative;
+    .dropdown-menu {
+      top: 0;
+      left: 100%;
+      margin-left: -1px;
+      border-radius: 0 6px 6px 6px;
+    }
+  }
+  .dropdown-submenu:hover > .dropdown-menu {
+    display: block;
+  }
+  /* triangle for sub nav */
+  .dropdown-submenu > a:after {
+    display: block;
+    content: "";
+    float: right;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 5px 0 5px 5px;
+    border-left-color: #cccccc;
+    margin-top: 5px;
+    margin-right: -10px;
+    @include transition(all, 0.2s, ease);
+  }
+  /* sub-nav triangle on hover */
+  .dropdown-submenu:hover > a:after {
+    display: block;
+    border-width: 3px 0 3px 3px;
+    margin-top: 10px;
+    border-color: transparent $brand-primary;
+    @include transition(all, 0.2s, ease);
+  }
+
+  /* -------------------
+  /  MEGA MENU */
+
+  .nav .dropdown.mega > .dropdown-menu {
+    padding: 6px 0;
+    min-width: 400px;
+  }
+  .nav .dropdown.mega .dropdown-menu .row {
+    margin-left: 0;
+    margin-right: 0;
+    .mega-col {
+      border-right: 2px solid rgba($navbar-dropdown-hr, 0.4);
+      padding: 0;
+      li a {
+        padding-left: 15px;
+        padding-right: 20px;
+      }
+      &:last-of-type {
+        border-right: none;
+      }
+    }
+  }
+
+  /* full span mega menu */
+
+  // to add a full width mega column, simply add '.mega-full to the top level'
+  .nav .dropdown.mega--full .dropdown-menu .row {
+    overflow: hidden;
+    .mega-col {
+      // for equal height columns
+      margin-bottom: -99999px;
+      padding-bottom: 99999px;
+    }
+  }
+  .navbar-nav > li.mega--full {
+    position: static;
+    .triangle-up {
+      display: none;
+      position: absolute;
+      right: 25px;
+      top: 2px;
+      z-index: 2000;
+    }
+    .dropdown-menu {
+    width: 1140px;
+      @media (max-width: $screen-lg-min) {
+        width: 940px;
+      }
+    }
+  }
+  .navbar-nav > li.mega--full:hover {
+    .triangle-up {
+      display: block;
+    }
+  }
+  // purely a wrapper for positioning the triangle on mega menus
+  .mega-triangle-wrap {
+    position: relative;
+    height: 0;
+  }
+
+  /* -------------------
+  /  SEARCH BOX */
+
+  #searchBox {
+    position: absolute;
+    display: none;
+    width: 240px;
+    right: 0;
+    top: 61px;
+  }
+
+  li > a#search {
+    padding-bottom: 13px;
+  }
+
+} /***********************
+END media query
+***********************/
+
+/* -------------------
+/  NAV RESPONSIVE TOP LEVEL */
+@media (max-width: $grid-float-breakpoint) {
+
+  .navbar-nav { margin: 0; }
+  .navbar-toggle {
+    margin: 0;
+    color: $white;
+  }
+  .navbar-collapse, 
+  .navbar-collapse.in {
+    overflow-y: scroll;
+    padding-left: 0 !important;
+  }
+
+  ul.nav {
+    display: block;
+    margin-bottom: 25px;
+    li.dropdown {
+      background: $navbar-mobile-top-bg;
+      z-index: 520;
+      position: relative;
+      display: list-item;
+      > ul.dropdown-menu {
+        max-height: 0;
+        padding: 0;
+        position: relative;
+        float: none;
+        color: $navbar-mobile-sub-text;
+        display: block;
+        background: $navbar-mobile-sub-bg;
+        overflow: hidden;
+        padding-left: 50px;
+        @include transition(max-height, .9s, ease);
+        li a {
+          position: static;
+          display: list-item;     
+          //background: $navbar-mobile--bg;
+          color: $navbar-mobile-sub-text;
+          background: $navbar-mobile-sub-bg;
+          padding-left: 25px;
+          padding-top: 10px;
+          padding-bottom: 10px;
+        }
+      }
+    }
+  }
+  ul.nav li.dropdown:hover > ul.dropdown-menu {
+    //display: block; /* show dropdown on hover */
+    max-height: 500px !important;
+    @include transition(max-height, .9s, ease);
+  }
+
+  /* -------------------
+     nav responsive SUB */
+
+  li.dropdown-submenu ul.dropdown-menu {
+    position: relative;
+    display: block;
+    max-height: 0;
+    float: none;
+    background: $navbar-mobile-sub-bg;
+    margin-left: 75px;
+    overflow: hidden;
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
+    @include transition(max-height, .9s, ease);
+  }
+  li.dropdown-submenu:hover ul.dropdown-menu {
+    max-height: 500px;
+    @include transition(max-height, .9s, ease);
+  }
+  .dropdown-submenu:hover > .dropdown-menu {
+    background: $navbar-mobile-sub-bg;
+  }
+
+  /* triangle for sub nav */
+  .dropdown-submenu > a:after {
+    display: inline-block;
+    float: left;
+    content: "";
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 5px 0 5px 5px;
+    border-left-color: #cccccc;
+    margin-right: 5px;
+    margin-top: 5px;
+    @include transition(all, 0.2s, ease);
+  }
+  /* sub-nav triangle on hover */
+  .dropdown-submenu:hover > a:after {
+    display: inline-block;
+    border-width: 3px 3px 0 3px;
+    margin-top: 10px;
+    @include transition(all, 0.2s, ease);
+  }
+} /* end mobile media query */

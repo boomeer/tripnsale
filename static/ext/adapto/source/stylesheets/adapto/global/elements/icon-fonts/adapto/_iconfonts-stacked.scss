@@ -1,0 +1,20 @@
+// Stacked Icons
+// -------------------------
+
+.#{$ai-css-prefix}-stack {
+  position: relative;
+  display: inline-block;
+  width: 2em;
+  height: 2em;
+  line-height: 2em;
+  vertical-align: middle;
+}
+.#{$ai-css-prefix}-stack-1x, .#{$ai-css-prefix}-stack-2x {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+.#{$ai-css-prefix}-stack-1x { line-height: inherit; }
+.#{$ai-css-prefix}-stack-2x { font-size: 2em; }
+.#{$ai-css-prefix}-inverse { color: $ai-inverse; }

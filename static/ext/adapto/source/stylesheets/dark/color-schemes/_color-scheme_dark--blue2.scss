@@ -1,0 +1,27 @@
+// ---------------------------------------------------------
+// 1. COLORS
+// ---------------------------------------------------------
+// general
+// --------------------
+// legend:
+// 1. theme-scheme color
+// 2. white/black
+// 3. grays
+// 4. primary
+// 5. secondary
+// ---------------------------------------------------------
+
+// 1. Theme Scheme Color
+$dark-color-blue2: rgb(86, 162, 197);
+//#5db4ee;
+//#49819C;
+
+$blue: $dark-color-blue2;
+$brand-primary: $blue;
+
+$green: #366F47;
+// --------------------
+// 5. Typography
+// links  
+$link-color:                $brand-primary;
+$link-hover-color:          saturate(adjust-hue($link-color, 10), 55);

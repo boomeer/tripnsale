@@ -1,0 +1,26 @@
+a {
+  // link-colors
+  @include transition(all, 0.25s, ease-in-out);
+  text-decoration: none !important;
+  outline: none;
+  //border-bottom: 1px dotted black
+  &:hover, &:active {
+    outline: none;
+    @include transition(all, 0.25s, ease-in-out);
+  }
+}
+
+.islet a:hover {
+  padding: 3px;
+  background-color: white;
+  color: blue;
+  @include transition(all, 0.25s, ease);
+  @include vendor(border-radius, 10px);
+}
+
+.btn {
+  @include transition(background-color, 0.25s, ease);
+  &:hover {
+    @include transition(background-color, 0.25s, ease);
+  }
+}

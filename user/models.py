@@ -1,6 +1,7 @@
 from django.db import models
 import django.contrib.auth.models as authModels
 import tripnsale.settings as settings
+from datetime import datetime
 
 
 class User(authModels.User):
@@ -12,3 +13,11 @@ class User(authModels.User):
 
     def avatarUrl(self):
         return self.avatar.url if self.avatar else "{}/user/av_default.png".format(settings.STATIC_URL)
+
+
+class Msg(models.Model):
+    fr = models.ForeignKey(User, related_name="user_from")
+    to = models.ForeignKey(User, related_name="user_to")
+    content = models.TextField()
+    time = models.DateTimeField(default=datetime.now())
+    new = models.BooleanField(default=True)

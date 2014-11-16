@@ -1,0 +1,15 @@
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-family-serif !important;
+}
+
+p.dropcap:first-letter {
+  font-size: 70px;
+  line-height: 60px;
+  float: left;
+  padding: 4px 8px 4px 4px;
+  margin-right: 6px;
+  margin-top: 0;
+  display: inline-block;
+
+  color: $brand-primary;
+}

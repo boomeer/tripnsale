@@ -13,6 +13,7 @@
         width: 100%;
         height: 100%;
         background-color: rgba(0, 0, 0, 0.7);
+        cursor: pointer;
     }
 
     .tripViewGoBack:hover {
@@ -26,11 +27,74 @@
         left: 10%;
         right: 10%;
         background-color: #fff;
+        border: 1px solid #888;
+        border-radius: 3px;
 
         .tripViewCloseBtn {
             position: relative;
             right: 0;
             float: right;
+        }
+
+        .tripViewContent {
+            padding: 20px;
+
+            .trip-item-title {
+                display: inline-block;
+                width: 200px;
+            }
+
+            .trip-item-content {
+                font-weight: 900;
+            }
+
+            hr {
+                margin: 14px 0px;
+                border-color: #eee;
+            }
+
+            .places {
+                .place {
+                }
+
+                .place-from {
+                    margin-right: 10px;
+                }
+
+                .place-to {
+                    margin-left: 10px;
+                }
+            }
+
+            .dates {
+                .date-row {
+                    .date-title {
+                    }
+                    .date-content {
+                        display: inline-block;
+                    }
+                }
+            }
+
+            .guarant {
+                font-weight: 900;
+                color: #a00;
+            }
+
+            .owner {
+                .owner-name {
+                    a {
+                        color: #600;
+                        font-weight: 900;
+                    }
+                }
+                
+                .owner-av {
+                    img {
+                        max-width: 300px;
+                    }
+                }
+            }
         }
     }
 }
@@ -39,17 +103,16 @@
     height: 100%;
     
     .tripsList {
-        height: 100%;
-        overflow-y: scroll;
-
         .tripItem:hover {
-            background-color: #f4f4ff;
+            background-color: #f4f4f4;
         }
         
         .tripItem {
-            border: 1px solid #eee;
-            margin: 1px 0px;
+            border: 1px solid #ccc;
+            margin: 4px 0px;
             padding: 3px 6px;
+            background-color: #eee;
+            cursor: pointer;
 
             .tripSection {
                 vertical-align: top;
@@ -83,6 +146,10 @@
 
             .tripDeposit {
                 width: 15%;
+                .guarant {
+                    font-weight: 900;
+                    color: #600;
+                }
             }
 
             .tripOwner {
@@ -92,6 +159,7 @@
                     .tripOwnerAv {
                         img {
                             border: 1px solid #ddd;
+                            max-height: 100px;
                         }
                     }
                 }

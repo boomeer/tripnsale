@@ -1,0 +1,88 @@
+// ---------------------------------------------------------
+// ADAPTO BASE IMPORTS
+
+// ---------------------------------------------------------
+// First, base variables and Bootstrap
+
+// ADAPTO VARIABLES
+@import "../variables-base";
+// BOOTSTRAP BASE IMPORT
+@import "bootstrap";
+
+// ---------------------------------------------------------
+// Everything hereafter by default overrides Bootstrap
+
+// UTILITIES
+@import "global/utilities/mixins";
+@import "global/utilities/placeholders";
+@import "global/utilities/helpers";
+@import "global/utilities/states";
+@import "global/utilities/custom-bgs";
+@import "global/utilities/custom-layouts";
+
+// SINGLE GLOBALS
+@import "global/bootstrap-overrides";
+@import "global/globals";
+@import "global/layout";
+
+// PLUGINS
+@import "plugins/animateScss/animateImport";
+@import "plugins/owl-slider";
+@import "plugins/prism";
+@import "plugins/noui-slider";
+@import "plugins/isotope";
+@import "plugins/bootstrapValidator";
+
+// MEDIA
+@import "global/media/media";
+
+// INCLUDES
+@import "global/includes/footer";
+@import "global/includes/header";
+@import "global/includes/navigation";
+@import "global/includes/extra-headers";
+@import "global/includes/sidebars";
+
+// ELEMENTS
+@import "global/elements/icon-box";
+@import "global/elements/full-spans";
+@import "global/elements/headings";
+@import "global/elements/nav-affix";
+@import "global/elements/breadcrumbs";
+@import "global/elements/gmaps";
+@import "global/elements/layout-controls";
+@import "global/elements/comments";
+@import "global/elements/email-signup-horizontal";
+@import "global/elements/form-elements";
+@import "global/elements/layout-controls";
+@import "global/elements/typography";
+@import "global/elements/icon-fonts/adapto/icon-font-adapto"; // all adapto icons
+@import "global/elements/lines";
+@import "global/elements/adapto-panels";
+@import "global/elements/nav-tabs";
+
+// PAGE SPECIFICS
+@import "pages/portfolio";
+@import "pages/blog";
+@import "pages/home/home";
+@import "pages/contact";
+@import "pages/sitemap";
+@import "pages/price-tables";
+@import "pages/team";
+@import "pages/demo-elements";
+@import "pages/block-demo";
+
+// STORE
+@import "pages/store/checkout";
+@import "pages/store/forms";
+@import "pages/store/home";
+@import "pages/store/listing-page";
+@import "pages/store/product-page";
+
+
+// ---------------------------------------------------------
+// SHAME!!!
+// as recommended here --> http://css-tricks.com/sass-style-guide/
+// this file should be empty
+// use only in a pinch, refactor-out quickly
+@import "shame";

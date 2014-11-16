@@ -1,0 +1,10 @@
+.controls-wrap {
+  @extend %absolute;
+  @extend %right-0;
+  bottom: -85px;
+  z-index: 200;
+  @include respond-to(tablet-portrait) {
+    display: none;
+  }
+}
+

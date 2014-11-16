@@ -1,0 +1,43 @@
+.page-wrap.boxed {
+  max-width: 1170px;
+  @extend %margin-0-auto;
+}
+.footer.boxed {
+  @extend .page-wrap.boxed;
+}
+.header.boxed {
+  @extend .page-wrap.boxed;
+}
+.extra-header.boxed {
+  @extend .page-wrap.boxed;
+}
+
+
+// for adding space between body and container via CLASSES
+.body-space-top { 
+  @media (min-width: $screen-lg-min) {
+    padding-top: $body-space-top;
+    transition: all, .3s, ease;
+  }
+}
+.body-space-bottom { 
+  @media (min-width: $screen-lg-min) {
+    padding-bottom: $body-space-bottom; 
+    transition: all, .3s, ease;
+  }
+}
+
+// for adding space between body and container via TOGGLES
+body {
+  @if $body-space-toggle--top == true {
+    @extend .body-space-top;
+  }
+  @if $body-space-toggle--bottom == true {
+    @extend .body-space-bottom;
+  }
+  @if $body-space-toggle == true {
+    @extend .body-space-top;
+    @extend .body-space-bottom;
+  }
+}
+

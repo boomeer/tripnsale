@@ -1,0 +1,92 @@
+// -------------------------
+// Elements Demo Page Styles
+
+#demo-elements {
+
+  .element-demo-wrap {
+    .heading h3 {
+      margin-top: 35px;
+      margin-bottom: 0px;
+    }
+    .heading {
+      margin: 45px 0 0
+    }
+  }
+
+  .icon-demo-wrap {
+    @extend %clearfix;
+  }
+
+  .heading h3 {
+    margin-top: 35px;
+    margin-bottom: 15px;
+  }
+
+  .bc-demo-icons-list {
+    padding-left: 0;
+    list-style: none;
+  }
+
+  .bc-demo-icons li {
+    @extend %transition-color--long;
+    float: left;
+    padding: 25px 2px 0;
+    width: 12.5%;
+    height: 115px;
+    margin: 0 -1px -1px 0;
+    font-size: 12px;
+    line-height: 1.4;
+    text-align: center;
+    border: 1px rgba($color3, 0.5) solid;
+    .ai, .glyphicon {
+      font-size: 24px;
+    }
+    @media (max-width: 993px) {
+      width: 25%;
+      font-size: 12px;
+    }
+    &:hover {
+      background-color: darken($body-bg, 5%);
+      .ai {
+        //color: darken($text-color, 15%);
+        color: $brand-primary;
+        @extend %transition-color--long;    
+      }
+    }
+  }
+
+  // the class name wrappers
+  .icon-class, .glyphicon-class {
+    margin-top: 10px;
+  }
+
+  .bc-demo-icons .icon-class, .bc-demo-icons .glyphicon-class {
+    display: block;
+    text-align: center;
+    word-wrap: break-word;
+  }
+
+  .clickToSelect {
+    position: relative;
+    display: block;
+    cursor: pointer;
+  }
+
+  textarea {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0 none transparent;
+    margin: 0;
+    padding: 0;
+    outline: none;
+    resize: none;
+    overflow: hidden;
+    font-family: inherit;
+    font-size: 1em;
+    background: $body-bg;
+  }
+
+} // end #demo-elements

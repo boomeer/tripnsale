@@ -13,8 +13,13 @@ from util.utils import (
 )
 from user.models import (
     User,
+    Msg,
+)
+from user.utils import (
+    GetCurrentUser,
 )
 import re
+from datetime import datetime
 
 
 class UsernameIsInvalidErr(TsExc):
@@ -33,6 +38,9 @@ class IncorrectUsernameOrPasswordErr(TsExc):
     def __init__(self):
         super().__init__("incorrect_username_or_password")
 
+class MsgCannotBeEmpty(TsExc):
+    def __init__(self):
+        super().__init__("msg_cannot_be_empty")
 
 @SafeView
 def ProfileView(request):
@@ -56,7 +64,10 @@ def AuthView(request):
             login(request, user)
         else:
             raise IncorrectUsernameOrPasswordErr
-        return redirect("/")
+        backref = params.get("backref", "/")
+        if not backref:
+            backref = "/"
+        return redirect(backref)
     elif act == "reg":
         CheckPost(request)
         if params["password"] != params["password2"]:
@@ -90,4 +101,56 @@ def AuthView(request):
 @SafeView
 def LogoutView(request):
     logout(request)
-    return redirect("/")
+    backref = request.REQUEST.get("backref", "/")
+    if not backref:
+        backref = "/"
+    return redirect(backref)
+
+
+@SafeView
+def ImView(request):
+    params = request.REQUEST
+    act = params.get("act", "")
+    if act == "send":
+        peer = User.objects.get(id=params.get("peer", 0))
+        user = GetCurrentUser(request)
+        content = params.get("content", "").strip()
+        if not content:
+            raise MsgCannotbeEmptyErr
+        msg = Msg(
+            fr=user,
+            to=peer,
+            content=content,
+            time=datetime.now(),
+        )
+        msg.save()
+        return RenderJson({"result": "ok"})
+    else:
+        peer = User.objects.get(id=params.get("peer", 0))
+        return RenderToResponse("user/im.html", request, {
+            "peer": peer,
+        })
+
+
+@SafeView
+def ImMsgFrameView(request):
+    params = request.REQUEST
+    peer = User.objects.get(id=params.get("peer", 0))
+    user = GetCurrentUser(request)
+    msgs = list(Msg.objects.filter(fr=user, to=peer).all()) + \
+        list(Msg.objects.filter(fr=peer, to=user).all())
+    msgs = sorted(msgs, key=lambda self: self.time)
+    groups = []
+    for msg in msgs:
+        if msg.new:
+            msg.new = False
+            msg.save()
+        if not groups or groups[-1][0].fr != msg.fr:
+            groups.append([])
+        groups[-1].append(msg)
+
+    msgs = groups
+    return RenderToResponse("user/im_msg_frame.html", request, {
+        "peer": peer,
+        "msgs": msgs,
+    })

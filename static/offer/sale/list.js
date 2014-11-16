@@ -29,6 +29,9 @@ $(function() {
     $("#tripsFilterFrom").on("input", function() {
         TripsRefresh();
     });
+    $("#tripsFilterTo").on("input", function() {
+        TripsRefresh();
+    });
 
     TripsRefresh();
 });

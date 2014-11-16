@@ -1,0 +1,20 @@
+.panel-default a.panel-heading {
+  @extend %bg-primary;
+  &.collapsed {
+    background-color: $panel-default-heading-bg;
+  }
+}
+
+.panel-nav .panel-body > ul > li {
+  border-bottom: 1px solid rgba($text-color,0.2);
+  &:last-of-type { border-bottom: none; }
+  > a {
+    display: block;
+    padding: 7px 0;
+    color: $text-color;
+    font-size: 14px;
+    &:hover {
+      color: $link-hover-color;
+    }
+  }
+}

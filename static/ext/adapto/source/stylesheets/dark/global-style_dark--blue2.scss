@@ -1,0 +1,23 @@
+// ---------------------------------------------------------
+// ADAPTO THEME --- global-style--corporate-dark.scss
+
+
+// ---------------------------------------------------------
+// alternative scheme variable files first
+// ---
+
+@import "color-schemes/color-scheme_dark--blue2"; // the color scheme file
+@import "settings-scheme_dark"; // the general theme scheme file
+
+// ---------------------------------------------------------
+// ADAPTO BASE IMPORT
+// ------------------
+// INCLUDES:
+// - all bootstrap files
+// - all adapto base files
+
+@if $global-style_dark--blue2 == true {
+
+  @import "../adapto/adapto-base";
+
+}

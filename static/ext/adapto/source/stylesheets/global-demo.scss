@@ -1,0 +1,15 @@
+// ---------------------------------------------------------
+// DEMO SPECIFIC STYLES
+// seperated out to avoid style-sheet bloat
+
+@import "variables-base";
+
+// --------------------
+// dependencies
+@import "adapto/global/utilities/mixins";
+@import "adapto/global/utilities/helpers";
+@import "adapto/bootstrap/mixins";
+
+// --------------------
+// demo-only modules (that need not be included in theme stylesheet(s))
+@import "demo/style-widget";

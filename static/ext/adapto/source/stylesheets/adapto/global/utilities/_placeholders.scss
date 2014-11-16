@@ -1,0 +1,145 @@
+// ---------------------------------------------------------
+// PLACEHOLDERS
+
+// -----------
+// DISPLAY
+%block {
+  display: block;
+}
+%inline-block {
+  display: inline-block;
+}
+
+// position
+// ---
+%relative {
+  position: relative;
+}
+%absolute {
+  position: absolute;
+}
+%top-0 {
+  top: 0;
+}
+%bottom-0 {
+  bottom: 0;
+}
+%left-0 {
+  left: 0;
+}
+%right-0 {
+  right: 0;
+}
+%float-left {
+  float: left;
+}
+%float-right {
+  float: right;
+}
+
+
+// ------------
+// S P A C E
+%width-100 {
+  width: 100%;
+}
+%width-50 {
+  width: 50%;
+}
+
+// ---------
+// PADDING
+// ---
+%padding-4 {
+  padding: 4px;
+}
+
+// ---------
+// MARGIN
+// ---
+%margin-0-auto {
+  margin: 0 auto;
+}
+%margin-0 {
+  margin: 0;
+}
+%margin-top-0 {
+  margin-top: 0;
+}
+%margin-bottom-0 {
+  margin-bottom: 0;
+}
+
+// -----------
+// TYPOGRAPHY
+%text-center {
+  text-align: center;
+}
+%capitalize {
+  text-transform: capitalize;
+}
+
+// -----------
+// BACKGROUNDS
+%bg-primary {
+  background-color: $brand-primary;
+}
+%background-noise {
+  background: url(../img/bg/noise.png) repeat;
+}
+%bg-input {
+  background-color: $input-bg;
+}
+
+// -----------
+// TRANSITIONS
+
+// COLOR
+%transition-color {
+  @include transition(color, 0.2s, ease);
+}
+%transition-color--short {
+  @include transition(color, 0.2s, ease);
+}
+%transition-color--long {
+  @include transition(color, 0.5s, ease);
+}
+
+// BG COLOR
+%transition-bg-color {
+  @include transition(background-color, 0.2s, ease);
+}
+
+// TOP NAVBAR COLOR
+%top-navbar-color {
+  background-color: $top-nav-bg;
+}
+
+// LINES
+%line-transparent-right {
+  border-right: 2px solid rgba(0, 0, 0, 0.4);
+}
+%border-none {
+  border: none;
+}
+%double {
+  border-top: 1px solid $fancy-line-color;
+  border-bottom: 1px solid $fancy-line-color;
+  height: .15em;
+}
+
+// -----------
+// MISC
+
+%rounded-4 {
+  border-radius: 4px;
+}
+
+%clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+

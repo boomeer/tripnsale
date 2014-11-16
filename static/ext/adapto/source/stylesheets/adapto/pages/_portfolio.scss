@@ -1,0 +1,43 @@
+/* PORTFOLIO HOME 
+----------------- */
+
+.portfolio-home-top {
+  /* url for top background image here */
+  background: $color3 url('../img/home/bg-studio.jpg') no-repeat center;
+  background-size: cover;
+  height: 440px;
+  @media (max-width: $screen-sm-min) {
+    background-image: none;
+    background: rgba($body-bg, 1);
+    height: auto;
+  }
+  @media (min-width: 1630px) {
+    background: $color3 url('../img/home/bg-studio.jpg') no-repeat center;
+    background-size: contain;
+  }
+}
+.page-wrap.boxed .portfolio-home-top {
+  @media (min-width: 1630px) {
+    background-size: cover;
+  } 
+}
+
+.is-checked {
+  @extend .active;
+}
+
+.portfolio-home-img-wrap {
+  margin-top: 66px;
+}
+
+#portfolio-home-caption {
+  background: rgba($body-bg, 0.9);
+  border-radius: 4px;
+  padding: 1px 33px 55px;  
+  margin-top: 66px;
+  @media (max-width: $screen-sm-min) {
+    background: rgba($body-bg, 1);
+    margin-top: 0;
+    margin-bottom: 15px;
+  }
+}

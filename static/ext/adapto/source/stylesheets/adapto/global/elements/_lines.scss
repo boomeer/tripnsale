@@ -1,0 +1,62 @@
+//  background: radial-gradient(ellipse at center 25%, white, DarkSlateGray) no-repeat;
+
+.hr-transparent {
+  border: 0;
+  height: 0;
+  border-top: 1px solid rgba($navbar-dropdown-hr, 0.1);
+  border-bottom: 1px solid rgba($navbar-dropdown-hr, 1);
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+
+hr.small {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 0;
+  border-top: 1px solid rgba($gray, 0.5);
+}
+hr.double {
+  border-top: 1px solid $fancy-line-color;
+  border-bottom: 1px solid $fancy-line-color;
+  height: .15em;
+}
+hr.double--inverse {
+  border-top: 1px solid $inverse-heading-underline-color;
+  border-bottom: 1px solid $inverse-heading-underline-color;
+  height: .15em;
+}
+
+
+// fancy
+
+.fancy {
+    overflow: hidden;
+    text-align: center;
+    line-height: 60px;
+    color: $fancy-line-font-color;
+}
+.fancy:before,
+.fancy:after {
+    border-top: 1px solid $fancy-line-color;
+    border-bottom: 1px solid $fancy-line-color;
+    content: "";
+    display: inline-block;
+    height: .1em;
+    position: relative;
+    vertical-align: middle;
+    width: 50%;
+    margin-bottom: .15em;
+}
+
+.fancy:before {
+    right: 0.5em;
+    margin-left: -50%;
+}
+.fancy:after {
+    left: 0.5em;
+    margin-right: -50%;
+}
+
+.fancy.divider {
+    margin: 60px 0;
+}

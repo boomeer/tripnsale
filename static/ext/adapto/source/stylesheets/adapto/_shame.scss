@@ -1,0 +1,50 @@
+// WARNING -- try NOT to write code here!
+// ----------
+// This file's for quick additions that don't yet have a home
+// QUICKLY Refactor-out anything that dares enter this dark file! 
+
+.list-group .badge {
+  margin-top: 5px;
+}
+.list-group .ai {
+  margin-top: 7px;
+}
+
+
+.style-widget {
+  color: $style-widget-color;
+  background-color: $style-widget-bg-color;
+  box-shadow: -1px 0 6px 0 $style-widget-box-shadow;
+}
+.style-tab {
+  background: $style-widget-bg-color;
+}
+.color-box {
+  color: darken($style-widget-color, 4);
+}
+.color-box-activated {
+  border: 3px solid $color-box-activated-border;
+}
+.color-box-pattern-activated {
+  border: 3px solid $brand-primary;
+}
+#boxed-pattern-selections .color-box {
+  color: $red;
+}
+#spaceToggles {
+  background: $style-widget-bg-LoD;
+}
+.widget-well {
+  background: $style-widget-bg-LoD;
+}
+
+
+
+#portal-meta {
+  & h5 { 
+    margin-bottom: 28px;
+  }
+  & p {
+    margin-bottom: 3px;
+  }
+}

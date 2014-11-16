@@ -1,0 +1,33 @@
+.order-form-wrap {
+  @include respond-to(tablet-portrait) {
+    margin: 40px auto;
+    text-align: center;
+    @include clearfix;
+  }
+}
+
+.checkout-meta--col {
+  .h2 { margin-top: 0; }
+  @include respond-to(tablet-portrait) {
+    margin-bottom: 50px;
+  }
+}
+
+.order-form-input-wrap {
+  float: left;
+  .form-group:first-of-type {
+    margin-bottom: -5px;
+  }
+  @include respond-to(tablet-portrait) {
+    float: none;
+  }
+}
+
+.order-btn-wrap {
+  display: inline-block;
+  margin-left: 15px;
+  @include respond-to(tablet-portrait) {
+    display: block;
+    margin: 0 auto;
+  }
+}

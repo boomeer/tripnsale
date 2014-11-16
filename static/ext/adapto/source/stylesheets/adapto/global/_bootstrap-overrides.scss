@@ -1,0 +1,64 @@
+p, 
+pre, 
+code.language-markup, 
+ul, 
+ol,
+blockquote,
+.btn,
+.popover,
+.radio-inline,
+.checkbox,
+.radio,
+.panel-body,
+address,
+.pagination>li>a, 
+.pagination>li>span,
+.table {
+  line-height: 22px;
+}
+ul.nav li ul li a {
+  padding-top: 0;
+  padding-bottom: 0;
+  font-size: 12px;
+}
+.form-control {
+  height: 36px;
+  line-height: 22px;
+  width: 100% !important;
+}
+
+
+a.panel-heading {
+  @extend %block;
+  @extend %relative;
+}
+.panel-body {
+  color: $panel-default-text;
+}
+
+.thumbnail {
+  background: rgba($gray-lighter, 0.5);
+}
+
+.carousel-indicators li {
+  width: 15px;
+  height: 15px;
+  border: 1px solid $white;
+  &:active {
+    background: $white;
+  }
+}
+
+.modal-header {
+  padding: 7px 15px 4px;
+  h4.modal-title {
+    font-weight: 600;
+  }
+  .close {
+    font-size: 30px;
+  }
+}
+
+.navbar-inverse {
+  border: none;
+}

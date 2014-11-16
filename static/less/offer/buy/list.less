@@ -1,0 +1,145 @@
+@import "../../conf.less";
+
+.buyViewBg {
+    position: fixed;
+    z-index: @buyViewZ;
+    top: 0px;
+    height: 100%;
+    width: 100%;
+    
+    .buyViewGoBack {
+        position: absolute;
+        z-index: @buyViewZ + 10;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        cursor: pointer;
+    }
+
+    .buyViewGoBack:hover {
+    }
+    
+    .buyView {
+        position: absolute;
+        z-index: @buyViewZ + 20;
+        top: 100px;
+        bottom: 100px;
+        left: 10%;
+        right: 10%;
+        background-color: #fff;
+        border: 1px solid #888;
+        border-radius: 3px;
+
+        .buyViewCloseBtn {
+            position: relative;
+            right: 0;
+            float: right;
+        }
+
+        .buyViewContent {
+            padding: 20px;
+
+            .buy-item-title {
+                display: inline-block;
+                width: 200px;
+            }
+
+            .buy-item-content {
+                font-weight: 900;
+            }
+
+            hr {
+                margin: 14px 0px;
+                border-color: #eee;
+            }
+
+            .title {
+            }
+
+            .owner {
+                .owner-name {
+                    a {
+                        color: #600;
+                        font-weight: 900;
+                    }
+                }
+                
+                .owner-av {
+                    img {
+                        max-width: 300px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.buys {
+    height: 100%;
+    
+    .buysList {
+        .buyItem:hover {
+            background-color: #f4f4f4;
+        }
+        
+        .buyItem {
+            border: 1px solid #ccc;
+            margin: 4px 0px;
+            padding: 3px 6px;
+            background-color: #eee;
+            cursor: pointer;
+
+            .buySection {
+                vertical-align: top;
+                display: inline-block;
+
+                .buySectionTitle {
+                    font-weight: 900;
+                    font-size: 10pt;
+                }
+
+                .buySectionContent {
+                    font-size: 11pt;
+                }
+            }
+
+            .buyFrom {
+                width: 20%;
+            }
+
+            .buyTo {
+                width: 20%;
+            }
+
+            .buyDates {
+                width: 25%;
+
+                .buySectionContent {
+                    font-size: 9pt;
+                }
+            }
+
+            .buyDeposit {
+                width: 15%;
+                .guarant {
+                    font-weight: 900;
+                    color: #600;
+                }
+            }
+
+            .buyOwner {
+                width: 10%;
+
+                .buySectionContent {
+                    .buyOwnerAv {
+                        img {
+                            border: 1px solid #ddd;
+                            max-height: 100px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+

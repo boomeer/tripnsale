@@ -34,19 +34,19 @@
                 Депозит
             </div>
             <div class="tripSectionContent">
-                {{ sale.deposit }}
+                {{ sale.deposit }} $
                 {% if sale.guarant %}
-                    ГАРАНТ
+                    <div class="guarant">
+                        Только с гарантом
+                    </div>
                 {% endif %}
             </div>
         </div>
         <div class="tripOwner tripSection">
             <div class="tripSectionContent">
-                <!--
                 <div class="tripOwnerAv">
                     <img src="{{ sale.owner.avatarUrl }}" width="100%">
                 </div>
-                -->
                 <div class="tripOwnerName">
                     {{ sale.owner.first_name }} {{ sale.owner.last_name }}
                 </div>

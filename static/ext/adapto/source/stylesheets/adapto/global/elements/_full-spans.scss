@@ -1,0 +1,26 @@
+// full spans for highlighting content
+// -----------------------------------
+
+%full-span-noise {
+  @if $full-span-noise == true {
+  background: url(../img/bg/noise.png) repeat;
+  }
+}
+
+.wide-info {
+  @extend %full-span-noise;
+  background-color: $color3;
+  padding: 40px 0px;
+}
+
+.wide-gray-lighter {
+  @extend %full-span-noise;
+  background-color: $gray-lighter;
+  padding: 40px 0px;
+}
+
+.wide-gray {
+  @extend %full-span-noise;
+  background-color: $gray;
+  padding: 40px 0px;
+}

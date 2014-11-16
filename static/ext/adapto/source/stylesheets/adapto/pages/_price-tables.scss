@@ -1,0 +1,96 @@
+.plan-popular {
+  width: 80%;
+  height: 28px;
+  margin: -28px auto 0;
+  padding-top: 4px;
+  line-height: 22px;
+  text-transform: uppercase;
+  text-align: center;
+  border-radius: 4px 4px 0 0;
+  background: $plan-popular-bg;
+  color: $plan-popular-text-color;
+  @include respond-to(tablet-portrait) {
+    margin-top: 30px;
+  }
+}
+
+.plan-wrap {
+  background: $price-table-plan-bg;
+  border-radius: 4px;
+  text-align: center;
+  @include respond-to(tablet-portrait) {
+    margin-bottom: 30px;
+  }
+  h2 {
+    margin: 0;
+    font-weight: 300;
+  }
+  .plan-title {
+    background: $price-table-title-bg;
+    color: $price-table-title-color;
+    border-radius: 4px 4px 0 0;
+    padding: 10px 0;
+    margin-bottom: 25px;
+  }
+  ul {
+    font-size: 16px;
+    li {
+      padding: 5px 0;
+    }
+  }
+  .plan-body {
+    padding: 3px 15px 20px;
+    .ai {
+      color: $price-table-icon-color;
+    }
+  }
+  .plan-price {
+    font-weight: 300;
+    color: $price-table-plan-price;
+    .price {
+      font-size: 50px;
+    }
+    .month {
+      font-size: 25px;
+    }
+  }
+}
+
+.row .attached {
+  padding-left: 0;
+  padding-right: 0;
+  .plan-wrap {
+    border-right: solid 1px $price-table-plan-r-border;
+  }
+}
+
+
+.plan--line-fancy {
+    overflow: hidden;
+    text-align: center;
+    line-height: 60px;
+    margin-top: -9px;
+    margin-bottom: -27px;
+    color: $fancy-line-font-color;
+}
+.plan--line-fancy:before,
+.plan--line-fancy:after {
+    border-top: 1px solid $fancy-line-color;
+    border-bottom: 1px solid $fancy-line-color;
+    content: "";
+    display: inline-block;
+    height: .1em;
+    position: relative;
+    vertical-align: middle;
+    width: 50%;
+    margin-bottom: .15em;
+}
+
+.plan--line-fancy:before {
+    right: 0.5em;
+    margin-left: -50%;
+}
+.plan--line-fancy:after {
+    left: 0.5em;
+    margin-right: -50%;
+}

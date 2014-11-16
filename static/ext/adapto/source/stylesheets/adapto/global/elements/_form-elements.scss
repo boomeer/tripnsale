@@ -1,0 +1,44 @@
+/* price range slider inputs */
+.product-price-range input {
+  @extend %padding-4;
+  @extend %rounded-4;
+  @extend %border-none;
+  @extend %bg-input;
+  @extend %text-center;
+  width: 48%;
+}
+
+.order-quantity {
+  margin-top: 5px;
+}
+input.order-quantity--input {
+  @extend %padding-4;
+  @extend %rounded-4;
+  @extend %bg-input;
+  @extend %text-center;
+  width: 50px;
+  border: 1px solid darken($input-bg, 7);
+  @include respond-to(phone) { 
+    width: 50%;
+  }
+}
+
+select {
+  @extend %bg-input;
+  @extend %rounded-4;
+  @extend %padding-4;
+  border: 1px solid darken($input-bg, 7);
+  @include respond-to(phone) {
+    width: 70%;
+    text-align: center;
+  }
+}
+
+#contact-form textarea {
+  height: 325px;
+}
+
+.form-control:focus {
+  background: $input-focus-bg-color;
+  color: $input-focus-text-color;
+}

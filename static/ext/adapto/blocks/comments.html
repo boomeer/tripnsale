@@ -1,0 +1,743 @@
+﻿<!doctype html>
+<html lang="en">
+
+  <head>
+    
+    <!-- TITLE TAG - text for browser tabs -->
+    <title>Adapto &there4; Blocks</title>
+
+    <!-- RESPONSIVE VIEWPORT -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+    <!-- STYLESHEETS -->
+    <!-- Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <!-- CORE DEFAULT Stylesheet (theme scheme) - CHANGE THEME SCHEME HERE -->
+    <link href="../assets/css/global-style_light--blue.min.css" rel="stylesheet" >    
+    
+
+        
+
+    
+    
+  </head>
+
+  <body id="top">
+    
+    <!-- Extra Header (optional) -->
+<!-- TO USE, follow these steps:
+  1. REMOVE the class "header-hidden" from the FIRST div below.
+  2. ADD ONE header size class to the same div.
+     Options are:
+       header-small
+       header-medium
+       header-large
+       header-xl
+  3. Decide which content you'd like in the extra header as seen in demo from the list below. 
+     Remove the class "header-hidden" from each list that you want.
+     Edit each list as you'd like. 
+ -->
+<div class="extra-header header-hidden">
+  <div class="container">
+    <ul class="list-inline extra-header-store header-hidden">
+      <li><a href="#"><span class="ai ai-cart"></span> Cart | 2 items</a></li>
+      <li><a href="#"><span class="ai ai-coin"></span> Checkout</a></li>
+    </ul>
+    <ul class="list-inline extra-header-account header-hidden">
+      <li><a href="#"><span class="ai ai-question"></span> HELP</a></li>
+      | <li><a href="#"><span class="ai ai-user3"></span> LOGIN</a></li>
+    </ul>
+    <ul class="list-inline extra-header-socialMedia-2 header-hidden">
+      <li class="tooltip-link" data-toggle="tooltip" data-placement="bottom" title="Linkedin"><a href="#"><span class="ai ai-linkedin"></span></a></li>
+      <li class="tooltip-link" data-toggle="tooltip" data-placement="bottom" title="Picassa"><a href="#"><span class="ai ai-picassa2"></span></a></li>
+      <li class="tooltip-link" data-toggle="tooltip" data-placement="bottom" title="Soundcloud"><a href="#"><span class="ai ai-soundcloud2"></span></a></li>
+    </ul>
+    <ul class="list-inline extra-header-socialMedia extra-header-default-content">
+      <li class="tooltip-link" data-toggle="tooltip" data-placement="bottom" title="Facebook"><a href="#"><span class="ai ai-facebook2"></span></a></li>
+      <li class="tooltip-link" data-toggle="tooltip" data-placement="bottom" title="Twitter"><a href="#"><span class="ai ai-twitter2"></span></a></li>
+      <li class="tooltip-link" data-toggle="tooltip" data-placement="bottom" title="Google+"><a href="#"><span class="ai ai-google-plus3"></span></a></li>
+    </ul>
+    <ul class="list-inline extra-header-phone extra-header-default-content">
+      <li><span class="ai ai-phone"></span> <a href="tel:+18007772323">(1800) 777-2323</a></li>
+    </ul>
+  </div>
+</div>
+    <!-- TOP HEADER / NAVIGATION BAR -->
+<header id="header" class="header slide animated" role="banner">
+  <div class="container">
+    <div class="row">
+    
+      <div class="navbar-header">
+        
+        <!-- TOGGLE BUTTON for mobile -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="ai ai-menu ai-2x ai-primary"></span>
+        </button>
+
+        <!-- sitewide logo LINK TO ROOT INDEX (home) PAGE -->
+        <a href="../index.html" class="navbar-brand">
+          <!-- sitewide LOGO HERE (as text, image, or both) -->
+          <span class="logo-top">
+            adapto <span class="ai ai-droplet"></span>
+          </span>
+          <!-- Hidden text in an h1 tag for SEO purposes -->
+          <h1 class="text-hide">Adapto Theme</h1>        
+        </a> <!-- end site-wide logo link -->
+
+      </div> <!-- end navbar-header -->
+
+      <!-- NAVIGATION -->
+      <div class="collapse navbar-collapse">
+        <nav class="navbar" role="navigation">
+          <ul class="nav navbar-nav navbar-right">          
+              
+                        <!-- Home Navigation -->
+            <li class="dropdown">
+              <a class="dropdown-toggle" href="#" aria-haspopup="true">Home</a>
+              <ul class="dropdown-menu">
+                <span class="triangle-up"></span>
+                <li><a href="../index.html" data-theme="default">Home (default)</a></li>
+                <li><a href="../home/home-simple.html">Home (simple)</a></li>
+                <hr class="hr-transparent">
+                <li><a href="../portfolio/portfolio-one.html">Home - Portfolio</a></li>
+                <hr class="hr-transparent">
+                <li><a href="../store/store-one.html">Home - Store 1</a></li>
+                <li><a href="../store/store-two.html">Home - Store 2</a></li>
+              </ul>
+            </li>
+                        <!-- Page Layouts Navigation -->
+            <li class="dropdown mega">
+              <a class="dropdown-toggle" href="#" aria-haspopup="true">Page Layouts</a>
+              <ul class="dropdown-menu">
+                <span class="triangle-up"></span>
+                <div class="row">
+                  <div class="mega-col col-md-6">
+                    <li><a href="../pages/what-makes-adapto-different.html">How Adapto's Different</a></li>
+                    <li><a href="../pages/about.html">About</a></li>
+                    <li><a href="../pages/team.html">Meet the Team</a></li>
+                    <li><a href="../pages/faqs.html">FAQs</a></li>
+                    <li><a href="../pages/404.html">404 Error</a></li>
+                  </div>
+                  <div class="mega-col col-md-6">
+                    <li><a href="../pages/signin.html">Sign in</a></li>
+                    <li><a href="../pages/signup.html">Sign up</a></li>
+                    <li><a href="../pages/price-tables.html">Price Tables</a></li>
+                    
+                    <!-- Contact Page Layouts -->
+                    <li class="dropdown-submenu">
+                      <a tabindex="-1" aria-haspopup="true">Contact</a>
+                      <ul class="dropdown-menu">
+                        <li><a href="../contact/contact-default.html">Contact - Default</a></li>
+                        <li><a href="../contact/contact-full.html">Contact - Full Width</a></li>
+                        <li><a href="../contact/contact-form.html">Contact - Form</a></li>
+                        <li><a href="../contact/contact-minimalist.html">Contact - Minimalist</a></li>
+                      </ul>
+                    </li> <!-- end contact layouts -->
+                    <!-- Basic Page Layouts -->
+                    <li class="dropdown-submenu">
+                      <a tabindex="-1" aria-haspopup="true">The Basics</a>
+                      <ul class="dropdown-menu">
+                        <li><a href="../basic-pages/page-right-sidebar.html">Page Right Sidebar</a></li>
+                        <li><a href="../basic-pages/page-left-sidebar.html">Page Left Sidebar</a></li>
+                        <li><a href="../basic-pages/page-dual-sidebars.html">Page Dual Sidebars</a></li>
+                        <li><a href="../basic-pages/page-full-width.html">Page Full Width</a></li>
+                        <li><a href="../basic-pages/page-constrained.html">Page Constrained</a></li>
+                      </ul>
+                    </li>
+                  </div>
+                </div>
+              </ul>
+            </li>
+                        <!-- Modules Navigation -->
+            <li class="dropdown mega mega--full">
+              <a class="dropdown-toggle" href="#" aria-haspopup="true">Build</a>
+              <div class="mega-triangle-wrap">
+                <span class="triangle-up"></span>
+              </div>
+              <ul class="dropdown-menu">
+                <div class="row">
+
+                  <!-- Elements Navigation -->
+                  <div class="mega-col col-md-3">
+                    <p class="text-center" style="margin: 3px 0; color: #777">Elements</p>
+                    <li><a href="../elements.html#elements-buttons">Buttons</a></li>
+                    <li><a href="../elements.html#elements-icons">Icons</a></li>
+                    <li><a href="../elements.html#elements-icons-examples">Icon Examples</a></li>
+                    <li><a href="../elements.html#elements-progress-bars">Progress Bars</a></li>
+                  </div>
+                  
+                  <!-- Structural Blocks -->
+                  <div class="mega-col col-md-3">
+                    <p class="text-center" style="margin: 3px 0; color: #777">Structural Blocks</p>
+                    
+                      <li><a href="../blocks/headers.html">Headers</a></li>
+                    
+                      <li><a href="../blocks/dividers.html">Dividers</a></li>
+                    
+                      <li><a href="../blocks/panels.html">Panels</a></li>
+                    
+                      <li><a href="../blocks/tables.html">Tables</a></li>
+                    
+                      <li><a href="../blocks/grid.html">Grid</a></li>
+                    
+                  </div>
+
+                  <!-- Content Blocks -->
+                  <div class="mega-col col-md-3">
+                    <p class="text-center" style="margin: 3px 0; color: #777">Content Blocks</p>
+                    
+                      <li><a href="../blocks/contact-form.html">Contact Form</a></li>
+                    
+                      <li><a href="../blocks/comments.html">Comments</a></li>
+                    
+                      <li><a href="../blocks/text.html">Text</a></li>
+                    
+                      <li><a href="../blocks/images.html">Images</a></li>
+                    
+                      <li><a href="../blocks/video.html">Video</a></li>
+                    
+                      <li><a href="../blocks/newsletter-signup.html">Newsletter Signup</a></li>
+                    
+                  </div>
+
+                  <!-- Organizational Blocks -->
+                  <div class="mega-col col-md-3">
+                    <p class="text-center" style="margin: 3px 0; color: #777">Organizational Blocks</p>
+                    
+                      <li><a href="../blocks/accordions.html">Accordions</a></li>
+                    
+                      <li><a href="../blocks/tabs.html">Tabs</a></li>
+                    
+                      <li><a href="../blocks/revolution-slider.html">Revolution Slider</a></li>
+                    
+
+                  </div>
+                </div>
+              </ul>
+            </li>
+                        <!-- Blog Navigation -->
+            <li class="dropdown">
+              <a class="dropdown-toggle" href="#" aria-haspopup="true">Blog</a>
+              <ul class="dropdown-menu">
+                <span class="triangle-up"></span>
+                <li><a href="../blog/grid-only-full.html">Blog - Grid Only Full</a></li>
+                <li><a href="../blog/row-only-full.html">Blog - List Only Full</a></li>
+                <hr class="hr-transparent">
+                <p class="text-center" style="margin: 3px 0; color: #777">Grid / Row Toggle</p>
+      
+                <!-- Blog sub navigation -->
+                <li class="dropdown-submenu">
+                  <a tabindex="-1" aria-haspopup="true">Grid Default</a>
+                  <ul class="dropdown-menu">
+                    <li><a href="../blog/full-width-grid.html">Blog - Full Width</a></li>
+                    <li><a href="../blog/right-sb-grid.html">Blog - Right sb</a></li>
+                    <li><a href="../blog/left-sb-grid.html">Blog - Left sb</a></li>
+                    <li><a href="../blog/right-sb-narrow-grid.html">Blog - Right sb narrow</a></li>
+                    <li><a href="../blog/left-sb-narrow-grid.html">Blog - Left sb narrow</a></li>    
+                  </ul>
+                </li>
+                <li class="dropdown-submenu">
+                  <a tabindex="-1" aria-haspopup="true">Row Default</a>
+                  <ul class="dropdown-menu">
+                    <li><a href="../blog/full-width-row.html">Blog - Full Width</a></li>
+                    <li><a href="../blog/right-sb-row.html">Blog - Right sb</a></li>
+                    <li><a href="../blog/left-sb-row.html">Blog - Left sb</a></li>
+                    <li><a href="../blog/right-sb-narrow-row.html">Blog - Right sb narrow</a></li>
+                    <li><a href="../blog/left-sb-narrow-row.html">Blog - Left sb narrow</a></li>
+                  </ul>
+                </li> 
+                <hr class="hr-transparent">
+                <li class="dropdown-submenu">
+                  <a tabindex="-1">Post</a>
+                  <ul class="dropdown-menu">
+                    <li><a href="../blog/post-full.html">Post - Full</a></li>
+                    <li><a href="../blog/post-sidebar.html">Post - sb</a></li>
+                    <li><a href="../blog/post-constrained.html">Post - Constrained</a></li>
+                    <li><a href="../blog/post-text.html">Post - Text</a></li>
+                  </ul>
+                </li> <!-- end blog sub navigation -->
+              </ul>
+            </li>
+                        <!-- portfolio navigation -->
+            <li class="dropdown">
+              <a class="dropdown-toggle" href="#" aria-haspopup="true">portfolio</a>
+              <ul class="dropdown-menu">
+                <span class="triangle-up"></span>
+                <li><a href="../portfolio/portfolio-one.html">Porftolio - Home</a></li>
+                <hr class="hr-transparent">
+                <li><a href="../portfolio/portfolio-two-column.html">Portfolio - 2 Column</a></li>
+                <li><a href="../portfolio/portfolio-three-column.html">Portfolio - 3 Column</a></li>
+                <li><a href="../portfolio/portfolio-four-column.html">Portfolio - 4 Column</a></li>
+                <hr class="hr-transparent">
+                <li><a href="../portfolio/gallery.html">Gallery</a></li>
+                <hr class="hr-transparent">
+                <li><a href="../portfolio/portfolio-entry.html">Portfolio - Entry</a></li>
+              </ul>
+            </li>
+                        <!-- store navigation -->
+            <li class="dropdown">
+              <a class="dropdown-toggle" href="#" aria-haspopup="true">Store</a>
+              <ul class="dropdown-menu">
+                <span class="triangle-up"></span>
+                <li><a href="../store/store-one.html">Store - Home 1</a></li>
+                <li><a href="../store/store-two.html">Store - Home 2</a></li>
+                <hr class="hr-transparent">
+                <li><a href="../store/store-listings.html">Store - Listings (fancy)</a></li>
+                <li><a href="../store/store-listings-simple.html">Store - Listings (simple)</a></li>
+                <hr class="hr-transparent">
+                <li><a href="../store/product-page.html">Store - Product Page</a></li>
+                <hr class="hr-transparent">
+                <li><a href="../store/my-cart.html">Store - My Cart</a></li>
+                <li><a href="../store/checkout.html">Store - Checkout</a></li>
+              </ul>
+            </li>
+        
+            <!-- search toggle button -->
+            <li class="visible-md visible-lg"><a id="search"><span class="ai ai-search"></span></a></li>
+
+          </ul>
+
+          <!-- search dropdown -->
+          <div id="searchBox">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Search">
+              <span class="input-group-btn">
+                <button class="btn btn-primary" type="button">Go</button>
+              </span>
+            </div>
+          </div> <!-- end search dropdown -->
+
+        </nav> <!-- END TOP NAVIGATION -->
+      </div> <!-- end navbar wrapper -->
+    </div> <!-- end row -->
+  </div> <!-- end container -->
+</header>
+  
+    <!-- FOR BODY background-noise: add 'bg-noise' to this div -->
+    <div class="page-wrap">
+      
+      <div class="page-header-wrap">
+        <div class="container">
+          <div class="page-header">
+            
+              <!-- breadcrumbs -->
+            <div class="breadcrumb-wrap">
+              <ol class="breadcrumb">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../blocks">Blocks</a></li><li class="active">Comments</li>
+              </ol>
+            </div> <!-- end breadcrumb-wrap -->
+
+            
+            <h1>Blocks</h1>
+            
+          </div> <!-- end page-header -->
+        </div> <!-- end container -->
+      </div> <!-- end page-header-wrap -->
+      
+  
+       
+    
+    <div class="container content-wrap">
+  
+  <div class="row">
+    <aside class="col-md-3">
+            <div class="panel-nav sidebar-left">
+
+        <!-- structural blocks -->
+        <div class="panel panel-default">
+
+          <div class="panel-body">
+
+            <div class="headline">
+              <h4>Structure</h4>
+            </div>
+            <ul class="list-unstyled">
+            
+              <li><a href="../blocks/headers.html">Headers</a></li>
+            
+              <li><a href="../blocks/dividers.html">Dividers</a></li>
+            
+              <li><a href="../blocks/panels.html">Panels</a></li>
+            
+              <li><a href="../blocks/tables.html">Tables</a></li>
+            
+              <li><a href="../blocks/grid.html">Grid</a></li>
+            
+            </ul>
+        
+      
+            <div class="headline">
+              <h4>Content</h4>
+            </div>
+            <ul class="list-unstyled">
+            
+              <li><a href="../blocks/contact-form.html">Contact Form</a></li>
+            
+              <li><a href="../blocks/comments.html">Comments</a></li>
+            
+              <li><a href="../blocks/text.html">Text</a></li>
+            
+              <li><a href="../blocks/images.html">Images</a></li>
+            
+              <li><a href="../blocks/video.html">Video</a></li>
+            
+              <li><a href="../blocks/newsletter-signup.html">Newsletter Signup</a></li>
+            
+            </ul>
+
+            <div class="headline">
+              <h4>Organization</h4>
+            </div>
+            <ul class="list-unstyled">
+            
+              <li><a href="../blocks/accordions.html">Accordions</a></li>
+            
+              <li><a href="../blocks/tabs.html">Tabs</a></li>
+            
+              <li><a href="../blocks/revolution-slider.html">Revolution Slider</a></li>
+            
+            </ul>
+
+        </div>
+      </div> <!-- end toc -->
+    </aside>
+
+    <article>
+      <div class="col-md-9">
+        
+        
+        
+
+        
+        
+        
+
+        
+        
+        
+
+        
+        
+        
+
+        
+        
+        
+
+        
+        
+        
+
+        
+        
+        
+
+          
+          
+          <h2>Comments</h2>
+  
+  <p class="lead">Styling and markup for <span class="f400">fully-reponsive</span> and <span class="f400">threaded</span> comments.</p>
+
+  <div class="wow fadeInRight">
+          <ul class="media-list">
+
+        <!-- comment 1 -->
+        <li class="media comment-wrap">
+          <span class="pull-left">
+            <img class="media-object" src="../assets/img/avatars/avatar-1.jpg" alt="">
+          </span>
+          <div class="comment-meta-wrap">
+            <ul class="list-inline">
+              <li>Thom Jefferson</li><span class="sep"> |</span>
+              <li>12/13/2013</li><span class="sep"> |</span>
+              <li>5:03 PM</li>
+              <li class="reply-to-comment" title="click to reply" data-toggle="tooltip"><a href="#commentMessageArea" data-toggle="smoothScroll"><i class="ai ai-reply"></i></a></li>
+            </ul>
+          </div>
+          <div class="media-body comment-body">
+            <div class="media-heading">
+              Great, but...
+            </div>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat, ratione, consequatur ipsam vel consequuntur impedit accusantium fugit distinctio nisi delectus modi repudiandae voluptatem laudantium alias hic officiis assumenda iste illo voluptatibus deleniti eaque amet!</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, officia, dolorem, aliquid ducimus sed vitae esse iste distinctio vel harum perferendis a deleniti itaque dolorum at ipsam quidem obcaecati ipsum praesentium minima.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur, esse minima!</p>
+          </div>
+        </li> <!-- end comment 1 -->
+
+        <!-- comment 2 -->
+        <li class="media comment-wrap">
+          <span class="pull-left">
+            <img class="media-object" src="../assets/img/avatars/avatar-15.jpg" alt="">
+          </span>
+          <div class="comment-meta-wrap">
+            <ul class="list-inline">
+              <li>Susy Jefferson</li><span class="sep"> |</span>
+              <li>12/13/2013</li><span class="sep"> |</span>
+              <li>5:03 PM</li>
+              <li class="reply-to-comment" title="click to reply" data-toggle="tooltip"><a href="#commentMessageArea" data-toggle="smoothScroll"><i class="ai ai-reply"></i></a></li>
+            </ul>
+          </div>
+          <div class="media-body comment-body">
+            <div class="media-heading">Incredible Point</div>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque, odit quos voluptatum nemo asperiores! Maiores sapiente sint explicabo aspernatur eaque nam tempora!</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur, tenetur, nobis ullam maxime assumenda consequuntur odit voluptates libero magni ratione perferendis facere.</p>
+          </div>
+
+          <!-- responses to comment 2 -->
+          <ul class="threaded-response">
+
+            <!-- response 1 -->
+            <li class="media comment-wrap">
+              <span class="pull-left">
+                <img class="media-object" src="../assets/img/avatars/avatar-22.jpg" alt="">
+              </span>
+              <div class="comment-meta-wrap">
+                <ul class="list-inline">
+                  <li>Jerry Jefferson</li><span class="sep"> |</span>
+                  <li>12/13/2013</li><span class="sep"> |</span>
+                  <li>5:03 PM</li>
+                  <li class="reply-to-comment" title="click to reply" data-toggle="tooltip"><a href="#commentMessageArea" data-toggle="smoothScroll"><i class="ai ai-reply"></i></a></li>
+                </ul>
+              </div>
+            <div class="media-body comment-body">
+              <div class="media-heading">Don't you think it lacked...</div>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque, odit quos voluptatum nemo asperiores! Maiores sapiente sint explicabo aspernatur eaque nam tempora!</p>
+            </div>
+            </li> <!-- end response 1 -->
+
+            <!-- response 2 -->
+            <li class="media comment-wrap">
+              <span class="pull-left">
+                <img class="media-object" src="../assets/img/avatars/avatar-15.jpg" alt="">
+              </span>
+              <div class="comment-meta-wrap">
+                <ul class="list-inline">
+                  <li>Susy Jefferson</li><span class="sep"> |</span>
+                  <li>12/13/2013</li><span class="sep"> |</span>
+                  <li>5:03 PM</li>
+                  <li class="reply-to-comment" title="click to reply" data-toggle="tooltip"><a href="#commentMessageArea" data-toggle="smoothScroll"><i class="ai ai-reply"></i></a></li>
+                </ul>
+              </div>
+            <div class="media-body comment-body">
+              <div class="media-heading">I suppose you have a point</div>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque, odit quos voluptatum nemo asperiores! Maiores sapiente sint explicabo aspernatur eaque nam tempora!</p>
+            </div>
+            </li> <!-- end response 2 -->
+          </ul> <!-- end responses to comment 2 -->
+        </li> <!-- end comment 2 -->
+
+        <!-- comment 3 -->
+        <li class="media comment-wrap">
+          <span class="pull-left">
+            <img class="media-object" src="../assets/img/avatars/avatar-12.jpg" alt="">
+          </span>
+          <div class="comment-meta-wrap">
+            <ul class="list-inline">
+              <li>Tom Eddison</li><span class="sep"> |</span>
+              <li>12/13/2013</li><span class="sep"> |</span>
+              <li>5:03 PM</li>
+              <li class="reply-to-comment" title="click to reply" data-toggle="tooltip"><a href="#commentMessageArea" data-toggle="smoothScroll"><i class="ai ai-reply"></i></a></li>
+            </ul>
+          </div>
+          <div class="media-body comment-body">
+            <div class="media-heading">Right On!</div>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque, odit quos voluptatum nemo asperiores! Maiores sapiente sint explicabo aspernatur eaque nam tempora!</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti, incidunt deleniti perferendis quas laudantium illum repellat eius! Iste provident natus aut?</p>
+          </div>
+        </li> <!-- end comment 3 -->
+
+        <!-- comment 4 -->
+        <li class="media comment-wrap">
+          <span class="pull-left">
+            <img src="../assets/img/avatars/avatar-53.jpg" alt="" class="media-object">
+          </span>
+          <div class="comment-meta-wrap">
+            <ul class="list-inline">
+              <li>Gary Jefferson</li><span class="sep"> |</span>
+              <li>12/13/2013</li><span class="sep"> |</span>
+              <li>5:03 PM</li>
+              <li class="reply-to-comment" title="click to reply" data-toggle="tooltip"><a href="#commentMessageArea" data-toggle="smoothScroll"><i class="ai ai-reply"></i></a></li>
+            </ul>
+          </div>
+          <div class="media-body comment-body">
+            <div class="media-heading">I especially loved the point...</div>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quasi ut voluptate aut voluptatibus!</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis alias consequatur sapiente porro assumenda ea suscipit omnis vitae dolor minima. Reiciendis, doloremque, explicabo eaque expedita perspiciatis quaerat beatae iusto accusamus commodi cumque reprehenderit itaque unde impedit obcaecati magnam. Eaque ullam consequuntur nam tempore praesentium voluptate perspiciatis possimus laudantium ea.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, consectetur sapiente vitae similique error voluptate facilis molestias quam perferendis libero. Doloribus, corrupti deserunt?</p>
+          </div>  
+        </li> <!-- end comment 4 -->
+
+      </ul> <!-- end media-list (end ALL comments)-->
+
+
+
+  <div class="headline" id="commentMessageArea">
+    <h2><span class="ai ai-pencil2"></span> Leave a Comment</h2>
+  </div>
+  <form role="form">
+    <div class="row">
+      <div class="col-sm-12 col-md-6">
+        <input type="name" class="form-control" id="inputName" placeholder="Name">
+      </div>
+      <div class="col-sm-12 col-md-6">
+        <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+      </div>
+
+      <div class="col-xs-12" style="margin-top: 15px">
+        <textarea class="form-control" id="TextArea" placeholder="Comment" style="height:200px !important"></textarea>
+      </div>
+    </div>
+    <div class="row" style="margin-top: 15px">
+      <div class="col-xs-12">
+        <button type="submit" value="submit" class="btn btn-primary">Submit</button>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox"> Notify me of new comments
+          </label>
+        </div>
+      </div>
+    </div>
+  </form>
+  </div>
+
+        
+
+        
+        
+        
+
+        
+        
+        
+
+        
+        
+        
+
+        
+        
+        
+
+        
+        
+        
+
+        
+        
+        
+
+        
+        
+        
+
+        
+
+      </div>
+    </article>  
+
+
+  </div> <!-- end row -->
+  
+</div> <!-- end container -->
+
+  
+    </div> <!-- end page-wrap -->
+    
+    
+      
+<!-- FOOTER -->
+<footer class="site-footer footer">
+  <div class="container">
+
+    <div class="row">
+
+      <div class="col-md-4 site-footer--col">
+        <div class="headline site-footer--heading text-center">
+          <h3>Footer Text</h3>
+        </div>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, iusto enim incidunt odio praesentium quas sed quidem fugiat magni provident illum aliquid sapiente temporibus dicta ut sequi facilis alias molestias omnis repellendus nam. Provident, natus asperiores quidem perferendis consequatur possimus tempora cupiditate harum repudiandae nam tempora cupiditate harum.</p>
+
+      </div> <!-- end col -->
+      
+      <div class="col-md-4 site-footer--col">
+        <div class="headline site-footer--heading text-center">
+          <h3>About Us</h3>
+        </div>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, iusto enim incidunt odio praesentium quas sed quidem fugiat magni provident illum aliquid sapiente temporibus dicta ut sequi facilis alias molestias omnis repellendus nam. Provident, natus asperiores quidem perferendis consequatur possimus tempora cupiditate harum repudiandae nam tempora cupiditate harum.</p>
+        <div class="clearfix"></div>
+      </div> <!-- end col -->
+
+      <div class="col-md-4 site-footer--col">        
+        <div class="headline site-footer--heading text-center">
+          <h3>Stay Informed</h3>
+        </div>
+        <p style="margin-bottom: 15px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, iusto enim incidunt odio praesentium quas sed quidem fugiat magni provident illum aliquid sapiente temporibus dicta ut sequi facilis alias molestias omnis repellendus nam.</p>
+        <form class="form-horizontal" role="form">
+          <div class="input-group" style="font-size: 12px">
+            <input type="text" class="form-control site-footer--input" placeholder="Enter email to join">
+            <span class="input-group-btn">
+              <button class="btn btn-primary btn-xs" type="submit" value="submit">Submit</button>
+            </span>
+          </div>
+        </form>
+
+      </div> <!-- end col -->
+    </div> <!-- end row -->
+
+    <!-- divider -->
+    <div class="row">
+      <div class="col-xs-12">
+        <hr class="double--inverse">
+      </div>
+    </div> <!-- end row -->
+
+    <!-- meta row -->
+    <div class="row">
+      <div class="site-footer--meta">
+        <div class="col-xs-4">
+          <p>Created by <a href="pixelandcraft.com" target="_blank">Pixel &amp; Kraft</a></p>
+        </div>
+        <span class="col-xs-4 text-center">
+          <a href="#top" title="Scroll to Top" data-toggle="smoothScroll"><i class="ai ai-2x ai-arrow-up3"></i></a>
+        </span>
+        <div class="col-xs-4 text-right">
+          <ul class="list-inline icons--social-media">
+  <li class="tooltip-link" data-toggle="tooltip" data-placement="top" title="Facebook"><a href="#"><span class="ai ai-2x ai-facebook2"></span></a></li>
+  <li class="tooltip-link" data-toggle="tooltip" data-placement="top" title="Twitter"><a href="#"><span class="ai ai-2x ai-twitter2"></span></a></li>
+  <li class="tooltip-link" data-toggle="tooltip" data-placement="top" title="Google+"><a href="#"><span class="ai ai-2x ai-google-plus3"></span></a></li>
+  <li class="tooltip-link" data-toggle="tooltip" data-placement="top" title="Linkedin"><a href="#"><span class="ai ai-2x ai-linkedin"></span></a></li>
+  <li class="tooltip-link" data-toggle="tooltip" data-placement="top" title="Picassa"><a href="#"><span class="ai ai-2x ai-picassa2"></span></a></li>
+  <li class="tooltip-link" data-toggle="tooltip" data-placement="top" title="Soundcloud"><a href="#"><span class="ai ai-2x ai-soundcloud2"></span></a></li>
+</ul>
+        </div>
+      </div> <!-- end meta -->
+    </div> <!-- end row -->
+
+  </div>  <!-- end container -->
+
+  
+</footer>
+
+    
+  
+    <!-- SCRIPTS -->
+    <!-- jQuery first -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  
+    <!-- Global Scripts -->
+    
+    <script src="../assets/js/global-adapto.min.js"></script>
+    <script src="../assets/js/global-bootstrap.min.js"></script>
+    
+  
+    
+    
+    
+    
+  </body>
+</html>

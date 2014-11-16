@@ -19,7 +19,7 @@
                         Мои заказы
                     </a>
                     <span class="userPanelSeparator"></span>
-                    <a class="userPanelItem" href="/user/logout">
+                    <a class="userPanelItem" href="/user/logout?backref={{ url }}">
                         <i class="glyphicon glyphicon-log-out"></i>
                         Выход
                     </a>
@@ -39,6 +39,7 @@
                     <form class="form-horizontal" role="form" action="/user/auth/" method="post">
                         {% csrf_token %}
                         <input type="hidden" name="act" value="login">
+                        <input type="hidden" name="backref" value="{{ url }}">
                         <div class="form-group">
                             <div class="col-sm-5 colMin">
                                 <input type="text" class="form-control" id="inputLoginUsername" name="login" placeholder="Логин">

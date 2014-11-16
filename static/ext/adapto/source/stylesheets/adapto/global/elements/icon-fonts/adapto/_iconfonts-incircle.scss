@@ -1,0 +1,58 @@
+@mixin circle($size, $color: $icon-font-bg-color) {
+  width: ($size);
+  height: ($size);
+  line-height: ($size);
+  border-radius: 50%;
+  background-color: $color;
+  display: inline-block;
+  margin: 2px 0;
+  text-align:center; 
+  color: $icon-font-color-when-circle;
+}
+
+.#{$ai-css-prefix}-circle {
+  @if $icon-bg-noise == true {
+    background: url(../img/bg/noise.png) repeat;
+  }
+  @include circle(1.65em)
+}
+
+// circle outline
+.#{$ai-css-prefix}-circle-outline {
+  @if $icon-bg-noise == true {
+    background: url(../img/bg/noise.png) repeat;
+  }
+  @include circle(2.35em);
+  color: $brand-primary;
+  border: 3px solid $brand-primary;
+  background-color: transparent;
+}
+
+.#{$ai-css-prefix}-circle-spaced {
+  @if $icon-bg-noise == true {
+    background: url(../img/bg/noise.png) repeat;
+  }
+  @include circle(2.35em);
+}
+.#{$ai-css-prefix}-circle-spaced-border {
+  @extend .#{$ai-css-prefix}-circle-spaced;
+  border: 5px solid black;
+}
+
+.#{$ai-css-prefix}-circle-spaced-border-blend {
+  width: 2.35em;
+  height: 2.35em;
+  line-height: 2.17em;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 2px 0;
+  text-align:center;  
+  color: $icon-font-color-when-circle;
+  border: 8px solid $body-bg;
+  @if $icon-burned-noise == true {
+    background: url(../img/bg/noise.png) repeat;
+  }
+  background-color: $icon-font-bg-color;
+}
+
+

@@ -20,29 +20,8 @@ from datetime import datetime
 
 @SafeView
 def SaleListView(request):
-    sales = SaleOffer.objects.all()
     return RenderToResponse("offer/sale/list.html", request, {
-        "sales": sales,
-    })
-
-
-@SafeView
-def BuyOfferAddView(request):
-    params = request.REQUEST
-    act = params.get("act", "")
-    if act == "add":
-        CheckPost(request)
-        CheckAuth(request)
-        buy = BuyOffer(
-            title=params.get("title", ""),
-            costFrom=params.get("costFrom", None),
-            costTo=params.get("costTo", None),
-            guarant=params.get("guarant", False),
-            owner=GetCurrentUser(request),
-        )
-        buy.save()
-        return redirect("/")
-    return RenderToResponse("offer/buy/add.html", request, {
+        "url": "/offer/sale/list",
     })
 
 
@@ -63,8 +42,9 @@ def SaleOfferAddView(request):
             owner=GetCurrentUser(request),
         )
         sale.save()
-        return redirect("/")
+        return redirect("/offer/sale/list")
     return RenderToResponse("offer/sale/add.html", request, {
+        "url": "/offer/sale",
     })
 
 
@@ -72,8 +52,8 @@ def SaleOfferAddView(request):
 def SaleFilterView(request):
     params = request.REQUEST
     sales = SaleOffer.objects.filter(
-        fr__startswith=params.get("from", ""),
-        to__startswith=params.get("to", ""),
+        fr__istartswith=params.get("from", ""),
+        to__istartswith=params.get("to", ""),
     ).all()
     page = params.get("page", 1)
     count = params.get("count", 5)
@@ -90,3 +70,56 @@ def SaleView(request, id):
     return RenderToResponse("offer/sale/view.html", request, {
         "sale": sale,
     })
+
+
+@SafeView
+def BuyOfferAddView(request):
+    params = request.REQUEST
+    act = params.get("act", "")
+    if act == "add":
+        CheckPost(request)
+        CheckAuth(request)
+        buy = BuyOffer(
+            title=params.get("title", ""),
+            costFrom=params.get("costFrom", None),
+            costTo=params.get("costTo", None),
+            guarant=params.get("guarant", False),
+            owner=GetCurrentUser(request),
+        )
+        buy.save()
+        return redirect("/offer/buy/list")
+    return RenderToResponse("offer/buy/add.html", request, {
+        "url": "/offer/buy",
+    })
+
+
+@SafeView
+def BuyListView(request):
+    return RenderToResponse("offer/buy/list.html", request, {
+        "url": "/offer/buy/list",
+    })
+
+
+@SafeView
+def BuyFilterView(request):
+    params = request.REQUEST
+    buys = BuyOffer.objects.filter(
+        title__istartswith=params.get("title", ""),
+    ).all()
+    page = params.get("page", 1)
+    count = params.get("count", 5)
+    block = buys[(page-1)*count:page*count]
+    return RenderToResponse("offer/buy/filter.html", request, {
+        "buys": buys,
+        "block": block,
+    })
+
+
+@SafeView
+def BuyView(request, id):
+    buy = BuyOffer.objects.get(id=id)
+    return RenderToResponse("offer/buy/view.html", request, {
+        "buy": buy,
+    })
+
+

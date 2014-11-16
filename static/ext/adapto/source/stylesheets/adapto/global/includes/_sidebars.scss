@@ -1,0 +1,23 @@
+.sidebar-group {
+  margin-bottom: 25px;
+
+  & > *:first-child,
+  & > *:first-child > *:first-child,
+  & > *:first-child > *:first-child > *:first-child {
+    margin-top: 0;
+  }
+  .headline, .heading {
+    margin-top: 0;
+  }
+}
+
+.list-inline.icons--social-media {
+  margin-left: 0 ;
+}
+
+.sidebar-right {
+  padding-left: 30px;
+}
+.sidebar-left {
+  padding-right: 30px;
+}

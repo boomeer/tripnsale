@@ -1,0 +1,62 @@
+// GLOBALS --------------------------
+// ----------------------------------
+
+/* give text a pointer */
+a[href], input[type='submit'], input[type='image'], label[for], select, button, .pointer {
+  cursor: pointer;
+}
+/* selected text color and bg */
+::selection {
+  background: $selected-text-bg;
+  color: $selected-text-color;
+  }
+
+html {
+  overflow-y: scroll;
+  body {
+    cursor: default;
+  }
+}
+
+body {
+  background-color: $boxed-default-bg;
+}
+
+.site-bg {
+  @if $body-bg-noise == true {
+    background: url(../img/bg/noise.png) repeat fixed;
+  }
+  background-color: $body-bg;
+}
+.page-wrap {
+  @extend .site-bg;
+  min-height: 68vh; /* the minium height of the page body */
+}
+
+// for full/boxed widths
+.boxed .full {
+  max-width: 1170px;
+  margin: 0 auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.content-wrap {
+  padding-top: 40px;
+  padding-bottom: 85px;
+  display: block;
+}
+.panel-heading {
+  color: $panel-default-heading-text !important;
+}
+// .nav-tabs > li > a {
+//   border: solid 1px $color2;
+// }
+
+.example-block {
+  background: $color5;
+}
+
+.icon-callouts .ai {
+  margin-bottom: 25px;
+}

@@ -1,0 +1,52 @@
+.comment-wrap {
+  margin: 30px 0;
+  padding-bottom: 20px;
+}
+
+.reply-to-comment {
+  @extend %float-right;
+  margin-top: 2px;
+  margin-right: 2px;
+  a {
+    margin-left: -50px;
+    padding-left: 50px;
+  }
+  ul li:last {
+    padding-bottom: 50px;
+  }
+  @media (max-width: 550px) {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+  }
+}
+
+ul.threaded-response {
+  margin-top: 20px;
+  margin-left: 30px;
+  border-left: solid 2px rgba($gray, 0.5);
+}
+
+.comment-meta-wrap {
+  background: rgba(darken($body-bg, 10), 0.5);
+  min-height: 20px;
+  width: 100%;
+  margin-bottom: 5px;
+  font-size: 12px;
+  border-radius: 0 7px 7px 0;
+  @media (max-width: 550px) {
+    ul {
+      position: relative;
+      .sep {
+        display: none;
+      }
+      li {
+        display: block;
+      }
+    }
+  }
+}
+
+.media {
+  overflow: visible;
+}

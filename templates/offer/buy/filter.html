@@ -1,0 +1,22 @@
+{% for buy in buys %}
+      <tr onClick="BuyView({{ buy.id }});">
+        <td>
+          <a href="../store/product-page.html">
+            <img src="" alt="" class="product-img" style="max-width: 100px;">
+          </a>
+        </td>
+        <td>
+          <h2>{{ buy.title }}<small>{{ buy.cost }}</small></h2>
+          <p>{{ buy.content }}<a href="#">Read Full Description</a></p>
+        </td>
+        <td>
+            <div class="owner-av">
+                <img src="{{ buy.owner.avatarUrl }}" style="max-width: 100px; max-height: 100px;">
+            </div>
+            <div class="owner-title">
+                {{ buy.owner.first_name }} {{ buy.owner.last_name }} ({{ buy.owner.username }})
+            </div>
+        </td>
+      </tr>
+{% endfor %}
+

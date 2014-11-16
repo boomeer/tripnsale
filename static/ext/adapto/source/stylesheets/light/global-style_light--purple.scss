@@ -1,0 +1,26 @@
+// ---------------------------------------------------------
+// ADAPTO THEME Scheme 
+// --- 
+// global-style_light--blue2.scss
+
+
+// ---------------------------------------------------------
+// variable files first
+// ---
+
+@import "color-schemes/color-scheme_light--purple"; // the color scheme file
+@import "settings-scheme_light";
+
+// ---------------------------------------------------------
+// ADAPTO BASE IMPORT
+// ------------------
+// INCLUDES:
+// - all bootstrap files
+// - all adapto base files
+// ---
+
+@if $global-style_light--purple == true {
+
+  @import "../adapto/adapto-base";
+
+}

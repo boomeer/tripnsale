@@ -1,0 +1,90 @@
+/* Site Navbar/Header */
+/* ------------------ */
+.header {
+  z-index: 510;
+  @extend %top-0;
+  @extend %left-0;
+  @extend %right-0;
+  @extend %relative;
+  @if $top-nav-noise == true {
+    background: url(../img/bg/noise.png) repeat;
+  }
+  background-color: $top-nav-bg;
+  box-shadow: 0 1px 2px 0 $navbar-bottom-shadow;
+}
+
+// logo
+.logo-top {
+  font-size: 22px;
+  color: $text-color;
+  margin-top: 8px;
+  margin-left: 8px;
+  text-transform: uppercase;
+  font-weight: 700;
+  .ai {
+    color: rgba($brand-primary, 1);
+    font-size: 21px;
+  }
+}
+.logo-top:hover .ai {
+  animation-play-state: running;
+  -webkit-animation-play-state:running;
+}
+
+.headroom {
+  z-index: 500;
+}
+.headroom--top {
+  @extend %relative;
+}
+.headroom--not-top {
+  @include transition(all, 0.3s, ease-in-out);
+  position: fixed !important;
+}
+.slideDown {
+  top: -100px;
+}
+.slideUp {
+  @extend %top-0;
+}
+.animated .slideDown {
+  animation-name: slideDown;  
+}
+.animated .slideUp {
+  animation-name: slideDown;
+}
+
+/* -----------------
+/  in-page header */
+
+.page-header-wrap {
+  width: 100%;
+  min-height: 35px;
+  @if $top-header-noise == true {
+    background: url(../img/bg/noise.png) repeat;
+  }
+  background-color: $top-header-bg;
+}
+
+.page-header {
+  position: relative;
+  border: none;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+  margin-top: 15px;
+  h1 {
+    font-size: 48px;
+    font-weight: 300;
+    margin-top: 0px;
+    margin-bottom: 25px;
+  }
+}
+
+.page-header-wrap-home {
+  width: 100%;
+  margin-top: 5px;
+}
+
+.page-header-home {
+  margin-bottom: 0;
+}

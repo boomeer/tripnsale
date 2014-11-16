@@ -1,0 +1,18 @@
+.breadcrumb-wrap {
+  @extend %absolute;
+  @extend %right-0;
+  @extend %capitalize;
+  bottom: -9px;
+  font-size: 13px;
+  @include respond-to(tablet-portrait) {
+    display: none;
+  }
+}
+
+/* .breadcrumb is a bootstrap class */
+.breadcrumb {
+  margin-bottom: 5px;
+  padding-bottom: 0px;
+  border-radius: 0px;
+  background: none;
+}

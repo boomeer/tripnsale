@@ -1,12 +1,12 @@
-{% extends "base_simple.html" %}
+{% extends "base.html" %}
 {% load static %}
 
-{% block own_head2 %}
+{% block own_head %}
     <script src="{% static "offer/sale/add.js" %}" type="text/javascript"></script>
     <link rel="stylesheet" href="{% static "css/offer/sale/add.css" %}">
 {% endblock %}
 
-{% block main2 %}
+{% block main %}
     <div class="container-fluid">
         <div class="saleAddForm col-md-8 col-lg-8 col-md-offset-2 col-lg-offset-2">
             <h3>Добавить поездку</h3>

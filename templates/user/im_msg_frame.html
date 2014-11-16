@@ -1,0 +1,21 @@
+{% for msgGroup in msgs %}
+    <div class="msgGroup container-fluid">
+        <div class="title">
+            <div class="author">
+                {{ msgGroup.0.fr.username }}:
+            </div>
+        </div>
+        <div class="groupBody">
+            {% for msg in msgGroup %}
+                <div class="msg">
+                    <div class="content col-md-10">
+                        {{ msg.content }}
+                    </div>
+                    <div class="time col-md-2">
+                        {{ msg.time|date:"d.m.Y" }} {{ msg.time|time:"H:i:s" }}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endfor %}

@@ -22,7 +22,8 @@
             color: #ccc;
             font-weight: 900;
 
-            .userPanelItem {
+            .userPanelItem, {
+                display: inline-block;
                 padding: 8px 4px 8px 6px;
                 cursor: pointer;
                 color: inherit;
@@ -48,27 +49,30 @@
                 color: #ddc;
             }
         }
+    }
+}
 
-        .userLoginForm {
-            display: none;
-            position: absolute;
-            top: @topPanelHeight;
-            right: 0px;
-            width: 300px;
-            z-index: @topPanelZ+10;
-            background-color: rgba(0, 0, 0, 0.5);
-            border: 1px solid #000;
-            padding: 6px 18px 0px 18px;
+.userLoginForm {
+    display: none;
+    /*
+    top: @topPanelHeight;
+    right: 0px;
+    width: 300px;
+    z-index: @topPanelZ+10;
+    */
+    /*
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid #000;
+    padding: 6px 18px 0px 18px;
+    */
 
-            .form-group {
-                margin-bottom: 2px;
-            }
+    .form-group {
+        margin-bottom: 2px;
+    }
 
-            .userLoginFormHideBtnWrapper {
-                .userLoginFormHideBtn {
-                    color: #009;
-                }
-            }
+    .userLoginFormHideBtnWrapper {
+        .userLoginFormHideBtn {
+            color: #009;
         }
     }
 }

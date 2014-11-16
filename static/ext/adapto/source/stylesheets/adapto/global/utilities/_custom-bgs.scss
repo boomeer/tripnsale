@@ -1,0 +1,82 @@
+// BG patterns & noise
+.bg-pattern-1 {background: url(../img/bg/noise.png) repeat fixed;}
+.bg-pattern-2 {background: url(../img/bg/carbon_fibre_v2.png) repeat fixed;}
+.bg-pattern-3 {background: url(../img/bg/inflicted.png) repeat fixed;}
+.bg-pattern-4 {background: url(../img/bg/light_honeycomb.png) repeat fixed;}
+.bg-pattern-5 {background: url(../img/bg/retina_dust.png) repeat fixed;}
+.bg-pattern-6 {background: url(../img/bg/worn_dots.png) repeat fixed;}
+.bg-pattern-7 {background: url(../img/bg/black-Linen.png) repeat fixed;}
+.bg-pattern-8 {background: url(../img/bg/cardboard.png) repeat fixed;}
+.bg-pattern-9 {background: url(../img/bg/cardboard_flat.png) repeat fixed;}
+.bg-pattern-10 {background: url(../img/bg/checkered_pattern.png) repeat fixed;}
+.bg-pattern-11 {background: url(../img/bg/connect.png) repeat fixed;}
+.bg-pattern-12 {background: url(../img/bg/diagonal-noise.png) repeat fixed;}
+.bg-pattern-13 {background: url(../img/bg/grilled.png) repeat fixed;}
+.bg-pattern-14 {background: url(../img/bg/subtlenet2.png) repeat fixed;}
+
+/* media query for retina-ready bg images */
+@media
+only screen and (-webkit-min-device-pixel-ratio: 2),
+only screen and (   min--moz-device-pixel-ratio: 2),
+only screen and (     -o-min-device-pixel-ratio: 2/1),
+only screen and (        min-device-pixel-ratio: 2),
+only screen and (                min-resolution: 192dpi),
+only screen and (                min-resolution: 2dppx) { 
+  
+.bg-pattern-1 {background: url(../img/bg/noise_@2x.png) repeat fixed;}
+.bg-pattern-2 {background: url(../img/bg/carbon_fibre_v2_@2x.png) repeat fixed;}
+.bg-pattern-3 {background: url(../img/bg/inflicted_@2x.png) repeat fixed;}
+.bg-pattern-4 {background: url(../img/bg/light_honeycomb_@2x.png) repeat fixed;}
+.bg-pattern-5 {background: url(../img/bg/retina_dust_@2x.png) repeat fixed;}
+.bg-pattern-6 {background: url(../img/bg/worn_dots_@2x.png) repeat fixed;}
+.bg-pattern-7 {background: url(../img/bg/black-Linen_@2x.png) repeat fixed;}
+.bg-pattern-8 {background: url(../img/bg/cardboard_@2x.png) repeat fixed;}
+.bg-pattern-9 {background: url(../img/bg/cardboard_flat_@2x.png) repeat fixed;}
+.bg-pattern-10 {background: url(../img/bg/checkered_pattern_@2x.png) repeat fixed;}
+.bg-pattern-11 {background: url(../img/bg/connect_@2x.png) repeat fixed;}
+.bg-pattern-12 {background: url(../img/bg/diagonal-noise_@2x.png) repeat fixed;}
+.bg-pattern-13 {background: url(../img/bg/grilled_@2x.png) repeat fixed;}
+.bg-pattern-14 {background: url(../img/bg/subtlenet2_@2x.png) repeat fixed;}  
+
+}
+
+// BG Colors
+.bg-white {background-color: $bg-white;}
+.bg-blue {background-color: $bg-blue;}
+.bg-green {background-color: $bg-green;}
+.bg-yellow {background-color: $bg-yellow;}
+.bg-red {background-color: $bg-red;}
+.bg-brown {background-color: $bg-brown;}
+.bg-tan {background-color: $bg-tan;}
+.bg-black {background-color: $bg-black;}
+//---
+.bg-brand-color {background-color: $brand-primary;}
+.bg-primary {background-color: $brand-primary;}
+.bg-success {background-color: $brand-success;}
+.bg-info {background-color: $brand-info;}
+.bg-warning {background-color: $brand-warning;}
+.bg-danger {background-color: $brand-danger;}
+//---
+.bg-gray {background-color: $gray;}
+.bg-gray-light {background-color: $gray-light;}
+.bg-gray-lighter {background-color: $gray-lighter;}
+.bg-gray-dark {background-color: $gray-dark;}
+.bg-gray-darker {background-color: $gray-darker;}
+//---
+.bg-blend {background: $bg-blend;}
+.bg-bg {@extend .site-bg;}
+
+
+// background noise helper class
+.bg-noise {
+  background: url(../img/bg/noise.png) repeat fixed;
+  @media
+  only screen and (-webkit-min-device-pixel-ratio: 2),
+  only screen and (   min--moz-device-pixel-ratio: 2),
+  only screen and (     -o-min-device-pixel-ratio: 2/1),
+  only screen and (        min-device-pixel-ratio: 2),
+  only screen and (                min-resolution: 192dpi),
+  only screen and (                min-resolution: 2dppx) {
+    background: url(../img/bg/noise_@2x.png) repeat fixed;
+  }
+}

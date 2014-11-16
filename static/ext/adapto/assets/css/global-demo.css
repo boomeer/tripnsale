@@ -1,0 +1,470 @@
+/* line 789, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/variables-base */
+.list-group a.list-group-item:hover {
+  color: white; }
+
+/* line 1, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/adapto/global/utilities/helpers */
+.off-screen-text {
+  text-indent: -9999px;
+  overflow: hidden;
+  text-decoration: none;
+  display: block;
+  font-size: 0;
+  text-align: start; }
+
+/* line 11, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/adapto/global/utilities/helpers */
+.space {
+  margin: 30px 0 50px; }
+
+/* line 14, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/adapto/global/utilities/helpers */
+.space-even {
+  margin: 50px 0 50px; }
+
+/* line 17, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/adapto/global/utilities/helpers */
+.space--big {
+  margin: 75px 0; }
+
+/* line 20, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/adapto/global/utilities/helpers */
+.space--huge {
+  margin: 113px 0 79px; }
+
+/* line 23, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/adapto/global/utilities/helpers */
+.container .space--big:first-child {
+  margin-top: 0; }
+
+/* line 27, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/adapto/global/utilities/helpers */
+.spacer-bottom--small {
+  margin-bottom: 10px; }
+
+/* line 28, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/adapto/global/utilities/helpers */
+.spacer-bottom--medium {
+  margin-bottom: 20px; }
+
+/* line 29, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/adapto/global/utilities/helpers */
+.spacer-bottom--large {
+  margin-bottom: 30px; }
+
+/* line 30, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/adapto/global/utilities/helpers */
+.spacer-top--small {
+  margin-top: 30px; }
+
+/* line 31, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/adapto/global/utilities/helpers */
+.spacer-top--medium {
+  margin-top: 50px; }
+
+/* line 32, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/adapto/global/utilities/helpers */
+.spacer-top--large {
+  margin-top: 70px; }
+
+/* line 34, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/adapto/global/utilities/helpers */
+ul.centered {
+  text-align: center;
+  padding: 0;
+  margin: 0; }
+  /* line 38, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/adapto/global/utilities/helpers */
+  ul.centered li {
+    display: inline-block; }
+
+/* line 43, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/adapto/global/utilities/helpers */
+.group-left {
+  padding-right: 50px; }
+
+/* line 46, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/adapto/global/utilities/helpers */
+.group-right {
+  padding-left: 50px; }
+
+/* line 51, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/adapto/global/utilities/helpers */
+.relative {
+  position: relative; }
+
+/* line 54, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/adapto/global/utilities/helpers */
+.flush-right {
+  margin-right: 0;
+  padding-right: 0; }
+
+/* line 58, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/adapto/global/utilities/helpers */
+.flush-left {
+  margin-left: 0;
+  padding-left: 0; }
+
+/* line 63, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/adapto/global/utilities/helpers */
+.no-top-margin {
+  margin-top: 0; }
+
+/* line 67, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/adapto/global/utilities/helpers */
+.no-bottom-margin {
+  margin-bottom: 0; }
+
+/* line 71, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/adapto/global/utilities/helpers */
+.no-margin {
+  margin-top: 0;
+  margin-bottom: 0; }
+
+/* line 76, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/adapto/global/utilities/helpers */
+.col-center {
+  float: none;
+  margin: 0 auto; }
+
+/* line 82, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/adapto/global/utilities/helpers */
+.caps {
+  text-transform: uppercase; }
+
+/* line 83, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/adapto/global/utilities/helpers */
+.caps-small {
+  font-variant: small-caps; }
+
+/* line 85, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/adapto/global/utilities/helpers */
+a.no-underline {
+  text-decoration: none; }
+
+/* line 89, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/adapto/global/utilities/helpers */
+a.social {
+  text-decoration: none; }
+  /* line 91, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/adapto/global/utilities/helpers */
+  a.social:hover {
+    color: #262827; }
+
+/* line 96, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/adapto/global/utilities/helpers */
+.center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 40%;
+  height: 50%; }
+
+/* line 105, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/adapto/global/utilities/helpers */
+.caret .caret-reversed {
+  border-top-width: 0;
+  border-bottom: 4px solid black; }
+
+/* line 110, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/adapto/global/utilities/helpers */
+.xs {
+  font-size: 40%; }
+
+/* line 112, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/adapto/global/utilities/helpers */
+.top {
+  vertical-align: top; }
+
+/* line 115, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/adapto/global/utilities/helpers */
+a.link-no-style {
+  color: #5c595a; }
+
+/* line 120, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/adapto/global/utilities/helpers */
+.f300 {
+  font-weight: 300; }
+
+/* line 121, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/adapto/global/utilities/helpers */
+.f400 {
+  font-weight: 400; }
+
+/* line 122, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/adapto/global/utilities/helpers */
+.f600 {
+  font-weight: 600; }
+
+/* line 123, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/adapto/global/utilities/helpers */
+.f700 {
+  font-weight: 700; }
+
+/* line 124, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/adapto/global/utilities/helpers */
+.f800 {
+  font-weight: 800; }
+
+@media (max-width: 767px) {
+  /* line 128, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/adapto/global/utilities/helpers */
+  .pull-left-xs {
+    float: left !important; }
+  /* line 131, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/adapto/global/utilities/helpers */
+  .pull-right-xs {
+    float: right !important; } }
+
+@media (min-width: 768px) and (max-width: 991px) {
+  /* line 137, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/adapto/global/utilities/helpers */
+  .pull-left-sm {
+    float: left !important; }
+  /* line 140, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/adapto/global/utilities/helpers */
+  .pull-right-sm {
+    float: right !important; } }
+
+@media (max-width: 768px) {
+  .space-vert-sm {
+    margin: 100px auto; }
+    /* line 149, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/adapto/global/utilities/helpers */
+    .space-vert-sm:after {
+      margin: 100px auto 0;
+      width: 40%;
+      content: '';
+      display: block;
+      border-top: 1px solid #b5b7a6;
+      border-bottom: 1px solid #b5b7a6;
+      height: 0.15em; }
+    /* line 158, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/adapto/global/utilities/helpers */
+    .space-vert-sm:last-of-type {
+      margin-bottom: 50px; }
+      /* line 160, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/adapto/global/utilities/helpers */
+      .space-vert-sm:last-of-type:after {
+        border: none; } }
+
+@media (max-width: 992px) {
+  .space-vert-md {
+    margin: 100px auto; }
+    /* line 169, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/adapto/global/utilities/helpers */
+    .space-vert-md:after {
+      margin: 100px auto 0;
+      width: 40%;
+      content: '';
+      display: block;
+      border-top: 1px solid #b5b7a6;
+      border-bottom: 1px solid #b5b7a6;
+      height: 0.15em; }
+    /* line 178, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/adapto/global/utilities/helpers */
+    .space-vert-md:last-of-type {
+      margin-bottom: 50px; }
+      /* line 180, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/adapto/global/utilities/helpers */
+      .space-vert-md:last-of-type:after {
+        border: none; } }
+
+/* line 187, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/adapto/global/utilities/helpers */
+.text-white {
+  color: white; }
+
+/* line 3, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/demo/style-widget */
+.style-toggle-show {
+  left: 0 !important; }
+
+/* line 8, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/demo/style-widget */
+.header-hidden {
+  display: none; }
+
+/* line 12, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/demo/style-widget */
+.toggleShowHide {
+  display: none; }
+
+/* line 18, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/demo/style-widget */
+.style-widget {
+  z-index: 900;
+  position: fixed;
+  width: 235px;
+  overflow-y: auto;
+  top: 0;
+  bottom: 0;
+  left: -235px;
+  border-radius: 0 4px 0 0;
+  -webkit-transition: left 0.3s ease-in-out;
+  transition: left 0.3s ease-in-out;
+  padding-bottom: 8px;
+  font-size: 12px; }
+  /* line 30, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/demo/style-widget */
+  .style-widget p {
+    margin: 10px 10px 0;
+    text-transform: uppercase; }
+    /* line 33, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/demo/style-widget */
+    .style-widget p[data-toggle="collapse"] {
+      cursor: pointer; }
+      /* line 35, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/demo/style-widget */
+      .style-widget p[data-toggle="collapse"]:before {
+        font-family: 'ai';
+        content: "\e7ee";
+        display: inline-block;
+        width: 15px; }
+    /* line 43, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/demo/style-widget */
+    .style-widget p.collapsed:before {
+      font-family: 'ai';
+      content: "\e7ed";
+      display: inline-block;
+      width: 15px; }
+  /* line 50, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/demo/style-widget */
+  .style-widget label {
+    margin-bottom: 0;
+    font-weight: 300; }
+  /* line 54, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/demo/style-widget */
+  .style-widget .checkbox-inline, .style-widget .radio-inline {
+    height: 24px; }
+
+/* line 59, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/demo/style-widget */
+.style-tab {
+  z-index: 901;
+  position: fixed;
+  cursor: pointer;
+  display: block;
+  right: -40px;
+  width: 40px;
+  font-size: 28px;
+  height: 40px;
+  padding: 6px 4px 0;
+  border-radius: 0 4px 4px 0;
+  top: 40%;
+  left: 0px;
+  -webkit-transition: left 0.3s ease-in-out;
+  transition: left 0.3s ease-in-out; }
+  /* line 73, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/demo/style-widget */
+  .style-tab.ai-arrow-left5 {
+    left: 235px; }
+
+/* line 78, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/demo/style-widget */
+.style-widget-body {
+  width: 90%;
+  margin: 0 auto; }
+  /* line 81, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/demo/style-widget */
+  .style-widget-body .selection-wrap {
+    margin-left: 10px;
+    line-height: 22px; }
+
+/* line 88, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/demo/style-widget */
+#extra-header-selection-wrap .selection-wrap.first {
+  margin-bottom: -5px; }
+
+/* line 93, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/demo/style-widget */
+#extra-header-content-wrap {
+  margin-top: -20px; }
+
+/* line 98, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/demo/style-widget */
+#wide-boxed-selection-wrap label {
+  margin-right: 7px; }
+
+/* line 102, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/demo/style-widget */
+#extra-header-content-wrap {
+  margin-top: 5px; }
+  /* line 104, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/demo/style-widget */
+  #extra-header-content-wrap .checkbox {
+    margin-top: 0; }
+
+/* line 108, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/demo/style-widget */
+.color-box {
+  min-width: 30px;
+  height: 30px;
+  margin: 2px;
+  padding: 0;
+  line-height: 28px;
+  text-align: center;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 4px; }
+
+/* line 119, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/demo/style-widget */
+#boxed-pattern-selections .color-box {
+  display: block;
+  -webkit-transition: margin 0.2s ease-in-out;
+  transition: margin 0.2s ease-in-out;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border-radius: 4px; }
+  /* line 124, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/demo/style-widget */
+  #boxed-pattern-selections .color-box:hover {
+    margin-left: 33px;
+    margin-right: 33px; }
+
+/* line 129, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/demo/style-widget */
+.color-box-pattern-activated {
+  margin-left: 33px;
+  margin-right: 33px; }
+
+/* line 135, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/demo/style-widget */
+.widget-form-control {
+  margin-left: 15px; }
+  /* line 137, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/demo/style-widget */
+  .widget-form-control:first-of-type {
+    margin-left: 0; }
+
+/* line 142, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/demo/style-widget */
+#spaceToggles {
+  border-radius: 4px;
+  padding: 5px;
+  margin-left: 5px;
+  margin-bottom: 15px; }
+  /* line 147, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/demo/style-widget */
+  #spaceToggles label {
+    margin-left: 5px;
+    margin-right: 15px;
+    text-align: center; }
+    /* line 151, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/demo/style-widget */
+    #spaceToggles label:first-of-type {
+      margin-bottom: 10px;
+      margin-left: 7px; }
+    /* line 155, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/demo/style-widget */
+    #spaceToggles label:last-of-type {
+      margin-left: 0; }
+
+/* line 168, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/demo/style-widget */
+.dark-color-blue {
+  background-color: #5bb0c5; }
+
+/* line 170, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/demo/style-widget */
+.dark-color-blue2 {
+  background-color: #56a2c5; }
+
+/* line 172, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/demo/style-widget */
+.dark-color-blue3 {
+  background-color: #2b94da; }
+
+/* line 175, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/demo/style-widget */
+.dark-color-green {
+  background-color: #729e7b; }
+
+/* line 177, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/demo/style-widget */
+.dark-color-green2 {
+  background-color: #A2BA38; }
+
+/* line 180, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/demo/style-widget */
+.dark-color-orange {
+  background-color: #FAB315; }
+
+/* line 182, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/demo/style-widget */
+.dark-color-orange2 {
+  background-color: #f07135; }
+
+/* line 185, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/demo/style-widget */
+.dark-color-red {
+  background-color: #d85130; }
+
+/* line 188, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/demo/style-widget */
+.dark-color-purple {
+  background-color: #9e7aa7; }
+
+/* line 191, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/demo/style-widget */
+.dark-color-brown {
+  background-color: #97701e; }
+
+/* line 196, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/demo/style-widget */
+.light-color-blue {
+  background-color: #5bb0c5; }
+
+/* line 198, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/demo/style-widget */
+.light-color-blue2 {
+  background-color: #5db4ee; }
+
+/* line 200, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/demo/style-widget */
+.light-color-blue3 {
+  background-color: #2b94da; }
+
+/* line 203, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/demo/style-widget */
+.light-color-green {
+  background-color: #80A077; }
+
+/* line 205, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/demo/style-widget */
+.light-color-green2 {
+  background-color: #A2BA38; }
+
+/* line 208, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/demo/style-widget */
+.light-color-orange {
+  background-color: #f0a212; }
+
+/* line 210, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/demo/style-widget */
+.light-color-orange2 {
+  background-color: #f07135; }
+
+/* line 213, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/demo/style-widget */
+.light-color-red {
+  background-color: #d85130; }
+
+/* line 216, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/demo/style-widget */
+.light-color-purple {
+  background-color: #9e7aa7; }
+
+/* line 219, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\/demo/style-widget */
+.light-color-brown {
+  background-color: #97701e; }
+
+

@@ -6,7 +6,70 @@
             <span class="glyphicon glyphicon-remove-circle"></span>
         </button>
         <div class="tripViewContent">
-            {{ sale.fr }}
+            <div class="places">
+                <span class="place place-from trip-item-content">
+                    {{ sale.fr }}
+                </span>
+                <span>
+                    <i class="glyphicon glyphicon-arrow-right"></i>
+                </span>
+                <span class="place place-to trip-item-content">
+                    {{ sale.to }}
+                </span>
+            </div>
+            <hr>
+            <div class="dates">
+                <div class="date-row">
+                    <span class="date-title trip-item-title">
+                        Дата отправления:
+                    </span>
+                    <span class="date-content trip-item-content">
+                        {{ sale.frTime|date:"d.m.Y" }}
+                    </span>
+                </div>
+                <div class="date-row">
+                    <span class="date-title trip-item-title">
+                        Дата прибытия:
+                    </span>
+                    <span class="date-content trip-item-content">
+                        {{ sale.toTime|date:"d.m.Y" }}
+                    </span>
+                </div>
+            </div>
+            <hr>
+            <div class="deposit">
+                <span class="deposit-title trip-item-title">
+                    Депозит:
+                </span>
+                <span class="deposit-content trip-item-content">
+                    {{ sale.deposit }} $
+                </span>
+            </div>
+            <div class="guarant">
+                {% if sale.guarant %}
+                    <i class="glyphicon glyphicon-exclamation-sign"></i>
+                    Только с гарантом
+                {% endif %}
+            </div>
+            <hr>
+            <div class="container-fluid">
+                <div class="owner col-md-6">
+                    <div class="owner-name">
+                        <a href="/user/profile/{{ sale.owner.username }}">
+                            {{ sale.owner.first_name }} {{ sale.owner.last_name }} ({{ sale.owner.username }})
+                        </a>
+                    </div>
+                    <div class="owner-av">
+                        <img src="{{ sale.owner.avatarUrl }}">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <a type="button" class="btn btn-default" href="/user/im?peer={{ sale.owner.id }}">
+                        <i class="glyphicon glyphicon-hand-up"></i>
+                        Связаться
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 </div>

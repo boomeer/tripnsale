@@ -1,0 +1,135 @@
+.logo-elipse-path {
+  &:hover {
+    fill: blue;
+  }
+}
+
+.logo-path {
+  &:hover {
+    fill: yellow;
+  }
+}
+
+.logo-top {
+  @extend %absolute;
+  top: 9px;
+  z-index: 100;
+  img {
+    width: 172px;
+    border: none !important;
+    margin-top: 5px;
+  }
+}
+
+.featured-image {
+  width: 100%;
+  float: left;
+  margin: 0 15px 0 0;
+}
+
+.post-listing .media-body {
+  p {
+  line-height: 20px !important;
+  }
+  .heading {
+    h2, h3, h4 {
+      @extend %margin-0;
+      line-height: 25px !important;
+    }
+  }
+}
+.media-heading {
+  font-family: $font-family-sans-serif !important;
+  font-weight: 600 !important;
+  font-size: 110%;
+  line-height: 22px;
+}
+
+.img-nested {
+  margin: 0 30px 30px 0 !important;
+  @media (min-width: $screen-md-min) {
+
+  }
+}
+
+img {
+  border: solid 1px $image-border-color;
+  border-radius: 4px;
+}
+
+.no-border img {
+  border: none !important;
+}
+
+ul.icons--social-media {
+  li {
+    padding: 0;
+    @include social-media-colors($text-color);
+  }
+}
+
+/* To constrain video bg height to approx half screen */
+#bg-vid-wrap--height-half {
+  //width: 100%;
+  position: relative;
+  margin: 0 auto;
+  max-height: 450px;
+  min-height: 400px;
+  overflow: hidden;
+}
+#portfolio-top-image {
+  z-index: 100;
+  @extend %absolute;
+  left: 0;
+  right: 0;
+  bottom: 112px; // must be the height of it's parent container, to be truly 'on top' of it
+  padding-top: 50px; // to overlap the video and effectively 'disable' the controls
+  @media (max-width: $screen-md-min) {
+    max-height: 400px;
+  }
+}
+
+/*  ---------------------
+ grayed-out image effects
+ --- */
+
+/* for image hover effects */
+.image-effect-wrap {
+  @extend %relative;
+  &:hover {
+    .image-overlay {
+      opacity: 0; 
+    }
+    .image-description {
+      height: 43px;
+      opacity: 1;
+      @include transition(all, 0.3s, ease);
+    }
+  }
+}
+
+/* the grayed out style */
+.image-overlay {
+  @extend %absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  background: $image-overlay-color;
+  @include transition(all, 0.3s, ease);
+}
+/* image description */
+.image-description {
+  @extend %absolute;
+  @extend %text-center;
+  width: 100%;
+  height: 0;
+  background: $image-description-bg;
+  color: $image-description-font-color;
+  font-size: 18px;
+  border-radius: 0 0 4px 4px;
+  bottom: 0;
+  opacity: 0;
+  padding-top: 5px;
+  @include transition(all, 0.3s, ease);
+}

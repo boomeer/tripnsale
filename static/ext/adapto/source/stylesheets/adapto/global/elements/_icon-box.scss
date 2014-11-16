@@ -1,0 +1,79 @@
+.icon-box-wrap {
+  display: inline-block;
+}
+
+ul.icon-boxes {
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+  line-height: 18px;
+  list-style: none;
+  margin: 0;
+  text-align: center;
+  li {
+    display: inline-block;
+    margin: 0 15px;
+    margin-bottom: 30px;
+    vertical-align: top;
+    height: 100px;
+    overflow: hidden;
+  }
+  li.icon-btn {
+    border-radius: 50px;
+    border: 3px solid $color5;
+    transition: all 200ms linear;
+    &:hover, &.active {
+      border: 3px solid rgba($link-color, 0.4);
+    }
+    a {
+      width: 100px;
+      height: 100px;
+      line-height: 100px;
+      text-decoration: none;
+      transition: all 200ms linear;
+      overflow: hidden;
+      @extend %relative;
+      display: inline-block;
+    }
+  }
+  li.icon-btn a .icon-btn_icon {
+    display: inline-block;
+    font-size: 54px;
+    color: $color5;
+    transition: all 200ms linear;
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+  }
+  li.icon-btn:hover a .icon-btn_icon {
+    font-size: 0;
+    transform: rotate(359deg);
+    opacity: 0.8;
+    filter: alpha(opacity = 80);
+  }
+  li.icon-btn.active a .icon-btn_icon {
+   filter: alpha(opacity = 80); 
+   font-size: 0;
+  }
+  li.icon-btn a .icon-btn_text {
+    display: block;
+    width: 100px;
+    height: 100px;
+    @extend %absolute;
+    top: 0;
+    font-size: 0;
+    font-family: "Open Sans Condensed", sans-serif;
+    color: $link-color;
+    text-transform: uppercase;
+    font-weight: 700;
+    transition: all 200ms linear;
+  }
+  li.icon-btn:hover a .icon-btn_text, 
+  li.icon-btn.active a .icon-btn_text {
+    font-size: 15px;
+  }
+  li.icon-btn a .icon-btn_icon .ia {
+    @extend %relative;
+    top: -4px;
+  }
+}

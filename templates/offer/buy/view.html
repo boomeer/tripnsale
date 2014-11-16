@@ -1,0 +1,44 @@
+<div class="buyViewBg">
+    <div class="buyViewGoBack" onClick="BuyViewClose();">
+    </div>
+    <div class="buyView">
+        <button type="button" class="buyViewCloseBtn btn btn-default" onClick="BuyViewClose();">
+            <span class="glyphicon glyphicon-remove-circle"></span>
+        </button>
+        <div class="buyViewContent">
+            <div class="title">
+                <div class="buy-item-content">
+                    {{ buy.title }}
+                </div>
+            </div>
+            <hr>
+            <div class="cost">
+                <span class="cost-title buy-item-title">
+                    Цена:
+                </span>
+                <span class="cost-content buy-item-content">
+                    {{ buy.costFrom }} $ - {{ buy.costTo }} $
+                </span>
+            </div>
+            <hr>
+            <div class="container-fluid">
+                <div class="owner col-md-6">
+                    <div class="owner-name">
+                        <a href="/user/profile/{{ buy.owner.username }}">
+                            {{ buy.owner.first_name }} {{ buy.owner.last_name }} ({{ buy.owner.username }})
+                        </a>
+                    </div>
+                    <div class="owner-av">
+                        <img src="{{ buy.owner.avatarUrl }}">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <a type="button" class="btn btn-default" href="/user/im?peer={{ buy.owner.id }}">
+                        <i class="glyphicon glyphicon-hand-up"></i>
+                        Связаться
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

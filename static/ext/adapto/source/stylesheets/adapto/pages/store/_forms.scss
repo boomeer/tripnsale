@@ -1,0 +1,74 @@
+label, input {
+  cursor: pointer !important;
+}
+
+#order-checkout .form-control {
+  margin-bottom: 5px;
+} 
+.payment-option-wrap {
+  margin-right: 15px;
+  &:last-of-type {
+    margin-right: 0;
+  }
+}
+
+.order-form-wrap {
+  position: relative;
+}
+.order-btn-wrap {
+  position: absolute;
+  right: 0;
+  .ai {
+    padding: 15px 0 11px;
+  }
+  @media (max-width: $screen-sm-min) {
+    position: static;   
+    margin-top: 40px;
+    .btn {
+      display: block;
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+}
+.order-form-input-wrap {
+  position: absolute;
+  right: 155px;
+  @media (max-width: $screen-sm-min) {
+   position: static; 
+  }
+}
+
+.order-quantity--input {
+  @extend .form-control;
+  text-align: center;
+  padding: 5px;
+  width: 63px !important;
+  margin-top: -4px;
+  margin-bottom: 4px;
+  margin-left: 13px;
+  @media (max-width: $screen-sm-min) {
+    width: 100% !important;
+    margin-left: 0;
+    margin-right: 0;
+    text-align: left !important;
+  }
+}
+
+select#productColor {
+  @extend .form-control;
+  padding: 5px;
+  width: 100px !important;
+  margin-top: 5px;
+  @media (max-width: $screen-sm-min) {
+    width: 100% !important;
+    margin-left: 0;
+    margin-right: 0;
+    text-align: left;
+  }
+}
+
+select.form-control, input[type="number"] {
+  color: $select-and-input-color;
+}

@@ -1,0 +1,219 @@
+// -------------------
+// Style Widget styles
+.style-toggle-show {
+  left: 0 !important;
+}
+
+// Extra header default display none class for demo
+.header-hidden {
+  display: none;
+}
+
+.toggleShowHide {
+  display: none;
+}
+
+$widget-width: 235px;
+
+.style-widget {
+  z-index: 900;
+  position: fixed;
+  width: $widget-width;
+  overflow-y: auto;
+  top: 0;
+  bottom: 0;
+  left: -$widget-width;
+  border-radius: 0 4px 0 0;
+  transition: left 0.3s ease-in-out;
+  padding-bottom: 8px;
+  font-size: 12px;
+  p {
+    margin: 10px 10px 0;
+    text-transform: uppercase;
+    &[data-toggle="collapse"] {
+      cursor: pointer;
+      &:before {
+        font-family: 'ai';   
+        content: "\e7ee";
+        display: inline-block;
+        width: 15px;
+      }
+    }
+    // toggle indicator on collapsed
+    &.collapsed:before {
+      font-family: 'ai';
+      content: "\e7ed";
+      display: inline-block;
+      width: 15px;
+    }
+  }
+  label {
+    margin-bottom: 0;
+    font-weight: 300;
+  }
+  .checkbox-inline, .radio-inline {
+    height: 24px;
+  }
+}
+
+.style-tab {
+  z-index: 901;
+  position: fixed;
+  cursor: pointer;
+  display: block;
+  right: -40px;
+  width: 40px;
+  font-size: 28px;
+  height: 40px;
+  padding: 6px 4px 0;
+  border-radius: 0 4px 4px 0;
+  top: 40%;
+  left: 0px;
+  transition: left 0.3s ease-in-out;
+  &.ai-arrow-left5 {
+    left: $widget-width;
+  }
+}
+
+.style-widget-body {
+  width: 90%;
+  margin: 0 auto;
+  .selection-wrap {
+    margin-left: 10px;
+    line-height: 22px;
+  }
+}
+
+#extra-header-selection-wrap {
+  .selection-wrap.first {
+    margin-bottom: -5px;
+  }
+}
+
+#extra-header-content-wrap {
+  margin-top: -20px;
+}
+
+#wide-boxed-selection-wrap {
+  label {
+    margin-right: 7px;
+  }
+}
+#extra-header-content-wrap{
+  margin-top: 5px;
+  .checkbox {
+    margin-top: 0;
+  }
+}
+.color-box {
+  min-width: 30px;
+  height: 30px;
+  margin: 2px;
+  padding: 0;
+  line-height: 28px;
+  text-align: center;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 4px;
+}
+#boxed-pattern-selections .color-box {
+  display: block;
+  transition: margin .2s ease-in-out;
+  box-sizing: border-box;
+  border-radius: 4px;
+  &:hover {
+    margin-left: 33px;
+    margin-right: 33px;
+  }
+}
+.color-box-pattern-activated {
+  margin-left: 33px;
+  margin-right: 33px;
+}
+
+// widget form control
+.widget-form-control {
+  margin-left: 15px; 
+  &:first-of-type {
+    margin-left: 0;
+  }
+}
+
+#spaceToggles {
+  border-radius: 4px;
+  padding: 5px;
+  margin-left: 5px;
+  margin-bottom: 15px;
+  label {
+    margin-left: 5px;
+    margin-right: 15px;
+    text-align: center;
+    &:first-of-type {
+      margin-bottom: 10px;
+      margin-left: 7px;
+    }
+    &:last-of-type {
+      margin-left: 0;
+    }
+  }
+}
+
+
+
+// -------------------------------------------------
+// theme-scheme specific colors for widget color-box
+// ---
+// DARK COLORS
+@import "../dark/color-schemes/color-scheme_dark--blue";
+.dark-color-blue {background-color: $dark-color-blue}
+@import "../dark/color-schemes/color-scheme_dark--blue2";
+.dark-color-blue2 {background-color: $dark-color-blue2}
+@import "../dark/color-schemes/color-scheme_dark--blue3";
+.dark-color-blue3 {background-color: $dark-color-blue3}
+
+@import "../dark/color-schemes/color-scheme_dark--green";
+.dark-color-green {background-color: $dark-color-green}
+@import "../dark/color-schemes/color-scheme_dark--green2";
+.dark-color-green2 {background-color: $dark-color-green2}
+
+@import "../dark/color-schemes/color-scheme_dark--orange";
+.dark-color-orange {background-color: $dark-color-orange}
+@import "../dark/color-schemes/color-scheme_dark--orange2";
+.dark-color-orange2 {background-color: $dark-color-orange2}
+
+@import "../dark/color-schemes/color-scheme_dark--red";
+.dark-color-red {background-color: $dark-color-red}
+
+@import "../dark/color-schemes/color-scheme_dark--purple";
+.dark-color-purple {background-color: $dark-color-purple}
+
+@import "../dark/color-schemes/color-scheme_dark--brown";
+.dark-color-brown {background-color: $dark-color-brown}
+
+// ------------
+// LIGHT COLORS
+@import "../light/color-schemes/color-scheme_light--blue";
+.light-color-blue {background-color: $light-color-blue}
+@import "../light/color-schemes/color-scheme_light--blue2";
+.light-color-blue2 {background-color: $light-color-blue2}
+@import "../light/color-schemes/color-scheme_light--blue3";
+.light-color-blue3 {background-color: $light-color-blue3}
+
+@import "../light/color-schemes/color-scheme_light--green";
+.light-color-green {background-color: $light-color-green}
+@import "../light/color-schemes/color-scheme_light--green2";
+.light-color-green2 {background-color: $light-color-green2}
+
+@import "../light/color-schemes/color-scheme_light--orange";
+.light-color-orange {background-color: $light-color-orange}
+@import "../light/color-schemes/color-scheme_light--orange2";
+.light-color-orange2 {background-color: $light-color-orange2}
+
+@import "../light/color-schemes/color-scheme_light--red";
+.light-color-red {background-color: $light-color-red;}
+
+@import "../light/color-schemes/color-scheme_light--purple";
+.light-color-purple {background-color: $light-color-purple;}
+
+@import "../light/color-schemes/color-scheme_light--brown";
+.light-color-brown {background-color: $light-color-brown;}

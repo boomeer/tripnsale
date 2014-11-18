@@ -1,8 +1,8 @@
 function RefreshMsgs() {
-    var oldMsgs = $(".msgs").html();
     $.post("/user/im_msg_frame/", {
         peer: $("#peer").val(),
     }, function(res) {
+        var oldMsgs = $(".msgs").html();
         if (res != oldMsgs) {
             $(".msgs").html(res);
             $("body").animate({ scrollTop: 2 * $("body").height() }, "slow");

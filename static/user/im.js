@@ -1,9 +1,12 @@
 function RefreshMsgs() {
+    var oldMsgs = $(".msgs").html();
     $.post("/user/im_msg_frame/", {
         peer: $("#peer").val(),
     }, function(res) {
-        $(".msgs").html(res);
-        $("body").animate({ scrollTop: 2 * $("body").height() }, "slow");
+        if (res != oldMsgs) {
+            $(".msgs").html(res);
+            $("body").animate({ scrollTop: 2 * $("body").height() }, "slow");
+        }
     });
 }
 
@@ -29,4 +32,7 @@ $(function() {
         }
     });
     RefreshMsgs();
+    setInterval(function() {
+        RefreshMsgs();
+    }, 500);
 });

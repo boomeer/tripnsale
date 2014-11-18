@@ -3,20 +3,30 @@ function RefreshMsgs() {
         peer: $("#peer").val(),
     }, function(res) {
         $(".msgs").html(res);
-        $(".msgsWrapper").animate({ scrollTop: 2 * $(".msgsWrapper").height() }, "slow");
+        $("body").animate({ scrollTop: 2 * $("body").height() }, "slow");
+    });
+}
+
+function sendMsg()
+{
+    $.post("/user/im/", {
+        act: "send",
+        peer: $("#peer").val(),
+        content: $("#msgContent").val(),
+    }, function(res) {
+        RefreshMsgs();
+        $("#msgContent").val("");
     });
 }
 
 $(function() {
     $(".sendBtn").on("click", function() {
-        $.post("/user/im/", {
-            act: "send",
-            peer: $("#peer").val(),
-            content: $("#msgContent").val(),
-        }, function(res) {
-            RefreshMsgs();
-            $("#msgContent").val("");
-        });
+        sendMsg();
+    });
+    $("#msgContent").on("keydown", function(event) {
+        if (event.which == 13) {
+            sendMsg();
+        }
     });
     RefreshMsgs();
 });

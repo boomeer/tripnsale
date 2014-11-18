@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block main %}
+    {% for user in users %}
+        <div class="user">
+            <a href="/user/profile/{{ user.username }}/">
+                ({{ user.username }}) {{ user.first_name }} {{ user.last_name }}
+            </a>
+        </div>
+    {% endfor %}
+{% endblock %}

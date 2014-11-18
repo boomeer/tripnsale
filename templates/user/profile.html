@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block own_head %}
+{% endblock %}
+
+{% block main %}
+    <div class="container-fluid">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="row">
+                <div class="statTitle">
+                    Имя:
+                </div>
+                <div class="statValue">
+                    {{ prUser.first_name }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="statTitle">
+                    Фамилия:
+                </div>
+                <div class="statValue">
+                    {{ prUser.last_name }}
+                </div>
+            </div>
+            <div class="row">
+                <a href="/user/im?peer={{ prUser.id }}" class="btn btn-default">
+                    Диалог
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -42,11 +42,6 @@ class MsgCannotBeEmpty(TsExc):
     def __init__(self):
         super().__init__("msg_cannot_be_empty")
 
-@SafeView
-def ProfileView(request):
-    return render_to_response("user/profile.html", RequestContext(request, {
-    }))
-
 
 @SafeView
 def AuthView(request):
@@ -153,4 +148,22 @@ def ImMsgFrameView(request):
     return RenderToResponse("user/im_msg_frame.html", request, {
         "peer": peer,
         "msgs": msgs,
+    })
+
+
+@SafeView
+def ProfileView(request, username=None):
+    params = request.REQUEST
+    user = User.objects.get(username=username) if username else GetCurrentUser(request)
+    return RenderToResponse("user/profile.html", request, {
+        "url": "/user/profile{}".format(user.username),
+        "prUser": user,
+    })
+
+@SafeView
+def UsersView(request):
+    user = User.objects.all()
+    return RenderToResponse("user/list.html", request, {
+        "url": "user/all",
+        "users": User.objects.all()
     })

@@ -102,6 +102,12 @@
                     Заказы
                 </a>
             </li>
+            <li>
+                <a href="/user/all">
+                    <i class="glyphicon"></i>
+                    Пользователи
+                </a>
+            </li>
             {% if profileOwner %}
                 <li class="dropdown">
                     <a class="dropdown-toggle" href="#">
@@ -127,7 +133,7 @@
                 <li class="dropdown">
                     <a class="dropdown-toggle" href="#">
                         <i class="glyphicon glyphicon-user"></i>
-                        {{ profileOwner.username }}
+                        {{ profileOwner.first_name }} {{ profileOwner.last_name }}
                     </a>
                     <ul class="dropdown-menu">
                         <li>

@@ -5,6 +5,7 @@ from django.template import RequestContext
 from offer.models import (
     BuyOffer,
     SaleOffer,
+    Country,
 )
 from util.utils import (
     SafeView,
@@ -32,10 +33,14 @@ def SaleOfferAddView(request):
     if act == "add":
         CheckPost(request)
         CheckAuth(request)
+        fr = Country.objects.get(name=params.get("from", ""))
+        to = Country.objects.get(name=params.get("to", ""))
         sale = SaleOffer(
-            fr=params.get("from", ""),
+            fr=fr,
+            frCity=params.get("frCity", ""),
             frTime=datetime.strptime(params.get("fromTime", ""), "%d.%m.%Y"),
-            to=params.get("to", ""),
+            to=to,
+            toCity=params.get("toCity", ""),
             toTime=datetime.strptime(params.get("toTime", ""), "%d.%m.%Y"),
             deposit=params.get("deposit", None),
             guarant=params.get("guarant", False),
@@ -43,8 +48,10 @@ def SaleOfferAddView(request):
         )
         sale.save()
         return redirect("/offer/sale/list")
+    countries = Country.objects.all()
     return RenderToResponse("offer/sale/add.html", request, {
         "url": "/offer/sale",
+        "countries": countries,
     })
 
 
@@ -52,8 +59,8 @@ def SaleOfferAddView(request):
 def SaleFilterView(request):
     params = request.REQUEST
     sales = SaleOffer.objects.filter(
-        fr__istartswith=params.get("from", ""),
-        to__istartswith=params.get("to", ""),
+        fr__title__istartswith=params.get("from", ""),
+        to__title__istartswith=params.get("to", ""),
     ).all()
     page = params.get("page", 1)
     count = params.get("count", 5)

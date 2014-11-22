@@ -219,6 +219,7 @@
      * @return {Number} pixels the page has scrolled along the Y-axis
      */
     getScrollY : function() {
+        return void 0;
       return (window.pageYOffset !== undefined)
         ? window.pageYOffset
         : (document.documentElement || document.body.parentNode || document.body).scrollTop;
@@ -282,7 +283,8 @@
       var scrollingDown = currentScrollY > this.lastKnownScrollY,
         pastOffset = currentScrollY >= this.offset;
   
-      return false;//scrollingDown && pastOffset && toleranceExceeded;
+        //return false;
+      return scrollingDown && pastOffset && toleranceExceeded;
     },
   
     /**

@@ -20,7 +20,14 @@
                         </div>
                         <div class="fromToBody">
                             <div class="inputWrapper">
-                                <input type="text" class="form-control" placeholder="Страна, Город" id="inputFrom" name="from">
+                                <select class="form-control" id="inputFrom" name="from">
+                                    {% for country in countries %}
+                                        <option value="{{ country.name }}">
+                                            {{ country.title }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                                <input type="text" class="form-control" placeholder="Город" id="inputFromCity" name="frCity">
                             </div>
                             <div class="inputWrapper">
                                 <input type="text" class="form-control" placeholder="Когда" id="inputFromTime" name="fromTime">
@@ -36,7 +43,14 @@
                         </div>
                         <div class="fromToBody">
                             <div class="inputWrapper">
-                                <input type="text" class="form-control" placeholder="Страна, Город" id="inputTo" name="to">
+                                <select class="form-control" id="inputTo" name="to">
+                                    {% for country in countries %}
+                                        <option value="{{ country.name }}">
+                                            {{ country.title }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                                <input type="text" class="form-control" placeholder="Город" id="inputToCity" name="toCity">
                             </div>
                             <div class="inputWrapper">
                                 <input type="text" class="form-control" placeholder="Когда" id="inputToTime" name="toTime">

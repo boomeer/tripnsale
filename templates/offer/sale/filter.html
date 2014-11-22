@@ -1,3 +1,5 @@
+{% load static %}
+
 {% for sale in sales %}
     <div class="tripItem" onClick="TripView({{ sale.id }});">
         <div class="tripFrom tripSection">
@@ -5,7 +7,13 @@
                 Откуда
             </div>
             <div class="tripSectionContent">
-                {{ sale.fr }}
+                <div>
+                    <img src="/static/countries/{{ sale.fr.name }}.gif" height=16>
+                    {{ sale.fr.title }}
+                </div>
+                <div class="tripCity">
+                    {{ sale.frCity }}
+                </div>
             </div>
         </div>
         <div class="tripTo tripSection">
@@ -13,7 +21,13 @@
                 Куда
             </div>
             <div class="tripSectionContent">
-                {{ sale.to }}
+                <div>
+                    <img src="/static/countries/{{ sale.to.name }}.gif" height=16>
+                    {{ sale.to.title }}
+                </div>
+                <div class="tripCity">
+                    {{ sale.toCity }}
+                </div>
             </div>
         </div>
         <div class="tripDates tripSection">

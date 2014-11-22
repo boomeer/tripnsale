@@ -8,10 +8,10 @@
         <div class="groupBody">
             {% for msg in msgGroup %}
                 <div class="msg">
-                    <div class="content col-md-10">
+                    <div class="content col-md-8">
                         {{ msg.content }}
                     </div>
-                    <div class="time col-md-2">
+                    <div class="time col-md-4">
                         {{ msg.time|date:"d.m.Y" }} {{ msg.time|time:"H:i:s" }}
                     </div>
                 </div>

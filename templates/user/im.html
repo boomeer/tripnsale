@@ -9,14 +9,16 @@
 {% block main %}
     <input type="hidden" id="peer" value="{{ peer.id }}">
     <div class="msgsWrapper container-fluid">
-        <div class="msgs col-md-offset-1 col-md-10 container-fluid">
+        <div class="msgs col-md-offset-2 col-md-8 container-fluid">
         </div>
     </div>
 {% endblock %}
 
 {% block footer %}
-    <div class="sendMsg container">
-        <textarea id="msgContent" class="form-control" rows=2></textarea>
-        <button type="button" class="sendBtn btn btn-default">Отправить</button>
+    <div class="sendMsg container-fluid">
+        <div class="col-md-10 col-md-offset-1">
+            <textarea id="msgContent" class="form-control" rows=2></textarea>
+            <button type="button" class="sendBtn btn btn-default">Отправить</button>
+        </div>
     </div>
 {% endblock %}

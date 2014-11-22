@@ -7,94 +7,113 @@
 {% endblock %}
 
 {% block main %}
-    <div class="page-wrap" style="margin-top: 0px;">
-
-<div class="portfolio-home-top">
-    <div class="container">
-        <div class="row">
-            <div class="text-center animated bounceInDown" style="margin-top: 230px;">
-    
-                <h1 style="font-size: 48pt; color: rgba(255,255,255,.85)">Доставляй удовольствие</h1>
-
-            </div>
-            <div class="wow fadeInCenter">
-                <div class="text-center">
-                    <div class="col-sm-6">
-                        <div class="animated bounceInLeft" style="margin-top: 130px;">
-                            <a type="button" href="/offer/sale/list" class="btn btn-lg btn-default" style="font-size: 28pt; color: #fff; background-color: rgba(187, 187, 187, 0.45); non border-color;">Заказать</a>
-                        </div>
-                    </div>
-    
-                    <div class="col-sm-6">
-                        <div class="animated bounceInRight" style="margin-top: 130px;">
-                            <a type="button" href="/offer/buy/list" class="btn btn-lg btn-default" style="font-size: 28pt; color: #fff; background-color: rgba(187, 187, 187, 0.45)">Доставить</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <span class="btn ai ai-4x ai-arrow-down3 animated bounceInDown space space-vert-md" style="margin-top: 80px; font-size: 34px; color: #fff; margin-left: 600px;"></span>
+   <!-- FOR BODY background-noise: add 'bg-noise' to this div -->
+<div class="page-wrap" style="margin-top: 0px;">
+  <div class="portfolio-home-top">
+  	 <div class="container">
+      	<div class="row">
+      		<div class="text-center animated bounceInDown" style="margin-top: 190px;">
+      			<h1 style="font-size: 48pt; color: rgba(255,255,255,.85)">Доставляй удовольствие</h1>
+      		</div>
         </div>
-    </div>
-</div>    
-    
 
-
-
-<div class="page-header-wrap-home">
-  <div class="container">
-    <div class="page-header-home">
-    </div>
-  </div>
-</div>
-<div class="container content-wrap">
-    <div class="row">
-    <div class="icon-callouts">
-      <div class="col-md-4 text-center space space-vert-md">
-        <i class="ai ai-4x ai-tablet ai-circle-outline"></i>
-        <h2>Fully Responsive <br>
-        <small>Friendly on <i>all</i> devices</small></h2>
         <div class="row">
-          <div class="col-xs-8 col-center">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio, magnam, cupiditate illo nisi excepturi rem rerum.</p>
+  				<div class="text-center">
+  		    		<div class="col-sm-6">
+  		    			<div class="animated bounceInLeft" style="margin-top: 200px;">
+  		    				<a href="#buy" data-toggle="smoothScroll">
+                    <button type="button" class="btn btn-lg btn-default" style="font-size: 28pt; color: #fff; background-color: rgba(187, 187, 187, 0.45); non border-color;">Куплю</button>
+                  </a>
+  		    			</div>
+  		    		</div>
+  		    		
+  		    		<div class="col-sm-6">
+  		    			<div class="animated bounceInRight" style="margin-top: 200px;">
+                    <a href="#sale" data-toggle="smoothScroll">
+                      <button type="button" class="btn btn-lg btn-default" style="font-size: 28pt; color: #fff; background-color: rgba(187, 187, 187, 0.45)">Доставлю</button>
+                    </a>
+  		    			</div>
+  		    		</div>
+  		    </div>
+        </div>
+
+        <div class="row">
+          <div class="grid-demo text-center">
+            <a href="#sale" data-toggle="smoothScroll">
+      		   <span class="btn ai ai-4x ai-arrow-down3 animated bounceInDown space space-vert-md" style="margin-top: 45px; font-size: 34px; color: #fff;"></span>
+           </a>
           </div>
-        </div>
-        <a href="#" class="btn btn-lg btn-primary">Learn More</a>
+      	</div>
       </div>
-      <div class="col-md-4 text-center space space-vert-md">
-        <i class="ai ai-4x ai-eye2 ai-circle-outline"></i>
-        <h2>Retina Ready <br>
-        <small>For Display Perfection</small></h2>
-        <div class="row">
-          <div class="col-xs-8 col-center">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio, magnam, cupiditate illo nisi excepturi rem rerum.</p>
-          </div>
-        </div>
-        <a href="#" class="btn btn-lg btn-primary">Start Today</a>
+      
+      
+
+  </div> <!-- END portfolio-home-top -->
+
+
+<section id="sale" style="background-image: url('assets/img/bg-white.png')">
+<div class="container content-wrap" style="padding-bottom: 0px;">
+  <div class="row"  style="margin-top: 100px; margin-bottom: 100px;">
+    <div class="icon-callouts">
+      <div class="text-center space space-vert-md col-md-4 wow fadeInLeft animated" data-wow-duration="1.3s" data-wow-delay=".15s" style="visibility: visible;-webkit-animation-duration: 1.3s; -moz-animation-duration: 1.3s; animation-duration: 1.3s;-webkit-animation-delay: .15s; -moz-animation-delay: .15s; animation-delay: .15s;">
+        <a href="#info" data-toggle="smoothScroll"><i class="ai ai-3x ai-earth ai-circle-outline" style="margin-bottom: 15px;"></i></a>
+        <h3>Путешествуй<br>
+        <a href="#info" data-toggle="smoothScroll" class="btn btn btn-primary" style="margin-top: 12px;">Learn More</a>
+      </div>
+
+      <div class="text-center space space-vert-md col-md-4 wow fadeInUp animated" data-wow-duration="1.3s" data-wow-delay=".15s" style="visibility: visible;-webkit-animation-duration: 1.3s; -moz-animation-duration: 1.3s; animation-duration: 1.3s;-webkit-animation-delay: .15s; -moz-animation-delay: .15s; animation-delay: .15s;">
+        <a href="store/my-cart1.html"> <i class="ai ai-3x ai ai ai-file ai-circle-outline" style="margin-bottom: 15px;"></i></a>
+        <h3>Выбирай заказы<br>
+        <a href="store/my-cart1.html" class="btn btn btn-primary" style="margin-top: 12px;">Start Today</a>
       </div> 
-      <div class="col-md-4 text-center space space-vert-md">
-        <i class="ai ai-4x ai ai-gift ai-circle-outline"></i>
-        <h2>Free Updates <br>
-        <small>Buy once, upgrade <i>forever</i></small></h2>
-        <div class="row">
-          <div class="col-xs-8 col-center">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio, magnam, cupiditate illo nisi excepturi rem rerum.</p>
-          </div>
-        </div>
-        <a href="#" class="btn btn-lg btn-primary">Buy Now</a>
+
+      <div class="text-center space space-vert-md col-md-4 wow fadeInRight animated" data-wow-duration="1.3s" data-wow-delay=".15s" style="visibility: visible;-webkit-animation-duration: 1.3s; -moz-animation-duration: 1.3s; animation-duration: 1.3s;-webkit-animation-delay: .15s; -moz-animation-delay: .15s; animation-delay: .15s;">
+        <a href="#info" data-toggle="smoothScroll"><i class="ai ai-3x ai ai-gift ai-circle-outline" style="margin-bottom: 15px;"></i></a>
+        <h3>Получай вознаграждения<br>
+        <a href="#info" data-toggle="smoothScroll" class="btn btn btn-primary" style="margin-top: 12px;">Buy Now</a>
       </div>
     </div> <!-- end icon-callouts -->
   </div> <!-- end row -->
+  </section>
+
+  <section id="buy" style="background-image: url('assets/img/bg-white.png'); padding-bottom: 80px;">
+  <p class="h3 fancy divider" style="background: #f4f4f4"><span class="ai ai-compass"></span></p>
+
+  <div class="row" style="margin-top: 110px;">
+    <div class="icon-callouts">
+       <div class="text-center space space-vert-md col-md-4 wow fadeInLeft animated" data-wow-duration="1.3s" data-wow-delay=".15s" style="visibility: visible;-webkit-animation-duration: 1.3s; -moz-animation-duration: 1.3s; animation-duration: 1.3s;-webkit-animation-delay: .15s; -moz-animation-delay: .15s; animation-delay: .15s;">
+        <i class="ai ai-3x ai-pencil2 ai-circle-outline" style="margin-bottom: 15px;"></i>
+        <h3>Создавай заявки<br>
+        <a href="#" class="btn btn btn-primary" style="margin-top: 12px;">Learn More</a>
+      </div>
+
+       <div class="text-center space space-vert-md col-md-4 wow fadeInDown animated" data-wow-duration="1.3s" data-wow-delay=".15s" style="visibility: visible;-webkit-animation-duration: 1.3s; -moz-animation-duration: 1.3s; animation-duration: 1.3s;-webkit-animation-delay: .15s; -moz-animation-delay: .15s; animation-delay: .15s;">
+        <i class="ai ai-3x ai-bubbles3 ai-circle-outline" style="margin-bottom: 15px;"></i>
+        <h3>Ищи путешественников<br>
+        <a href="#" class="btn btn btn-primary" style="margin-top: 12px;">Start Today</a>
+      </div> 
+
+       <div class="text-center space space-vert-md col-md-4 wow fadeInRight animated" data-wow-duration="1.3s" data-wow-delay=".15s" style="visibility: visible;-webkit-animation-duration: 1.3s; -moz-animation-duration: 1.3s; animation-duration: 1.3s;-webkit-animation-delay: .15s; -moz-animation-delay: .15s; animation-delay: .15s;">
+        <i class="ai ai-3x ai ai ai-cart3 ai-circle-outline" style="margin-bottom: 15px;"></i>
+        <h3>Покупай дешевле<br>
+        <a href="#" class="btn btn btn-primary" style="margin-top: 12px;">Buy Now</a>
+      </div>
+    </div> <!-- end icon-callouts -->
+  </div> <!-- end row -->
+  </section>
 </div> <!-- end container -->
 
-<div class="home__group--highlight">
+<!--<p class="h3 fancy divider" style="background-image: url('assets/img/bg-blue-light.png'); height: 47px;padding-top: 10px;"><span class="ai ai-compass"></span></p>-->
+<section id="info">
+<div class="home__group--highlight" style="background-image: url('assets/img/bg-white1.png')">
   <div class="container">
 
-    <div class="row">
+    <div class="row" style="margin-top: 60px; margin-bottom: 60px;">
       <div class="col-md-3">
-        <div class="h1 no-margin">For Business</div>
+        <div class="h1 no-margin">Like Bisnes</div>
       </div>
       <div class="col-md-7">
-        <p>From an array of business specific page templates to professional customization options, harness Adapto for your next business site.</p>
+        <p>Часто бываешь за границей? Готов доставлять товары?<br>Получай заказы, повышай свой рейтинг и это станет твоим новым источником дохода.</p>
       </div>
       <div class="col-md-2 col-xs-6">
         <a href="home-simple.html" class="btn btn-primary btn-block">View Business</a>
@@ -103,9 +122,9 @@
     
     <hr>
     
-    <div class="row">
+    <div class="row" style="margin-top: 60px; margin-bottom: 60px;">
       <div class="col-md-3">
-        <div class="h1 no-margin">For Portfolios</div>
+        <div class="h2 no-margin">Система вознаграждений</div>
       </div>
       <div class="col-md-7">
       <p>Regardless of your portfolio needs, Adapto has you covered. Home page layouts, portfolio pages, and individual project pages are waiting for your next project.</p>
@@ -117,9 +136,9 @@
     
     <hr>
     
-    <div class="row">
+    <div class="row" style="margin-top: 60px; margin-bottom: 60px;">
       <div class="col-md-3">
-        <div class="h1 no-margin">For E-Selling</div>
+        <div class="h2 no-margin">Сравнение цен</div>
       </div>
       <div class="col-md-7">
         <p>Page templates, customized ecommerce header bar options, and tons of other built-in functionality make Adapto a great choice for nearly any ecommerce site.</p>
@@ -131,6 +150,7 @@
 
   </div> <!-- end container -->
 </div> <!-- end section offset -->
+</section>
 
 
 <div class="container content-wrap">
@@ -215,7 +235,7 @@
 
     <!-- image -->
     <div class="col-md-12 no-border">
-      <img src="/static/ext/adapto/assets/img/home/home-bottom.jpg" alt="" class="img-responsive visible-md visible-lg">
+      <img src="assets/img/home/home-bottom.jpg" alt="" class="img-responsive visible-md visible-lg">
     </div>
     
     <!-- columns -->
@@ -244,6 +264,6 @@
   
     </div> <!-- end page-wrap -->
     
-    
+      
       
 {% endblock %}

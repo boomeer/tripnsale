@@ -10432,7 +10432,7 @@ hr.double--inverse {
   background: url('/static/bg_passport3.jpg') no-repeat center;
   -webkit-background-size: cover;
   background-size: cover;
-  height: 650px; 
+  height: 80%; 
   //height: "100%"; 
   }
   @media (max-width: 768px) {

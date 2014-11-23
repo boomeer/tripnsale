@@ -164,6 +164,6 @@ def ProfileView(request, username=None):
 def UsersView(request):
     user = User.objects.all()
     return RenderToResponse("user/list.html", request, {
-        "url": "user/all",
+        "url": "/user/all",
         "users": User.objects.all()
     })

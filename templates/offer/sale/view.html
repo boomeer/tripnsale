@@ -8,13 +8,15 @@
         <div class="tripViewContent">
             <div class="places">
                 <span class="place place-from trip-item-content">
-                    {{ sale.fr }}
+                    <img src="/static/countries/{{ sale.fr.name }}_preview.gif">
+                    {{ sale.fr.title }}
                 </span>
                 <span>
                     <i class="glyphicon glyphicon-arrow-right"></i>
                 </span>
                 <span class="place place-to trip-item-content">
-                    {{ sale.to }}
+                    <img src="/static/countries/{{ sale.to.name }}_preview.gif">
+                    {{ sale.to.title }}
                 </span>
             </div>
             <hr>

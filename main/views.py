@@ -9,4 +9,5 @@ from util.utils import (
 @SafeView
 def MainView(request):
     return RenderToResponse("main/main.html", request, {
+        "url": "/",
     })

@@ -9,7 +9,7 @@
 {% block main %}
     <div class="dialogs">
         {% for dialog in dialogs %}
-            <div class="dialog container">
+            <div class="dialog {% if dialog.msg.new %}dialog-unread{% endif %} container">
                 <a href="/user/im/?peer={{ dialog.peer.id }}">
                     <div class="container">
                         <div class="col-md-3 peer">

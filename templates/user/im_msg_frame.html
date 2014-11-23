@@ -7,7 +7,7 @@
         </div>
         <div class="groupBody">
             {% for msg in msgGroup %}
-                <div class="msg">
+                <div class="msg {% if msg.new %}msg-unread{% endif %} container-fluid">
                     <div class="content col-md-8">
                         {{ msg.content }}
                     </div>

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block own_head %}
+    <script src="{% static "user/mail.js" %}" type="text/javascript"></script>
+    <link rel="stylesheet" href="{% static "css/user/mail.css" %}">
+{% endblock %}
+
+{% block main %}
+    <div class="dialogs">
+        {% for dialog in dialogs %}
+            <div class="dialog container">
+                <a href="/user/im/?peer={{ dialog.peer.id }}">
+                    <div class="container">
+                        <div class="col-md-3 peer">
+                            {{ dialog.peer.first_name }} {{ dialog.peer.last_name }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ dialog.msg.content }}
+                        </div>
+                        <div class="col-md-3">
+                            {{ dialog.msg.time }}
+                        </div>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

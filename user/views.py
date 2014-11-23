@@ -162,8 +162,30 @@ def ProfileView(request, username=None):
 
 @SafeView
 def UsersView(request):
-    user = User.objects.all()
+    users = User.objects.all()
     return RenderToResponse("user/list.html", request, {
         "url": "/user/all",
-        "users": User.objects.all()
+        "users": users,
+    })
+
+
+@SafeView
+def UserMailView(request):
+    user = GetCurrentUser(request)
+    msgs = list(Msg.objects.filter(fr=user).all()) + \
+            list(Msg.objects.filter(to=user).all())
+    lastMsg = {}
+    for msg in msgs:
+        peer = msg.fr if msg.to == user else msg.to
+        last = lastMsg.get(peer, None)
+        if not last or last.time < msg.time:
+            lastMsg[peer] = msg
+    dialogs = [{
+        "peer": peer,
+        "msg": msg,
+    } for peer, msg in lastMsg.items()]
+    dialogs = sorted(dialogs, key=lambda self: self["msg"].time)
+    return RenderToResponse("user/mail.html", request, {
+        "url": "/user/mail",
+        "dialogs": dialogs,
     })

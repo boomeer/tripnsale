@@ -137,7 +137,7 @@ def ImMsgFrameView(request):
     msgs = sorted(msgs, key=lambda self: self.time)
     groups = []
     for msg in msgs:
-        if msg.new:
+        if msg.to == user and msg.new:
             msg.new = False
             msg.save()
         if not groups or groups[-1][0].fr != msg.fr:
@@ -185,6 +185,7 @@ def UserMailView(request):
         "msg": msg,
     } for peer, msg in lastMsg.items()]
     dialogs = sorted(dialogs, key=lambda self: self["msg"].time)
+    dialogs.reverse()
     return RenderToResponse("user/mail.html", request, {
         "url": "/user/mail",
         "dialogs": dialogs,

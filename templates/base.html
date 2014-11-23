@@ -134,6 +134,15 @@
                     <a class="dropdown-toggle" href="#">
                         <i class="glyphicon glyphicon-user"></i>
                         {{ profileOwner.first_name }} {{ profileOwner.last_name }}
+                        &nbsp;
+                        <span style="color: #006;">
+                            {% if unreadCount %}
+                                <span class="unread">
+                                    <i class="ai ai-envelope"></i>
+                                    +{{ unreadCount }}
+                                </span>
+                            {% endif %}
+                        </span>
                     </a>
                     <ul class="dropdown-menu">
                         <li>
@@ -146,6 +155,9 @@
                             <a href="/user/mail">
                                 <i class="glyphicon glyphicon-envelope"></i>
                                 Сообщения
+                                {% if unreadCount %}
+                                (+{{ unreadCount }})
+                                {% endif %}
                             </a>
                         </li>
                         <hr class="hr-transparent">

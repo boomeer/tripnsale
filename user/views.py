@@ -1,5 +1,6 @@
 from django.shortcuts import redirect
 from django.template import RequestContext
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import (
     authenticate,
     login,
@@ -15,8 +16,18 @@ from user.models import (
     User,
     Msg,
 )
+from util.avatar import (
+    StoreImage,
+)
+from place.models import (
+    Country,
+)
+from place.utils import (
+    GetCountries,
+)
 from user.utils import (
     GetCurrentUser,
+    GetDjUserByUser,
 )
 import re
 from datetime import datetime
@@ -71,13 +82,14 @@ def AuthView(request):
             raise UsernameIsInvalidErr
         if not re.compile("^.{3,30}$").match(params["password"]):
             raise PasswordIsIvalidErr
+        country = Country.objects.get(name=params.get("country", 0))
         user = User.objects.create_user(
             params.get("username", ""),
             params.get("email", ""),
             params.get("password", ""),
             first_name=params.get("firstName", ""),
             last_name=params.get("lastName", ""),
-            country=params.get("country", ""),
+            country=country,
             city=params.get("city", ""),
             remoteAddr=request.META["REMOTE_ADDR"],
             regRemoteAddr=request.META["REMOTE_ADDR"],
@@ -90,6 +102,7 @@ def AuthView(request):
         login(request, user)
         return redirect("/")
     return RenderToResponse("user/auth.html", request, {
+        "countries": GetCountries(),
     })
 
 
@@ -102,6 +115,7 @@ def LogoutView(request):
     return redirect(backref)
 
 
+@login_required(login_url="/user/auth/")
 @SafeView
 def ImView(request):
     params = request.REQUEST
@@ -156,9 +170,42 @@ def ProfileView(request, username=None):
     params = request.REQUEST
     user = User.objects.get(username=username) if username else GetCurrentUser(request)
     return RenderToResponse("user/profile.html", request, {
-        "url": "/user/profile{}".format(user.username),
+        "url": "/user/profile/{}".format(user.username),
         "prUser": user,
     })
+
+
+@login_required(login_url="/user/auth/")
+@SafeView
+def EditProfileView(request):
+    params = request.REQUEST
+    user = GetCurrentUser(request)
+    act = params.get("act", "")
+    if act == "edit":
+        oldPassw = params.get("oldPassword", "")
+        passw = params.get("password", "")
+        passw2 = params.get("password2", "")
+        if oldPassw or passw or passw2:
+            if not authenticate(username=user.username, password=oldPassw):
+                raise Exception("wrong_old_password")
+            if passw != passw2:
+                raise Exception("passwords_are_not_equal")
+            user.set_password(passw)
+            user.save()
+        user.first_name = params.get("firstName", "")
+        user.last_name = params.get("lastName", "")
+        user.country = Country.objects.get(name=params.get("country", ""))
+        user.city = params.get("city", "")
+        if 'avatar' in request.FILES:
+            StoreImage(request.FILES['avatar'], user.avatar, user.username)
+        user.save()
+        return redirect("/user/profile/")
+    return RenderToResponse("user/edit_profile.html", request, {
+        "url": "/user/edit_profile/",
+        "prUser": user,
+        "countries": GetCountries(),
+    })
+    
 
 @SafeView
 def UsersView(request):

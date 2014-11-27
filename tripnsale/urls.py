@@ -1,5 +1,7 @@
 from django.conf.urls import patterns, include, url
+from django.conf.urls.static import static
 from django.contrib import admin
+import tripnsale.settings as settings
 
 admin.autodiscover()
 
@@ -12,4 +14,4 @@ urlpatterns = patterns('',
     url('^', include('main.urls')),
     url('^offer/', include('offer.urls')),
     url('^user/', include('user.urls')),
-)
+) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

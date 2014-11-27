@@ -24,6 +24,16 @@ DEBUG = True
 
 TEMPLATE_DEBUG = True
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.static",
+    "django.core.context_processors.tz",
+    "django.contrib.messages.context_processors.messages",
+)
+
 ALLOWED_HOSTS = []
 
 
@@ -40,6 +50,7 @@ INSTALLED_APPS = (
     'offer',
     'user',
     'util',
+    'place',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -96,3 +107,8 @@ STATIC_ROOT = "/var/www/tripnsale/static/"
 TEMPLATE_DIRS = (
     "templates",
 )
+
+
+MEDIA_ROOT = "/var/www/tripnsale/upl/"
+
+MEDIA_URL = "/upl/"

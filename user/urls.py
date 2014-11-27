@@ -5,6 +5,7 @@ from user.views import *
 urlpatterns = patterns('',
     url("^profile/(?P<username>[a-zA-z0-9._-]{1,30})/$", ProfileView),
     url("^profile/$", ProfileView),
+    url("^edit_profile/$", EditProfileView),
     url("^all/$", UsersView),
     url("^auth/$", AuthView),
     url("^mail/$", UserMailView),

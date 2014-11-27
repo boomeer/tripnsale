@@ -30,3 +30,4 @@ def RenderToResponse(templPath, request, params):
 def CheckPost(request):
     if request.method != "POST":
         raise ReqMustBePostErr
+

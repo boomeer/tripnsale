@@ -3,13 +3,11 @@ from util.utils import TsExc
 import util.models
 from user.models import User
 from datetime import datetime
+from place.models import (
+    Country,
+)
 
 
-class Country(models.Model):
-    title = models.TextField(default="")
-    name = models.TextField(default="")
-    
-    
 class Offer(util.models.ContentHolder):
     class Meta:
         abstract = True

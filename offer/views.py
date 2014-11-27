@@ -5,6 +5,8 @@ from django.template import RequestContext
 from offer.models import (
     BuyOffer,
     SaleOffer,
+)
+from place.models import (
     Country,
 )
 from util.utils import (

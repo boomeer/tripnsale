@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import lxml.html
-from offer.models import Country
+from place.models import Country
 
 
 def Parse(data):

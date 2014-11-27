@@ -1,11 +1,11 @@
-{% extends "base_simple.html" %}
+{% extends "base.html" %}
 {% load static %}
 
-{% block own_head2 %}
+{% block own_head %}
     <link rel="stylesheet" href="{% static "css/user/auth.css" %}">
 {% endblock %}
 
-{% block main2 %}
+{% block main %}
     <div class="container-fluid">
         <div class="authBlockWrapper authBlockWrapperReg col-lg-4 col-lg-offset-2 col-md-6 col-sm-6">
             <div class="authBlock">
@@ -27,9 +27,9 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputUsername" class="col-sm-3 control-label">Ник:</label>
+                        <label for="inputUsername" class="col-sm-3 control-label">Логин:</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="inputUsername" name="username" placeholder="Ник">
+                            <input type="text" class="form-control" id="inputUsername" name="username" placeholder="Логин">
                         </div>
                     </div>
                     <div class="form-group">
@@ -53,7 +53,16 @@
                     <div class="form-group">
                         <label class="control-label col-sm-3" for="inputCountry">Место проживания:</label>
                         <div class="col-sm-5">
+                            <select class="form-control" id="inputCountry" name="country">
+                                {% for country in countries %}
+                                    <option value="{{ country.name }}">
+                                        {{ country.title }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                            <!--
                             <input type="text" class="form-control" id="inputCountry" name="country" placeholder="Страна">
+                            -->
                         </div>
                         <div class="col-sm-4">
                             <input type="text" class="form-control" id="inputCity" name="city" placeholder="Город">

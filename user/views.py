@@ -9,15 +9,15 @@ from django.contrib.auth import (
 from util.utils import (
     SafeView,
     TsExc,
+    RedirectExc,
     RenderToResponse,
     CheckPost,
+    GetSysMsg,
+    StoreImage,
 )
 from user.models import (
     User,
     Msg,
-)
-from util.avatar import (
-    StoreImage,
 )
 from place.models import (
     Country,
@@ -45,10 +45,6 @@ class PasswordsAreNotEqualErr(TsExc):
     def __init__(self):
         super().__init__("passwords_are_not_equal")
 
-class IncorrectUsernameOrPasswordErr(TsExc):
-    def __init__(self):
-        super().__init__("incorrect_username_or_password")
-
 class MsgCannotBeEmpty(TsExc):
     def __init__(self):
         super().__init__("msg_cannot_be_empty")
@@ -69,7 +65,7 @@ def AuthView(request):
             user.save()
             login(request, user)
         else:
-            raise IncorrectUsernameOrPasswordErr
+            raise RedirectExc("/user/auth/?msgLogin=wrong_login_or_password")
         backref = params.get("backref", "/")
         if not backref:
             backref = "/"
@@ -103,6 +99,8 @@ def AuthView(request):
         return redirect("/")
     return RenderToResponse("user/auth.html", request, {
         "countries": GetCountries(),
+        "msgLogin": GetSysMsg(params.get("msgLogin", "")),
+        "msgReg": GetSysMsg(params.get("msgReg", "")),
     })
 
 

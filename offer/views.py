@@ -40,9 +40,11 @@ def SaleOfferAddView(request):
         sale = SaleOffer(
             fr=fr,
             frCity=params.get("frCity", ""),
+            ifrCity=params.get("frCity", "").lower(),
             frTime=datetime.strptime(params.get("fromTime", ""), "%d.%m.%Y"),
             to=to,
             toCity=params.get("toCity", ""),
+            itoCity=params.get("toCity", "").lower(),
             toTime=datetime.strptime(params.get("toTime", ""), "%d.%m.%Y"),
             deposit=params.get("deposit", None),
             guarant=params.get("guarant", False),
@@ -61,8 +63,8 @@ def SaleOfferAddView(request):
 def SaleFilterView(request):
     params = request.REQUEST
     sales = SaleOffer.objects.filter(
-        fr__title__istartswith=params.get("from", ""),
-        to__title__istartswith=params.get("to", ""),
+        fr__ititle__istartswith=params.get("from", ""),
+        to__ititle__istartswith=params.get("to", ""),
     ).all()
     page = params.get("page", 1)
     count = params.get("count", 5)

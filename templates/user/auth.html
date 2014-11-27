@@ -78,6 +78,11 @@
             <div class="authBlock">
                 <div class="authTitle">
                 </div>
+                {% if msgLogin %}
+                    <div class="sysMsg sysMsg-login">
+                        {{ msgLogin }}
+                    </div>
+                {% endif %}
                 <form class="form-horizontal" role="form" action="" method="post">
                     {% csrf_token %}
                     <input type="hidden" name="act" value="login">

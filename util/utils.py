@@ -1,13 +1,17 @@
-from django.shortcuts import HttpResponse, render_to_response
+from django.shortcuts import HttpResponse, render_to_response, redirect
 from django.template import RequestContext
 from user.utils import GetCurrentUser
 from user.models import Msg
 from util.exc import *
+from util.msg import *
+from util.avatar import *
 
 
 def SafeViewFunc(func, *arg, **argv):
     try:
         return func(*arg, **argv)
+    except RedirectExc as e:
+        return redirect(str(e))
     except Exception as e:
         return HttpResponse("Error({}): {}".format(type(e), e))
 

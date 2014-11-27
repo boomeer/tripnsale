@@ -169,8 +169,10 @@ def ImMsgFrameView(request):
 def ProfileView(request, username=None):
     params = request.REQUEST
     user = User.objects.get(username=username) if username else GetCurrentUser(request)
+    if not user and not username:
+        return redirect("/user/auth/")
     return RenderToResponse("user/profile.html", request, {
-        "url": "/user/profile/{}".format(user.username),
+        "url": "/user/profile/{}".format(user.username) if user else "/user/profile/",
         "prUser": user,
     })
 
@@ -181,7 +183,7 @@ def EditProfileView(request):
     params = request.REQUEST
     user = GetCurrentUser(request)
     act = params.get("act", "")
-    if act == "edit":
+    if user and act == "edit":
         oldPassw = params.get("oldPassword", "")
         passw = params.get("password", "")
         passw2 = params.get("password2", "")
@@ -191,7 +193,6 @@ def EditProfileView(request):
             if passw != passw2:
                 raise Exception("passwords_are_not_equal")
             user.set_password(passw)
-            user.save()
         user.first_name = params.get("firstName", "")
         user.last_name = params.get("lastName", "")
         user.country = Country.objects.get(name=params.get("country", ""))

@@ -17,7 +17,9 @@
                 {{ prUser.username }}
             </div>
             <div class="row">
-                Адрес: {{ prUser.country.title }} {{ prUser.city }}
+                Адрес:
+                <img src="{{ prUser.country.img }}">
+                {{ prUser.country.title }} {{ prUser.city }}
             </div>
             <div class="row">
                 {% if prUser.id != user.id %}

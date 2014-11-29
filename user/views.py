@@ -58,16 +58,17 @@ def AuthView(request):
     act = params.get("act", "")
     if act == "login":
         CheckPost(request)
-        user = GetUserByDjUser(authenticate(
+        djUser = authenticate(
             username=params.get("login", ""),
             password=params.get("password", ""),
-        ))
-        if not user.activated:
-            raise RedirectExc("/user/auth?msgLogin=user_is_not_activated")
+        )
+        user = GetUserByDjUser(djUser)
         if user:
+            if not user.activated:
+                raise RedirectExc("/user/auth?msgLogin=user_is_not_activated")
             user.remoteAddr = request.META["REMOTE_ADDR"]
             user.save()
-            login(request, user)
+            login(request, djUser)
         else:
             raise RedirectExc("/user/auth/?msgLogin=wrong_login_or_password")
         backref = params.get("backref", "/")

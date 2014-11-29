@@ -41,7 +41,7 @@
                 <div class="form-group">
                     <label class="control-label col-sm-3" for="inputCountry">Место проживания:</label>
                     <div class="col-sm-5">
-                        <select class="form-control" id="inputCountry" name="country" value={{ prUser.country.id }}>
+                        <select multiple id="inputCountry" name="country" placeholder="Страна" value={{ prUser.country.id }}>
                             {% for country in countries %}
                                 <option value="{{ country.name }}">
                                     {{ country.title }}

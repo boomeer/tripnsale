@@ -10,7 +10,9 @@
     <div class="container-fluid">
         <div class="editProfile col-md-6">
             <div class="authTitle">
+                <h4>Редактирование профиля</h4>
             </div>
+            <hr>
             <form enctype="multipart/form-data" class="form-horizontal" role="form" action="" method="post">
                 {% csrf_token %}
                 <input type="hidden" name="act" value="edit">
@@ -41,7 +43,7 @@
                 <div class="form-group">
                     <label class="control-label col-sm-3" for="inputCountry">Место проживания:</label>
                     <div class="col-sm-5">
-                        <select multiple id="inputCountry" name="country" placeholder="Страна" value={{ prUser.country.id }}>
+                        <select id="inputCountry" name="country" placeholder="Страна" value={{ prUser.country.id }}>
                             {% for country in countries %}
                                 <option value="{{ country.name }}">
                                     {{ country.title }}
@@ -59,7 +61,13 @@
                 <div class="form-group">
                     <label class="control-label col-sm-3" for="inputAvatar">Фото:</label>
                     <div class="col-sm-9">
-                        <input type="file" name="avatar" id="inputAvatar">
+                        <input type="file" class="form-control" name="avatar" id="inputAvatar">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="inputAvatar">Текущее фото:</label>
+                    <div class="col-sm-9">
+                        <img src="{{ prUser.avatarUrl }}" style="max-width: 300px; max-height: 300px;">
                     </div>
                 </div>
 
@@ -82,6 +90,7 @@
                         <input type="password" class="form-control" id="inputPassword2" name="password2" placeholder="Повторите пароль">
                     </div>
                 </div>
+                <hr>
                 <div class="btnAuth">
                     <button type="submit" class="btn btn-default">Применить изменения</button>
                 </div>

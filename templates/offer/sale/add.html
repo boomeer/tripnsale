@@ -20,7 +20,7 @@
                         </div>
                         <div class="fromToBody">
                             <div class="inputWrapper">
-                                <select multiple id="inputFrom" name="from" placeholder="Страна">
+                                <select id="inputFrom" name="from" placeholder="Страна">
                                     {% for country in countries %}
                                         <option value="{{ country.name }}">
                                             {{ country.title }}
@@ -43,7 +43,7 @@
                         </div>
                         <div class="fromToBody">
                             <div class="inputWrapper">
-                                <select multiple id="inputTo" name="to" placeholder="Страна">
+                                <select id="inputTo" name="to" placeholder="Страна">
                                     {% for country in countries %}
                                         <option value="{{ country.name }}">
                                             {{ country.title }}

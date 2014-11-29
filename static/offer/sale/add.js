@@ -3,4 +3,7 @@ $(function() {
     $("#inputFromTime").datepicker("option", "dateFormat", "dd.mm.yy");
     $("#inputToTime").datepicker();
     $("#inputToTime").datepicker("option", "dateFormat", "dd.mm.yy");
+    
+    CountriesAC($("#inputFrom"));
+    CountriesAC($("#inputTo"));
 });

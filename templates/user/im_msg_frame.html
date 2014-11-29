@@ -1,14 +1,16 @@
 {% for msgGroup in msgs %}
     <div class="msgGroup container-fluid">
         <div class="title">
-            <div class="author">
-                <img src="{{ msgGroup.0.fr.avatarUrl }}" class="peerAv">
-                {{ msgGroup.0.fr.first_name }} {{ msgGroup.0.fr.last_name }}:
+            <div class="author bboldy">
+                <a href="/user/profile/{{ msgGroup.0.fr.username }}/" class="bboldy">
+                    <img src="{{ msgGroup.0.fr.avatarUrl }}" class="peerAv">
+                    {{ msgGroup.0.fr.first_name }} {{ msgGroup.0.fr.last_name }}:
+                </a>
             </div>
         </div>
         <div class="groupBody">
             {% for msg in msgGroup %}
-                <div class="msg {% if msg.new %}msg-unread{% endif %} container-fluid">
+                <div class="msg {% if msg.new %}bg1 msg-unread{% endif %} container-fluid">
                     <div class="content col-md-8">
                         {{ msg.content }}
                     </div>

@@ -105,19 +105,24 @@
     
     .tripsList {
         .tripItem:hover {
-            background-color: #f4f4f4;
+            opacity: 0.7;
         }
         
         .tripItem {
             border: 1px solid #ccc;
+            border-radius: 4px;
             margin: 4px 0px;
             padding: 3px 6px;
-            background-color: #eee;
+            background-color: rgba(250, 250, 250, 0.2);
             cursor: pointer;
+
+            table {
+                width: 100%;
+                background: inherit;
+            }
 
             .tripSection {
                 vertical-align: top;
-                display: inline-block;
 
                 .tripSectionTitle {
                     font-weight: 900;
@@ -163,6 +168,12 @@
             .tripOwner {
                 width: 10%;
 
+                &:hover {
+                    * {
+                        color: #900;
+                    }
+                }
+                
                 .tripSectionContent {
                     .tripOwnerAv {
                         img {

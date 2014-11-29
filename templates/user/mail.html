@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block main %}
-    <div class="container-fluid">
+    <div class="container-fluid bg0">
         <div class="col-md-10 col-md-offset-1">
             <div>
                 <h4>
@@ -17,26 +17,27 @@
             <hr>
             <div class="dialogs">
                 {% for dialog in dialogs %}
-                    <div class="dialog container">
-                        <a href="/user/im/?peer={{ dialog.peer.id }}">
-                            <div class="container">
-                                <div class="col-md-3 peer container">
+                    <div class="dialog container" onClick="window.location.href='/user/im/?peer={{ dialog.peer.id }}'">
+                        <input type="hidden" class="peer" value="{{ dialog.peer.id }}">
+                        <div class="container" style="display: inline-block;">
+                            <div class="col-md-3 peer bboldy container">
+                                <a href="/user/profile/{{ dialog.peer.username }}/" class="bboldy">
                                     <img src="{{ dialog.peer.avatarUrl }}" class="peerAv">
                                     {{ dialog.peer.first_name }} {{ dialog.peer.last_name }}
-                                </div>
-                                <div class="col-md-6 {% if dialog.msg.new %}dialog-unread{% endif %}">
-                                    {% if profileOwner == dialog.msg.fr %}
-                                        <span class="itsMe">
-                                            Я:
-                                        </span>
-                                    {% endif %}
-                                    {{ dialog.msg.content }}
-                                </div>
-                                <div class="col-md-3">
-                                    {{ dialog.msg.time }}
-                                </div>
+                                </a>
                             </div>
-                        </a>
+                            <div class="col-md-6 {% if dialog.msg.new %}bg1 dialog-unread{% endif %}">
+                                {% if profileOwner == dialog.msg.fr %}
+                                    <span class="itsMe">
+                                        Я:
+                                    </span>
+                                {% endif %}
+                                {{ dialog.msg.content }}
+                            </div>
+                            <div class="col-md-3">
+                                {{ dialog.msg.time }}
+                            </div>
+                        </div>
                     </div>
                 {% endfor %}
                 {% if not dialogs %}

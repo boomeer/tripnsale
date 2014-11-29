@@ -20,6 +20,9 @@ class User(authModels.User):
     def avatarUrl(self):
         return self.avatar.url if self.avatar else "{}/user/av_default.png".format(settings.STATIC_URL)
 
+    def profileUrl(self):
+        return "/user/profile/{}/".format(self.username)
+
 
 class Msg(models.Model):
     fr = models.ForeignKey(User, related_name="user_from")

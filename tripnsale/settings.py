@@ -112,3 +112,6 @@ TEMPLATE_DIRS = (
 MEDIA_ROOT = "/var/www/tripnsale/upl/"
 
 MEDIA_URL = "/upl/"
+
+EMAIL_SENDER_MAIL = "admin@tripnsale.com"
+EMAIL_SENDER_NAME = "Trip & Sale"

@@ -1,6 +1,9 @@
 from user.models import User
 from util.exc import TsExc
 from django.contrib.auth.models import User as djUser
+from util.mail import (
+    SendMail,
+)
 
 
 class AuthErr(TsExc):
@@ -27,3 +30,7 @@ def GetCurrentUser(request):
 def CheckAuth(request):
     if not GetCurrentUser(request):
         raise AuthErr
+
+
+def SendActivateMail(user):
+    SendMail(user.email, "Activate your account", "Please, activate your account: http://tripnsale.com/user/activate/{}".format(user.activateCode))

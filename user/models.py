@@ -14,6 +14,8 @@ class User(authModels.User):
     country = models.ForeignKey(Country)
     city = models.TextField(default="")
     avatar = models.ImageField(upload_to="avatars", blank=True, null=True)
+    activated = models.BooleanField(default=True)
+    activateCode = models.TextField(default="")
 
     def avatarUrl(self):
         return self.avatar.url if self.avatar else "{}/user/av_default.png".format(settings.STATIC_URL)

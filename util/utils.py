@@ -5,6 +5,10 @@ from user.models import Msg
 from util.exc import *
 from util.msg import *
 from util.avatar import *
+from util.mail import *
+
+import string
+import random
 
 
 def SafeViewFunc(func, *arg, **argv):
@@ -35,3 +39,8 @@ def CheckPost(request):
     if request.method != "POST":
         raise ReqMustBePostErr
 
+
+def GetNewId():
+    newId = ''.join(random.choice(string.ascii_lowercase \
+        + string.digits) for i in range(20))
+    return newId

@@ -14,11 +14,13 @@ from util.utils import (
     CheckPost,
     GetSysMsg,
     StoreImage,
+    GetNewId,
 )
 from user.models import (
     User,
     Msg,
 )
+from user.utils import *
 from place.models import (
     Country,
 )
@@ -56,10 +58,12 @@ def AuthView(request):
     act = params.get("act", "")
     if act == "login":
         CheckPost(request)
-        user = authenticate(
+        user = GetUserByDjUser(authenticate(
             username=params.get("login", ""),
             password=params.get("password", ""),
-        )
+        ))
+        if not user.activated:
+            raise RedirectExc("/user/auth?msgLogin=user_is_not_activated")
         if user:
             user.remoteAddr = request.META["REMOTE_ADDR"]
             user.save()
@@ -89,19 +93,35 @@ def AuthView(request):
             city=params.get("city", ""),
             remoteAddr=request.META["REMOTE_ADDR"],
             regRemoteAddr=request.META["REMOTE_ADDR"],
+            activateCode=GetNewId(),
+            activated=False,
         )
         user.save()
+        '''
         user = authenticate(
             username=user.username,
             password=params.get("password", ""),
         )
         login(request, user)
+        '''
+        SendActivateMail(user)
         return redirect("/")
     return RenderToResponse("user/auth.html", request, {
         "countries": GetCountries(),
         "msgLogin": GetSysMsg(params.get("msgLogin", "")),
         "msgReg": GetSysMsg(params.get("msgReg", "")),
     })
+
+
+@SafeView
+def ActivateView(request, code):
+    user = User.objects.get(activateCode=code)
+    user.activated = True
+    user.save()
+    djUser = GetDjUserByUser(user)
+    djUser.backend = 'django.contrib.auth.backends.ModelBackend'
+    login(request, djUser)
+    return redirect("/")
 
 
 @SafeView

@@ -13,10 +13,16 @@ from util.utils import (
     SafeView,
     RenderToResponse,
     CheckPost,
+    StoreImage,
+    AvatarBigSizeErr,
 )
 from user.utils import (
     GetCurrentUser,
     CheckAuth,
+)
+from gallery.utils import (
+    CreateGallery,
+    CreateGalleryPhoto,
 )
 from datetime import datetime
 
@@ -90,11 +96,14 @@ def BuyOfferAddView(request):
     if act == "add":
         CheckPost(request)
         CheckAuth(request)
+        gallery = CreateGallery()
         buy = BuyOffer(
             title=params.get("title", ""),
+            content=params.get("content", ""),
             costFrom=params.get("costFrom", None),
             costTo=params.get("costTo", None),
             guarant=params.get("guarant", False),
+            gallery=gallery,
             owner=GetCurrentUser(request),
         )
         buy.save()
@@ -102,6 +111,37 @@ def BuyOfferAddView(request):
     return RenderToResponse("offer/buy/add.html", request, {
         "url": "/offer/buy",
     })
+
+
+@SafeView
+def BuyEditView(request, id):
+    params = request.REQUEST
+    act = params.get("act", "")
+    buy = BuyOffer.objects.get(id=id)
+    user = GetCurrentUser(request)
+    if buy.owner != user:
+        return redirect("/")
+    if act == "edit":
+        CheckPost(request)
+        buy.title = params.get("title", "")
+        buy.content = params.get("content", "")
+        buy.costFrom = float(params.get("costFrom", 0).replace(",", "."))
+        buy.costTo = float(params.get("costTo", 0).replace(",", "."))
+        if not buy.gallery:
+            buy.gallery = CreateGallery()
+        for photo in request.FILES.getlist("photos"):
+            ph = CreateGalleryPhoto(buy.gallery)
+            try:
+                StoreImage(photo, ph.img)
+            except AvatarBigSizeErr:
+                ph.delete()
+        buy.save()
+        return redirect("/offer/buy/edit/{}?msg=buy_edit_ok".format(buy.id))
+    return RenderToResponse("offer/buy/edit.html", request, {
+        "url": "/offer/buy/edit/{}/".format(buy.id),
+        "buy": buy,
+    })
+        
 
 
 @SafeView

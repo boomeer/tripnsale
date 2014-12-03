@@ -5,10 +5,14 @@ import random
 import string
 
 
-def StoreImage(image, field, fileName, sizeLimit=4*2**20):
+class AvatarBigSizeErr(Exception):
+    pass
+
+
+def StoreImage(image, field, fileName="", sizeLimit=4*2**20):
     imageFileExt = os.path.splitext(image.name)[1]
     if image.size > sizeLimit:
-        raise AvatarBigSize
+        raise AvatarBigSizeErr
     tempFileName = ''.join(random.choice(string.ascii_lowercase \
         + string.digits) for i in range(20))
     field.save(tempFileName + imageFileExt, image)

@@ -7,6 +7,10 @@ from datetime import datetime
 from place.models import (
     Country,
 )
+from gallery.models import (
+    Gallery,
+    Photo,
+)
 
 
 class Offer(util.models.ContentHolder):
@@ -19,6 +23,7 @@ class BuyOffer(Offer):
     costFrom = models.FloatField(default=None)
     costTo = models.FloatField(default=None)
     guarant = models.BooleanField(default=False)
+    gallery = models.ForeignKey(Gallery)
 
 @admin.register(BuyOffer)
 class BuyOfferAdmin(admin.ModelAdmin):

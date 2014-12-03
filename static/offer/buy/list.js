@@ -1,10 +1,10 @@
 function BuysRefresh()
 {        
-    $(".buysList table tbody").html("Загрузка...");
+    $(".buysList").html("Загрузка...");
     $.post("/offer/buy/filter/", {
         "title": $("#buysTitle").val(),
     }, function(res) {
-        $(".buysList table tbody").html(res);
+        $(".buysList").html(res);
     });
 }
 

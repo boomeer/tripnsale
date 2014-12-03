@@ -1,22 +1,24 @@
 {% for buy in buys %}
-      <tr onClick="BuyView({{ buy.id }});">
-        <td>
-          <a href="../store/product-page.html">
-            <img src="" alt="" class="product-img" style="max-width: 100px;">
-          </a>
-        </td>
-        <td>
-          <h2>{{ buy.title }}<small>{{ buy.cost }}</small></h2>
-          <p>{{ buy.content }}<a href="#">Read Full Description</a></p>
-        </td>
-        <td>
-            <div class="owner-av">
-                <img src="{{ buy.owner.avatarUrl }}" style="max-width: 100px; max-height: 100px;">
+    <div class="buy-item" onClick="BuyView({{ buy.id }})">
+        <div class="buy-section photo">
+            <img src="{{ buy.gallery.photos.all.0.img.url }}" alt="">
+        </div>
+        <div class="buy-section content">
+            <div class="title">
+                {{ buy.title }}
             </div>
-            <div class="owner-title">
+            <div class="comment">
+                {{ buy.content }}
+            </div>
+        </div>
+        <div class="buy-section owner">
+            <div class="owner-av">
+                <img src="{{ buy.owner.avatarUrl }}">
+            </div>
+            <div>
                 {{ buy.owner.first_name }} {{ buy.owner.last_name }} ({{ buy.owner.username }})
             </div>
-        </td>
-      </tr>
+        </div>
+    </div>
 {% endfor %}
 

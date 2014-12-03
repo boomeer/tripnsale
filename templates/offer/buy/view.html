@@ -33,10 +33,17 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <a type="button" class="btn btn-default" href="/user/im?peer={{ buy.owner.id }}">
-                        <i class="glyphicon glyphicon-hand-up"></i>
-                        Связаться
-                    </a>
+                    {% if profileOwner == buy.owner %}
+                        <a type="button" class="btn btn-default" href="/offer/buy/edit/{{ buy.id }}">
+                            <i class="ai ai-pencil"></i>
+                            Редактировать
+                        </a>
+                    {% else %}
+                        <a type="button" class="btn btn-default" href="/user/im?peer={{ buy.owner.id }}">
+                            <i class="glyphicon glyphicon-hand-up"></i>
+                            Связаться
+                        </a>
+                    {% endif %}
                 </div>
             </div>
         </div>

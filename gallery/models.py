@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib import admin
+import tripnsale.settings as settings
 
 
 class Gallery(models.Model):
@@ -13,6 +14,10 @@ class Gallery(models.Model):
 
     def __str__(self):
         return str(id)
+
+    def getHeadUrl(self):
+        photos = self.photos.all()
+        return photos[0].img.url if photos else settings.STATIC_URL + "/no-photo.jpg"
 
 @admin.register(Gallery)
 class GalleryAdmin(admin.ModelAdmin):

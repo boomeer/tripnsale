@@ -1,7 +1,7 @@
 {% for buy in buys %}
     <div class="buy-item" onClick="BuyView({{ buy.id }})">
         <div class="buy-section photo">
-            <img src="{{ buy.gallery.photos.all.0.img.url }}" alt="">
+            <img src="{{ buy.gallery.getHeadUrl }}" alt="">
         </div>
         <div class="buy-section content">
             <div class="title">

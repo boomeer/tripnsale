@@ -4,11 +4,23 @@
             <img src="{{ buy.gallery.getHeadUrl }}" alt="">
         </div>
         <div class="buy-section content">
-            <div class="title">
-                {{ buy.title }}
+            <div>
+                <div class="title">
+                    {{ buy.title }}
+                </div>
+                <div class="comment">
+                    {{ buy.content }}
+                </div>
             </div>
-            <div class="comment">
-                {{ buy.content }}
+            <div class="prices">
+                <span>
+                    Готов заплатить:
+                </span>
+                <span>
+                    <span class="bboldy">{{ buy.costFrom|floatformat }}$</span>
+                    -
+                    <span class="bboldy">{{ buy.costTo|floatformat }}$</span>
+                </span>
             </div>
         </div>
         <div class="buy-section owner">
@@ -16,7 +28,7 @@
                 <img src="{{ buy.owner.avatarUrl }}">
             </div>
             <div>
-                {{ buy.owner.first_name }} {{ buy.owner.last_name }} ({{ buy.owner.username }})
+                {{ buy.owner.first_name }} {{ buy.owner.last_name }}
             </div>
         </div>
     </div>

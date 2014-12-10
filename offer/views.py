@@ -1,6 +1,7 @@
 from django.shortcuts import (
     redirect,
 )
+from django.http import JsonResponse
 from django.template import RequestContext
 from offer.models import (
     BuyOffer,
@@ -125,8 +126,8 @@ def BuyEditView(request, id):
         CheckPost(request)
         buy.title = params.get("title", "")
         buy.content = params.get("content", "")
-        buy.costFrom = float(params.get("costFrom", 0).replace(",", "."))
-        buy.costTo = float(params.get("costTo", 0).replace(",", "."))
+        buy.costFrom = float(params.get("costFrom", "0").replace(",", "."))
+        buy.costTo = float(params.get("costTo", "0").replace(",", "."))
         if not buy.gallery:
             buy.gallery = CreateGallery()
         for photo in request.FILES.getlist("photos"):
@@ -137,6 +138,25 @@ def BuyEditView(request, id):
                 ph.delete()
         buy.save()
         return redirect("/offer/buy/edit/{}?msg=buy_edit_ok".format(buy.id))
+    elif act == "upload":
+        CheckPost(request)
+        if not buy.gallery:
+            buy.gallery = CreateGallery()
+            buy.save()
+        files = []
+        for photo in request.FILES.getlist("photos"):
+            ph = CreateGalleryPhoto(buy.gallery)
+            try:
+                filePath = StoreImage(photo, ph.img)
+                files.append({
+                    "name": filePath,
+                    "thumbnailUrl": ph.img.url,
+                })
+            except AvatarBigSizeErr:
+                ph.delete()
+        return JsonResponse({
+            "files": files,
+        })
     return RenderToResponse("offer/buy/edit.html", request, {
         "url": "/offer/buy/edit/{}/".format(buy.id),
         "buy": buy,

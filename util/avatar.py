@@ -13,7 +13,8 @@ def StoreImage(image, field, fileName="", sizeLimit=4*2**20):
     imageFileExt = os.path.splitext(image.name)[1]
     if image.size > sizeLimit:
         raise AvatarBigSizeErr
-    tempFileName = ''.join(random.choice(string.ascii_lowercase \
-        + string.digits) for i in range(20))
-    field.save(tempFileName + imageFileExt, image)
+    filePath = ''.join(random.choice(string.ascii_lowercase \
+        + string.digits) for i in range(20)) + imageFileExt
+    field.save(filePath, image)
+    return filePath
 

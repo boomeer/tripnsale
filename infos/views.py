@@ -3,4 +3,6 @@ from util.utils import RenderToResponse
 
 
 def InfoView(request, name):
-    return RenderToResponse("infos/{}.html".format(name), request, {})
+    return RenderToResponse("infos/with_base.html", request, {
+        "filepath": "infos/{}.html".format(name),
+    })

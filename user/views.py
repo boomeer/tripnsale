@@ -16,10 +16,7 @@ from util.utils import (
     StoreImage,
     GetNewId,
 )
-from user.models import (
-    User,
-    Msg,
-)
+from user.models import *
 from user.utils import *
 from place.models import (
     Country,
@@ -140,37 +137,53 @@ def ImView(request):
     params = request.REQUEST
     act = params.get("act", "")
     if act == "send":
-        peer = User.objects.get(id=params.get("peer", 0))
         user = GetCurrentUser(request)
         content = params.get("content", "").strip()
         if not content:
             raise MsgCannotbeEmptyErr
-        msg = Msg(
+        conf = Conference.objects.get(id=params.get("conf", 0))
+        msg = ConferenceMsg(
+            conf=conf,
             fr=user,
-            to=peer,
             content=content,
             time=datetime.now(),
         )
         msg.save()
         return RenderJson({"result": "ok"})
+    elif act == "askGuarant":
+        conf = Conference.objects.get(id=params.get("conf"))
+        if conf.askGuarant or conf.withGuarant:
+            raise Exception("bad request")
+        conf.askGuarant = True
+        conf.save()
+        msg = SystemMsg(
+            conf=conf,
+            content="Запрос к гаранту отправлен",
+            time=datetime.now(),
+        )
+        msg.save()
+        return RenderJson({"result": "ok"})
     else:
-        peer = User.objects.get(id=params.get("peer", 0))
+        if "conf" not in params:
+            peer = User.objects.get(id=params.get("peer", 0))
+            conf = GetOrCreateDialog(GetCurrentUser(request), peer)
+            return redirect("/user/im?conf={}".format(conf.id))
+        conf = Conference.objects.get(id=params.get("conf", 0))
         return RenderToResponse("user/im.html", request, {
-            "peer": peer,
+            "conf": conf,
         })
 
 
 @SafeView
 def ImMsgFrameView(request):
     params = request.REQUEST
-    peer = User.objects.get(id=params.get("peer", 0))
     user = GetCurrentUser(request)
-    msgs = list(Msg.objects.filter(fr=user, to=peer).all()) + \
-        list(Msg.objects.filter(fr=peer, to=user).all())
+    conf = Conference.objects.get(id=params.get("conf", 0))
+    msgs = conf.msgs.all()
     msgs = sorted(msgs, key=lambda self: self.time)
     groups = []
     for msg in msgs:
-        if msg.to == user and msg.new:
+        if msg.fr != user and msg.new:
             msg.new = False
             msg.save()
         if not groups or groups[-1][0].fr != msg.fr:
@@ -179,7 +192,6 @@ def ImMsgFrameView(request):
 
     msgs = groups
     return RenderToResponse("user/im_msg_frame.html", request, {
-        "peer": peer,
         "msgs": msgs,
     })
 
@@ -239,8 +251,14 @@ def UsersView(request):
 @SafeView
 def UserMailView(request):
     user = GetCurrentUser(request)
-    msgs = list(Msg.objects.filter(fr=user).all()) + \
-            list(Msg.objects.filter(to=user).all())
+    confs = Conference.objects.filter(users=user).all()
+    confs = [conf for conf in confs if conf.msgs.all()]
+    confs = sorted(confs, key=lambda self: list(self.msgs.all())[-1].time)
+    for conf in confs:
+        u = conf.users.all()
+        conf.peer = u[0] if u[1] == user else u[1]
+        conf.msg = list(conf.msgs.all())[-1]
+    '''
     lastMsg = {}
     for msg in msgs:
         peer = msg.fr if msg.to == user else msg.to
@@ -253,7 +271,9 @@ def UserMailView(request):
     } for peer, msg in lastMsg.items()]
     dialogs = sorted(dialogs, key=lambda self: self["msg"].time)
     dialogs.reverse()
+    '''
     return RenderToResponse("user/mail.html", request, {
         "url": "/user/mail",
-        "dialogs": dialogs,
+        #"dialogs": dialogs,
+        "confs": confs,
     })

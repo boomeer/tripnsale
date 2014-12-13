@@ -1,23 +1,39 @@
 {% for msgGroup in msgs %}
     <div class="msgGroup container-fluid">
         <div class="title">
+            {% if msgGroup.0.fr %}
             <div class="author bboldy">
-                <a href="/user/profile/{{ msgGroup.0.fr.username }}/" class="bboldy">
+                <a href="/user/profile/{{ msgGroup.0.fr.username }}/" class="bboldy {% if msgGroup.0.fr.guarant %}guarant{% endif %}">
                     <img src="{{ msgGroup.0.fr.avatarUrl }}" class="peerAv">
+                    {% if msgGroup.0.fr.guarant %}
+                        <i class="ai ai-shield"></i>
+                    {% endif %}
                     {{ msgGroup.0.fr.first_name }} {{ msgGroup.0.fr.last_name }}:
                 </a>
             </div>
+            {% endif %}
         </div>
         <div class="groupBody">
             {% for msg in msgGroup %}
-                <div class="msg {% if msg.new %}bg1 msg-unread{% endif %} container-fluid">
-                    <div class="content col-md-8">
-                        {{ msg.content }}
+                {% if msg.fr %}
+                    <div class="msg {% if msg.new %}bg1 msg-unread{% endif %} container-fluid">
+                        <div class="content col-md-8">
+                            {{ msg.content }}
+                        </div>
+                        <div class="time col-md-4">
+                            {{ msg.time|date:"d.m.Y" }} {{ msg.time|time:"H:i:s" }}
+                        </div>
                     </div>
-                    <div class="time col-md-4">
-                        {{ msg.time|date:"d.m.Y" }} {{ msg.time|time:"H:i:s" }}
+                {% else %}
+                    <div class="msg msg-sys {% if msg.new %}bg1 msg-unread{% endif %} container-fluid">
+                        <div class="content col-md-8">
+                            {{ msg.content }}
+                        </div>
+                        <div class="time col-md-4">
+                            {{ msg.time|date:"d.m.Y" }} {{ msg.time|time:"H:i:s" }}
+                        </div>
                     </div>
-                </div>
+                {% endif %}
             {% endfor %}
         </div>
     </div>

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+[% load static %}
+
+{% block own_head %}
+{% endblock %}
+
+{% block main %}
+    <div class="asks">
+        {% for conf in confs %}
+            <div class="ask">
+                <div class="title">
+                    {{ conf.getTitle }}
+                </div>
+                <div>
+                    <a href="/guarant/accept/{{ conf.id }}/" type="button" class="btn btn-default">
+                        Принять
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

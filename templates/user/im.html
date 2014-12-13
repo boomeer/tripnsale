@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block main %}
-    <input type="hidden" id="peer" value="{{ peer.id }}">
+    <input type="hidden" id="conf" value="{{ conf.id }}">
     <div class="msgsWrapper bg0 container-fluid">
         <div class="msgs col-md-offset-2 col-md-8 container-fluid">
         </div>
@@ -19,6 +19,7 @@
         <div class="col-md-10 col-md-offset-1">
             <textarea id="msgContent" class="form-control" rows=2></textarea>
             <button type="button" class="sendBtn btn btn-default">Отправить</button>
+            <button type="button" class="guarantBtn btn btn-default">Добавить гаранта</button>
         </div>
     </div>
 {% endblock %}

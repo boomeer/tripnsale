@@ -14,4 +14,5 @@ urlpatterns = patterns('',
     url('^', include('main.urls')),
     url('^offer/', include('offer.urls')),
     url('^user/', include('user.urls')),
+    url('^guarant/', include('guarant.urls')),
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

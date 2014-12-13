@@ -16,31 +16,31 @@
             </div>
             <hr>
             <div class="dialogs">
-                {% for dialog in dialogs %}
-                    <div class="dialog container" onClick="window.location.href='/user/im/?peer={{ dialog.peer.id }}'">
-                        <input type="hidden" class="peer" value="{{ dialog.peer.id }}">
+                {% for conf in confs %}
+                    <div class="dialog container" onClick="window.location.href='/user/im/?conf={{ conf.id }}'">
+                        <input type="hidden" class="peer" value="{{ conf.peer.id }}">
                         <div class="container" style="display: inline-block;">
                             <div class="col-md-3 peer bboldy container">
-                                <a href="/user/profile/{{ dialog.peer.username }}/" class="bboldy">
-                                    <img src="{{ dialog.peer.avatarUrl }}" class="peerAv">
-                                    {{ dialog.peer.first_name }} {{ dialog.peer.last_name }}
+                                <a href="/user/profile/{{ conf.peer.username }}/" class="bboldy">
+                                    <img src="{{ conf.peer.avatarUrl }}" class="peerAv">
+                                    {{ conf.peer.first_name }} {{ conf.peer.last_name }}
                                 </a>
                             </div>
-                            <div class="col-md-6 {% if dialog.msg.new %}bg1 dialog-unread{% endif %}">
-                                {% if profileOwner == dialog.msg.fr %}
+                            <div class="col-md-6 {% if conf.msg.new %}bg1 dialog-unread{% endif %}">
+                                {% if profileOwner == conf.msg.fr %}
                                     <span class="itsMe">
                                         Я:
                                     </span>
                                 {% endif %}
-                                {{ dialog.msg.content }}
+                                {{ conf.msg.content }}
                             </div>
                             <div class="col-md-3">
-                                {{ dialog.msg.time }}
+                                {{ conf.msg.time }}
                             </div>
                         </div>
                     </div>
                 {% endfor %}
-                {% if not dialogs %}
+                {% if not confs %}
                     Нет диалогов
                 {% endif %}
             </div>

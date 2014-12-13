@@ -1,6 +1,6 @@
 function RefreshMsgs() {
     $.post("/user/im_msg_frame/", {
-        peer: $("#peer").val(),
+        conf: $("#conf").val(),
     }, function(res) {
         var oldMsgs = $(".msgs").html();
         if (res != oldMsgs) {
@@ -10,11 +10,11 @@ function RefreshMsgs() {
     });
 }
 
-function sendMsg()
+function SendMsg()
 {
     $.post("/user/im/", {
         act: "send",
-        peer: $("#peer").val(),
+        conf: $("#conf").val(),
         content: $("#msgContent").val(),
     }, function(res) {
         RefreshMsgs();
@@ -22,16 +22,29 @@ function sendMsg()
     });
 }
 
+function AskGuarant()
+{
+    $.post("/user/im/", {
+        act: "askGuarant",
+        conf: $("#conf").val(),
+    }, function(res) {
+        RefreshMsgs();
+    });
+}
+
 $(function() {
     $(".sendBtn").on("click", function() {
-        sendMsg();
+        SendMsg();
+    });
+    $(".guarantBtn").on("click", function() {
+        AskGuarant();
     });
     $("#msgContent").on("keydown", function(event) {
         if (event.which == 13) {
-            sendMsg();
+            SendMsg();
         }
     });
-    RefreshMsgs();
+        RefreshMsgs();
     setInterval(function() {
         RefreshMsgs();
     }, 500);

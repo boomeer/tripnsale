@@ -1,4 +1,4 @@
-from user.models import User
+from user.models import *
 from util.exc import TsExc
 from django.contrib.auth.models import User as djUser
 from util.mail import (
@@ -34,3 +34,17 @@ def CheckAuth(request):
 
 def SendActivateMail(user):
     SendMail(user.email, "Activate your account", "Please, activate your account: http://tripnsale.com/user/activate/{}".format(user.activateCode))
+
+
+def CreateDialog(fr, to):
+    conf = Conference()
+    conf.save()
+    conf.users.add(fr, to)
+    return conf
+
+def GetOrCreateDialog(fr, to):
+    confs = Conference.objects.filter(users=fr).all()
+    confs = [conf for conf in confs if to in conf.users.all()]
+    conf = confs[0] if confs else CreateDialog(fr, to)
+    return conf
+

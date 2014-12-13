@@ -1,5 +1,8 @@
 {% load static %}
 
+{% if not sales %}
+    Нет поездок
+{% endif %}
 {% for sale in sales %}
     <div class="tripItem" onClick="TripView({{ sale.id }});">
         <div class="tripFrom tripSection">

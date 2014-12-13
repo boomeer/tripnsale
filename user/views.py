@@ -1,4 +1,5 @@
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
+from django.http import JsonResponse
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import (
@@ -183,7 +184,7 @@ def ImMsgFrameView(request):
     msgs = sorted(msgs, key=lambda self: self.time)
     groups = []
     for msg in msgs:
-        if msg.fr != user and msg.new:
+        if int(params.get("read", True)) and msg.fr != user and msg.new:
             msg.new = False
             msg.save()
         if not groups or groups[-1][0].fr != msg.fr:
@@ -191,8 +192,14 @@ def ImMsgFrameView(request):
         groups[-1].append(msg)
 
     msgs = groups
-    return RenderToResponse("user/im_msg_frame.html", request, {
-        "msgs": msgs,
+    return JsonResponse({
+        "content": render(request, "user/im_msg_frame.html", {
+            "msgs": msgs,
+        }).content.decode("utf-8"),
+        "opts": {
+            "addGuarant": not conf.withGuarant and not conf.askGuarant,
+            "unreadCount": GetUnreadCount(request),
+        },
     })
 
 

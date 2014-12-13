@@ -1,12 +1,31 @@
+function ProcOpts(opts)
+{
+    if (opts.addGuarant != window.addGuarant) {
+        window.addGuarant = opts.addGuarant;
+        if (window.addGuarant) {
+            $(".guarantBtn").show();
+        }
+        else {
+            $(".guarantBtn").hide();
+        }
+    }
+    SetUnread(opts.unreadCount);
+}
+
+
 function RefreshMsgs() {
     $.post("/user/im_msg_frame/", {
         conf: $("#conf").val(),
+        read: window.isActive ? 1 : 0,
     }, function(res) {
         var oldMsgs = $(".msgs").html();
-        if (res != oldMsgs) {
-            $(".msgs").html(res);
-            $("body").animate({ scrollTop: 2 * $("body").height() }, "slow");
+        var content = res.content;
+        var opts = res.opts;
+        if (content != oldMsgs) {
+            $(".msgs").html(content);
+            $("body").animate({ scrollTop: 2 * $("body").height() }, "fast");
         }
+        ProcOpts(opts);
     });
 }
 
@@ -48,4 +67,6 @@ $(function() {
     setInterval(function() {
         RefreshMsgs();
     }, 500);
+
+    window.addGuarant = false;
 });

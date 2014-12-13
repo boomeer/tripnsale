@@ -48,3 +48,8 @@ def GetOrCreateDialog(fr, to):
     conf = confs[0] if confs else CreateDialog(fr, to)
     return conf
 
+
+def GetUnreadCount(request):
+    user = GetCurrentUser(request)
+    unread = ConferenceMsg.objects.filter(conf__users=user, new=True).exclude(fr=user).count()
+    return unread

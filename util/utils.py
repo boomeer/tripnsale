@@ -1,6 +1,6 @@
 from django.shortcuts import HttpResponse, render_to_response, redirect
 from django.template import RequestContext
-from user.utils import GetCurrentUser
+from user.utils import GetCurrentUser, GetUnreadCount
 from user.models import Msg
 from util.exc import *
 from util.msg import *
@@ -26,7 +26,7 @@ def SafeView(func):
 
 def RenderToResponse(templPath, request, params):
     user = GetCurrentUser(request)
-    unreadCount = Msg.objects.filter(to=user, new=True).count()
+    unreadCount = GetUnreadCount(request)
     params = dict(
         params,
         profileOwner=GetCurrentUser(request),

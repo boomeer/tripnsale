@@ -19,6 +19,7 @@
     <link href="{% static "ext/adapto/assets/css/global-style_light--blue1.css" %}" rel="stylesheet">
     <link href="{% static "ext/adapto/assets/revolution-slider/css/settings.css" %}" rel="stylesheet" type="text/css" media="all" />
 
+    <script src="{% static "base.js" %}"></script>
     <script src="{% static "csrf.js" %}"></script>
     <script src="{% static "top_panel.js" %}"></script>
     <link rel="stylesheet" href="{% static "css/base.css" %}">
@@ -140,12 +141,11 @@
                         {{ profileOwner.first_name }} {{ profileOwner.last_name }}
                         &nbsp;
                         <span style="color: #006;">
-                            {% if unreadCount %}
-                                <span class="unread">
-                                    <i class="ai ai-envelope"></i>
-                                    +{{ unreadCount }}
-                                </span>
-                            {% endif %}
+                            <span class="unread unread-count-wrapper" style="display: none;">
+                                <i class="ai ai-envelope"></i>
+                                    <span class="unread-count">
+                                    </span>
+                            </span>
                         </span>
                     </a>
                     <ul class="dropdown-menu">
@@ -159,9 +159,10 @@
                             <a href="/user/mail">
                                 <i class="glyphicon glyphicon-envelope"></i>
                                 Сообщения
-                                {% if unreadCount %}
-                                (+{{ unreadCount }})
-                                {% endif %}
+                                <span class="unread-count-wrapper" style="display: none;">
+                                    (<span class="unread-count">
+                                    </span>)
+                                </span>
                             </a>
                         </li>
                         <hr class="hr-transparent">
@@ -349,7 +350,9 @@ new WOW().init();
 
 </script>
     
-    
+<script>
+    SetUnread({{ unreadCount }});
+</script>
     
  
 

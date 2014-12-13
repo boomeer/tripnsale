@@ -1,3 +1,17 @@
+
+
+.overlay:after {
+    background: url('../img/home/dots.png') repeat top left;
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    opacity: .4;
+    filter: alpha(opacity=40)
+}
 /* line 789, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\variables-base */
 .list-group a.list-group-item:hover {
   color: white; }
@@ -4616,7 +4630,7 @@ a.panel-heading, .image-effect-wrap, .site-footer, .header, .headroom--top, ul.i
 
 /* line 84, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\adapto/global/utilities/placeholders */
 .panel-default a.panel-heading {
-  background-color: #5bb0c5; }
+  background-color: rgba(91,176,197,.9);}
 
 /* line 90, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\adapto/global/utilities/placeholders */
 .product-price-range input, input.order-quantity--input, select {
@@ -5203,7 +5217,7 @@ body {
 
 /* line 49, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\adapto/global/globals */
 .panel-heading {
-  color: #f4f4f4 !important; }
+  color: rgba(255,255,255,0.95) !important; }
 
 /* line 56, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\adapto/global/globals */
 .example-block {
@@ -7113,7 +7127,7 @@ ul.icons--social-media li {
     border-bottom-color: #7b7568 !important; }
   /* line 22, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\adapto/global/includes/footer */
   .site-footer--heading.headline:after {
-    border-color: #7b7568; }
+    border-color: #4f90bd; }
 
 /* line 27, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\adapto/global/includes/footer */
 input.site-footer--input {
@@ -7728,12 +7742,12 @@ ul.icon-boxes {
   /* line 21, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\adapto/global/elements/icon-box */
   ul.icon-boxes li.icon-btn {
     border-radius: 50px;
-    border: 3px solid #878179;
+    border: 3px solid #5bb0c5;
     -webkit-transition: all 200ms linear;
     transition: all 200ms linear; }
     /* line 25, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\adapto/global/elements/icon-box */
     ul.icon-boxes li.icon-btn:hover, ul.icon-boxes li.icon-btn.active, ul.icon-boxes li.icon-btn.is-checked {
-      border: 3px solid rgba(91, 176, 197, 0.4); }
+      border: 3px solid rgba(91, 176, 197, 0.5); }
     /* line 28, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\adapto/global/elements/icon-box */
     ul.icon-boxes li.icon-btn a {
       width: 100px;
@@ -7748,7 +7762,7 @@ ul.icon-boxes {
   ul.icon-boxes li.icon-btn a .icon-btn_icon {
     display: inline-block;
     font-size: 54px;
-    color: #878179;
+    color: #5bb0c5;
     -webkit-transition: all 200ms linear;
     transition: all 200ms linear;
     width: 100px;
@@ -7774,7 +7788,7 @@ ul.icon-boxes {
     top: 0;
     font-size: 0;
     font-family: "Open Sans Condensed", sans-serif;
-    color: #5bb0c5;
+    color: rgba(122,135,154,.95);
     text-transform: uppercase;
     font-weight: 700;
     -webkit-transition: all 200ms linear;
@@ -8070,7 +8084,7 @@ select {
 
 /* line 1, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\adapto/global/elements/typography */
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Open Sans", sans-serif !important; }
+  font-family: "Open Sans", sans-serif ; }
 
 /* line 5, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\adapto/global/elements/typography */
 p.dropcap:first-letter {
@@ -8233,6 +8247,20 @@ p.dropcap:first-letter {
   text-align: center;
   color: #f4f4f4; }
 
+.ai-circle-outline1 {
+  width: 4.2em;
+  height: 2.9em;
+  line-height: 2.1em;
+  border-radius: 50%;
+  background-color: #5bb0c5;
+  display: inline-block;
+  margin: 2px 0;
+  text-align: center;
+  color: #f4f4f4;
+  color: #5bb0c5;
+  border: 3px solid #5bb0c5;
+  background-color: transparent; }
+
 /* line 20, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\adapto/global/elements/icon-fonts/adapto/iconfonts-incircle */
 .ai-circle-outline {
   width: 2.35em;
@@ -8246,6 +8274,20 @@ p.dropcap:first-letter {
   color: #f4f4f4;
   color: #5bb0c5;
   border: 3px solid #5bb0c5;
+  background-color: transparent; }
+
+.ai-circle-outline1 {
+  width: 2.35em;
+  height: 2.35em;
+  line-height: 2.35em;
+  border-radius: 50%;
+  background: #5bb0c5;
+  display: inline-block;
+  margin: 2px 0;
+  text-align: center;
+  color: #f4f4f4;
+  color: #ECF1F2;
+  border: 3px solid #ECF1F2;
   background-color: transparent; }
 
 /* line 30, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\adapto/global/elements/icon-fonts/adapto/iconfonts-incircle */
@@ -10363,8 +10405,8 @@ hr.double {
 
 /* line 23, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\adapto/global/elements/lines */
 hr.double--inverse {
-  border-top: 1px solid #7b7568;
-  border-bottom: 1px solid #7b7568;
+  border-top: 1px solid #4f90bd;
+  border-bottom: 1px solid #4f90bd;
   height: 0.15em; }
 
 /* line 32, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\adapto/global/elements/lines */
@@ -10402,7 +10444,7 @@ hr.double--inverse {
 
 /* line 3, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\adapto/global/elements/adapto-panels */
 .panel-default a.panel-heading.collapsed {
-  background-color: #595654; }
+  background-color: rgba(52,67,81,0.9) }
 
 /* line 8, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\adapto/global/elements/adapto-panels */
 .panel-nav .panel-body > ul > li {
@@ -10424,33 +10466,78 @@ hr.double--inverse {
 .tab-content p:first-child {
   margin-top: 15px; }
 
+/* line 33, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\adapto/pages/portfolio */
+#portfolio-home-caption {
+  background: rgba(244, 244, 244, 0.0);
+  border-radius: 4px;
+  padding: 1px 33px 55px;
+  margin-top: 66px; }
+  @media (max-width: 768px) {
+    #portfolio-home-caption {
+      background: #f4f4f4;
+      margin-top: 0;
+      margin-bottom: 15px; } }
+
 /* PORTFOLIO HOME 
 ----------------- */
 /* line 4, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\adapto/pages/portfolio */
 .portfolio-home-top {
   /* url for top background image here */
-  background: url('/static/bg_passport3.jpg') no-repeat center;
+  background: url('../img/home/uber-back.png') no-repeat center;
   -webkit-background-size: cover;
   background-size: cover;
-  height: 80%; 
+  height: 650px; 
   //height: "100%"; 
+  //background-attachment: fixed;
   }
   @media (max-width: 768px) {
     .portfolio-home-top {
       //background-image: none;
       //background: #f4f4f4;
-      background: #e4e0db url('../img/home/bg-passport3.jpg') no-repeat center;
+      background: #e4e0db url('../img/home/uber-back.png') no-repeat center;
       height: auto; } }
   @media (min-width: 1630px) {
     .portfolio-home-top {
-      background: #e4e0db url('../img/home/bg-passport3.jpg') no-repeat center;
+      /*background: #e4e0db url('../img/home/bg-passport3.jpg') no-repeat center;*/
       -webkit-background-size: contain;
-      background-size: contain; } }
+      background-size: cover; } }
 
 @media (min-width: 1630px) {
   .page-wrap.boxed .portfolio-home-top {
     -webkit-background-size: cover;
     background-size: cover; } }
+
+
+
+.portfolio-home-down {
+  /* url for top background image here */
+  background: url('../img/home/bg_passport4.png') no-repeat center;
+  -webkit-background-size: cover;
+  background-size: cover;
+  background-attachment: fixed;
+  height: 400px; 
+  //height: "100%"; 
+  //background-attachment: fixed;
+  }
+  @media (max-width: 768px) {
+    .portfolio-home-down {
+      //background-image: none;
+      //background: #f4f4f4;
+      background-attachment: fixed;
+      background: #e4e0db url('../img/home/bg_passport4.png') no-repeat center;
+      height: auto; } }
+  @media (min-width: 1630px) {
+    .portfolio-home-down {
+      background-attachment: fixed;
+      /*background: #e4e0db url('../img/home/bg-passport3.jpg') no-repeat center;*/
+      -webkit-background-size: contain;
+      background-size: cover; } }
+
+@media (min-width: 1630px) {
+  .page-wrap.boxed .portfolio-home-down {
+    -webkit-background-size: cover;
+    background-size: cover; } }
+
 
 /* line 29, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\adapto/pages/portfolio */
 .portfolio-home-img-wrap {
@@ -10630,7 +10717,7 @@ p.post-excerpt.full {
 
 /* line 4, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\adapto/pages/home/home */
 .home__group--highlight {
-  background-color: #f4f4f4;;
+  background-color: #f4f4f4;
   padding: 30px 0; }
 
 /* line 11, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\adapto/pages/home/home */
@@ -10639,6 +10726,16 @@ p.post-excerpt.full {
   color: #f4f4f4; }
 /* line 15, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\adapto/pages/home/home */
 .icon-callouts .ai-circle-outline {
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease; }
+
+
+  /* line 11, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\adapto/pages/home/home */
+.icon-callouts > div:hover .ai-circle-outline1 {
+  background-color: #5bb0c5;
+  color: #f4f4f4; }
+/* line 15, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\adapto/pages/home/home */
+.icon-callouts .ai-circle-outline1 {
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease; }
 /* line 18, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\adapto/pages/home/home */

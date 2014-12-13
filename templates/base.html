@@ -16,6 +16,8 @@
     {% bootstrap_css %}
     {% bootstrap_javascript %}
     <link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Italianno' rel='stylesheet' type='text/css'>
     <link href="{% static "ext/adapto/assets/css/global-style_light--blue1.css" %}" rel="stylesheet">
     <link href="{% static "ext/adapto/assets/revolution-slider/css/settings.css" %}" rel="stylesheet" type="text/css" media="all" />
 
@@ -227,41 +229,60 @@
         {% block main %}{% endblock %}
     </div>
 <!-- FOOTER -->
-<footer class="site-footer footer">
+<footer class="site-footer footer bgBlueDark">
   <div class="container">
-    {% block footer %}
 
-    <div class="row">
+    <div class="row" style="color: White;">
 
-      <div class="col-md-4 site-footer--col">
-        <div class="headline site-footer--heading text-center">
-          <h3>Footer Text</h3>
+      <div class="col-md-8 site-footer--col">
+        <div class="headline site-footer--heading text-center" style="margin-bottom: 10px;">
+          <h3 style="color: White;">Trip&Sale</h3>
         </div>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, iusto enim incidunt odio praesentium quas sed quidem fugiat magni provident illum aliquid sapiente temporibus dicta ut sequi facilis alias molestias omnis repellendus nam. Provident, natus asperiores quidem perferendis consequatur possimus tempora cupiditate harum repudiandae nam tempora cupiditate harum.</p>
-
+        <div class="row">
+          <div class="col-md-3 col-md-offset-1 text-center">
+            <a href="blocks/contact-form.html" style="font-size: 13pt; color: rgba(255,255,255,.90);">Ваши предложения</a>
+          </div>
+          <div class="col-md-3 col-md-offset-4 text-center">
+            <a href="contact/contact-minimalist.html" style="font-size: 13pt; color: rgba(255,255,255,.90);">Контакты</a>
+          </div>
+        </div>
+      <div class="row">
+        <div class="container-fluid">
+          <div <div class="text-center" style="color: rgba(255,255,255,.85);">
+            <div class="features--feature-wrap" style="margin-top: 0px;">
+              <i class="ai ai-4x ai-compass"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+       <div class="row">
+          <div class="col-md-3 col-md-offset-1 text-center">
+            <a href="pages/faqs.html" style="font-size: 13pt; color: rgba(255,255,255,.90);">F.A.Q</a>
+          </div>
+          <div class="col-md-3 col-md-offset-4 text-center">
+            <a href="security-service/security.html" style="font-size: 13pt; color: rgba(255,255,255,.90);">Гарант</a>
+          </div>
+        </div>
       </div> <!-- end col -->
       
-      <div class="col-md-4 site-footer--col">
-        <div class="headline site-footer--heading text-center">
-          <h3>About Us</h3>
-        </div>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, iusto enim incidunt odio praesentium quas sed quidem fugiat magni provident illum aliquid sapiente temporibus dicta ut sequi facilis alias molestias omnis repellendus nam. Provident, natus asperiores quidem perferendis consequatur possimus tempora cupiditate harum repudiandae nam tempora cupiditate harum.</p>
-        <div class="clearfix"></div>
-      </div> <!-- end col -->
 
       <div class="col-md-4 site-footer--col">        
-        <div class="headline site-footer--heading text-center">
-          <h3>Stay Informed</h3>
+        <div class="headline site-footer--heading text-center" style="margin-bottom: 10px;">
+          <h3 style="color: White;">&nbsp;</h3>
         </div>
-        <p style="margin-bottom: 15px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, iusto enim incidunt odio praesentium quas sed quidem fugiat magni provident illum aliquid sapiente temporibus dicta ut sequi facilis alias molestias omnis repellendus nam.</p>
-        <form class="form-horizontal" role="form">
-          <div class="input-group" style="font-size: 12px">
-            <input type="text" class="form-control site-footer--input" placeholder="Enter email to join">
-            <span class="input-group-btn">
-              <button class="btn btn-primary btn-xs" type="submit" value="submit">Submit</button>
-            </span>
-          </div>
-        </form>
+        <div class="row text-center">
+          <a href="blog/blog.html" style="font-size: 11pt; color: rgba(255,255,255,.90);">Новости</a>
+        </div>
+        <div class="row text-center">
+          <a href="pages/about.html" style="font-size: 11pt; color: rgba(255,255,255,.90);">О нас</a>
+        </div>
+        <div class="row text-center">
+          <a href="pages/rules.html" style="font-size: 11pt; color: rgba(255,255,255,.90);">Правила</a>
+        </div>
+        <div class="row text-center">
+          <a href="#" style="font-size: 11pt; color: rgba(255,255,255,.90);">Оферта</a>
+        </div>
+
 
       </div> <!-- end col -->
     </div> <!-- end row -->
@@ -269,40 +290,30 @@
     <!-- divider -->
     <div class="row">
       <div class="col-xs-12">
-        <hr class="double--inverse">
+        <hr class="double--inverse" style="margin-top: 10px">
       </div>
     </div> <!-- end row -->
 
     <!-- meta row -->
     <div class="row">
       <div class="site-footer--meta">
-        <div class="col-xs-4">
-          <p>Created by <a href="pixelandcraft.com" target="_blank">Pixel &amp; Kraft</a></p>
-        </div>
-        <span class="col-xs-4 text-center">
+        <span class="col-xs-4 col-xs-offset-4 text-center">
           <a href="#top" title="Scroll to Top" data-toggle="smoothScroll"><i class="ai ai-2x ai-arrow-up3"></i></a>
         </span>
         <div class="col-xs-4 text-right">
           <ul class="list-inline icons--social-media">
-  <li class="tooltip-link" data-toggle="tooltip" data-placement="top" title="Facebook"><a href="#"><span class="ai ai-2x ai-facebook2"></span></a></li>
-  <li class="tooltip-link" data-toggle="tooltip" data-placement="top" title="Twitter"><a href="#"><span class="ai ai-2x ai-twitter2"></span></a></li>
-  <li class="tooltip-link" data-toggle="tooltip" data-placement="top" title="Google+"><a href="#"><span class="ai ai-2x ai-google-plus3"></span></a></li>
-  <li class="tooltip-link" data-toggle="tooltip" data-placement="top" title="Linkedin"><a href="#"><span class="ai ai-2x ai-linkedin"></span></a></li>
-  <li class="tooltip-link" data-toggle="tooltip" data-placement="top" title="Picassa"><a href="#"><span class="ai ai-2x ai-picassa2"></span></a></li>
-  <li class="tooltip-link" data-toggle="tooltip" data-placement="top" title="Soundcloud"><a href="#"><span class="ai ai-2x ai-soundcloud2"></span></a></li>
+  <li class="tooltip-link" data-toggle="tooltip" data-placement="top" title="VK"><a href="#"><span class="ai ai-2x ai-vk" style="color: #4f90bd"></span></a></li>
+  <li class="tooltip-link" data-toggle="tooltip" data-placement="top" title="Facebook"><a href="#"><span class="ai ai-2x ai-facebook2" style="color: #4f90bd"></span></a></li>
 </ul>
         </div>
       </div> <!-- end meta -->
     </div> <!-- end row -->
 
-    {% endblock %}
   </div>  <!-- end container -->
 
   
 </footer>
 
-    
-  
     <!-- SCRIPTS -->
     <!-- Global Scripts -->
     

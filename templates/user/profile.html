@@ -2,44 +2,78 @@
 {% load static %}
 
 {% block own_head %}
+    <script src="{% static "offer/buy/list.js" %}" type="text/javascript"></script>
+    <script src="{% static "offer/sale/list.js" %}" type="text/javascript"></script>
     <script src="{% static "user/profile.js" %}" type="text/javascript"></script>
+    <link rel="stylesheet" href="{% static "css/offer/buy/list.css" %}">
+    <link rel="stylesheet" href="{% static "css/offer/sale/list.css" %}">
     <link rel="stylesheet" href="{% static "css/user/profile.css" %}">
 {% endblock %}
 
 {% block main %}
+    <input type="hidden" id="user" value="{{ prUser.id }}">
+    <input type="hidden" id="blockStartupList" value="1">
     <div class="container-fluid">
-        <div class="col-md-6 col-md-offset-1 userInfo">
-            <div class="row fullname">
-                {{ prUser.first_name }} {{ prUser.last_name }}
+        <div class="row">
+            <div class="col-md-6 col-md-offset-1 col-xs-12 userInfo">
+                <div class="fullname">
+                    {{ prUser.first_name }} {{ prUser.last_name }}
+                </div>
+                <div class="">
+                    Логин:
+                    {{ prUser.username }}
+                </div>
+                <div class="">
+                    Адрес:
+                    <img src="{{ prUser.country.img }}">
+                    {{ prUser.country.title }} {{ prUser.city }}
+                </div>
+                <div class="">
+                    {% if prUser.id != user.id %}
+                        <a href="/user/im?peer={{ prUser.id }}" class="btn btn-default">
+                            <i class="ai ai-mail2"></i>
+                            Написать сообщение
+                        </a>
+                    {% endif %}
+                </div>
+                <div class="">
+                    {% if prUser.id == user.id %}
+                        <a href="/user/edit_profile" class="btn btn-default">
+                            <i class="ai ai-pencil"></i>
+                            Редактировать
+                        </a>
+                    {% endif %}
+                </div>
             </div>
-            <div class="row">
-                Логин:
-                {{ prUser.username }}
-            </div>
-            <div class="row">
-                Адрес:
-                <img src="{{ prUser.country.img }}">
-                {{ prUser.country.title }} {{ prUser.city }}
-            </div>
-            <div class="row">
-                {% if prUser.id != user.id %}
-                    <a href="/user/im?peer={{ prUser.id }}" class="btn btn-default">
-                        <i class="ai ai-mail2"></i>
-                        Написать сообщение
-                    </a>
-                {% endif %}
-            </div>
-            <div class="row">
-                {% if prUser.id == user.id %}
-                    <a href="/user/edit_profile" class="btn btn-default">
-                        <i class="ai ai-pencil"></i>
-                        Редактировать
-                    </a>
-                {% endif %}
+            <div class="col-md-4">
+                <img src="{{ prUser.avatarUrl }}" style="max-width: 200px; max-height: 200px;">
             </div>
         </div>
-        <div class="col-md-4">
-            <img src="{{ prUser.avatarUrl }}" style="max-width: 200px; max-height: 200px;">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-1 col-xs-12">
+                <h4>
+                    Поездки
+                </h4>
+            </div>
         </div>
+        <div class="row trips">
+            <div class="col-md-8 col-md-offset-1 col-xs-12 tripsList">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-1 col-xs-12">
+                <h4>
+                    Заказы
+                </h4>
+            </div>
+        </div>
+        <div class="row buys">
+            <div class="col-md-8 col-md-offset-1 col-xs-12 buysList">
+            </div>
+        </div>
+    </div>
+    <div class="buyViewWrapper">
+    </div>
+    <div class="tripViewWrapper">
     </div>
 {% endblock %}

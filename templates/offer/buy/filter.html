@@ -1,3 +1,6 @@
+{% if not buys %}
+    Нет заказов
+{% endif %}
 {% for buy in buys %}
     <div class="buy-item" onClick="BuyView({{ buy.id }})">
         <div class="buy-section photo">
@@ -33,4 +36,5 @@
         </div>
     </div>
 {% endfor %}
+
 

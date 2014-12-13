@@ -69,10 +69,14 @@ def SaleOfferAddView(request):
 @SafeView
 def SaleFilterView(request):
     params = request.REQUEST
+    owner = int(params.get("owner", 0))
     sales = SaleOffer.objects.filter(
         fr__ititle__istartswith=params.get("from", ""),
         to__ititle__istartswith=params.get("to", ""),
-    ).all()
+    )
+    if owner:
+        sales = sales.filter(owner__id=owner)
+    sales = sales.all()
     page = params.get("page", 1)
     count = params.get("count", 5)
     block = sales[(page-1)*count:page*count]
@@ -174,9 +178,13 @@ def BuyListView(request):
 @SafeView
 def BuyFilterView(request):
     params = request.REQUEST
+    owner = int(params.get("owner", 0))
     buys = BuyOffer.objects.filter(
         title__istartswith=params.get("title", ""),
-    ).all()
+    )
+    if owner:
+        buys = buys.filter(owner__id=owner)
+    buys = buys.all()
     page = params.get("page", 1)
     count = params.get("count", 5)
     block = buys[(page-1)*count:page*count]

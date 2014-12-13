@@ -1,8 +1,9 @@
-function BuysRefresh()
+function BuysRefresh(user)
 {        
     $(".buysList").html("Загрузка...");
     $.post("/offer/buy/filter/", {
         "title": $("#buysTitle").val(),
+        "owner": user ? user : 0,
     }, function(res) {
         $(".buysList").html(res);
     });
@@ -29,5 +30,8 @@ $(function() {
         BuysRefresh();
     });
 
-    BuysRefresh();
+    var block = $("#blockStartupList");
+    if (!(block && block.val() == 1)) {
+        BuysRefresh();
+    }
 });

@@ -1,9 +1,10 @@
-function TripsRefresh()
+function TripsRefresh(user)
 {        
     $(".tripsList").html("Загрузка...");
     $.post("/offer/sale/filter/", {
         "from": $("#tripsFilterFrom").val(),
         "to": $("#tripsFilterTo").val(),
+        "owner": user ? user : 0,
     }, function(res) {
         $(".tripsList").html(res);
     });
@@ -33,5 +34,8 @@ $(function() {
         TripsRefresh();
     });
 
-    TripsRefresh();
+    var block = $("#blockStartupList");
+    if (!(block && block.val() == 1)) {
+        TripsRefresh();
+    }
 });

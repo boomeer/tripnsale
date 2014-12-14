@@ -86,26 +86,33 @@
                                     <thead>
                                         <tr>
                                             <td>
-                                                <input type="checkbox">
                                             </td>
                                             <td>
                                             </td>
                                             <td>
-                                                Главная
                                             </td>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {% for photo in buy.gallery.photos.all %}
                                             <tr>
-                                                <td style="max-width: 30%;">
-                                                    <input type="checkbox">
-                                                </td>
                                                 <td>
                                                     <img src="{{ photo.img.url }}" style="max-width: 100%; max-height: 160px;">
                                                 </td>
                                                 <td>
-                                                    <input type="radio" name="galleryMain">
+                                                    {% if buy.gallery.head == photo %}
+                                                        <strong>Главная</strong>
+                                                    {% else %}
+                                                        <a href="/offer/buy/edit/{{ buy.id }}?act=makeHead&picId={{ photo.id }}" class="btn btn-default">
+                                                            Сделать главной
+                                                        </a>
+                                                    {% endif %}
+                                                </td>
+                                                <td style="max-width: 30%;">
+                                                    <a href="/offer/buy/edit/{{ buy.id }}?act=erasePic&picId={{ photo.id }}" class="btn btn-danger">
+                                                        <i class="ai ai-remove"></i>
+                                                        Удалить
+                                                    </a>
                                                 </td>
                                             </tr>
                                         {% endfor %}
@@ -119,7 +126,7 @@
                                 <span class="btn btn-info fileinput-button">
                                     <i class="glyphicon glyphicon-plus"></i>
                                     <span>Добавить</span>
-                                    <input type="file" accept="image/*" name="photos" multiple>
+                                    <input type="file" accept="image/*" capture="camera" name="photos" multiple>
                                     <input type="hidden" name="act" value="upload">
                                 </span>
 

@@ -25,6 +25,10 @@ from gallery.utils import (
     CreateGallery,
     CreateGalleryPhoto,
 )
+from gallery.models import (
+    Gallery,
+    Photo,
+)
 from datetime import datetime
 
 
@@ -162,6 +166,13 @@ def BuyEditView(request, id):
         return JsonResponse({
             "files": files,
         })
+    elif act == "makeHead":
+        pic = Photo.objects.get(id=params.get("picId"))
+        pic.gallery.head = pic
+        pic.gallery.save()
+    elif act == "erasePic":
+        pic = Photo.objects.get(id=params.get("picId"))
+        pic.delete()
     return RenderToResponse("offer/buy/edit.html", request, {
         "url": "/offer/buy/edit/{}/".format(buy.id),
         "buy": buy,

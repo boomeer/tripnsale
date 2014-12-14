@@ -4,6 +4,8 @@ import tripnsale.settings as settings
 
 
 class Gallery(models.Model):
+    head = models.ForeignKey("Photo", blank=True, null=True, related_name="heads")
+    
     def add(self, photo):
         photo.gallery = self
         photo.save()
@@ -16,8 +18,7 @@ class Gallery(models.Model):
         return str(id)
 
     def getHeadUrl(self):
-        photos = self.photos.all()
-        return photos[0].img.url if photos else settings.STATIC_URL + "/no-photo.jpg"
+        return self.head.img.url if self.head else settings.STATIC_URL + "/no-photo.jpg"
 
 @admin.register(Gallery)
 class GalleryAdmin(admin.ModelAdmin):
@@ -28,6 +29,3 @@ class Photo(models.Model):
     img = models.ImageField(upload_to="gallery_img", blank=True, null=True)
     gallery = models.ForeignKey(Gallery, blank=True, null=True, related_name="photos")
 
-@admin.register(Photo)
-class PhotoAdmin(admin.ModelAdmin):
-    list_display = ("img", "gallery",)

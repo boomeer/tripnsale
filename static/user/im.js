@@ -31,13 +31,14 @@ function RefreshMsgs() {
 
 function SendMsg()
 {
+    $("#msgContent").attr("disabled", "1");
     $.post("/user/im/", {
         act: "send",
         conf: $("#conf").val(),
         content: $("#msgContent").val(),
     }, function(res) {
         RefreshMsgs();
-        $("#msgContent").val("");
+        $("#msgContent").val("").removeAttr("disabled").focus();
     });
 }
 

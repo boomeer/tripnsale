@@ -37,6 +37,10 @@ class UsernameIsInvalidErr(TsExc):
     def __init__(self):
         super().__init__("username_is_invalid")
 
+class DuplicateUsernameErr(TsExc):
+    def __init__(self):
+        super().__init__("username_is_not_unique")
+
 class PasswordIsInvalidErr(TsExc):
     def __init__(self):
         super().__init__("password_is_invalid")
@@ -48,7 +52,6 @@ class PasswordsAreNotEqualErr(TsExc):
 class MsgCannotBeEmpty(TsExc):
     def __init__(self):
         super().__init__("msg_cannot_be_empty")
-
 
 @SafeView
 def AuthView(request):
@@ -69,7 +72,7 @@ def AuthView(request):
             login(request, djUser)
         else:
             raise RedirectExc("/user/auth/?msgLogin=wrong_login_or_password")
-        backref = params.get("backref", "/")
+        backref = params.get("next", "/")
         if not backref:
             backref = "/"
         return redirect(backref)
@@ -82,8 +85,9 @@ def AuthView(request):
         if not re.compile("^.{3,30}$").match(params["password"]):
             raise PasswordIsIvalidErr
         country = Country.objects.get(name=params.get("country", 0))
+
         user = User.objects.create_user(
-            params.get("username", ""),
+            params.get("username", "").lower(),
             params.get("email", ""),
             params.get("password", ""),
             first_name=params.get("firstName", ""),
@@ -104,6 +108,7 @@ def AuthView(request):
         login(request, user)
         '''
         SendActivateMail(user)
+
         return redirect("/")
     return RenderToResponse("user/auth.html", request, {
         "countries": GetCountries(),
@@ -170,11 +175,14 @@ def ImView(request):
             conf = GetOrCreateDialog(GetCurrentUser(request), peer)
             return redirect("/user/im?conf={}".format(conf.id))
         conf = Conference.objects.get(id=params.get("conf", 0))
+        user = GetCurrentUser(request)
+        if not conf.users.filter(id=user.id):
+            return redirect("/user/mail/")
         return RenderToResponse("user/im.html", request, {
             "conf": conf,
         })
 
-
+@login_required(login_url="/user/auth/")
 @SafeView
 def ImMsgFrameView(request):
     params = request.REQUEST
@@ -244,8 +252,9 @@ def EditProfileView(request):
         "prUser": user,
         "countries": GetCountries(),
     })
-    
 
+
+@login_required(login_url="/user/auth/")
 @SafeView
 def UsersView(request):
     users = User.objects.all()
@@ -255,6 +264,7 @@ def UsersView(request):
     })
 
 
+@login_required(login_url="/user/auth/")
 @SafeView
 def UserMailView(request):
     user = GetCurrentUser(request)

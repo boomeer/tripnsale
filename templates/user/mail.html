@@ -17,9 +17,9 @@
             <hr>
             <div class="dialogs">
                 {% for conf in confs %}
-                    <div class="dialog container" onClick="window.location.href='/user/im/?conf={{ conf.id }}'">
+                    <div class="dialog container-fluid" onClick="window.location.href='/user/im/?conf={{ conf.id }}'">
                         <input type="hidden" class="peer" value="{{ conf.peer.id }}">
-                        <div class="container" style="display: inline-block;">
+                        <div class="row">
                             <div class="col-md-3 peer bboldy container">
                                 <a href="/user/profile/{{ conf.peer.username }}/" class="bboldy">
                                     <img src="{{ conf.peer.avatarUrl }}" class="peerAv">

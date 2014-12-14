@@ -39,261 +39,264 @@
        header-medium
        header-large
        header-xl
-  3. Decide which content you'd like in the extra header as seen in demo from the list below. 
+  3. Decide which content you'd like in the extra header as seen in demo from the list below.
      Remove the class "header-hidden" from each list that you want.
-     Edit each list as you'd like. 
+     Edit each list as you'd like.
  -->    <!-- TOP HEADER / NAVIGATION BAR -->
-<header id="header" class="header slide animated" role="banner">
-  <div class="container">
-    <div class="row">
-    
-      <div class="navbar-header">
-        
-        <!-- TOGGLE BUTTON for mobile -->
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="ai ai-menu ai-2x ai-primary"></span>
-        </button>
 
-        <!-- sitewide logo LINK TO ROOT INDEX (home) PAGE -->
-        <a href="/" class="navbar-brand">
-          <!-- sitewide LOGO HERE (as text, image, or both) -->
-          <span class="logo-top">
-            Trip<span class="ai ai-compass"></span>Sale
-          </span>
-          <!-- Hidden text in an h1 tag for SEO purposes -->
-          <h1 class="text-hide">Adapto Theme</h1>        
-        </a> <!-- end site-wide logo link -->
+  <header id="header" class="header slide animated" role="banner">
+    <div class="container">
+      <div class="row">
 
-      </div> <!-- end navbar-header -->
+        <div class="navbar-header">
 
-      <!-- NAVIGATION -->
-      <div class="collapse navbar-collapse">
-        <nav class="navbar" role="navigation">
-          <ul class="nav navbar-nav navbar-right">          
-            <li>
-                <a href="/offer/sale/list">
-                    <i class="glyphicon glyphicon-plane"></i>
-                    Поездки
-                </a>
-            </li>
-            <li>
-                <a href="/offer/buy/list">
-                    <i class="glyphicon glyphicon-briefcase"></i>
-                    Заказы
-                </a>
-            </li>
-            <li>
-                <a href="/user/all">
-                    <i class="ai ai-users"></i>
-                    Пользователи
-                </a>
-            </li>
-            {% if profileOwner %}
-                <li class="dropdown">
-                    <a class="dropdown-toggle" href="#">
-                        <i class="glyphicon glyphicon-plus"></i>
-                        Добавить
-                    </a>
-                    <ul class="dropdown-menu">
-                        <span class="triangle-up"></span>
-                        <li>
-                            <a href="/offer/buy/">
-                                <i class="glyphicon glyphicon-briefcase"></i>
-                                Заказ
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/offer/sale/">
-                                <i class="glyphicon glyphicon-plane"></i>
-                                Поездку
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" href="#">
-                        <i class="glyphicon glyphicon-user"></i>
-                        {{ profileOwner.first_name }} {{ profileOwner.last_name }}
-                        &nbsp;
-                        <span style="color: #006;">
-                            <span class="unread unread-count-wrapper" style="display: none;">
-                                <i class="ai ai-envelope"></i>
-                                    <span class="unread-count">
-                                    </span>
-                            </span>
-                        </span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="/user/profile">
-                                <i class="ai ai-user"></i>
-                                Профиль
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/user/mail">
-                                <i class="glyphicon glyphicon-envelope"></i>
-                                Сообщения
-                                <span class="unread-count-wrapper" style="display: none;">
-                                    (<span class="unread-count">
-                                    </span>)
-                                </span>
-                            </a>
-                        </li>
-                        <hr class="hr-transparent">
-                        <li>
-                            <a href="/user/logout?backref={{ url }}">
-                                <i class="glyphicon glyphicon-log-out"></i>
-                                Выход
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-            {% else %}
-                <li>
-                    <a href="/user/auth">
-                        <i class="glyphicon glyphicon-collapse-up"></i>
-                        Регистрация
-                    </a>
-                </li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" href="#">
-                        <i class="glyphicon glyphicon-log-in"></i>
-                        Войти
-                    </a>
-                    <ul class="dropdown-menu">
-                        <span class="triangle-up"></span>
-                        <li>
-                            <div class="userLoginForm" style="display: inline-block; width: 400px; padding-left: 30px; padding-top: 4px;">
-                                <form class="form-horizontal" style="" role="form" action="/user/auth/" method="post">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="act" value="login">
-                                    <input type="hidden" name="backref" value="{{ url }}">
-                                    <div class="form-group">
-                                        <div class="col-sm-5 colMin">
-                                            <input type="text" class="form-control" id="inputLoginUsername" name="login" placeholder="Логин">
-                                        </div>
-                                        <div class="col-sm-5 colMin">
-                                            <input type="password" class="form-control" id="inputLoginPassword" name="password" placeholder="Пароль">
-                                        </div>
-                                        <div class="col-sm-2 colMin">
-                                            <button type="submit" class="btn btn-default">
-                                                <i class="glyphicon glyphicon-log-in"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                {% endif %}
-            </ul>
-        </nav> <!-- END TOP NAVIGATION -->
-      </div> <!-- end navbar wrapper -->
-    </div> <!-- end row -->
-  </div> <!-- end container -->
-</header>
-  
-    <!-- FOR BODY background-noise: add 'bg-noise' to this div -->
-      
+          <!-- TOGGLE BUTTON for mobile -->
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="ai ai-menu ai-2x ai-primary"></span>
+          </button>
+
+          <!-- sitewide logo LINK TO ROOT INDEX (home) PAGE -->
+          <a href="/" class="navbar-brand">
+            <!-- sitewide LOGO HERE (as text, image, or both) -->
+            <span class="logo-top">
+              Trip<span class="ai ai-compass"></span>Sale
+            </span>
+            <!-- Hidden text in an h1 tag for SEO purposes -->
+            <h1 class="text-hide">Adapto Theme</h1>
+          </a> <!-- end site-wide logo link -->
+
+        </div> <!-- end navbar-header -->
+
+        <!-- NAVIGATION -->
+        <div class="collapse navbar-collapse">
+          <nav class="navbar" role="navigation">
+            <ul class="nav navbar-nav navbar-right">
+              <li>
+                  <a href="/offer/sale/list">
+                      <i class="glyphicon glyphicon-plane"></i>
+                      Поездки
+                  </a>
+              </li>
+              <li>
+                  <a href="/offer/buy/list">
+                      <i class="glyphicon glyphicon-briefcase"></i>
+                      Заказы
+                  </a>
+              </li>
+              <li>
+                  <a href="/user/all">
+                      <i class="ai ai-users"></i>
+                      Пользователи
+                  </a>
+              </li>
+              {% if profileOwner %}
+                  <li class="dropdown">
+                      <a class="dropdown-toggle" href="#">
+                          <i class="glyphicon glyphicon-plus"></i>
+                          Добавить
+                      </a>
+                      <ul class="dropdown-menu">
+                          <span class="triangle-up"></span>
+                          <li>
+                              <a href="/offer/buy/">
+                                  <i class="glyphicon glyphicon-briefcase"></i>
+                                  Заказ
+                              </a>
+                          </li>
+                          <li>
+                              <a href="/offer/sale/">
+                                  <i class="glyphicon glyphicon-plane"></i>
+                                  Поездку
+                              </a>
+                          </li>
+                      </ul>
+                  </li>
+                  <li class="dropdown">
+                      <a class="dropdown-toggle" href="#">
+                          <i class="glyphicon glyphicon-user"></i>
+                          {{ profileOwner.first_name }} {{ profileOwner.last_name }}
+                          &nbsp;
+                          <span style="color: #006;">
+                              <span class="unread unread-count-wrapper" style="display: none;">
+                                  <i class="ai ai-envelope"></i>
+                                      <span class="unread-count">
+                                      </span>
+                              </span>
+                          </span>
+                      </a>
+                      <ul class="dropdown-menu">
+                          <li>
+                              <a href="/user/profile">
+                                  <i class="ai ai-user"></i>
+                                  Профиль
+                              </a>
+                          </li>
+                          <li>
+                              <a href="/user/mail">
+                                  <i class="glyphicon glyphicon-envelope"></i>
+                                  Сообщения
+                                  <span class="unread-count-wrapper" style="display: none;">
+                                      (<span class="unread-count">
+                                      </span>)
+                                  </span>
+                              </a>
+                          </li>
+                          <hr class="hr-transparent">
+                          <li>
+                              <a href="/user/logout?backref={{ url }}">
+                                  <i class="glyphicon glyphicon-log-out"></i>
+                                  Выход
+                              </a>
+                          </li>
+                      </ul>
+                  </li>
+              {% else %}
+                  <li>
+                      <a href="/user/auth">
+                          <i class="glyphicon glyphicon-collapse-up"></i>
+                          Регистрация
+                      </a>
+                  </li>
+                  <li class="dropdown">
+                      <a class="dropdown-toggle" href="#">
+                          <i class="glyphicon glyphicon-log-in"></i>
+                          Войти
+                      </a>
+                      <ul class="dropdown-menu">
+                          <span class="triangle-up"></span>
+                          <li>
+                              <div class="userLoginForm" style="display: inline-block; width: 400px; padding-left: 30px; padding-top: 4px;">
+                                  <form class="form-horizontal" style="" role="form" action="/user/auth/" method="post">
+                                      {% csrf_token %}
+                                      <input type="hidden" name="act" value="login">
+                                      <input type="hidden" name="backref" value="{{ url }}">
+                                      <div class="form-group">
+                                          <div class="col-sm-5 colMin">
+                                              <input type="text" class="form-control" id="inputLoginUsername" name="login" placeholder="Логин">
+                                          </div>
+                                          <div class="col-sm-5 colMin">
+                                              <input type="password" class="form-control" id="inputLoginPassword" name="password" placeholder="Пароль">
+                                          </div>
+                                          <div class="col-sm-2 colMin">
+                                              <button type="submit" class="btn btn-default">
+                                                  <i class="glyphicon glyphicon-log-in"></i>
+                                              </button>
+                                          </div>
+                                      </div>
+                                  </form>
+                              </div>
+                          </li>
+                      </ul>
+                  </li>
+                  <li>
+                  {% endif %}
+              </ul>
+          </nav> <!-- END TOP NAVIGATION -->
+        </div> <!-- end navbar wrapper -->
+      </div> <!-- end row -->
+    </div> <!-- end container -->
+  </header>
+      <!-- FOR BODY background-noise: add 'bg-noise' to this div -->
+<div class="main-wrap bg0">
     <div class="main">
         {% block main %}{% endblock %}
     </div>
+</div>
+
 <!-- FOOTER -->
-<footer class="site-footer footer bgBlueDark">
-  <div class="container">
+{% block footer %}
+  <footer class="site-footer footer bgBlueDark">
+    <div class="container">
 
-    <div class="row" style="color: White;">
+      <div class="row" style="color: White;">
 
-      <div class="col-md-8 site-footer--col">
-        <div class="headline site-footer--heading text-center" style="margin-bottom: 10px;">
-          <h3 style="color: White;">Trip&Sale</h3>
-        </div>
+        <div class="col-md-8 site-footer--col">
+          <div class="headline site-footer--heading text-center" style="margin-bottom: 10px;">
+            <h3 style="color: White;">Trip&Sale</h3>
+          </div>
+          <div class="row">
+            <div class="col-md-3 col-md-offset-1 text-center">
+              <a href="/info/contact-form/" style="font-size: 13pt; color: rgba(255,255,255,.90);">Ваши предложения</a>
+            </div>
+            <div class="col-md-3 col-md-offset-4 text-center">
+              <a href="/info/contact-minimalist/" style="font-size: 13pt; color: rgba(255,255,255,.90);">Контакты</a>
+            </div>
+          </div>
         <div class="row">
-          <div class="col-md-3 col-md-offset-1 text-center">
-            <a href="/info/contact-form/" style="font-size: 13pt; color: rgba(255,255,255,.90);">Ваши предложения</a>
-          </div>
-          <div class="col-md-3 col-md-offset-4 text-center">
-            <a href="/info/contact-minimalist/" style="font-size: 13pt; color: rgba(255,255,255,.90);">Контакты</a>
-          </div>
-        </div>
-      <div class="row">
-        <div class="container-fluid">
-          <div <div class="text-center" style="color: rgba(255,255,255,.85);">
-            <div class="features--feature-wrap" style="margin-top: 0px;">
-              <i class="ai ai-4x ai-compass"></i>
+          <div class="container-fluid">
+            <div <div class="text-center" style="color: rgba(255,255,255,.85);">
+              <div class="features--feature-wrap" style="margin-top: 0px;">
+                <i class="ai ai-4x ai-compass"></i>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-       <div class="row">
-          <div class="col-md-3 col-md-offset-1 text-center">
-            <a href="/info/faqs/" style="font-size: 13pt; color: rgba(255,255,255,.90);">F.A.Q</a>
+         <div class="row">
+            <div class="col-md-3 col-md-offset-1 text-center">
+              <a href="/info/faqs/" style="font-size: 13pt; color: rgba(255,255,255,.90);">F.A.Q</a>
+            </div>
+            <div class="col-md-3 col-md-offset-4 text-center">
+              <a href="/info/security/" style="font-size: 13pt; color: rgba(255,255,255,.90);">Гарант</a>
+            </div>
           </div>
-          <div class="col-md-3 col-md-offset-4 text-center">
-            <a href="/info/security/" style="font-size: 13pt; color: rgba(255,255,255,.90);">Гарант</a>
+        </div> <!-- end col -->
+
+
+        <div class="col-md-4 site-footer--col">
+          <div class="headline site-footer--heading text-center" style="margin-bottom: 10px;">
+            <h3 style="color: White;">&nbsp;</h3>
           </div>
+          <div class="row text-center">
+            <a href="/info/blog/" style="font-size: 11pt; color: rgba(255,255,255,.90);">Новости</a>
+          </div>
+          <div class="row text-center">
+            <a href="/info/about/" style="font-size: 11pt; color: rgba(255,255,255,.90);">О нас</a>
+          </div>
+          <div class="row text-center">
+            <a href="/info/rules/" style="font-size: 11pt; color: rgba(255,255,255,.90);">Правила</a>
+          </div>
+          <div class="row text-center">
+            <a href="#" style="font-size: 11pt; color: rgba(255,255,255,.90);">Оферта</a>
+          </div>
+
+
+        </div> <!-- end col -->
+      </div> <!-- end row -->
+
+      <!-- divider -->
+      <div class="row">
+        <div class="col-xs-12">
+          <hr class="double--inverse" style="margin-top: 10px">
         </div>
-      </div> <!-- end col -->
-      
+      </div> <!-- end row -->
 
-      <div class="col-md-4 site-footer--col">        
-        <div class="headline site-footer--heading text-center" style="margin-bottom: 10px;">
-          <h3 style="color: White;">&nbsp;</h3>
-        </div>
-        <div class="row text-center">
-          <a href="/info/blog/" style="font-size: 11pt; color: rgba(255,255,255,.90);">Новости</a>
-        </div>
-        <div class="row text-center">
-          <a href="/info/about/" style="font-size: 11pt; color: rgba(255,255,255,.90);">О нас</a>
-        </div>
-        <div class="row text-center">
-          <a href="/info/rules/" style="font-size: 11pt; color: rgba(255,255,255,.90);">Правила</a>
-        </div>
-        <div class="row text-center">
-          <a href="#" style="font-size: 11pt; color: rgba(255,255,255,.90);">Оферта</a>
-        </div>
+      <!-- meta row -->
+      <div class="row">
+        <div class="site-footer--meta">
+          <span class="col-xs-4 col-xs-offset-4 text-center">
+            <a href="#top" title="Scroll to Top" data-toggle="smoothScroll"><i class="ai ai-2x ai-arrow-up3"></i></a>
+          </span>
+          <div class="col-xs-4 text-right">
+            <ul class="list-inline icons--social-media">
+    <li class="tooltip-link" data-toggle="tooltip" data-placement="top" title="VK"><a href="#"><span class="ai ai-2x ai-vk" style="color: #4f90bd"></span></a></li>
+    <li class="tooltip-link" data-toggle="tooltip" data-placement="top" title="Facebook"><a href="#"><span class="ai ai-2x ai-facebook2" style="color: #4f90bd"></span></a></li>
+  </ul>
+          </div>
+        </div> <!-- end meta -->
+      </div> <!-- end row -->
+
+    </div>  <!-- end container -->
 
 
-      </div> <!-- end col -->
-    </div> <!-- end row -->
-
-    <!-- divider -->
-    <div class="row">
-      <div class="col-xs-12">
-        <hr class="double--inverse" style="margin-top: 10px">
-      </div>
-    </div> <!-- end row -->
-
-    <!-- meta row -->
-    <div class="row">
-      <div class="site-footer--meta">
-        <span class="col-xs-4 col-xs-offset-4 text-center">
-          <a href="#top" title="Scroll to Top" data-toggle="smoothScroll"><i class="ai ai-2x ai-arrow-up3"></i></a>
-        </span>
-        <div class="col-xs-4 text-right">
-          <ul class="list-inline icons--social-media">
-  <li class="tooltip-link" data-toggle="tooltip" data-placement="top" title="VK"><a href="#"><span class="ai ai-2x ai-vk" style="color: #4f90bd"></span></a></li>
-  <li class="tooltip-link" data-toggle="tooltip" data-placement="top" title="Facebook"><a href="#"><span class="ai ai-2x ai-facebook2" style="color: #4f90bd"></span></a></li>
-</ul>
-        </div>
-      </div> <!-- end meta -->
-    </div> <!-- end row -->
-
-  </div>  <!-- end container -->
-
-  
-</footer>
-
+  </footer>
+{% endblock %}
     <!-- SCRIPTS -->
     <!-- Global Scripts -->
-    
+
     <script src="{% static "ext/adapto/assets/js/global-adapto.js" %}"></script>
     <script src="{% static "ext/adapto/assets/js/global-bootstrap.min.js" %}"></script>
-    
+
 <script src="{% static "ext/adapto/assets/js/owl.carousel.min.js" %}"></script>
 <script src="{% static "ext/adapto/assets/js/wow.min.js" %}"></script>
 <script>
@@ -309,8 +312,8 @@
 new WOW().init();
 </script>
 
-  
-    
+
+
       <!-- Revolution Slider REQUIRED JS files -->
 <script src="{% static "ext/adapto/assets/revolution-slider/js/jquery.themepunch.revolution.min.js" %}"></script>
 <script src="{% static "ext/adapto/assets/revolution-slider/js/jquery.themepunch.plugins.min.js" %}"></script>
@@ -334,12 +337,12 @@ new WOW().init();
   }); //ready
 
 </script>
-    
+
 <script>
     SetUnread({{ unreadCount }});
 </script>
-    
- 
+
+
 
 </body>
 </html>

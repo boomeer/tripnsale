@@ -15,11 +15,31 @@
 {% endblock %}
 
 {% block footer %}
-    <div class="sendMsg container-fluid">
-        <div class="col-md-10 col-md-offset-1">
-            <textarea id="msgContent" class="form-control" rows=2></textarea>
-            <button type="button" class="sendBtn btn btn-default">Отправить</button>
-            <button type="button" class="guarantBtn btn btn-default" style="display: none;">Добавить гаранта</button>
+    <div class="imfooter-wrap">
+        <div class="sendMsg container-fluid">
+            <div class="col-md-10 col-md-offset-1">
+                <textarea id="msgContent" class="form-control" rows=2></textarea>
+                <button type="button" class="sendBtn btn btn-default">Отправить</button>
+                <button type="button" class="guarantBtn btn btn-default" style="display: none;">Добавить гаранта</button>
+            </div>
         </div>
+        <!-- FOOTER Small -->
+        <footer class="site-footer footer bgBlueDark">
+          <div class="container">
+
+            <div class="row" style="color: White;">
+
+              <div class="col-md-12 site-footer--col">
+                <div class="headline site-footer--heading" style="margin-bottom: 10px;">
+                  <div class="row">
+                    <h3 class="col-md-6 text-center"style="color: White;">Trip<span class="ai ai-compass"></span>Sale</h3>
+                    <a href="#"><h3 class="col-md-3 text-center" style="color: White;">Диалоги</h3></a>
+                    <a href="/info/faqs/"><h3 class="col-md-3 text-center" style="color: White;">FAQ</h3></a>
+                  </dov>
+                </div>
+              </div> <!-- end col -->
+            </div> <!-- end row -->
+          </div>  <!-- end container -->
+        </footer>
     </div>
 {% endblock %}

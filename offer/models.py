@@ -20,6 +20,7 @@ class Offer(util.models.ContentHolder):
 
 
 class BuyOffer(Offer):
+    ititle = models.TextField(default="")
     costFrom = models.FloatField(default=None)
     costTo = models.FloatField(default=None)
     guarant = models.BooleanField(default=False)

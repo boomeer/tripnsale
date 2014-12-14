@@ -71,8 +71,8 @@ def SaleFilterView(request):
     params = request.REQUEST
     owner = int(params.get("owner", 0))
     sales = SaleOffer.objects.filter(
-        fr__ititle__istartswith=params.get("from", ""),
-        to__ititle__istartswith=params.get("to", ""),
+        fr__ititle__istartswith=params.get("from", "").lower(),
+        to__ititle__istartswith=params.get("to", "").lower(),
     )
     if owner:
         sales = sales.filter(owner__id=owner)
@@ -104,6 +104,7 @@ def BuyOfferAddView(request):
         gallery = CreateGallery()
         buy = BuyOffer(
             title=params.get("title", ""),
+            ititle=params.get("title", "").lower(),
             content=params.get("content", ""),
             costFrom=params.get("costFrom", None),
             costTo=params.get("costTo", None),
@@ -165,7 +166,7 @@ def BuyEditView(request, id):
         "url": "/offer/buy/edit/{}/".format(buy.id),
         "buy": buy,
     })
-        
+
 
 
 @SafeView
@@ -180,7 +181,7 @@ def BuyFilterView(request):
     params = request.REQUEST
     owner = int(params.get("owner", 0))
     buys = BuyOffer.objects.filter(
-        title__istartswith=params.get("title", ""),
+        ititle__istartswith=params.get("title", "").lower(),
     )
     if owner:
         buys = buys.filter(owner__id=owner)

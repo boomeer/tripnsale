@@ -32,6 +32,7 @@ from user.utils import (
 import re
 from datetime import datetime
 
+enableActivation = True
 
 class UsernameIsInvalidErr(TsExc):
     def __init__(self):
@@ -60,7 +61,7 @@ def AuthView(request):
     if act == "login":
         CheckPost(request)
         djUser = authenticate(
-            username=params.get("login", ""),
+            username=params.get("login", "").lower(),
             password=params.get("password", ""),
         )
         user = GetUserByDjUser(djUser)
@@ -83,7 +84,7 @@ def AuthView(request):
         if not re.compile("^[a-zA-Z0-9._-]{3,30}$").match(params["username"]):
             raise UsernameIsInvalidErr
         if not re.compile("^.{3,30}$").match(params["password"]):
-            raise PasswordIsIvalidErr
+            raise PasswordIsInvalidErr
         country = Country.objects.get(name=params.get("country", 0))
 
         user = User.objects.create_user(
@@ -97,7 +98,7 @@ def AuthView(request):
             remoteAddr=request.META["REMOTE_ADDR"],
             regRemoteAddr=request.META["REMOTE_ADDR"],
             activateCode=GetNewId(),
-            activated=False,
+            activated=not enableActivation,
         )
         user.save()
         '''
@@ -107,7 +108,8 @@ def AuthView(request):
         )
         login(request, user)
         '''
-        SendActivateMail(user)
+        if enableActivation:
+            SendActivateMail(user)
 
         return redirect("/")
     return RenderToResponse("user/auth.html", request, {

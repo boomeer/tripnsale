@@ -12,7 +12,13 @@
             <div class="authBlock">
                 <div class="authTitle">
                 </div>
-                <form class="form-horizontal" role="form" action="" method="post">
+
+                {% if msgReg %}
+                    <div class="alert alert-danger">
+                        {{ msgReg }}
+                    </div>
+                {% endif %}
+                <form id="auth-form" class="form-horizontal" role="form" action="" method="post">
                     {% csrf_token %}
                     <input type="hidden" name="act" value="reg">
                     <div class="form-group">
@@ -80,7 +86,7 @@
                 <div class="authTitle">
                 </div>
                 {% if msgLogin %}
-                    <div class="sysMsg sysMsg-login">
+                    <div class="alert alert-danger">
                         {{ msgLogin }}
                     </div>
                 {% endif %}

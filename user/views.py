@@ -32,20 +32,38 @@ from user.utils import (
 import re
 from datetime import datetime
 
+enableActivation = True
 
-class UsernameIsInvalidErr(TsExc):
+class RegErr(TsExc):
+    def __init__(self, msg):
+        super().__init__(msg)
+        self.status = msg
+
+class UsernameIsInvalidErr(RegErr):
     def __init__(self):
         super().__init__("username_is_invalid")
 
-class DuplicateUsernameErr(TsExc):
+class ShortUsernameErr(RegErr):
+    def __init__(self):
+        super().__init__("username_is_too_short")
+
+class LongUsernameErr(RegErr):
+    def __init__(self):
+        super().__init__("username_is_too_long")
+
+class DuplicateUsernameErr(RegErr):
     def __init__(self):
         super().__init__("username_is_not_unique")
 
-class PasswordIsInvalidErr(TsExc):
+class PasswordIsInvalidErr(RegErr):
     def __init__(self):
         super().__init__("password_is_invalid")
 
-class PasswordsAreNotEqualErr(TsExc):
+class BadPasswordLengthErr(RegErr):
+    def __init__(self):
+        super().__init__("bad_password_len")
+
+class PasswordsAreNotEqualErr(RegErr):
     def __init__(self):
         super().__init__("passwords_are_not_equal")
 
@@ -60,7 +78,7 @@ def AuthView(request):
     if act == "login":
         CheckPost(request)
         djUser = authenticate(
-            username=params.get("login", ""),
+            username=params.get("login", "").lower(),
             password=params.get("password", ""),
         )
         user = GetUserByDjUser(djUser)
@@ -77,39 +95,55 @@ def AuthView(request):
             backref = "/"
         return redirect(backref)
     elif act == "reg":
-        CheckPost(request)
-        if params["password"] != params["password2"]:
-            raise PasswordsAreNotEqualErr
-        if not re.compile("^[a-zA-Z0-9._-]{3,30}$").match(params["username"]):
-            raise UsernameIsInvalidErr
-        if not re.compile("^.{3,30}$").match(params["password"]):
-            raise PasswordIsIvalidErr
-        country = Country.objects.get(name=params.get("country", 0))
+        try:
+            CheckPost(request)
+            if params["password"] != params["password2"]:
+                raise PasswordsAreNotEqualErr
+            if not re.compile("^[a-zA-Z0-9._-]+$").match(params["username"]):
+                raise UsernameIsInvalidErr
+            if len(params["username"]) < 3:
+                raise ShortUsernameErr
+            if len(params["username"]) > 30:
+                raise LongUsernameErr
+            if not (3 <= len(params["password"]) <= 20):
+                raise BadPasswordLengthErr
+            country = Country.objects.get(name=params.get("country", 0))
 
-        user = User.objects.create_user(
-            params.get("username", "").lower(),
-            params.get("email", ""),
-            params.get("password", ""),
-            first_name=params.get("firstName", ""),
-            last_name=params.get("lastName", ""),
-            country=country,
-            city=params.get("city", ""),
-            remoteAddr=request.META["REMOTE_ADDR"],
-            regRemoteAddr=request.META["REMOTE_ADDR"],
-            activateCode=GetNewId(),
-            activated=False,
-        )
-        user.save()
-        '''
-        user = authenticate(
-            username=user.username,
-            password=params.get("password", ""),
-        )
-        login(request, user)
-        '''
-        SendActivateMail(user)
+            if User.objects.filter(username=params["username"]).count():
+                raise DuplicateUsernameErr
 
-        return redirect("/")
+            user = User.objects.create_user(
+                params.get("username", "").lower(),
+                params.get("email", ""),
+                params.get("password", ""),
+                first_name=params.get("firstName", ""),
+                last_name=params.get("lastName", ""),
+                country=country,
+                city=params.get("city", ""),
+                remoteAddr=request.META["REMOTE_ADDR"],
+                regRemoteAddr=request.META["REMOTE_ADDR"],
+                activateCode=GetNewId(),
+                activated=not enableActivation,
+            )
+            user.save()
+
+            if enableActivation:
+                SendActivateMail(user)
+                return RenderToResponse("user/auth_success.html", request, {
+                            "email": params.get("email", ""),
+                        })
+            else:
+                user = authenticate(
+                    username=user.username,
+                    password=params.get("password", ""),
+                )
+                login(request, user)
+                backref = params.get("next", "/")
+                if not backref:
+                    backref = "/"
+                return redirect(backref)
+        except RegErr as e:
+            raise RedirectExc("/user/auth/?msgReg={}".format(e.status))
     return RenderToResponse("user/auth.html", request, {
         "countries": GetCountries(),
         "msgLogin": GetSysMsg(params.get("msgLogin", "")),

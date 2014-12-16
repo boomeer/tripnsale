@@ -8,7 +8,7 @@ def Parse(data):
     for tr in doc.cssselect("table.country tr")[2:]:
         name = "_".join(tr[0][0][0].get("src").split("/")[-1].split(".")[0].split("_")[:-1])
         title = tr[1][0].text
-        print(name, title)
+        print(name)
         country = Country(
             name=name,
             title=title,
@@ -17,7 +17,7 @@ def Parse(data):
 
 
 def Main(args=None):
-    with open("util/countries.html", "r") as f:
+    with open("util/countries.html", "r", encoding="utf-8") as f:
         data = f.read()
         Parse(data)
 

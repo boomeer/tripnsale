@@ -32,7 +32,7 @@ from user.utils import (
 import re
 from datetime import datetime
 
-enableActivation = False
+enableActivation = True
 
 class RegErr(TsExc):
     def __init__(self, msg):
@@ -126,19 +126,22 @@ def AuthView(request):
                 activated=not enableActivation,
             )
             user.save()
-            '''
-            user = authenticate(
-                username=user.username,
-                password=params.get("password", ""),
-            )
-            login(request, user)
-            '''
+
             if enableActivation:
                 SendActivateMail(user)
-
-            return RenderToResponse("user/auth_success.html", request, {
-                        "email": params.get("email", ""),
-                    })
+                return RenderToResponse("user/auth_success.html", request, {
+                            "email": params.get("email", ""),
+                        })
+            else:
+                user = authenticate(
+                    username=user.username,
+                    password=params.get("password", ""),
+                )
+                login(request, user)
+                backref = params.get("next", "/")
+                if not backref:
+                    backref = "/"
+                return redirect(backref)
         except RegErr as e:
             raise RedirectExc("/user/auth/?msgReg={}".format(e.status))
     return RenderToResponse("user/auth.html", request, {

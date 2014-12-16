@@ -14,9 +14,9 @@ from util.utils import (
     RenderToResponse,
     CheckPost,
     GetSysMsg,
-    StoreImage,
     GetNewId,
 )
+from gallery.utils import StoreImage, MakeThumbnail
 from user.models import *
 from user.utils import *
 from place.models import (

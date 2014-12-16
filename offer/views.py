@@ -14,8 +14,6 @@ from util.utils import (
     SafeView,
     RenderToResponse,
     CheckPost,
-    StoreImage,
-    AvatarBigSizeErr,
 )
 from user.utils import (
     GetCurrentUser,
@@ -24,6 +22,8 @@ from user.utils import (
 from gallery.utils import (
     CreateGallery,
     CreateGalleryPhoto,
+    StoreImage,
+    MakeThumbnail,
 )
 from gallery.models import (
     Gallery,
@@ -139,13 +139,7 @@ def BuyEditView(request, id):
         buy.costTo = float(params.get("costTo", "0").replace(",", "."))
         if not buy.gallery:
             buy.gallery = CreateGallery()
-        for photo in request.FILES.getlist("photos"):
-            ph = CreateGalleryPhoto(buy.gallery)
-            try:
-                StoreImage(photo, ph.img)
-            except AvatarBigSizeErr:
-                ph.delete()
-        buy.save()
+            buy.save()
         return redirect("/offer/buy/edit/{}?msg=buy_edit_ok".format(buy.id))
     elif act == "upload":
         CheckPost(request)
@@ -157,11 +151,13 @@ def BuyEditView(request, id):
             ph = CreateGalleryPhoto(buy.gallery)
             try:
                 filePath = StoreImage(photo, ph.img)
+                MakeThumbnail(ph.img, ph.thumbnail)
+                ph.save()
                 files.append({
                     "name": filePath,
                     "thumbnailUrl": ph.img.url,
                 })
-            except AvatarBigSizeErr:
+            except:
                 ph.delete()
         return JsonResponse({
             "files": files,

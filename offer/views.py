@@ -87,7 +87,16 @@ def SaleFilterView(request):
     return RenderToResponse("offer/sale/filter.html", request, {
         "sales": sales,
         "block": block,
+        "profile": int(params.get("profile", 0)),
     })
+
+@SafeView
+def SaleRemoveView(request):
+    params = request.REQUEST
+    sale = SaleOffer.objects.get(id=params.get("id", 0))
+    if sale.owner == GetCurrentUser(request):
+        sale.delete()
+    return redirect("/user/profile")
 
 
 @SafeView
@@ -175,6 +184,15 @@ def BuyEditView(request, id):
     })
 
 
+@SafeView
+def BuyRemoveView(request):
+    params = request.REQUEST
+    buy = BuyOffer.objects.get(id=params.get("id", 0))
+    if buy.owner == GetCurrentUser(request):
+        buy.delete()
+    return redirect("/user/profile")
+
+
 
 @SafeView
 def BuyListView(request):
@@ -199,6 +217,7 @@ def BuyFilterView(request):
     return RenderToResponse("offer/buy/filter.html", request, {
         "buys": buys,
         "block": block,
+        "profile": int(params.get("profile", 0)),
     })
 
 

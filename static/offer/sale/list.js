@@ -1,10 +1,11 @@
-function TripsRefresh(user)
+function TripsRefresh(user, profile)
 {        
     $(".tripsList").html("Загрузка...");
     $.post("/offer/sale/filter/", {
         "from": $("#tripsFilterFrom").val(),
         "to": $("#tripsFilterTo").val(),
         "owner": user ? user : 0,
+        "profile": profile,
     }, function(res) {
         $(".tripsList").html(res);
     });

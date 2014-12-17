@@ -5,6 +5,13 @@
 {% endif %}
 {% for sale in sales %}
     <div class="tripItem" onClick="TripView({{ sale.id }});">
+        <div>
+            {% if profile and profileOwner == sale.owner %}
+                <a href="/offer/sale/remove/?id={{ sale.id }}" class="btn btn-danger">
+                    Удалить
+                </a>
+            {% endif %}
+        </div>
         <div class="tripFrom tripSection">
             <div class="tripSectionTitle">
                 Откуда

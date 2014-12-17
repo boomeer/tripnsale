@@ -1,9 +1,10 @@
-function BuysRefresh(user)
+function BuysRefresh(user, profile)
 {        
     $(".buysList").html("Загрузка...");
     $.post("/offer/buy/filter/", {
         "title": $("#buysTitle").val(),
         "owner": user ? user : 0,
+        "profile": profile,
     }, function(res) {
         $(".buysList").html(res);
     });

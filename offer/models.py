@@ -17,6 +17,11 @@ class Offer(util.models.ContentHolder):
     class Meta:
         abstract = True
     owner = models.ForeignKey(User, default=None, blank=True, null=True)
+    removed = models.BooleanField(default=False)
+    closed = models.BooleanField(default=False)
+
+    def visible(self):
+        return not self.removed and not self.closed
 
 
 class BuyOffer(Offer):
@@ -28,7 +33,7 @@ class BuyOffer(Offer):
 
 @admin.register(BuyOffer)
 class BuyOfferAdmin(admin.ModelAdmin):
-    list_display = ('costFrom', 'costTo', 'guarant', 'owner')
+    list_display = ('costFrom', 'costTo', 'guarant', 'owner', 'closed', 'removed',)
 
 
 class SaleOffer(Offer):

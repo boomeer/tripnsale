@@ -6,5 +6,4 @@ class ContentHolder(models.Model):
         abstract = True
     title = models.TextField(default="")
     content = models.TextField(default="")
-    visible = models.BooleanField(default=True)
     verified = models.BooleanField(default=True)

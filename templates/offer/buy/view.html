@@ -6,82 +6,71 @@
             <span class="glyphicon glyphicon-remove-circle"></span>
         </button>
         <div class="buyViewContent">
-            <div class="title">
-                <div class="buy-item-content">
-                    {{ buy.title }}
-                </div>
-            </div>
-            <hr>
-            <div class="cost">
-                <span class="cost-title buy-item-title">
-                    Цена:
-                </span>
-                <span class="cost-content buy-item-content">
-                    {{ buy.costFrom }} $ - {{ buy.costTo }} $
-                </span>
-            </div>
-            <hr>
-            <div class="container-fluid">
-                <div class="owner col-md-6">
-                    <div class="owner-name">
-                        <a href="/user/profile/{{ buy.owner.username }}">
-                            {{ buy.owner.first_name }} {{ buy.owner.last_name }}
-                        </a>
-                    </div>
-                    <div class="owner-av">
-                        <img src="{{ buy.owner.avatarUrl }}">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    {% if profileOwner == buy.owner %}
-                        <a type="button" class="btn btn-default" href="/offer/buy/edit/{{ buy.id }}">
-                            <i class="ai ai-pencil"></i>
-                            Редактировать
-                        </a>
-                    {% else %}
-                        <a type="button" class="btn btn-default" href="/user/im?peer={{ buy.owner.id }}">
-                            <i class="glyphicon glyphicon-hand-up"></i>
-                            Связаться
-                        </a>
-                    {% endif %}
-                </div>
-            </div>
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-6">
-                        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                          <!-- Indicators -->
-                          <ol class="carousel-indicators">
-                            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-                          </ol>
-
-                          <!-- Wrapper for slides -->
-                          <div class="carousel-inner" role="listbox">
-                            {% for photo in buy.gallery.photos.all %}
-                                <div class="item {% if forloop.counter == 1 %}active{% endif %}" style="text-align: center;">
-                                    <img src="{{ photo.img.url }}" style="max-width: 100%; max-height: 200px;">
-                                    <div class="carousel-caption">
-                                        CAPTION
-                                    </div>
-                                </div>
-                            {% endfor %}
-                          </div>
-
-                          <!-- Controls -->
-                          <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                          </a>
-                          <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                          </a>
+                    <div class="col-md-8">
+                        <div class="title">
+                            <div class="buy-item-content">
+                                {{ buy.title }}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="cost">
+                            <span class="cost-title buy-item-title">
+                                Цена:
+                            </span>
+                            <span class="cost-content buy-item-content">
+                                {{ buy.costFrom }} $ - {{ buy.costTo }} $
+                            </span>
                         </div>
                     </div>
+                    <div class="owner col-md-4">
+                        <div class="owner-name">
+                            <a href="/user/profile/{{ buy.owner.username }}">
+                                {{ buy.owner.first_name }} {{ buy.owner.last_name }}
+                            </a>
+                        </div>
+                        <div class="owner-av">
+                            <img src="{{ buy.owner.avatarUrl }}">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <hr>
+                        <div>
+                            <h5>
+                                Фото
+                            </h5>
+                        </div>
+                        <div id="links">
+                            {% for photo in buy.gallery.photos.all %}
+                                <a href="{{ photo.url }}" title="" data-gallery>
+                                    <img src="{{ photo.thumbUrl }}" alt="">
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <hr>
+                        {% if profileOwner == buy.owner %}
+                            <a type="button" class="btn btn-default" href="/offer/buy/edit/{{ buy.id }}">
+                                <i class="ai ai-pencil"></i>
+                                Редактировать
+                            </a>
+                        {% else %}
+                            <a type="button" class="btn btn-default" href="/user/im?peer={{ buy.owner.id }}">
+                                <i class="glyphicon glyphicon-hand-up"></i>
+                                Связаться
+                            </a>
+                        {% endif %}
+                    </div>
+
                 </div>
             </div>
         </div>
     </div>
 </div>
+

@@ -28,4 +28,10 @@ class GalleryAdmin(admin.ModelAdmin):
 class Photo(models.Model):
     img = models.ImageField(upload_to="gallery_img", blank=True, null=True)
     gallery = models.ForeignKey(Gallery, blank=True, null=True, related_name="photos")
+    thumbnail = models.ImageField(upload_to="gallery_img", blank=True, null=True)
+    
+    def thumbUrl(self):
+        return self.thumbnail.url if self.thumbnail else ""
 
+    def url(self):
+        return self.img.url

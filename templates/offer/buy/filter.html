@@ -25,6 +25,13 @@
                     <span class="bboldy">{{ buy.costTo|floatformat }}$</span>
                 </span>
             </div>
+            <div>
+                {% if profile and profileOwner == buy.owner %}
+                    <a href="/offer/buy/remove/?id={{ buy.id }}" class="btn btn-danger">
+                        Удалить
+                    </a>
+                {% endif %}
+            </div>
         </div>
         <div class="buy-section owner">
             <div class="owner-av">

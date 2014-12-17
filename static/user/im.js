@@ -12,8 +12,12 @@ function ProcOpts(opts)
     SetUnread(opts.unreadCount);
 }
 
+function ScrollToBottom()
+{
+    $("html,body").animate({ scrollTop: $("body").height() }, "fast");
+}
 
-function RefreshMsgs() {
+function RefreshMsgs(scroll) {
     $.post("/user/im_msg_frame/", {
         conf: $("#conf").val(),
         read: window.isActive ? 1 : 0,
@@ -23,7 +27,9 @@ function RefreshMsgs() {
         var opts = res.opts;
         if (content != oldMsgs) {
             $(".msgs").html(content);
-            $("body").animate({ scrollTop: 2 * $("body").height() }, "fast");
+            if (scroll) {
+                ScrollToBottom();
+            }
         }
         ProcOpts(opts);
     });
@@ -37,7 +43,7 @@ function SendMsg()
         conf: $("#conf").val(),
         content: $("#msgContent").val(),
     }, function(res) {
-        RefreshMsgs();
+        RefreshMsgs(true);
         $("#msgContent").val("").removeAttr("disabled").focus();
     });
 }
@@ -48,25 +54,23 @@ function AskGuarant()
         act: "askGuarant",
         conf: $("#conf").val(),
     }, function(res) {
-        RefreshMsgs();
+        RefreshMsgs(true);
     });
 }
 
 $(function() {
-    $(".sendBtn").on("click", function() {
-        SendMsg();
-    });
-    $(".guarantBtn").on("click", function() {
-        AskGuarant();
-    });
+    $(".msgsWrapper").css("margin-bottom", $(".imfooter-wrap").height() + "px");
+    $(".sendBtn").on("click", SendMsg);
+    $(".guarantBtn").on("click", AskGuarant);
     $("#msgContent").on("keydown", function(event) {
         if (event.which == 13) {
             SendMsg();
         }
     });
-        RefreshMsgs();
+
+    RefreshMsgs(true);
     setInterval(function() {
-        RefreshMsgs();
+        RefreshMsgs(false);
     }, 500);
 
     window.addGuarant = false;

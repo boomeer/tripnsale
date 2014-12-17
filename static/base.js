@@ -18,18 +18,16 @@ function SetUnread(unread)
 }
 
 function CheckFooter() {
-    var h = $("html").height() - $(".header").height() - $(".footer").height() - 80 + 34;
-    // if (h > $(".main").height())
-        $(".main-wrap").height(Math.max(h, $(".main").height()));
+    var h = $("body").height() - $(".footer").outerHeight(true);
+    $(".main-wrap").css("min-height", h);
 }
 
 $(function() {
     window.isActive = true;
     $(window).focus(function() { this.isActive = true; });
     $(window).blur(function() { this.isActive = false; });
-    // $(".main").resize(CheckFooter);
-    // $(window).resize(CheckFooter);
-    // CheckFooter();
-    var h = $("html").height() - $(".header").height() - $(".footer").height() + 25;
-    $(".main-wrap").css("min-height", h);
+    $(window).resize(CheckFooter);
+
+    // oh my god
+    setTimeout (CheckFooter, 100);
 });

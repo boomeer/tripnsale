@@ -236,12 +236,17 @@ def BuyListView(request):
 def BuyFilterView(request):
     params = request.REQUEST
     owner = int(params.get("owner", 0))
-    buys = BuyOffer.objects.filter(
+    buys = BuyOffer.objects
+    '''
+    buys = buys.filter(
         ititle__istartswith=params.get("title", "").lower(),
     )
+    '''
     if owner:
         buys = buys.filter(owner__id=owner)
     buys = buys.all()
+    buys = [buy for buy in buys if ValidFilter(buy.title + " " + buy.content,
+                params.get("title", ""))]
     buys = sorted(buys, key=lambda buy: (buy.closed, -buy.id,))
     page = params.get("page", 1)
     count = params.get("count", 5)

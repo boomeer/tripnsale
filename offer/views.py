@@ -60,6 +60,7 @@ def SaleOfferAddView(request):
             deposit=params.get("deposit", None),
             guarant=params.get("guarant", False),
             owner=GetCurrentUser(request),
+            createTime=datetime.now(),
         )
         sale.save()
         return redirect("/offer/sale/list")
@@ -81,6 +82,7 @@ def SaleFilterView(request):
     if owner:
         sales = sales.filter(owner__id=owner)
     sales = sales.all()
+    sales = sorted(sales, key=lambda sale: (sale.closed, -sale.isCurrent(), sale.toEnd(),))
     page = params.get("page", 1)
     count = params.get("count", 5)
     block = sales[(page-1)*count:page*count]
@@ -135,6 +137,7 @@ def BuyOfferAddView(request):
             guarant=params.get("guarant", False),
             gallery=gallery,
             owner=GetCurrentUser(request),
+            createTime=datetime.now(),
         )
         buy.save()
         return redirect("/offer/buy/list")
@@ -232,6 +235,7 @@ def BuyFilterView(request):
     if owner:
         buys = buys.filter(owner__id=owner)
     buys = buys.all()
+    buys = sorted(buys, key=lambda buy: (buy.closed, -buy.id,))
     page = params.get("page", 1)
     count = params.get("count", 5)
     block = buys[(page-1)*count:page*count]

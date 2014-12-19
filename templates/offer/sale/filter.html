@@ -5,7 +5,7 @@
 {% endif %}
 {% for sale in sales %}
     {% if sale.visible %}
-        <div class="tripItem" onClick="TripView({{ sale.id }});">
+        <div class="tripItem {% if sale.closed %}tripItem-closed{% endif %}" onClick="TripView({{ sale.id }});">
             <div class="tripFrom tripSection">
                 <div class="tripSectionTitle">
                     Откуда
@@ -71,7 +71,7 @@
                 </div>
             </div>
             <div>
-                {% if profile and profileOwner == sale.owner %}
+                {% if profile and not sale.closed and profileOwner == sale.owner %}
                     <a href="/offer/sale/remove/?id={{ sale.id }}" class="btn btn-danger">
                         <i class="ai ai-close"></i>
                         Удалить
@@ -80,6 +80,11 @@
                         <i class="ai ai-lock"></i>
                         Закрыть
                     </a>
+                {% endif %}
+                {% if sale.closed %}
+                    <span class="closed">
+                        Закрыт
+                    </span>
                 {% endif %}
             </div>
         </div>

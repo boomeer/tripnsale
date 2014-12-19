@@ -19,9 +19,10 @@ class Offer(util.models.ContentHolder):
     owner = models.ForeignKey(User, default=None, blank=True, null=True)
     removed = models.BooleanField(default=False)
     closed = models.BooleanField(default=False)
+    createTime = models.DateTimeField(default=datetime.now())
 
     def visible(self):
-        return not self.removed and not self.closed
+        return not self.removed
 
 
 class BuyOffer(Offer):
@@ -47,6 +48,12 @@ class SaleOffer(Offer):
     toTime = models.DateTimeField(default=datetime.now())
     deposit = models.FloatField(default=None)
     guarant = models.BooleanField(default=False)
+
+    def isCurrent(self):
+        return self.frTime <= datetime.now() <= self.toTime
+
+    def toEnd(self):
+        return self.toTime - datetime.now()
 
 @admin.register(SaleOffer)
 class SaleOfferAdmin(admin.ModelAdmin):

@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block own_title %}
+Пользователи -
+{% endblock %}
+
 {% block own_head %}
     <script src="{% static "user/all.js" %}" type="text/javascript"></script>
     <link rel="stylesheet" href="{% static "css/user/all.css" %}">

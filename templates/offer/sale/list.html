@@ -1,6 +1,10 @@
 {% extends "base_list.html" %}
 {% load static %}
 
+{% block own_title %}
+Список поездок -
+{% endblock %}
+
 {% block own_head %}
     <script src="{% static "offer/sale/list.js" %}"></script>
     <link rel="stylesheet" href="{% static "css/offer/sale/list.css" %}"/>

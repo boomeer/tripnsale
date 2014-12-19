@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block own_title %}
+Заказы -
+{% endblock %}
+
 {% block own_head %}
     <script src="{% static "offer/buy/list.js" %}"></script>
     <link rel="stylesheet" href="{% static "css/offer/buy/list.css" %}"/>

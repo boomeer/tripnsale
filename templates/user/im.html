@@ -1,6 +1,10 @@
 {% extends "base_list.html" %}
 {% load static %}
 
+{% block own_title %}
+Сообщения -
+{% endblock %}
+
 {% block own_head %}
     <script src="{% static "user/im.js" %}"></script>
     <link rel="stylesheet" href="{% static "css/user/im.css" %}"/>

@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block own_title %}
+Профиль -
+{% endblock %}
+
 {% block own_head %}
     <script src="{% static "offer/buy/list.js" %}" type="text/javascript"></script>
     <script src="{% static "offer/sale/list.js" %}" type="text/javascript"></script>

@@ -29,6 +29,7 @@ from gallery.models import (
     Gallery,
     Photo,
 )
+from util.utils import ValidFilter
 from datetime import datetime
 
 
@@ -60,6 +61,7 @@ def SaleOfferAddView(request):
             deposit=params.get("deposit", None),
             guarant=params.get("guarant", False),
             owner=GetCurrentUser(request),
+            createTime=datetime.now(),
         )
         sale.save()
         return redirect("/offer/sale/list")
@@ -74,13 +76,20 @@ def SaleOfferAddView(request):
 def SaleFilterView(request):
     params = request.REQUEST
     owner = int(params.get("owner", 0))
-    sales = SaleOffer.objects.filter(
+    sales = SaleOffer.objects
+    '''
+    sales = sales.filter(
         fr__ititle__istartswith=params.get("from", "").lower(),
         to__ititle__istartswith=params.get("to", "").lower(),
     )
+    '''
     if owner:
         sales = sales.filter(owner__id=owner)
     sales = sales.all()
+    sales = [sale for sale in sales if ValidFilter(sale.fr.title + " " + sale.frCity, 
+                                                    params.get("from", "")) \
+                and ValidFilter(sale.to.title + " " + sale.toCity, params.get("to", ""))]
+    sales = sorted(sales, key=lambda sale: (sale.closed, -sale.isCurrent(), sale.toEnd(),))
     page = params.get("page", 1)
     count = params.get("count", 5)
     block = sales[(page-1)*count:page*count]
@@ -135,6 +144,7 @@ def BuyOfferAddView(request):
             guarant=params.get("guarant", False),
             gallery=gallery,
             owner=GetCurrentUser(request),
+            createTime=datetime.now(),
         )
         buy.save()
         return redirect("/offer/buy/list")
@@ -226,12 +236,18 @@ def BuyListView(request):
 def BuyFilterView(request):
     params = request.REQUEST
     owner = int(params.get("owner", 0))
-    buys = BuyOffer.objects.filter(
+    buys = BuyOffer.objects
+    '''
+    buys = buys.filter(
         ititle__istartswith=params.get("title", "").lower(),
     )
+    '''
     if owner:
         buys = buys.filter(owner__id=owner)
     buys = buys.all()
+    buys = [buy for buy in buys if ValidFilter(buy.title + " " + buy.content,
+                params.get("title", ""))]
+    buys = sorted(buys, key=lambda buy: (buy.closed, -buy.id,))
     page = params.get("page", 1)
     count = params.get("count", 5)
     block = buys[(page-1)*count:page*count]

@@ -3,7 +3,7 @@
 {% endif %}
 {% for buy in buys %}
     {% if buy.visible %}
-        <div class="buy-item" onClick="BuyView({{ buy.id }})">
+        <div class="buy-item {% if buy.closed %}buy-item-closed{% endif %}" onClick="BuyView({{ buy.id }})">
             <div class="buy-section photo">
                 <img src="{{ buy.gallery.getHeadUrl }}" alt="">
             </div>
@@ -27,7 +27,7 @@
                     </span>
                 </div>
                 <div>
-                    {% if profile and profileOwner == buy.owner %}
+                    {% if profile and not buy.closed and profileOwner == buy.owner %}
                         <a href="/offer/buy/remove/?id={{ buy.id }}" class="btn btn-danger">
                             <i class="ai ai-close"></i>
                             Удалить
@@ -36,6 +36,11 @@
                             <i class="ai ai-lock"></i>
                             Закрыть
                         </a>
+                    {% endif %}
+                    {% if buy.closed %}
+                        <span class="closed">
+                            Закрыт
+                        </span>
                     {% endif %}
                 </div>
             </div>

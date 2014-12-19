@@ -19,9 +19,10 @@ class Offer(util.models.ContentHolder):
     owner = models.ForeignKey(User, default=None, blank=True, null=True)
     removed = models.BooleanField(default=False)
     closed = models.BooleanField(default=False)
+    createTime = models.DateTimeField(default=datetime.now())
 
     def visible(self):
-        return not self.removed and not self.closed
+        return not self.removed
 
 
 class BuyOffer(Offer):
@@ -37,16 +38,22 @@ class BuyOfferAdmin(admin.ModelAdmin):
 
 
 class SaleOffer(Offer):
-    fr = models.ForeignKey(Country, related_name="country_from")
+    fr = models.ForeignKey(Country, related_name="country_from", blank=True, null=True)
     frCity = models.TextField(default="")
     ifrCity = models.TextField(default="")
     frTime = models.DateTimeField(default=datetime.now())
-    to = models.ForeignKey(Country, related_name="country_to")
+    to = models.ForeignKey(Country, related_name="country_to", blank=True, null=True)
     toCity = models.TextField(default="")
     itoCity = models.TextField(default="")
     toTime = models.DateTimeField(default=datetime.now())
     deposit = models.FloatField(default=None)
     guarant = models.BooleanField(default=False)
+
+    def isCurrent(self):
+        return self.frTime <= datetime.now() <= self.toTime
+
+    def toEnd(self):
+        return self.toTime - datetime.now()
 
 @admin.register(SaleOffer)
 class SaleOfferAdmin(admin.ModelAdmin):

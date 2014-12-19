@@ -11,7 +11,7 @@
 {% endblock %}
 
 {% block main %}
-    <div class="container-fluid bg0">
+    <div class="user-list container-fluid bg0">
         <div class="col-md-8 col-md-offset-2">
             {% for user in users %}
                 <div class="user container-fluid" onclick="window.location.href='/user/profile/{{ user.username }}/';">

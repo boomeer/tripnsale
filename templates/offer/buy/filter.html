@@ -2,46 +2,53 @@
     Нет заказов
 {% endif %}
 {% for buy in buys %}
-    <div class="buy-item" onClick="BuyView({{ buy.id }})">
-        <div class="buy-section photo">
-            <img src="{{ buy.gallery.getHeadUrl }}" alt="">
-        </div>
-        <div class="buy-section content">
-            <div>
-                <div class="title">
-                    {{ buy.title }}
+    {% if buy.visible %}
+        <div class="buy-item" onClick="BuyView({{ buy.id }})">
+            <div class="buy-section photo">
+                <img src="{{ buy.gallery.getHeadUrl }}" alt="">
+            </div>
+            <div class="buy-section content">
+                <div>
+                    <div class="title">
+                        {{ buy.title }}
+                    </div>
+                    <div class="comment">
+                        {{ buy.content }}
+                    </div>
                 </div>
-                <div class="comment">
-                    {{ buy.content }}
+                <div class="prices">
+                    <span>
+                        Готов заплатить:
+                    </span>
+                    <span>
+                        <span class="bboldy">{{ buy.costFrom|floatformat }}$</span>
+                        -
+                        <span class="bboldy">{{ buy.costTo|floatformat }}$</span>
+                    </span>
+                </div>
+                <div>
+                    {% if profile and profileOwner == buy.owner %}
+                        <a href="/offer/buy/remove/?id={{ buy.id }}" class="btn btn-danger">
+                            <i class="ai ai-close"></i>
+                            Удалить
+                        </a>
+                        <a href="/offer/buy/close/?id={{ buy.id }}" class="btn btn-success">
+                            <i class="ai ai-lock"></i>
+                            Закрыть
+                        </a>
+                    {% endif %}
                 </div>
             </div>
-            <div class="prices">
-                <span>
-                    Готов заплатить:
-                </span>
-                <span>
-                    <span class="bboldy">{{ buy.costFrom|floatformat }}$</span>
-                    -
-                    <span class="bboldy">{{ buy.costTo|floatformat }}$</span>
-                </span>
-            </div>
-            <div>
-                {% if profile and profileOwner == buy.owner %}
-                    <a href="/offer/buy/remove/?id={{ buy.id }}" class="btn btn-danger">
-                        Удалить
-                    </a>
-                {% endif %}
+            <div class="buy-section owner">
+                <div class="owner-av">
+                    <img src="{{ buy.owner.avatarUrl }}">
+                </div>
+                <div>
+                    {{ buy.owner.first_name }} {{ buy.owner.last_name }}
+                </div>
             </div>
         </div>
-        <div class="buy-section owner">
-            <div class="owner-av">
-                <img src="{{ buy.owner.avatarUrl }}">
-            </div>
-            <div>
-                {{ buy.owner.first_name }} {{ buy.owner.last_name }}
-            </div>
-        </div>
-    </div>
+    {% endif %}
 {% endfor %}
 
 

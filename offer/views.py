@@ -95,7 +95,18 @@ def SaleRemoveView(request):
     params = request.REQUEST
     sale = SaleOffer.objects.get(id=params.get("id", 0))
     if sale.owner == GetCurrentUser(request):
-        sale.delete()
+        sale.removed = True
+        sale.save()
+    return redirect("/user/profile")
+
+
+@SafeView
+def SaleCloseView(request):
+    params = request.REQUEST
+    sale = SaleOffer.objects.get(id=params.get("id", 0))
+    if sale.owner == GetCurrentUser(request):
+        sale.closed = True
+        sale.save()
     return redirect("/user/profile")
 
 
@@ -189,9 +200,19 @@ def BuyRemoveView(request):
     params = request.REQUEST
     buy = BuyOffer.objects.get(id=params.get("id", 0))
     if buy.owner == GetCurrentUser(request):
-        buy.delete()
+        buy.removed = True
+        buy.save()
     return redirect("/user/profile")
 
+
+@SafeView
+def BuyCloseView(request):
+    params = request.REQUEST
+    buy = BuyOffer.objects.get(id=params.get("id", 0))
+    if buy.owner == GetCurrentUser(request):
+        buy.closed = True
+        buy.save()
+    return redirect("/user/profile")
 
 
 @SafeView

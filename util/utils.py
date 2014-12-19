@@ -43,3 +43,18 @@ def GetNewId():
     newId = ''.join(random.choice(string.ascii_lowercase \
         + string.digits) for i in range(20))
     return newId
+
+
+def ValidFilter(text, filt):
+    wt = text.split()
+    wf = filt.split()
+    for w in wf:
+        w = w.lower()
+        ok = False
+        for ww in wt:
+            ww = ww.lower()
+            eq = len(w) <= len(ww) and ww[:len(w)] == w
+            ok = ok or eq
+        if not ok:
+            return False
+    return True

@@ -29,6 +29,7 @@ from gallery.models import (
     Gallery,
     Photo,
 )
+from util.utils import ValidFilter
 from datetime import datetime
 
 
@@ -75,13 +76,19 @@ def SaleOfferAddView(request):
 def SaleFilterView(request):
     params = request.REQUEST
     owner = int(params.get("owner", 0))
-    sales = SaleOffer.objects.filter(
+    sales = SaleOffer.objects
+    '''
+    sales = sales.filter(
         fr__ititle__istartswith=params.get("from", "").lower(),
         to__ititle__istartswith=params.get("to", "").lower(),
     )
+    '''
     if owner:
         sales = sales.filter(owner__id=owner)
     sales = sales.all()
+    sales = [sale for sale in sales if ValidFilter(sale.fr.title + " " + sale.frCity, 
+                                                    params.get("from", "")) \
+                and ValidFilter(sale.to.title + " " + sale.toCity, params.get("to", ""))]
     sales = sorted(sales, key=lambda sale: (sale.closed, -sale.isCurrent(), sale.toEnd(),))
     page = params.get("page", 1)
     count = params.get("count", 5)

@@ -38,11 +38,11 @@ class BuyOfferAdmin(admin.ModelAdmin):
 
 
 class SaleOffer(Offer):
-    fr = models.ForeignKey(Country, related_name="country_from")
+    fr = models.ForeignKey(Country, related_name="country_from", blank=True, null=True)
     frCity = models.TextField(default="")
     ifrCity = models.TextField(default="")
     frTime = models.DateTimeField(default=datetime.now())
-    to = models.ForeignKey(Country, related_name="country_to")
+    to = models.ForeignKey(Country, related_name="country_to", blank=True, null=True)
     toCity = models.TextField(default="")
     itoCity = models.TextField(default="")
     toTime = models.DateTimeField(default=datetime.now())

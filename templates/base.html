@@ -6,7 +6,6 @@
 <head>
     <meta charset="UTF-8">
     <link href="{% static "favicon.png" %}" rel="shortcut icon" type="image/x-icon" />
-    <title></title>
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
@@ -32,6 +31,9 @@
     <link rel="stylesheet" href="{% static "css/top_panel.css" %}"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {% block own_head %}{% endblock %}
+    <title>
+      {% block own_title %}{% endblock %}trip&sale - Сделай это дешевле!
+    </title>
 </head>
 <body id="top">
     <!-- Extra Header (optional) -->
@@ -74,7 +76,7 @@
 
         <!-- NAVIGATION -->
         <div class="collapse navbar-collapse">
-          <nav class="navbar" role="navigation">
+          <nav class="navbar nobcg" role="navigation">
             <ul class="nav navbar-nav navbar-right">
               <li>
                   <a href="/offer/sale/list">

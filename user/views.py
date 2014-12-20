@@ -155,6 +155,7 @@ def AuthView(request):
         "countries": GetCountries(),
         "msgLogin": GetRegMsg(params.get("msgLogin", "")),
         "msgReg": GetRegMsg(params.get("msgReg", "")),
+        "next": params.get("next", ""),
     })
 
 

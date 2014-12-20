@@ -287,7 +287,7 @@ def EditProfileView(request):
         user.country = Country.objects.get(name=params.get("country", ""))
         user.city = params.get("city", "")
         if 'avatar' in request.FILES:
-            StoreImage(request.FILES['avatar'], user.avatar, user.username)
+            StoreImage(request.FILES['avatar'], user.avatar)
         user.save()
         return redirect("/user/profile/")
     return RenderToResponse("user/edit_profile.html", request, {

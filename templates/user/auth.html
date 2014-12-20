@@ -11,7 +11,7 @@
 {% endblock %}
 
 {% block main %}
-    <div class="container-fluid">
+    <div class="container-fluid" style="margin: 20px 0px;">
         <div class="authBlockWrapper authBlockWrapperReg col-lg-4 col-lg-offset-2 col-md-6 col-sm-6">
             <div class="authBlock">
                 <div class="authTitle">
@@ -26,33 +26,33 @@
                     {% csrf_token %}
                     <input type="hidden" name="act" value="reg">
                     <div class="form-group">
-                        <label for="inputFirstName" class="col-sm-3 control-label">Имя:</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="inputFirstName" name="firstName" placeholder="Имя">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputLastName" class="col-sm-3 control-label">Фамилия:</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="inputLastName" name="lastName" placeholder="Фамилия">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputEmail" class="col-sm-3 control-label">Email:</label>
+                        <label for="inputEmail" class="col-sm-3 control-label">Email: <span class="req">*</span></label>
                         <div class="col-sm-9">
                             <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Email">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputPassword" class="col-sm-3 control-label">Пароль:</label>
+                        <label for="inputPassword" class="col-sm-3 control-label">Пароль: <span class="req">*</span></label>
                         <div class="col-sm-9">
                             <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Пароль">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputPassword2" class="col-sm-3 control-label"></label>
+                        <label for="inputPassword2" class="col-sm-3 control-label"><span class="req">*</span></label>
                         <div class="col-sm-9">
                             <input type="password" class="form-control" id="inputPassword2" name="password2" placeholder="Повторите пароль">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputFirstName" class="col-sm-3 control-label">Имя: <span class="req">*</span></label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="inputFirstName" name="firstName" placeholder="Имя">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputLastName" class="col-sm-3 control-label">Фамилия: <span class="req">*</span></label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="inputLastName" name="lastName" placeholder="Фамилия">
                         </div>
                     </div>
                     <div class="form-group">
@@ -73,8 +73,17 @@
                             <input type="text" class="form-control" id="inputCity" name="city" placeholder="Город">
                         </div>
                     </div>
+                    <div class="form-group">
+                        <div class="col-sm-1 col-sm-offset-2">
+                            <input id="offert-check" type="checkbox" value="true" name="offert" />
+                        </div>
+                        <div class="col-sm-9" style="font-size: smaller;"><span class="req" style="font-size: small;">*</span> Нажимая "Зарегистрироваться", я соглашаюсь с условиями <a href="/">оферты</a></div>
+                    </div>
+                    <div class="col-sm-9 col-sm-offset-3">
+                        <span class="req">Поля с * обязательны для заполнения</span>
+                    </div>
                     <div class="btnAuth">
-                        <button type="submit" class="btn btn-default">Зарегистрироваться</button>
+                        <button id="reg-btn" type="submit" class="btn btn-default" disabled>Зарегистрироваться</button>
                     </div>
                 </form>
             </div>
@@ -92,9 +101,9 @@
                     {% csrf_token %}
                     <input type="hidden" name="act" value="login">
                     <div class="form-group">
-                        <label for="inputLogin" class="col-sm-2 control-label">Логин:</label>
+                        <label for="inputLogin" class="col-sm-2 control-label">Email:</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputLogin" name="email" placeholder="Логин">
+                            <input type="text" class="form-control" id="inputLogin" name="email" placeholder="Email">
                         </div>
                     </div>
                     <div class="form-group">

@@ -25,28 +25,46 @@
                 Теперь Вы можете дополнить информацию о себе. Хороший профиль привлекает больше внимания и увеличивает шансы на то, что другие пользователи обратятся именно к вам!
             </div>
             {% endif %}
-            <div class="col-md-6 col-md-offset-1 col-xs-12 userInfo">
-                <div class="fullname">
-                    {{ prUser.first_name }} {{ prUser.last_name }}
+            <div class="col-md-6 col-md-offset-3 col-xs-12 userInfo">
+                <h3>Профиль: <strong>{{ prUser.first_name }} {{ prUser.last_name }}</strong></h3>
+            </div>
+            <div class="col-md-6 col-md-offset-2 col-xs-12 userInfo">
+                <div class="row container-fluid profile-item">
+                    <label class="col-sm-3">Адрес:</label>
+                    <div class="col-sm-9">
+                        <img src="{{ prUser.country.img }}" />
+                        {{ prUser.country.title }} {{ prUser.city }}
+                    </div>
                 </div>
-                <div class="">
-                    Адрес:
-                    <img src="{{ prUser.country.img }}">
-                    {{ prUser.country.title }} {{ prUser.city }}
+                <div class="row container-fluid profile-item">
+                    <label class="col-sm-3">Дата рождения:</label>
+                    <div class="col-sm-9">
+                        {{ prUser.bday }}
+                    </div>
                 </div>
-                <div class="">
-                    {% if prUser.id != user.id %}
-                        <a href="/user/im?peer={{ prUser.id }}" class="btn btn-default">
-                            <i class="ai ai-mail2"></i>
-                            Написать сообщение
-                        </a>
-                    {% endif %}
+                <div class="row container-fluid profile-item">
+                    <label class="col-sm-3">Дата рождения:</label>
+                    <div class="col-sm-9">
+                        {{ prUser.bday }}
+                    </div>
                 </div>
-                <div class="">
+                <div class="row container-fluid profile-item">
+                    <label class="col-sm-3">О себе:</label>
+                    <div class="col-sm-9">
+                        {{ prUser.about }}
+                    </div>
+                </div>
+
+                <div class="profile-action profile-item">
                     {% if prUser.id == user.id %}
                         <a href="/user/edit_profile" class="btn btn-default">
                             <i class="ai ai-pencil"></i>
                             Редактировать
+                        </a>
+                    {% else %}
+                        <a href="/user/im?peer={{ prUser.id }}" class="btn btn-default">
+                            <i class="ai ai-mail2"></i>
+                            Написать сообщение
                         </a>
                     {% endif %}
                 </div>
@@ -55,26 +73,32 @@
                 <img src="{{ prUser.avatarUrl }}" style="max-width: 200px; max-height: 200px;">
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-8 col-md-offset-1 col-xs-12">
-                <h4>
-                    Поездки
-                </h4>
-            </div>
-        </div>
-        <div class="row trips">
-            <div class="col-md-8 col-md-offset-1 col-xs-12 tripsList">
+        <div class="row" style="margin-top: 20px;">
+            <div class="col-md-8 col-md-offset-2 col-xs-12">
+                <a href="/offer/sale" class="btn btn-default"><i class="glyphicon glyphicon-plus"></i> Новая поездка</a>
+                <a href="/offer/buy" class="btn btn-default"><i class="glyphicon glyphicon-plus"></i> Новая заявка</a>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-8 col-md-offset-1 col-xs-12">
-                <h4>
-                    Заказы
-                </h4>
-            </div>
-        </div>
-        <div class="row buys">
-            <div class="col-md-8 col-md-offset-1 col-xs-12 buysList">
+            <div class="panel-group col-md-8 col-md-offset-2 col-xs-12" id="zbs">
+                <div class="panel panel-primary" style="margin-top:20px;">
+                    <a class="panel-heading" data-toggle="collapse" data-parent="#zbs" href="#sales">
+                        Поездки
+                    </a>
+                    <div class="panel-collapse collapse" id="sales">
+                        <div class="col-md-10 col-md-1 tripsList">
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-primary" style="margin-top:20px;">
+                    <a class="panel-heading" data-toggle="collapse" data-parent="#zbs" href="#buys">
+                        Заявки
+                    </a>
+                    <div class="panel-collapse collapse" id="buys">
+                        <div class="col-md-10 col-md-1 buysList">
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

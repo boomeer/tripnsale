@@ -286,6 +286,9 @@ def EditProfileView(request):
         user.last_name = params.get("lastName", "")
         user.country = Country.objects.get(name=params.get("country", ""))
         user.city = params.get("city", "")
+        user.bday = params.get("bday", "01.01.1970")
+        user.about = params.get("about", "")
+
         if 'avatar' in request.FILES:
             StoreImage(request.FILES['avatar'], user.avatar)
         user.save()

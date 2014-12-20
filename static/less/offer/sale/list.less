@@ -119,6 +119,7 @@
         padding: 6px 12px;
         background-color: rgba(250, 250, 250, 0.2);
         cursor: pointer;
+        position: relative;
 
         &.tripItem-closed {
             opacity: 0.8;
@@ -183,6 +184,15 @@
                 * {
                     color: #900;
                 }
+            }
+
+            &.tripOwner-invis {
+                opacity: 0;
+            }
+
+            &.tripOwner-right {
+                position: absolute;
+                right: 0;
             }
 
             .tripSectionContent {

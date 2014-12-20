@@ -44,7 +44,7 @@
                     {% endif %}
                 </div>
             </div>
-            <div class="buy-section owner">
+            <div class="buy-section owner owner-right" onClick="window.location.href='{{ buy.owner.profileUrl }}';">
                 <div class="owner-av">
                     <img src="{{ buy.owner.avatarThumbUrl }}">
                 </div>
@@ -52,6 +52,15 @@
                     {{ buy.owner.first_name }} {{ buy.owner.last_name }}
                 </div>
             </div>
+            <div class="buy-section owner owner-invis">
+                <div class="owner-av">
+                    <img src="{{ buy.owner.avatarThumbUrl }}">
+                </div>
+                <div>
+                    {{ buy.owner.first_name }} {{ buy.owner.last_name }}
+                </div>
+            </div>
+
         </div>
     {% endif %}
 {% endfor %}

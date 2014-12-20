@@ -11,6 +11,9 @@ from offer.models import (
 from place.models import (
     Country,
 )
+from place.utils import (
+    GetCountries,
+)
 from util.msg import (
     GetBuyEditMsg,
 )
@@ -56,6 +59,7 @@ def SaleOfferAddView(request):
         fr = Country.objects.get(name=params.get("from", ""))
         to = Country.objects.get(name=params.get("to", ""))
         sale = SaleOffer(
+            content=params.get("content", ""),
             fr=fr,
             frCity=params.get("frCity", ""),
             ifrCity=params.get("frCity", "").lower(),
@@ -64,17 +68,45 @@ def SaleOfferAddView(request):
             toCity=params.get("toCity", ""),
             itoCity=params.get("toCity", "").lower(),
             toTime=datetime.strptime(params.get("toTime", ""), "%d.%m.%Y"),
-            deposit=params.get("deposit", None),
+            deposit=params.get("deposit", 0),
             guarant=params.get("guarant", False),
             owner=GetCurrentUser(request),
             createTime=datetime.now(),
         )
         sale.save()
         return redirect("/offer/sale/list")
-    countries = Country.objects.all()
     return RenderToResponse("offer/sale/add.html", request, {
         "url": "/offer/sale",
-        "countries": countries,
+        "countries": GetCountries(),
+    })
+
+
+def SaleEditView(request, id):
+    params = request.REQUEST
+    sale = SaleOffer.objects.get(id=id)
+    act = params.get("act", "")
+    if sale.owner != GetCurrentUser(request):
+        return redirect("/")
+    if act == "edit":
+        CheckPost(request)
+        fr = Country.objects.get(name=params.get("from", ""))
+        to = Country.objects.get(name=params.get("to", ""))
+        sale.content = params.get("content", "")
+        sale.fr = fr
+        sale.frCiry = params.get("frCity", "")
+        sale.ifrCiry = params.get("frCity", "").lower()
+        #sale.frTime = datetime.strptime(params.get("fromTime", ""), "%d.%m.%Y"),
+        sale.to = to
+        sale.toCity = params.get("toCity", "")
+        sale.itoCity = params.get("toCity", "").lower()
+        #sale.toTime = datetime.strptime(params.get("toTime", ""), "%d.%m.%Y"),
+        sale.deposit = float(params.get("deposit", "0").replace(",", "."))
+        sale.guarant = params.get("guarant", False)
+        sale.save()
+        return redirect("/offer/sale/edit/{}".format(sale.id))
+    return RenderToResponse("offer/sale/edit.html", request, {
+        "sale": sale,
+        "countries": GetCountries(),
     })
 
 
@@ -104,6 +136,7 @@ def SaleFilterView(request):
         "block": block,
         "profile": int(params.get("profile", 0)),
     })
+
 
 @SafeView
 def SaleRemoveView(request):

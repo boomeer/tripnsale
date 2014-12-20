@@ -2,21 +2,22 @@
 {% load static %}
 
 {% block own_title %}
-Добавление поездки -
+Редактирование поездки -
 {% endblock %}
 
 {% block own_head %}
-    <script src="{% static "offer/sale/add.js" %}" type="text/javascript"></script>
     <link rel="stylesheet" href="{% static "css/offer/sale/add.css" %}">
+    <script src="{% static "offer/sale/edit.js" %}" type="text/javascript"></script>
+    <link rel="stylesheet" href="{% static "css/offer/sale/edit.css" %}">
 {% endblock %}
 
 {% block main %}
     <div class="container-fluid">
         <div class="saleAddForm col-md-6 col-lg-6 col-md-offset-2 col-lg-offset-2">
-            <h3>Добавить поездку</h3>
+            <h3>Редактировать поездку</h3>
             <form class="form-horizontal" action="" method="post" role="form">
                 {% csrf_token %}
-                <input type="hidden" name="act" value="add">
+                <input type="hidden" name="act" value="edit">
                 <div class="fromTo group">
                     <div class="fromBlock fromToBlock">
                         <div class="fromToTitle">
@@ -26,15 +27,15 @@
                             <div class="inputWrapper">
                                 <select id="inputFrom" name="from" placeholder="Страна">
                                     {% for country in countries %}
-                                        <option value="{{ country.name }}">
+                                        <option value="{{ country.name }}" {% if sale.fr == country %}selected{% endif %}>
                                             {{ country.title }}
                                         </option>
                                     {% endfor %}
                                 </select>
-                                <input type="text" class="form-control" placeholder="Город" id="inputFromCity" name="frCity">
+                                <input type="text" class="form-control" placeholder="Город" id="inputFromCity" name="frCity" value="{{ sale.frCity }}">
                             </div>
                             <div class="inputWrapper">
-                                <input type="text" class="form-control" placeholder="Когда" id="inputFromTime" name="fromTime">
+                                <input type="text" class="form-control" placeholder="Когда" id="inputFromTime" name="fromTime" value="{{ sale.frTime|date:"d.m.Y" }}">
                             </div>
                         </div>
                     </div>
@@ -49,15 +50,15 @@
                             <div class="inputWrapper">
                                 <select id="inputTo" name="to" placeholder="Страна">
                                     {% for country in countries %}
-                                        <option value="{{ country.name }}">
+                                        <option value="{{ country.name }}" {% if sale.to == country %}selected{% endif %}>
                                             {{ country.title }}
                                         </option>
                                     {% endfor %}
                                 </select>
-                                <input type="text" class="form-control" placeholder="Город" id="inputToCity" name="toCity">
+                                <input type="text" class="form-control" placeholder="Город" id="inputToCity" name="toCity" value="{{ sale.toCity }}">
                             </div>
                             <div class="inputWrapper">
-                                <input type="text" class="form-control" placeholder="Когда" id="inputToTime" name="toTime">
+                                <input type="text" class="form-control" placeholder="Когда" id="inputToTime" name="toTime" value="{{ sale.toTime|date:"d.m.Y" }}">
                             </div>
                         </div>
                     </div>
@@ -67,7 +68,7 @@
                         <label for="inputContent">Комментарий:</label>
                     </div>
                     <div class="col-md-10">
-                        <textarea class="form-control" id="inputContent" name="deposit" rows=4></textarea>
+                        <textarea class="form-control" id="inputContent" name="content" rows=4>{{ sale.content }}</textarea>
                     </div>
                 </div>
 
@@ -76,7 +77,7 @@
                         <label for="inputDeposit">Депозит:</label>
                     </div>
                     <div class="inputWrapper">
-                        <input type="text" class="form-control" id="inputDeposit" name="deposit" value=0>
+                        <input type="text" class="form-control" id="inputDeposit" name="deposit" value="{{ sale.deposit }}">
                     </div>
                     <div class="hint">
                         Укажите депозит в долларах
@@ -87,12 +88,12 @@
                         <label for="inputGuarant">Только с гарантом:</label>
                     </div>
                     <div class="inputWrapper">
-                        <input type="checkbox" id="inputGuarant" name="guarant" checked>
+                        <input type="checkbox" id="inputGuarant" name="guarant" {% if sale.guarant %}checked{% endif %}>
                     </div>
                 </div>
 
                 <div class="group">
-                    <button type="submit" class="btn btn-default btn-lg">Создать заявку</button>
+                    <button type="submit" class="btn btn-default btn-lg">Редактировать заказ</button>
                 </div>
             </form>
         </div>

@@ -14,6 +14,7 @@ from util.utils import (
     SafeView,
     RenderToResponse,
     CheckPost,
+    GetNewId,
 )
 from user.utils import (
     GetCurrentUser,
@@ -24,6 +25,7 @@ from gallery.utils import (
     CreateGalleryPhoto,
     StoreImage,
     MakeThumbnail,
+    VerifyPhotos,
 )
 from gallery.models import (
     Gallery,
@@ -134,7 +136,7 @@ def BuyOfferAddView(request):
     if act == "add":
         CheckPost(request)
         CheckAuth(request)
-        gallery = CreateGallery()
+        gallery = Gallery.objects.get(token=params.get("gallery", ""))
         buy = BuyOffer(
             title=params.get("title", ""),
             ititle=params.get("title", "").lower(),
@@ -147,9 +149,14 @@ def BuyOfferAddView(request):
             createTime=datetime.now(),
         )
         buy.save()
+        VerifyPhotos(params.get("token", ""))
         return redirect("/offer/buy/list")
+    gallery = CreateGallery()
+    token = GetNewId()
     return RenderToResponse("offer/buy/add.html", request, {
         "url": "/offer/buy",
+        "gallery": gallery,
+        "token": token,
     })
 
 
@@ -167,31 +174,8 @@ def BuyEditView(request, id):
         buy.content = params.get("content", "")
         buy.costFrom = float(params.get("costFrom", "0").replace(",", "."))
         buy.costTo = float(params.get("costTo", "0").replace(",", "."))
-        if not buy.gallery:
-            buy.gallery = CreateGallery()
-            buy.save()
+        VerifyPhotos(params.get("token", ""))
         return redirect("/offer/buy/edit/{}?msg=buy_edit_ok".format(buy.id))
-    elif act == "upload":
-        CheckPost(request)
-        if not buy.gallery:
-            buy.gallery = CreateGallery()
-            buy.save()
-        files = []
-        for photo in request.FILES.getlist("photos"):
-            ph = CreateGalleryPhoto(buy.gallery)
-            try:
-                filePath = StoreImage(photo, ph.img)
-                MakeThumbnail(ph.img, ph.thumbnail)
-                ph.save()
-                files.append({
-                    "name": filePath,
-                    "thumbnailUrl": ph.img.url,
-                })
-            except:
-                ph.delete()
-        return JsonResponse({
-            "files": files,
-        })
     elif act == "makeHead":
         pic = Photo.objects.get(id=params.get("picId"))
         pic.gallery.head = pic
@@ -202,6 +186,7 @@ def BuyEditView(request, id):
     return RenderToResponse("offer/buy/edit.html", request, {
         "url": "/offer/buy/edit/{}/".format(buy.id),
         "buy": buy,
+        "token": GetNewId(),
     })
 
 

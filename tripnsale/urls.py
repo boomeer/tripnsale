@@ -16,4 +16,8 @@ urlpatterns = patterns('',
     url('^user/', include('user.urls')),
     url('^guarant/', include('guarant.urls')),
     url('^info/', include('infos.urls')),
-) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    url('^gallery/', include('gallery.urls')),
+)
+
+if settings.DEBUG:
+    urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

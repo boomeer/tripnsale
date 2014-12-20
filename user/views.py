@@ -14,7 +14,7 @@ from util.utils import (
     RedirectExc,
     RenderToResponse,
     CheckPost,
-    GetSysMsg,
+    GetRegMsg,
     GetNewId,
 )
 from gallery.utils import StoreImage, MakeThumbnail
@@ -149,8 +149,8 @@ def AuthView(request):
             raise RedirectExc("/user/auth/?msgReg={}".format(e.status))
     return RenderToResponse("user/auth.html", request, {
         "countries": GetCountries(),
-        "msgLogin": GetSysMsg(params.get("msgLogin", "")),
-        "msgReg": GetSysMsg(params.get("msgReg", "")),
+        "msgLogin": GetRegMsg(params.get("msgLogin", "")),
+        "msgReg": GetRegMsg(params.get("msgReg", "")),
     })
 
 

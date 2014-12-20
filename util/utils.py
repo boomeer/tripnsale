@@ -4,7 +4,6 @@ from user.utils import GetCurrentUser, GetUnreadCount
 from user.models import Msg
 from util.exc import *
 from util.msg import *
-from util.mail import *
 
 import string
 import random

@@ -1,21 +1,21 @@
-
+{% load static %}
     <!-- FOR BODY background-noise: add 'bg-noise' to this div -->
-    <div class="page-wrap" style="background-image: url('../assets/img/bg-white.png')">
-      
+    <div class="page-wrap bg0" style="margin-top: 0px;">
+
       <div class="page-header-wrap">
         <div class="container">
-          <div class="page-header"> 
+          <div class="page-header">
 
-            
+
             <h1>Сравнение цен</h1>
-            
+
           </div> <!-- end page-header -->
         </div> <!-- end container -->
       </div> <!-- end page-header-wrap -->
 
 <div class="container content-wrap" style="padding-bottom: 40px;">
 <section id="iphone">
-<div style="background-image: url('../assets/img/bg-white.png')">    
+<div class="bg0">
 <div class="container content-wrap" style="padding-bottom: 0px;">
   <div class="row">
     <div class="col-md-6 text-center">
@@ -28,10 +28,10 @@
   <!-- wide spaced -->
   <div class="row space">
     <div class="col-sm-6 wow fadeInLeft" data-wow-duration="1.4s" data-wow-delay=".2s">
-      <img src="../assets/img/Price_apple-us.png" alt="" class="img-responsive visible-md visible-lg no-border" style="margin-top: 42px;">
+      <img src="{% static "img/compare/Price_apple-us.png" %}" alt="" class="img-responsive visible-md visible-lg no-border" style="margin-top: 42px;">
     </div>
     <div class="col-sm-6 wow fadeInRight" data-wow-duration="1.4s" data-wow-delay=".2s">
-      <img src="../assets/img/Price_apple-ru.png" alt="" class="img-responsive visible-md visible-lg no-border" style="margin-top: 0px;">
+      <img src="{% static "img/compare/Price_apple-ru.png" %}" alt="" class="img-responsive visible-md visible-lg no-border" style="margin-top: 0px;">
     </div>
   </div> <!-- end row -->
 </div> <!-- end page-wrap -->
@@ -39,12 +39,10 @@
 
 </div>
 
-<div style="background-image: url('../assets/img/bg-white2.png'); padding-bottom: 0px;">   
-<div class="container content-wrap" style="background-image: url('../assets/img/bg-white2.png'); padding-bottom: 40px;">
-  
-  
-  
-  
+<div class="bg2" style="padding-bottom: 0px;">
+<div class="container content-wrap bg2">
+
+
   <!-- Philosophy -->
 
 <section class="col-md-8 col-md-push-4 flush-right">
@@ -76,7 +74,7 @@
 <aside class="col-md-4 col-md-pull-8">
   <div class="col-md-9">
     <div class="wow fadeInLeft no-border" data-wow-duration="1.4s" data-wow-delay=".2s">
-      <img src="../assets/img/iPhone1.png" alt="" class="img-responsive visible-md visible-lg no-border">
+      <img src="{% static "img/compare/iPhone1.png" %}" alt="" class="img-responsive visible-md visible-lg no-border">
     </div>
   </div>
 </aside>
@@ -87,7 +85,7 @@
 <p class="h3 fancy divider" style="background: #f4f4f4; height: 47px;padding-top: 10px;"><span class="ai ai-compass"></span></p>
 
 <section id="macys">
-<div style="background-image: url('../assets/img/bg-white.png'); padding-top: 70px;">    
+<div class="bg0" style="padding-top: 70px;">
 <div class="container content-wrap" style="padding-bottom: 40px;">
 
   <div class="row">
@@ -108,17 +106,17 @@
   <!-- wide spaced -->
   <div class="row space">
     <div class="col-sm-6 wow fadeInLeft" data-wow-duration="1.4s" data-wow-delay=".2s">
-      <img src="../assets/img/bags_us.png" alt="" class="img-responsive visible-md visible-lg no-border" style="margin-top: 35px;">
+      <img src="{% static "img/compare/bags_us.png" %}" alt="" class="img-responsive visible-md visible-lg no-border" style="margin-top: 35px;">
     </div>
     <div class="col-sm-6 wow fadeInRight" data-wow-duration="1.4s" data-wow-delay=".2s">
-      <img src="../assets/img/bags_ru.png" alt="" class="img-responsive visible-md visible-lg no-border" style="margin-top: 0px;">
+      <img src="{% static "img/compare/bags_ru.png" %}" alt="" class="img-responsive visible-md visible-lg no-border" style="margin-top: 0px;">
     </div>
   </div> <!-- end row -->
 </div> <!-- end page-wrap -->
 </div>
 
-<div style="background-image: url('../assets/img/bg-white2.png'); padding-bottom: 0px;">   
-<div class="container content-wrap" style="background-image: url('../assets/img/bg-white2.png');">
+<div class="bg2" style="padding-bottom: 0px;">
+<div class="container content-wrap bg2">
   <div class="row">
     <div class="col-md-6 text-center" style="padding-top: 30px;">
       <p class="lead">GUESS Confidential Avery ~5900 рублей в США.</p>
@@ -159,8 +157,8 @@
 <p class="h3 fancy divider" style="background: #f4f4f4; height: 47px;padding-top: 10px;"><span class="ai ai-compass"></span></p>
 
 <section id="prot">
-<div style="background-image: url('../assets/img/bg-white.png'); padding-top: 70px;">    
-<div class="container content-wrap" style="padding-bottom: 40px;">
+<div class="bg0" style="padding-top: 70px;">
+<div class="container content-wrap bg0" style="padding-bottom: 40px;">
 
   <div class="row">
     <div class="col-md-6 text-center">
@@ -173,17 +171,17 @@
   <!-- wide spaced -->
   <div class="row space">
     <div class="col-sm-6 wow fadeInLeft" data-wow-duration="1.4s" data-wow-delay=".2s">
-      <img src="../assets/img/prot_us.png" alt="" class="img-responsive visible-md visible-lg no-border" style="margin-top: 50px;">
+      <img src="{% static "img/compare/prot_us.png" %}" alt="" class="img-responsive visible-md visible-lg no-border" style="margin-top: 50px;">
     </div>
     <div class="col-sm-6 wow fadeInRight" data-wow-duration="1.4s" data-wow-delay=".2s">
-      <img src="../assets/img/prot_ru.png" alt="" class="img-responsive visible-md visible-lg no-border" style="margin-top: 0px;">
+      <img src="{% static "img/compare/prot_ru.png" %}" alt="" class="img-responsive visible-md visible-lg no-border" style="margin-top: 0px;">
     </div>
   </div> <!-- end row -->
 </div> <!-- end page-wrap -->
 </div>
 
-<div style="background-image: url('../assets/img/bg-white2.png'); padding-bottom: 0px;">   
-<div class="container content-wrap" style="background-image: url('../assets/img/bg-white2.png');">
+<div class="bg2" style="padding-bottom: 0px;">
+<div class="container content-wrap bg2">
   <div class="row">
     <div class="col-md-6 text-center" style="padding-top: 30px;">
       <p class="lead">~3000 рублей за протеин в США.</p>
@@ -200,14 +198,14 @@
 </section>
 
 <section id="macys">
-<div style="background-image: url('../assets/img/bg-white.png'); padding-top: 70px;">    
-<div class="container content-wrap" style="padding-bottom: 40px;">
+<div class="bg0" style="padding-top: 70px;">
+<div class="container content-wrap bg0" style="padding-bottom: 40px;">
 
   <div class="row">
     <div class="col-md-12 text-center">
       <p class="lead">Примеров - масса.</p>
       <p class="lead">Это могут быть вещи, которых вовсе нет в России (витамины из США);<br>Может быть что-то сезонное (распродажи брендовой одежды в Европе).</p>
-      <p class="lead">Услуги сервиса ограничиваются лишь вашим воображением.</p>
+      <p class="lead">Услуги сервиса ограничиваются лишь Вашим воображением.</p>
       <p><br></p>
     </div>
   </div>
@@ -219,6 +217,6 @@
 </div>
 
 </div>
-    
-    
-     
+
+
+

@@ -110,6 +110,7 @@
     .tripItem:hover {
         border-color: #5bb0c5;
         background-color: rgb(240, 240, 240);
+        box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3);
     }
 
     .tripItem {
@@ -123,63 +124,86 @@
 
         &.tripItem-closed {
             opacity: 0.8;
+            background-color: rgba(150, 150, 10, 0.1);
+            border: 1px solid #994;
         }
-
-        .closed {
-            padding: 3px 6px;
-            border-radius: 3px;
-            background-color: #eea;
-            color: #552;
-        }
-
-        .tripFromTo {
-            .tripPlace {
-                display: inline-block;
-            }
-
-            .tripArrow {
-                display: inline-block;
-                width: 60px;
-                text-align: center;
-            }
-
-            .tripFrom {
-            }
-            
-            .tripTo {
-            }
-        }
-        
+ 
         .tripSection {
             vertical-align: top;
             display: inline-block;
             padding: 2px 12px;
 
             .tripSectionTitle {
-                font-weight: 900;
-                font-size: 11pt;
             }
 
             .tripSectionContent {
-                font-size: 11pt;
+                font-weight: 900;
             }
         }
 
-        img {
-        }
+        .tripMainSection {
+            max-width: 70%;
 
-        .tripCity {
-            color: #888;
-        }
+            .closed {
+                padding: 3px 6px;
+                border-radius: 3px;
+                border: 1px solid #994;
+                background-color: #eea;
+                color: #552;
+            }
 
-        .tripGuarant {
-            .guarant {
+            .tripFromTo {
+                .tripPlace {
+                    display: inline-block;
+                }
+
+                .tripArrow {
+                    display: inline-block;
+                    width: 60px;
+                    text-align: center;
+                }
+
+                .tripFrom {
+                }
+                
+                .tripTo {
+                }
+            }
+            
+            .tripDates {
+                font-size: 12pt;
                 font-weight: 900;
-                color: #600;
+            }
+
+            img {
+            }
+
+            .tripCity {
+                color: #888;
+            }
+
+            .tripGuarant {
+                .guarant {
+                    font-weight: 900;
+                    color: #600;
+                }
+            }
+
+            .tripComment {
+                .tripComment-title {
+                    font-weight: 900;
+                }
+
+                .tripComment-content {
+                    padding: 0px 4px;
+                }
             }
         }
 
         .tripOwner {
+            max-width: 20%;
+            padding-right: 10px;
+
             &:hover {
                 * {
                     color: #900;

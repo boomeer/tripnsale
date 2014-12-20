@@ -147,9 +147,7 @@ def AuthView(request):
                     password=params.get("password", ""),
                 )
                 login(request, user)
-                backref = params.get("next", "/")
-                if not backref:
-                    backref = "/"
+                backref = params.get("next", "/user/profile/?firsttime=1")
                 return redirect(backref)
         except RegErr as e:
             raise RedirectExc("/user/auth/?msgReg={}".format(e.status))
@@ -168,7 +166,7 @@ def ActivateView(request, code):
     djUser = GetDjUserByUser(user)
     djUser.backend = 'django.contrib.auth.backends.ModelBackend'
     login(request, djUser)
-    return redirect("/")
+    return redirect("/user/profile/?firsttime=1")
 
 
 @SafeView
@@ -263,6 +261,7 @@ def ProfileView(request, userid=None):
     return RenderToResponse("user/profile.html", request, {
         "url": user.profileUrl() if user else "/user/profile/",
         "prUser": user,
+        "firsttime": params.get("firsttime", ""),
     })
 
 

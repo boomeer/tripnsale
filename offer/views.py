@@ -185,9 +185,11 @@ def BuyEditView(request, id):
         pic = Photo.objects.get(id=params.get("picId"))
         pic.gallery.head = pic
         pic.gallery.save()
+        return redirect("/offer/buy/edit/{}".format(buy.id))
     elif act == "erasePic":
         pic = Photo.objects.get(id=params.get("picId"))
-        pic.delete()
+        buy.gallery.er(pic)
+        return redirect("/offer/buy/edit/{}".format(buy.id))
     return RenderToResponse("offer/buy/edit.html", request, {
         "url": "/offer/buy/edit/{}/".format(buy.id),
         "buy": buy,

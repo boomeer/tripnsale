@@ -13,6 +13,16 @@ class Gallery(models.Model):
         photo.gallery = self
         photo.save()
 
+    def er(self, photo):
+        if self.head == photo:
+            phs = self.photos.all()
+            if len(phs) >= 2:
+                self.head = phs[0] if phs[0] != photo else phs[1]
+            else:
+                self.head = None
+        self.save()
+        photo.delete()
+
     def getPhotos(self):
         photos = self.photos.filter(verified=True).all()
         return photos

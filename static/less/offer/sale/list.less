@@ -22,6 +22,7 @@
     .tripView {
         position: absolute;
         z-index: @tripViewZ + 20;
+        overflow-y: auto;
         top: 100px;
         bottom: 100px;
         left: 10%;
@@ -103,99 +104,99 @@
 .trips {
     padding-top: 20px;
     height: 100%;
+}
+/* DON'T INCUDE .tripsList INSIDE .trips !!! */ 
+.tripsList {
+    .tripItem:hover {
+        border-color: #5bb0c5;
+    }
 
-    .tripsList {
-        .tripItem:hover {
-            border-color: #5bb0c5;
+    .tripItem {
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin: 4px 0px;
+        padding: 6px 12px;
+        background-color: rgba(250, 250, 250, 0.2);
+        cursor: pointer;
+
+        &.tripItem-closed {
+            opacity: 0.8;
         }
 
-        .tripItem {
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            margin: 4px 0px;
-            padding: 6px 12px;
-            background-color: rgba(250, 250, 250, 0.2);
-            cursor: pointer;
+        .closed {
+            padding: 3px 6px;
+            border-radius: 3px;
+            background-color: #eea;
+            color: #552;
+        }
 
-            &.tripItem-closed {
-                opacity: 0.8;
+        .tripFromTo {
+            .tripPlace {
+                display: inline-block;
             }
 
-            .closed {
-                padding: 3px 6px;
-                border-radius: 3px;
-                background-color: #eea;
-                color: #552;
+            .tripArrow {
+                display: inline-block;
+                width: 60px;
+                text-align: center;
             }
 
-            .tripFromTo {
-                .tripPlace {
-                    display: inline-block;
-                }
-
-                .tripArrow {
-                    display: inline-block;
-                    width: 60px;
-                    text-align: center;
-                }
-
-                .tripFrom {
-                }
-                
-                .tripTo {
-                }
+            .tripFrom {
             }
             
-            .tripSection {
-                vertical-align: top;
-                display: inline-block;
-                padding: 2px 12px;
-
-                .tripSectionTitle {
-                    font-weight: 900;
-                    font-size: 11pt;
-                }
-
-                .tripSectionContent {
-                    font-size: 11pt;
-                }
+            .tripTo {
             }
-
-            img {
-            }
-
-            .tripCity {
-                color: #888;
-            }
-
-            .tripGuarant {
-                .guarant {
-                    font-weight: 900;
-                    color: #600;
-                }
-            }
-
-            .tripOwner {
-                &:hover {
-                    * {
-                        color: #900;
-                    }
-                }
-
-                .tripSectionContent {
-                    text-align: center;
-
-                    .tripOwnerAv {
-                        img {
-                            border: 1px solid #ddd;
-                            max-height: 128px;
-                            max-width: 100%;
-                        }
-                    }
-                }
-            }
-
         }
+        
+        .tripSection {
+            vertical-align: top;
+            display: inline-block;
+            padding: 2px 12px;
+
+            .tripSectionTitle {
+                font-weight: 900;
+                font-size: 11pt;
+            }
+
+            .tripSectionContent {
+                font-size: 11pt;
+            }
+        }
+
+        img {
+        }
+
+        .tripCity {
+            color: #888;
+        }
+
+        .tripGuarant {
+            .guarant {
+                font-weight: 900;
+                color: #600;
+            }
+        }
+
+        .tripOwner {
+            &:hover {
+                * {
+                    color: #900;
+                }
+            }
+
+            .tripSectionContent {
+                text-align: center;
+
+                .tripOwnerAv {
+                    img {
+                        border: 1px solid #ddd;
+                        max-height: 128px;
+                        max-width: 100%;
+                    }
+                }
+            }
+        }
+
     }
 }
 

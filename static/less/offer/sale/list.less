@@ -113,14 +113,9 @@
             border: 1px solid #ccc;
             border-radius: 4px;
             margin: 4px 0px;
-            padding: 3px 6px;
+            padding: 6px 12px;
             background-color: rgba(250, 250, 250, 0.2);
             cursor: pointer;
-
-            table {
-                width: 100%;
-                background: inherit;
-            }
 
             &.tripItem-closed {
                 opacity: 0.8;
@@ -132,14 +127,33 @@
                 background-color: #eea;
                 color: #552;
             }
+
+            .tripFromTo {
+                .tripPlace {
+                    display: inline-block;
+                }
+
+                .tripArrow {
+                    display: inline-block;
+                    width: 60px;
+                    ext-align: center;
+                }
+
+                .tripFrom {
+                }
+                
+                .tripTo {
+                }
+            }
             
             .tripSection {
                 vertical-align: top;
                 display: inline-block;
+                padding: 2px 12px;
 
                 .tripSectionTitle {
                     font-weight: 900;
-                    font-size: 10pt;
+                    font-size: 11pt;
                 }
 
                 .tripSectionContent {
@@ -154,28 +168,7 @@
                 color: #888;
             }
 
-            .tripFrom {
-                width: 20%;
-                max-width: 20%;
-            }
-
-            .tripTo {
-                width: 20%;
-                max-width: 20%;
-            }
-
-            .tripDates {
-                width: 25%;
-                max-width: 25%;
-
-                .tripSectionContent {
-                    font-size: 9pt;
-                }
-            }
-
-            .tripDeposit {
-                width: 15%;
-                max-width: 15%;
+            .tripGuarant {
                 .guarant {
                     font-weight: 900;
                     color: #600;
@@ -183,9 +176,6 @@
             }
 
             .tripOwner {
-                width: 10%;
-                max-width: 10%;
-
                 &:hover {
                     * {
                         color: #900;
@@ -198,7 +188,7 @@
                     .tripOwnerAv {
                         img {
                             border: 1px solid #ddd;
-                            max-height: 200px;
+                            max-height: 128px;
                             max-width: 100%;
                         }
                     }

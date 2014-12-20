@@ -137,7 +137,7 @@ def AuthView(request):
             user.save()
 
             if settings.ENABLE_ACTIVATION:
-                SendActivateMail(request, user)
+                SendActivateMail(user)
                 return RenderToResponse("user/auth_success.html", request, {
                             "email": params.get("email", ""),
                         })

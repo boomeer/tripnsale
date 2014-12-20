@@ -12,7 +12,7 @@ class User(authModels.User):
     remoteAddr = models.TextField(default="")
     regRemoteAddr = models.TextField(default="")
     country = models.ForeignKey(Country)
-    city = models.TextField(default="")
+    city = models.TextField(default="", blank=True)
     avatar = models.ImageField(upload_to="avatars", blank=True, null=True)
     activated = models.BooleanField(default=True)
     activateCode = models.TextField(default="")

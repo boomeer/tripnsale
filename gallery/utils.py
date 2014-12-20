@@ -3,20 +3,38 @@ from util.utils import GetNewId
 from PIL import Image
 import os
 from django.core.files import File
+from datetime import datetime
 
 
 def CreateGallery():
-    g = Gallery()
+    g = Gallery(
+        createTime=datetime.now(),
+        token=GetNewId(),
+    )
     g.save(force_insert=True)
     return g
 
 
-def CreateGalleryPhoto(gallery):
+def CreateGalleryPhoto(gallery, token=None):
+    if not token:
+        token = GetNewId()
     photo = Photo(
         gallery=gallery,
+        token=token,
+        verified=False,
     )
     photo.save(force_insert=True)
+    if len(gallery.photos.all()) == 1:
+        gallery.head = photo
+        gallery.save()
     return photo
+
+
+def VerifyPhotos(token):
+    phs = Photo.objects.filter(token=token).all()
+    for ph in phs:
+        ph.verified = True
+        ph.save()
 
 
 def StoreImage(image, field, sizeLimit=4*2**20):

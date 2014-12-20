@@ -44,7 +44,7 @@
                             </h5>
                         </div>
                         <div id="links">
-                            {% for photo in buy.gallery.photos.all %}
+                            {% for photo in buy.gallery.getPhotos %}
                                 <a href="{{ photo.url }}" title="" data-gallery>
                                     <img src="{{ photo.thumbUrl }}" alt="">
                                 </a>

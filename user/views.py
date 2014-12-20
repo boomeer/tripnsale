@@ -7,6 +7,7 @@ from django.contrib.auth import (
     login,
     logout,
 )
+import tripnsale.settings as settings
 from util.utils import (
     SafeView,
     TsExc,
@@ -31,8 +32,6 @@ from user.utils import (
 )
 import re
 from datetime import datetime
-
-enableActivation = False
 
 class RegErr(TsExc):
     def __init__(self, msg):
@@ -127,11 +126,11 @@ def AuthView(request):
                 remoteAddr=request.META["REMOTE_ADDR"],
                 regRemoteAddr=request.META["REMOTE_ADDR"],
                 activateCode=GetNewId(),
-                activated=not enableActivation,
+                activated=not settings.ENABLE_ACTIVATION,
             )
             user.save()
 
-            if enableActivation:
+            if settings.ENABLE_ACTIVATION:
                 SendActivateMail(user)
                 return RenderToResponse("user/auth_success.html", request, {
                             "email": params.get("email", ""),

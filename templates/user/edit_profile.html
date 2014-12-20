@@ -42,9 +42,9 @@
                 <div class="form-group">
                     <label class="control-label col-sm-3" for="inputCountry">Место проживания:</label>
                     <div class="col-sm-5">
-                        <select id="inputCountry" name="country" placeholder="Страна" value={{ prUser.country.id }}>
+                        <select id="inputCountry" name="country" placeholder="Страна" value="{{ prUser.country.name }}">
                             {% for country in countries %}
-                                <option value="{{ country.name }}">
+                                <option value="{{ country.name }}" {% if prUser.country.id == country.id %} selected {% endif %}>
                                     {{ country.title }}
                                 </option>
                             {% endfor %}
@@ -64,19 +64,19 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-sm-3" for="inputAvatar">Фото:</label>
+                    <label class="control-label col-sm-3" for="inputAvatar">Аватар:</label>
                     <div class="col-sm-9">
                         <!-- The fileinput-button span is used to style the file input field as button -->
                         <span class="btn btn-info fileinput-button">
                             <i class="glyphicon glyphicon-plus"></i>
-                            <span>Добавить</span>
+                            <span>Загрузить</span>
                             <input type="file" accept="image/*" name="avatar" id="inputAvatar">
                             <!--<input type="hidden" name="act" value="upload">-->
                         </span>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-sm-3" for="inputAvatar">Текущее фото:</label>
+                    <label class="control-label col-sm-3" for="inputAvatar">Текущий аватар:</label>
                     <div class="col-sm-9">
                         <img src="{{ prUser.avatarUrl }}" style="max-width: 300px; max-height: 300px;">
                     </div>
@@ -108,7 +108,7 @@
                 </div>
                 <hr>
                 <div class="btnAuth">
-                    <button type="submit" class="btn btn-default">Применить изменения</button>
+                    <button type="submit" class="btn btn-default col-md-offset-3">Применить изменения</button>
                 </div>
             </form>
         </div>

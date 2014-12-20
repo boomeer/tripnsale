@@ -311,11 +311,11 @@ def UserMailView(request):
     user = GetCurrentUser(request)
     confs = Conference.objects.filter(users=user).all()
     confs = [conf for conf in confs if conf.msgs.all()]
-    confs = sorted(confs, key=lambda self: list(self.msgs.all())[-1].time)
+    confs.sort(key=lambda conf: conf.msgs.latest("time").time, reverse=True)
     for conf in confs:
         u = conf.users.all()
         conf.peer = u[0] if u[1] == user else u[1]
-        conf.msg = list(conf.msgs.all())[-1]
+        conf.msg = conf.msgs.latest("time")
     '''
     lastMsg = {}
     for msg in msgs:

@@ -15,6 +15,15 @@
             <div class="">
                 <h4>Редактирование заказа</h4>
             </div>
+            {% if failMsg %}
+                <div class="alert alert-danger">
+                    {{ failMsg }}
+                </div>
+            {% elif succMsg %}
+                <div class="alert alert-success">
+                    {{ succMsg }}
+                </div>
+            {% endif %}
             <hr>
             <form id="fileupload" enctype="multipart/form-data" class="form-horizontal" action="" method="post" role="form">
                 {% csrf_token %}

@@ -17,6 +17,8 @@ class User(authModels.User):
     activated = models.BooleanField(default=True)
     activateCode = models.TextField(default="")
     guarant = models.BooleanField(default=False)
+    bday = models.TextField(default="01.01.1970")
+    about = models.TextField(default="")
 
     def avatarUrl(self):
         return self.avatar.url if self.avatar else "{}/user/av_default.png".format(settings.STATIC_URL)

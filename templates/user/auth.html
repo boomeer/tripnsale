@@ -12,9 +12,15 @@
 
 {% block main %}
     <div class="container-fluid" style="margin: 20px 0px;">
+        {% if next %}
+            <div class="col-lg-8 col-lg-offset-2 alert alert-warning">
+                Пожалуйста, войдите или зарегистрируйтесь.
+            </div>
+        {% endif %}
         <div class="authBlockWrapper authBlockWrapperReg col-lg-5 col-lg-offset-1 col-md-6 col-sm-6">
             <div class="authBlock">
                 <div class="authTitle">
+                    Регистрация
                 </div>
 
                 {% if msgReg %}
@@ -57,8 +63,8 @@
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="inputCountry">Место проживания:</label>
-                        <div class="col-sm-4">
-                            <select id="inputCountry" name="country" placeholder="Страна">
+                        <div class="col-sm-4" style="padding: 0px;">
+                            <select id="inputCountry" name="country" placeholder="Страна" class="col-sm-12">
                                 {% for country in countries %}
                                     <option value="{{ country.name }}">
                                         {{ country.title }}
@@ -74,12 +80,12 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-sm-1 col-sm-offset-2">
+                        <div class="col-sm-1 col-sm-offset-3">
                             <input id="offert-check" type="checkbox" value="true" name="offert" />
                         </div>
                         <div class="col-sm-8" style="font-size: smaller;"><span class="req" style="font-size: small;">*</span> Нажимая "Зарегистрироваться", я соглашаюсь с условиями <a href="/">оферты</a></div>
                     </div>
-                    <div class="col-sm-9 col-sm-offset-3">
+                    <div class="col-sm-8 col-sm-offset-3">
                         <span class="req">Поля с * обязательны для заполнения</span>
                     </div>
                     <div class="btnAuth">
@@ -91,6 +97,7 @@
         <div class="authBlockWrapper col-lg-5 col-md-6 col-sm-6">
             <div class="authBlock">
                 <div class="authTitle">
+                    Вход
                 </div>
                 {% if msgLogin %}
                     <div class="alert alert-danger">

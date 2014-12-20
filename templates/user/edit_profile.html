@@ -8,6 +8,7 @@
 {% block own_head %}
     <script src="{% static "user/edit_profile.js" %}" type="text/javascript"></script>
     <link rel="stylesheet" href="{% static "css/user/edit_profile.css" %}">
+    {% include "file-upload.html" %}
 {% endblock %}
 
 {% block main %}
@@ -57,9 +58,21 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label for="inputBday" class="col-sm-3 control-label">Дата рождения:</label>
+                    <div class="col-sm-9">
+                        <input type="date" class="form-control" id="inputBday" name="bday" placeholder="Дата рождения" {% if prUser.bday != "01.01.1970" %}value="{{ prUser.bday }}"{% endif %}>
+                    </div>
+                </div>
+                <div class="form-group">
                     <label class="control-label col-sm-3" for="inputAvatar">Фото:</label>
                     <div class="col-sm-9">
-                        <input type="file" accept="image/*" class="form-control" name="avatar" id="inputAvatar">
+                        <!-- The fileinput-button span is used to style the file input field as button -->
+                        <span class="btn btn-info fileinput-button">
+                            <i class="glyphicon glyphicon-plus"></i>
+                            <span>Добавить</span>
+                            <input type="file" accept="image/*" name="avatar" id="inputAvatar">
+                            <!--<input type="hidden" name="act" value="upload">-->
+                        </span>
                     </div>
                 </div>
                 <div class="form-group">
@@ -68,7 +81,12 @@
                         <img src="{{ prUser.avatarUrl }}" style="max-width: 300px; max-height: 300px;">
                     </div>
                 </div>
-
+                <div class="form-group">
+                    <label for="inputAbout" class="col-sm-3 control-label">О себе:</label>
+                    <div class="col-sm-9">
+                        <textarea class="form-control" id="inputAbout" name="about" placeholder="О себе">{{ prUser.about }}</textarea>
+                    </div>
+                </div>
                 <hr>
                 <div class="form-group">
                     <label for="inputOldPassword" class="col-sm-3 control-label">Старый пароль:</label>

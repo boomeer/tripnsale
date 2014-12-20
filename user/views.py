@@ -147,9 +147,7 @@ def AuthView(request):
                     password=params.get("password", ""),
                 )
                 login(request, user)
-                backref = params.get("next", "/")
-                if not backref:
-                    backref = "/"
+                backref = params.get("next", "/user/profile/?firsttime=1")
                 return redirect(backref)
         except RegErr as e:
             raise RedirectExc("/user/auth/?msgReg={}".format(e.status))
@@ -157,6 +155,7 @@ def AuthView(request):
         "countries": GetCountries(),
         "msgLogin": GetRegMsg(params.get("msgLogin", "")),
         "msgReg": GetRegMsg(params.get("msgReg", "")),
+        "next": params.get("next", ""),
     })
 
 
@@ -168,7 +167,7 @@ def ActivateView(request, code):
     djUser = GetDjUserByUser(user)
     djUser.backend = 'django.contrib.auth.backends.ModelBackend'
     login(request, djUser)
-    return redirect("/")
+    return redirect("/user/profile/?firsttime=1")
 
 
 @SafeView
@@ -263,6 +262,7 @@ def ProfileView(request, userid=None):
     return RenderToResponse("user/profile.html", request, {
         "url": user.profileUrl() if user else "/user/profile/",
         "prUser": user,
+        "firsttime": params.get("firsttime", ""),
     })
 
 
@@ -286,6 +286,9 @@ def EditProfileView(request):
         user.last_name = params.get("lastName", "")
         user.country = Country.objects.get(name=params.get("country", ""))
         user.city = params.get("city", "")
+        user.bday = params.get("bday", "01.01.1970")
+        user.about = params.get("about", "")
+
         if 'avatar' in request.FILES:
             StoreImage(request.FILES['avatar'], user.avatar)
         user.save()
@@ -312,11 +315,11 @@ def UserMailView(request):
     user = GetCurrentUser(request)
     confs = Conference.objects.filter(users=user).all()
     confs = [conf for conf in confs if conf.msgs.all()]
-    confs = sorted(confs, key=lambda self: list(self.msgs.all())[-1].time)
+    confs.sort(key=lambda conf: conf.msgs.latest("time").time, reverse=True)
     for conf in confs:
         u = conf.users.all()
         conf.peer = u[0] if u[1] == user else u[1]
-        conf.msg = list(conf.msgs.all())[-1]
+        conf.msg = conf.msgs.latest("time")
     '''
     lastMsg = {}
     for msg in msgs:

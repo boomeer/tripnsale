@@ -31,7 +31,7 @@ class Gallery(models.Model):
         return str(id)
 
     def getHeadUrl(self):
-        return self.head.img.url if self.head else settings.STATIC_URL + "/no-photo.jpg"
+        return self.head.thumbnail.url if self.head else settings.STATIC_URL + "/no-photo.jpg"
 
 @admin.register(Gallery)
 class GalleryAdmin(admin.ModelAdmin):

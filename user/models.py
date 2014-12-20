@@ -14,6 +14,7 @@ class User(authModels.User):
     country = models.ForeignKey(Country)
     city = models.TextField(default="", blank=True)
     avatar = models.ImageField(upload_to="avatars", blank=True, null=True)
+    avatarThumb = models.ImageField(upload_to="avatars/thumbs", blank=True, null=True)
     activated = models.BooleanField(default=True)
     activateCode = models.TextField(default="")
     guarant = models.BooleanField(default=False)
@@ -22,6 +23,9 @@ class User(authModels.User):
 
     def avatarUrl(self):
         return self.avatar.url if self.avatar else "{}/user/av_default.png".format(settings.STATIC_URL)
+
+    def avatarThumbUrl(self):
+        return self.avatarThumb.url if self.avatarThumb else "{}/user/av_default.png".format(settings.STATIC_URL)
 
     def profileUrl(self):
         return "/user/profile/{}/".format(self.id)

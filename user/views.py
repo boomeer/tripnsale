@@ -291,7 +291,6 @@ def EditProfileView(request):
     })
 
 
-@login_required(login_url="/user/auth/")
 @SafeView
 def UsersView(request):
     users = User.objects.all()

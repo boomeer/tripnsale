@@ -178,6 +178,7 @@ def BuyEditView(request, id):
         buy.content = params.get("content", "")
         buy.costFrom = float(params.get("costFrom", "0").replace(",", "."))
         buy.costTo = float(params.get("costTo", "0").replace(",", "."))
+        buy.save()
         VerifyPhotos(params.get("token", ""))
         return redirect("/offer/buy/edit/{}?msg=buy_edit_ok".format(buy.id))
     elif act == "makeHead":

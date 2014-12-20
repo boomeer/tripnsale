@@ -24,9 +24,8 @@ def CreateGalleryPhoto(gallery, token=None):
         verified=False,
     )
     photo.save(force_insert=True)
-    if len(gallery.photos.all()) == 1:
+    if not gallery.head:
         gallery.head = photo
-        gallery.save()
     return photo
 
 

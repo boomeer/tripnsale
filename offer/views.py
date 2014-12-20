@@ -153,7 +153,8 @@ def SaleCloseView(request):
     params = request.REQUEST
     sale = SaleOffer.objects.get(id=params.get("id", 0))
     if sale.owner == GetCurrentUser(request):
-        sale.closed = True
+        revert = bool(params.get("revert", False))
+        sale.closed = not revert
         sale.save()
     return redirect("/user/profile")
 

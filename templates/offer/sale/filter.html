@@ -31,6 +31,14 @@
                     </div>
                 </div>
                 <div>
+                    <div class="tripSection">
+                        {% if sale.closed %}
+                            <span class="closed">
+                                <i class="ai ai-lock"></i>
+                                Закрытa
+                            </span>
+                        {% endif %}
+                    </div>
                     <div class="tripDates tripSection">
                         <span>
                             {{ sale.frTime|date:"d.m.Y" }} -
@@ -88,12 +96,6 @@
                                 Закрыть
                             </a>
                         </div>
-                    {% endif %}
-                    {% if sale.closed %}
-                        <span class="closed">
-                            <i class="ai ai-lock"></i>
-                            Закрытa
-                        </span>
                     {% endif %}
                 </div>
             </div>

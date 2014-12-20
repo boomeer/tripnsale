@@ -90,15 +90,19 @@
         background-color: rgba(250, 250, 250, 0.2);
         position: relative;
 
+        &.buy-item-closed {
+            opacity: 0.8;
+            background-color: rgba(150, 150, 10, 0.1);
+            border: 1px solid #994;
+        }
+
         &:hover {
             border-color: #5bb0c5;
             background-color: rgb(240, 240, 240);
         }
 
-        &.buy-item-closed {
-            opacity: 0.8;
+        &.buy-item-closed:hover {
             background-color: rgba(150, 150, 10, 0.1);
-            border: 1px solid #994;
         }
 
         .closed {

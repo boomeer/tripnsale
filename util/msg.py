@@ -1,3 +1,5 @@
+#-*- coding: utf-8 -*-
+
 def GetRegMsg(name):
     return {
         "wrong_login_or_password": "Неправильный логин или пароль",
@@ -10,5 +12,10 @@ def GetRegMsg(name):
         "email_is_not_unique": "Email занят",
         "password_is_invalid": "Неверный символ в пароле О_О. Как Вы этого добились!?",
         "bad_password_len": "Пароль должен иметь от 3 до 30 символов",
-        "passwords_are_not_equal": "Пароли не совпадают"
+        "passwords_are_not_equal": "Пароли не совпадают",
+    }.get(name, "")
+
+def GetBuyEditMsg(name):
+    return {
+        "buy_edit_ok": "Изменения успешно сохранены",
     }.get(name, "")

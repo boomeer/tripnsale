@@ -11,6 +11,9 @@ from offer.models import (
 from place.models import (
     Country,
 )
+from util.msg import (
+    GetBuyEditMsg,
+)
 from util.utils import (
     SafeView,
     RenderToResponse,
@@ -203,6 +206,8 @@ def BuyEditView(request, id):
     return RenderToResponse("offer/buy/edit.html", request, {
         "url": "/offer/buy/edit/{}/".format(buy.id),
         "buy": buy,
+        "succMsg": GetBuyEditMsg(params.get("msg", "")),
+        "failMsg": GetBuyEditMsg(params.get("err", ""))
     })
 
 

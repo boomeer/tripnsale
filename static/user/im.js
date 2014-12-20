@@ -74,4 +74,6 @@ $(function() {
     }, 500);
 
     window.addGuarant = false;
+
+    $("#msgContent").focus();
 });

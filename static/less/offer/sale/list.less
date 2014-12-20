@@ -107,11 +107,6 @@
 }
 /* DON'T INCUDE .tripsList INSIDE .trips !!! */ 
 .tripsList {
-    .tripItem:hover {
-        border-color: #5bb0c5;
-        background-color: rgb(240, 240, 240);
-    }
-
     .tripItem {
         border: 1px solid #ccc;
         border-radius: 4px;
@@ -126,6 +121,16 @@
             background-color: rgba(150, 150, 10, 0.1);
             border: 1px solid #994;
         }
+
+        &:hover {
+            border-color: #5bb0c5;
+            background-color: rgb(240, 240, 240);
+        }
+
+        &.tripItem-closed:hover {
+            background-color: rgba(150, 150, 10, 0.1);
+        }
+
  
         .tripSection {
             vertical-align: top;
@@ -170,8 +175,7 @@
             }
             
             .tripDates {
-                font-size: 12pt;
-                font-weight: 900;
+                font-size: 11pt;
             }
 
             img {

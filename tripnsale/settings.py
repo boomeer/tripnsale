@@ -121,3 +121,7 @@ EMAIL_SENDER_MAIL = "admin@tripnsale.com"
 EMAIL_SENDER_NAME = "Trip & Sale"
 
 ENABLE_ACTIVATION = True
+
+
+if os.path.isfile(os.path.join(BASE_DIR, "tripnsale", "priv_settings.py")):
+    from tripnsale.priv_settings import *

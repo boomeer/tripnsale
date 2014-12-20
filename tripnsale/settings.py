@@ -117,3 +117,5 @@ MEDIA_URL = "/upl/"
 
 EMAIL_SENDER_MAIL = "admin@tripnsale.com"
 EMAIL_SENDER_NAME = "Trip & Sale"
+
+ENABLE_ACTIVATION = True

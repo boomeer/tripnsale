@@ -22,12 +22,19 @@ function CheckFooter() {
     $(".main-wrap").css("min-height", h);
 }
 
+function CheckHeader() {
+    $(".main").css("margin-top", $("header").outerHeight());
+    $(".page-wrap2").css("margin-top", -$("header").outerHeight());
+}
+
 $(function() {
     window.isActive = true;
     $(window).focus(function() { this.isActive = true; });
     $(window).blur(function() { this.isActive = false; });
     $(window).resize(CheckFooter);
+    $(window).resize(CheckHeader);
 
     // oh my god
     setTimeout (CheckFooter, 100);
+    setTimeout (CheckHeader, 100);
 });

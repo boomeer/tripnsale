@@ -22,7 +22,7 @@ class User(authModels.User):
         return self.avatar.url if self.avatar else "{}/user/av_default.png".format(settings.STATIC_URL)
 
     def profileUrl(self):
-        return "/user/profile/{}/".format(self.username)
+        return "/user/profile/{}/".format(self.id)
 
     def fullname(self):
         return "{} {}".format(self.first_name, self.last_name)

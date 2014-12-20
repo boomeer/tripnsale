@@ -7,6 +7,7 @@ from django.contrib.auth import (
     login,
     logout,
 )
+import tripnsale.settings as settings
 from util.utils import (
     SafeView,
     TsExc,
@@ -32,8 +33,6 @@ from user.utils import (
 import re
 from datetime import datetime
 
-enableActivation = True
-
 class RegErr(TsExc):
     def __init__(self, msg):
         super().__init__(msg)
@@ -42,6 +41,10 @@ class RegErr(TsExc):
 class UsernameIsInvalidErr(RegErr):
     def __init__(self):
         super().__init__("username_is_invalid")
+
+class EmailIsInvalidErr(RegErr):
+    def __init__(self):
+        super().__init__("email_is_invalid")
 
 class ShortUsernameErr(RegErr):
     def __init__(self):
@@ -54,6 +57,10 @@ class LongUsernameErr(RegErr):
 class DuplicateUsernameErr(RegErr):
     def __init__(self):
         super().__init__("username_is_not_unique")
+
+class DuplicateEmailErr(RegErr):
+    def __init__(self):
+        super().__init__("email_is_not_unique")
 
 class PasswordIsInvalidErr(RegErr):
     def __init__(self):
@@ -78,7 +85,7 @@ def AuthView(request):
     if act == "login":
         CheckPost(request)
         djUser = authenticate(
-            username=params.get("login", "").lower(),
+            username=params.get("email", "").lower(),
             password=params.get("password", ""),
         )
         user = GetUserByDjUser(djUser)
@@ -99,22 +106,18 @@ def AuthView(request):
             CheckPost(request)
             if params["password"] != params["password2"]:
                 raise PasswordsAreNotEqualErr
-            if not re.compile("^[a-zA-Z0-9._-]+$").match(params["username"]):
-                raise UsernameIsInvalidErr
-            if len(params["username"]) < 3:
-                raise ShortUsernameErr
-            if len(params["username"]) > 30:
-                raise LongUsernameErr
+            if not re.compile("^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+$").match(params["email"]):
+                raise EmailIsInvalidErr
             if not (3 <= len(params["password"]) <= 20):
                 raise BadPasswordLengthErr
             country = Country.objects.get(name=params.get("country", 0))
 
-            if User.objects.filter(username=params["username"]).count():
-                raise DuplicateUsernameErr
+            if User.objects.filter(username=params["email"]).count():
+                raise DuplicateEmailErr
 
             user = User.objects.create_user(
-                params.get("username", "").lower(),
-                params.get("email", ""),
+                params.get("email", "").lower(),
+                params.get("email", "").lower(),
                 params.get("password", ""),
                 first_name=params.get("firstName", ""),
                 last_name=params.get("lastName", ""),
@@ -123,11 +126,11 @@ def AuthView(request):
                 remoteAddr=request.META["REMOTE_ADDR"],
                 regRemoteAddr=request.META["REMOTE_ADDR"],
                 activateCode=GetNewId(),
-                activated=not enableActivation,
+                activated=not settings.ENABLE_ACTIVATION,
             )
             user.save()
 
-            if enableActivation:
+            if settings.ENABLE_ACTIVATION:
                 SendActivateMail(user)
                 return RenderToResponse("user/auth_success.html", request, {
                             "email": params.get("email", ""),
@@ -246,13 +249,13 @@ def ImMsgFrameView(request):
 
 
 @SafeView
-def ProfileView(request, username=None):
+def ProfileView(request, userid=None):
     params = request.REQUEST
-    user = User.objects.get(username=username) if username else GetCurrentUser(request)
-    if not user and not username:
+    user = User.objects.get(id=userid) if userid else GetCurrentUser(request)
+    if not user and not userid:
         return redirect("/user/auth/")
     return RenderToResponse("user/profile.html", request, {
-        "url": "/user/profile/{}".format(user.username) if user else "/user/profile/",
+        "url": user.profileUrl() if user else "/user/profile/",
         "prUser": user,
     })
 

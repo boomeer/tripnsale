@@ -1,6 +1,7 @@
 from django.shortcuts import (
     redirect,
 )
+from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.template import RequestContext
 from offer.models import (
@@ -41,7 +42,7 @@ def SaleListView(request):
         "url": "/offer/sale/list",
     })
 
-
+@login_required(login_url="/user/auth/")
 @SafeView
 def SaleOfferAddView(request):
     params = request.REQUEST
@@ -88,7 +89,7 @@ def SaleFilterView(request):
     if owner:
         sales = sales.filter(owner__id=owner)
     sales = sales.all()
-    sales = [sale for sale in sales if ValidFilter(sale.fr.title + " " + sale.frCity, 
+    sales = [sale for sale in sales if ValidFilter(sale.fr.title + " " + sale.frCity,
                                                     params.get("from", "")) \
                 and ValidFilter(sale.to.title + " " + sale.toCity, params.get("to", ""))]
     sales = sorted(sales, key=lambda sale: (sale.closed, -sale.isCurrent(), sale.toEnd(),))
@@ -128,7 +129,7 @@ def SaleView(request, id):
         "sale": sale,
     })
 
-
+@login_required(login_url="/user/auth/")
 @SafeView
 def BuyOfferAddView(request):
     params = request.REQUEST

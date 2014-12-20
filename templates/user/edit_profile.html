@@ -33,15 +33,9 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputUsername" class="col-sm-3 control-label">Логин:</label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" disabled value="{{ prUser.username }}">
-                    </div>
-                </div>
-                <div class="form-group">
                     <label for="inputEmail" class="col-sm-3 control-label">Email:</label>
                     <div class="col-sm-9">
-                        <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Email" value="{{ prUser.email }}">
+                        <input type="email" readonly class="form-control" id="inputEmail" name="email" placeholder="Email" value="{{ prUser.email }}">
                     </div>
                 </div>
                 <div class="form-group">

@@ -44,9 +44,6 @@
                     <div class="col-sm-5">
                         <select id="inputCountry" name="country" placeholder="Страна" value="{{ prUser.country.name }}">
                             {% for country in countries %}
-                                <option value="{{ country.name }}" {% if prUser.country.id == country.id %} selected {% endif %}>
-                        <select id="inputCountry" name="country" placeholder="Страна">
-                            {% for country in countries %}
                                 <option value="{{ country.name }}" {% if country == prUser.country %}selected{% endif %}>
                                     {{ country.title }}
                                 </option>
@@ -63,7 +60,7 @@
                 <div class="form-group">
                     <label for="inputBday" class="col-sm-3 control-label">Дата рождения:</label>
                     <div class="col-sm-9">
-                        <input type="date" class="form-control" id="inputBday" name="bday" placeholder="Дата рождения" {% if prUser.bday != "01.01.1970" %}value="{{ prUser.bday }}"{% endif %}>
+                        <input type="text" class="form-control hasDatepicker" id="inputBday" name="bday" placeholder="Дата рождения" {% if prUser.bday != "01.01.1970" %}value="{{ prUser.bday }}"{% endif %}>
                     </div>
                 </div>
                 <div class="form-group">

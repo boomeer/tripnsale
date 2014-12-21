@@ -12,6 +12,7 @@ function BuysRefresh(user, profile)
 
 function BuyView(id)
 {
+    window.location.hash = "#" + id;
     $.post("/offer/buy/view/" + id, {}, function(res) {
         $(".buyViewWrapper").html(res);
     });
@@ -19,6 +20,7 @@ function BuyView(id)
 
 function BuyViewClose()
 {
+    window.location.hash = "";
     $(".buyViewWrapper").html("");
 }
 
@@ -34,6 +36,10 @@ $(function() {
     var block = $("#blockStartupList");
     if (!(block && block.val() == 1)) {
         BuysRefresh();
+    }
+
+    if (window.location.hash) {
+        BuyView(window.location.hash.slice(1));
     }
 });
 

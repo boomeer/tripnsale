@@ -13,6 +13,7 @@ function TripsRefresh(user, profile)
 
 function TripView(id)
 {
+    window.location.hash = "#" + id;
     $.post("/offer/sale/view/" + id, {}, function(res) {
         $(".tripViewWrapper").html(res);
     });
@@ -20,6 +21,7 @@ function TripView(id)
 
 function TripViewClose()
 {
+    window.location.hash = "";
     $(".tripViewWrapper").html("");
 }
 
@@ -38,5 +40,9 @@ $(function() {
     var block = $("#blockStartupList");
     if (!(block && block.val() == 1)) {
         TripsRefresh();
+    }
+
+    if (window.location.hash) {
+        TripView(window.location.hash.slice(1));
     }
 });

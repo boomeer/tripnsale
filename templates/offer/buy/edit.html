@@ -51,6 +51,46 @@
                         <input type="text" class="form-control" id="inputCostTo" name="costTo" placeholder="до" value="{{ buy.costTo }}">
                     </div>
                 </div>
+                <hr>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Откуда:</label>
+                    <div class="col-md-5">
+                        <select id="inputFrom" name="from" placeholder="Страна">
+                            {% for country in countries %}
+                                <option value="{{ country.name }}" {% if buy.from == country %}selected{% endif %}>
+                                    {{ country.title }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-5">
+                        <input type="text" class="form-control" id="inputFromCity" name="frCity" placeholder="Город" value="{{ buy.frCity }}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Куда:</label>
+                    <div class="col-md-5">
+                        <select id="inputTo" name="to" placeholder="Страна">
+                            {% for country in countries %}
+                                <option value="{{ country.name }}" {% if buy.to == country %}selected{% endif %}>
+                                    {{ country.title }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-5">
+                        <input type="text" class="form-control" id="inputToCity" name="toCity" placeholder="Город" value="{{ buy.toCity }}">
+                    </div>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <div class="col-md-2 control-label">
+                        <label for="inputGuarant">Только с гарантом:</label>
+                    </div>
+                    <div class="col-md-10" style="padding-top: 10px;">
+                        <input type="checkbox" id="inputGuarant" name="guarant" {% if buy.guarant %}checked{% endif %}>
+                    </div>
+                </div>
                 <div class="form-group">
                     <label class="col-md-2 control-label">Фото:</label>
                     <div class="col-md-10 container-fluid">

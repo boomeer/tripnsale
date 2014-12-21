@@ -93,8 +93,8 @@ def SaleEditView(request, id):
         to = Country.objects.get(name=params.get("to", ""))
         sale.content = params.get("content", "")
         sale.fr = fr
-        sale.frCiry = params.get("frCity", "")
-        sale.ifrCiry = params.get("frCity", "").lower()
+        sale.frCity = params.get("frCity", "")
+        sale.ifrCity = params.get("frCity", "").lower()
         #sale.frTime = datetime.strptime(params.get("fromTime", ""), "%d.%m.%Y"),
         sale.to = to
         sale.toCity = params.get("toCity", "")
@@ -164,6 +164,8 @@ def SaleCloseView(request):
 @SafeView
 def SaleView(request, id):
     sale = SaleOffer.objects.get(id=id)
+    if not sale.visible():
+        raise Exception("not found")
     return RenderToResponse("offer/sale/view.html", request, {
         "sale": sale,
     })
@@ -177,6 +179,8 @@ def BuyOfferAddView(request):
         CheckPost(request)
         CheckAuth(request)
         gallery = Gallery.objects.get(token=params.get("gallery", ""))
+        fr = Country.objects.get(name=params.get("from", ""))
+        to = Country.objects.get(name=params.get("to", ""))
         buy = BuyOffer(
             title=params.get("title", ""),
             ititle=params.get("title", "").lower(),
@@ -184,6 +188,12 @@ def BuyOfferAddView(request):
             costFrom=params.get("costFrom", None),
             costTo=params.get("costTo", None),
             guarant=params.get("guarant", False),
+            fr=fr,
+            frCity=params.get("frCity", ""),
+            ifrCity=params.get("frCity", "").lower(),
+            to=to,
+            toCity=params.get("toCity", ""),
+            itoCity=params.get("toCity", "").lower(),
             gallery=gallery,
             owner=GetCurrentUser(request),
             createTime=datetime.now(),
@@ -197,6 +207,7 @@ def BuyOfferAddView(request):
         "url": "/offer/buy",
         "gallery": gallery,
         "token": token,
+        "countries": GetCountries(),
     })
 
 
@@ -210,10 +221,19 @@ def BuyEditView(request, id):
         return redirect("/")
     if act == "edit":
         CheckPost(request)
+        fr = Country.objects.get(name=params.get("from", ""))
+        to = Country.objects.get(name=params.get("to", ""))
         buy.title = params.get("title", "")
         buy.content = params.get("content", "")
         buy.costFrom = float(params.get("costFrom", "0").replace(",", "."))
         buy.costTo = float(params.get("costTo", "0").replace(",", "."))
+        buy.fr = fr
+        buy.frCity = params.get("frCity", "")
+        buy.ifrCity = params.get("frCity", "").lower()
+        buy.to = to
+        buy.toCity = params.get("toCity", "")
+        buy.itoCity = params.get("toCity", "").lower()
+        buy.guarant = params.get("guarant", False)
         buy.save()
         VerifyPhotos(params.get("token", ""))
         return redirect("/offer/buy/edit/{}?msg=buy_edit_ok".format(buy.id))
@@ -232,6 +252,7 @@ def BuyEditView(request, id):
         "succMsg": GetBuyEditMsg(params.get("msg", "")),
         "failMsg": GetBuyEditMsg(params.get("err", "")),
         "token": GetNewId(),
+        "countries": GetCountries(),
     })
 
 
@@ -240,9 +261,11 @@ def BuyRemoveView(request):
     params = request.REQUEST
     buy = BuyOffer.objects.get(id=params.get("id", 0))
     if buy.owner == GetCurrentUser(request):
-        buy.removed = True
+        revert = bool(params.get("revert", False))
+        buy.closed = not revert
         buy.save()
-    return redirect("/user/profile")
+    backref = params.get("backref", "/user/profile")
+    return redirect(backref)
 
 
 @SafeView
@@ -250,9 +273,11 @@ def BuyCloseView(request):
     params = request.REQUEST
     buy = BuyOffer.objects.get(id=params.get("id", 0))
     if buy.owner == GetCurrentUser(request):
-        buy.closed = True
+        revert = bool(params.get("revert", False))
+        buy.closed = not revert
         buy.save()
-    return redirect("/user/profile")
+    backref = params.get("backref", "/user/profile")
+    return redirect(backref)
 
 
 @SafeView
@@ -291,6 +316,8 @@ def BuyFilterView(request):
 @SafeView
 def BuyView(request, id):
     buy = BuyOffer.objects.get(id=id)
+    if not buy.visible():
+        raise Exception("not found")
     return RenderToResponse("offer/buy/view.html", request, {
         "buy": buy,
     })

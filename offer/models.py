@@ -26,10 +26,16 @@ class Offer(util.models.ContentHolder):
 
 
 class BuyOffer(Offer):
-    ititle = models.TextField(default="")
+    ititle = models.TextField(default="", blank=True)
     costFrom = models.FloatField(default=None)
     costTo = models.FloatField(default=None)
     guarant = models.BooleanField(default=False)
+    fr = models.ForeignKey(Country, related_name="buy_country_from", blank=True, null=True)
+    frCity = models.TextField(default="", blank=True)
+    ifrCity = models.TextField(default="", blank=True)
+    to = models.ForeignKey(Country, related_name="buy_country_to", blank=True, null=True)
+    toCity = models.TextField(default="", blank=True)
+    itoCity = models.TextField(default="", blank=True)
     gallery = models.ForeignKey(Gallery)
 
 @admin.register(BuyOffer)
@@ -39,12 +45,12 @@ class BuyOfferAdmin(admin.ModelAdmin):
 
 class SaleOffer(Offer):
     fr = models.ForeignKey(Country, related_name="country_from", blank=True, null=True)
-    frCity = models.TextField(default="")
-    ifrCity = models.TextField(default="")
+    frCity = models.TextField(default="", blank=True)
+    ifrCity = models.TextField(default="", blank=True)
     frTime = models.DateTimeField(default=datetime.now())
     to = models.ForeignKey(Country, related_name="country_to", blank=True, null=True)
-    toCity = models.TextField(default="")
-    itoCity = models.TextField(default="")
+    toCity = models.TextField(default="", blank=True)
+    itoCity = models.TextField(default="", blank=True)
     toTime = models.DateTimeField(default=datetime.now())
     deposit = models.FloatField(default=None)
     guarant = models.BooleanField(default=False)

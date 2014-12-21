@@ -43,6 +43,38 @@
                         <input type="text" class="form-control" id="inputCostTo" name="costTo" placeholder="до">
                     </div>
                 </div>
+                <hr>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Откуда:</label>
+                    <div class="col-md-5">
+                        <select id="inputFrom" name="from" placeholder="Страна">
+                            {% for country in countries %}
+                                <option value="{{ country.name }}">
+                                    {{ country.title }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-5">
+                        <input type="text" class="form-control" id="inputFromCity" name="frCity" placeholder="Город">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Куда:</label>
+                    <div class="col-md-5">
+                        <select id="inputTo" name="to" placeholder="Страна">
+                            {% for country in countries %}
+                                <option value="{{ country.name }}">
+                                    {{ country.title }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-5">
+                        <input type="text" class="form-control" id="inputToCity" name="toCity" placeholder="Город">
+                    </div>
+                </div>
+                <hr>
                 <div class="form-group">
                     <div class="col-md-2 control-label">
                         <label for="inputGuarant">Только с гарантом:</label>

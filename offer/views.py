@@ -145,7 +145,8 @@ def SaleRemoveView(request):
     if sale.owner == GetCurrentUser(request):
         sale.removed = True
         sale.save()
-    return redirect("/user/profile")
+    backref = params.get("backref", "/user/profile")
+    return redirect(backref)
 
 
 @SafeView
@@ -153,9 +154,11 @@ def SaleCloseView(request):
     params = request.REQUEST
     sale = SaleOffer.objects.get(id=params.get("id", 0))
     if sale.owner == GetCurrentUser(request):
-        sale.closed = True
+        revert = bool(params.get("revert", False))
+        sale.closed = not revert
         sale.save()
-    return redirect("/user/profile")
+    backref = params.get("backref", "/user/profile")
+    return redirect(backref)
 
 
 @SafeView

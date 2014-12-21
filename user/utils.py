@@ -1,7 +1,9 @@
 from user.models import *
 from util.exc import TsExc
 from django.contrib.auth.models import User as djUser
-from util.mail import (
+from django.shortcuts import render
+from django.template.loader import render_to_string
+from mail.utils import (
     SendMail,
 )
 
@@ -33,8 +35,12 @@ def CheckAuth(request):
 
 
 def SendActivateMail(user):
-    SendMail(user.email, "Activate your account", "Please, activate your account: http://tripnsale.com/user/activate/{}".format(user.activateCode))
-
+    content = render_to_string("mail/activate.html", {
+        "user": user,
+        "hostAddr": settings.CURRENT_HOST,
+    })
+    SendMail("activate@tripnsale.com", user.email, content)
+    
 
 def CreateDialog(fr, to):
     conf = Conference()

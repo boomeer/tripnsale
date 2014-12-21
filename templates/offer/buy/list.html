@@ -12,8 +12,8 @@
 
 {% block main %}
     <div class="buys container-fluid container2 bg0">
-        <div class="buysFilter col-md-2">
-            <div>
+        <div class="row">
+            <div class="buysFilter col-md-2">
                 <form class="form-horizontal" role="form">
                     <div class="form-group">
                         <div class="col-md-12">
@@ -25,17 +25,19 @@
                             <input type="button" id="buysFilterApply" class="btn btn-default form-control" value="Применить">
                         </div>
                     </div>
+                    <hr>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <a class="btn btn-default form-control" href="/offer/buy">
+                                <i class="glyphicon glyphicon-plus"></i>
+                                Добавить
+                            </a>
+                        </div>
+                    </div>
                 </form>
             </div>
-            <hr>
-            <div>
-                <a class="btn btn-default" href="/offer/buy">
-                    <i class="glyphicon glyphicon-plus"></i>
-                    Добавить
-                </a>
+            <div class="buysList col-md-10">
             </div>
-        </div>
-        <div class="buysList col-md-10">
         </div>
     </div>
     <div class="buyViewWrapper">

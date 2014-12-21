@@ -291,6 +291,7 @@ def EditProfileView(request):
 
         if 'avatar' in request.FILES:
             StoreImage(request.FILES['avatar'], user.avatar)
+            MakeThumbnail(user.avatar, user.avatarThumb)
         user.save()
         return redirect("/user/profile/")
     return RenderToResponse("user/edit_profile.html", request, {

@@ -6,7 +6,7 @@
 {% for sale in sales %}
     {% if sale.visible %}
         <div class="tripItem {% if sale.closed %}tripItem-closed{% endif %}" onClick="TripView({{ sale.id }});">
-            <div class="tripSection">
+            <div class="tripSection tripMainSection">
                 <div class="tripFromTo">
                     <div class="tripFrom tripPlace">
                         <span>
@@ -39,59 +39,80 @@
                             {{ sale.toTime|date:"d.m.Y" }}
                         </span>
                     </div>
+                    <div class="tripSection">
+                        {% if sale.closed %}
+                            <span class="closed">
+                                <i class="ai ai-lock"></i>
+                                Закрытa
+                            </span>
+                        {% endif %}
+                    </div>
+                </div>
+                <div>
                     <div class="tripDeposit tripSection">
                         <span class="tripSectionTitle">
                             Депозит:
                         </span>
                         <span class="tripSectionContent">
-                            {{ sale.deposit }} $
+                            {{ sale.deposit|floatformat }}$
                         </span>
                     </div>
                     <div class="tripGuarant tripSection">
                         <span>
                             {% if sale.guarant %}
                                 <div class="guarant">
+                                    <i class="ai ai-shield"></i>
                                     Только с гарантом
                                 </div>
                             {% endif %}
                         </span>
                     </div>
                 </div>
-                <div>
-                    {{ sale.content }}
+                <div class="tripComment">
+                    <div class="tripSection">
+                        <div class="tripComment-title">
+                            Комментарий:
+                        </div>
+                        <div class="tripComment-content">
+                            {{ sale.content }}
+                        </div>
+                    </div>
                 </div>
-                <div>
+                <div class="tripButtons">
                     {% if profile and not sale.closed and profileOwner == sale.owner %}
-                        <a href="/offer/sale/remove/?id={{ sale.id }}" class="btn btn-danger">
-                            <i class="ai ai-close"></i>
-                            Удалить
-                        </a>
-                        <a href="/offer/sale/close/?id={{ sale.id }}" class="btn btn-success">
-                            <i class="ai ai-lock"></i>
-                            Закрыть
-                        </a>
-                    {% endif %}
-                    {% if sale.closed %}
-                        <span class="closed">
-                            Закрыт
-                        </span>
+                        <div style="margin-bottom: 4px;">
+                            <a href="/offer/sale/edit/{{ sale.id }}" class="btn btn-default">
+                                <i class="ai ai-pencil"></i>
+                                Редактировать
+                            </a>
+                        </div>
+                        <div>
+                            <a href="/offer/sale/remove/?id={{ sale.id }}" class="btn btn-danger">
+                                <i class="ai ai-close"></i>
+                                Удалить
+                            </a>
+                            <a href="/offer/sale/close/?id={{ sale.id }}" class="btn btn-success">
+                                <i class="ai ai-lock"></i>
+                                Закрыть
+                            </a>
+                        </div>
                     {% endif %}
                 </div>
             </div>
-            <div class="tripOwner tripSection" style="float: right;">
+            <div class="tripOwner tripOwner-right tripSection">
                 <div class="tripSectionContent" onClick="window.location.href='{{ sale.owner.profileUrl }}';">
                     <div class="tripOwnerAv">
-                        <img src="{{ sale.owner.avatarUrl }}">
+                        <img src="{{ sale.owner.avatarThumbUrl }}">
                     </div>
                     <div class="tripOwnerName bboldy">
                         {{ sale.owner.first_name }} {{ sale.owner.last_name }}
                     </div>
                 </div>
             </div>
-            <div class="tripOwner tripSection" style="opacity: 0;">
+            <div class="tripOwner tripOwner-invis tripSection">
                 <div class="tripSectionContent">
                     <div class="tripOwnerAv">
-                        <img src="{{ sale.owner.avatarUrl }}">
+                        <img src="{{ sale.owner.avatarThumbUrl }}">
                     </div>
                     <div class="tripOwnerName bboldy">
                         {{ sale.owner.first_name }} {{ sale.owner.last_name }}

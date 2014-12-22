@@ -24,14 +24,26 @@ def AcceptView(request, confId):
     guarant = GetCurrentUser(request)
     if not guarant.guarant:
         raise Exception("You aren't guarant")
-    conf.askGuarant = False
-    conf.withGuarant = True
+    conf.askGuarant = True
+    conf2 = Conference(
+        plusGuarant=conf,
+        askGuarant=False,
+        withGuarant=True,
+    )
+    conf2.save()
+    conf2.users.add(*(list(conf.users.all()) + [guarant]))
+    conf.plusGuarant = conf2
     conf.save()
-    conf.users.add(guarant)
     msg = SystemMsg(
-        conf=conf,
+        conf=conf2,
         content="Гарант подключен к конференции",
         time=datetime.now(),
     )
     msg.save()
+    msg2 = SystemMsg(
+        conf=conf,
+        content="Гарант принял вашу заявку. Перейдите в отдельную конференцию по кнопке внизу диалога",
+        time=datetime.now(),
+    )
+    msg2.save()
     return redirect("/user/im?conf={}".format(conf.id))

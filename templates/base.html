@@ -78,6 +78,14 @@
         <div class="collapse navbar-collapse">
           <nav class="navbar nobcg" role="navigation">
             <ul class="nav navbar-nav navbar-right">
+                {% if profileOwner.guarant %}
+                  <li>
+                      <a href="/guarant/asks">
+                          <i class="ai ai-shield"></i>
+                            Запросы гаранта
+                      </a>
+                  </li>
+                {% endif %}
               <li>
                   <a href="/offer/sale/list">
                       <i class="glyphicon glyphicon-plane"></i>

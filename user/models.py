@@ -47,9 +47,13 @@ class Conference(models.Model):
     users = models.ManyToManyField(User)
     askGuarant = models.BooleanField(default=False)
     withGuarant = models.BooleanField(default=False)
+    plusGuarant = models.ForeignKey("Conference", blank=True, null=True)
 
     def getTitle(self):
         return ",".join(user.fullname() for user in self.users.all())
+
+    def url(self):
+        return "/user/im?conf={}".format(self.id)
 
 
 class ConferenceMsg(models.Model):

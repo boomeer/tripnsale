@@ -247,8 +247,10 @@ def ImMsgFrameView(request):
             "msgs": msgs,
         }).content.decode("utf-8"),
         "opts": {
-            "addGuarant": not conf.withGuarant and not conf.askGuarant,
+            "addGuarant": not conf.plusGuarant and not conf.askGuarant,
             "unreadCount": GetUnreadCount(request),
+            "toWithGuarant": conf.plusGuarant.url() if conf.plusGuarant and not conf.withGuarant else "",
+            "toWithoutGuarant": conf.plusGuarant.url() if conf.plusGuarant and conf.withGuarant else "",
         },
     })
 

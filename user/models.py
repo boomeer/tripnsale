@@ -19,7 +19,8 @@ class User(authModels.User):
     activateCode = models.TextField(default="")
     guarant = models.BooleanField(default=False)
     bday = models.TextField(default="01.01.1970")
-    about = models.TextField(default="")
+    about = models.TextField(default="", blank=True)
+    hidden = models.BooleanField(default=False)
 
     def avatarUrl(self):
         return self.avatar.url if self.avatar else "{}/user/av_default.png".format(settings.STATIC_URL)
@@ -32,6 +33,9 @@ class User(authModels.User):
 
     def fullname(self):
         return "{} {}".format(self.first_name, self.last_name)
+
+    def visible(self):
+        return not self.hidden and not self.guarant
 
 
 class Msg(models.Model): # DEPRECATED

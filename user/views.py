@@ -261,6 +261,8 @@ def ProfileView(request, userid=None):
     user = User.objects.get(id=userid) if userid else GetCurrentUser(request)
     if not user and not userid:
         return redirect("/user/auth/")
+    if not user.visible() and user != GetCurrentUser(request):
+        return redirect("/")
     return RenderToResponse("user/profile.html", request, {
         "url": user.profileUrl() if user else "/user/profile/",
         "prUser": user,

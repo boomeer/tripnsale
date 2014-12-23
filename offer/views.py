@@ -14,8 +14,14 @@ from place.models import (
 from place.utils import (
     GetCountries,
 )
+from util.utils import (
+    ValidFilter,
+    TsExc,
+    RedirectExc,
+)
 from util.msg import (
     GetBuyEditMsg,
+    GetSaleAddMsg,
 )
 from util.utils import (
     SafeView,
@@ -38,9 +44,44 @@ from gallery.models import (
     Gallery,
     Photo,
 )
-from util.utils import ValidFilter
 from datetime import datetime
 
+class SaleEditErr (TsExc):
+    def __init__(self, msg):
+        super().__init__(msg)
+        self.status = msg
+
+class SaleFrDateMissingErr (SaleEditErr):
+    def __init__(self):
+        super().__init__("fromdate_field_is_empty")
+
+class SaleFrDateInvalidErr (SaleEditErr):
+    def __init__(self):
+        super().__init__("fromdate_field_is_invalid")
+
+class SaleFrCountryMissingErr (SaleEditErr):
+    def __init__(self):
+        super().__init__("fromcountry_field_is_empty")
+
+class SaleFrCountryInvalidErr (SaleEditErr):
+    def __init__(self):
+        super().__init__("fromcountry_field_is_invalid")
+
+class SaleToDateMissingErr (SaleEditErr):
+    def __init__(self):
+        super().__init__("todate_field_is_empty")
+
+class SaleToDateInvalidErr (SaleEditErr):
+    def __init__(self):
+        super().__init__("todate_field_is_invalid")
+
+class SaleToCountryMissingErr (SaleEditErr):
+    def __init__(self):
+        super().__init__("tocountry_field_is_empty")
+
+class SaleToCountryInvalidErr (SaleEditErr):
+    def __init__(self):
+        super().__init__("tocountry_field_is_invalid")
 
 @SafeView
 def SaleListView(request):
@@ -54,30 +95,60 @@ def SaleOfferAddView(request):
     params = request.REQUEST
     act = params.get("act", "")
     if act == "add":
-        CheckPost(request)
-        CheckAuth(request)
-        fr = Country.objects.get(name=params.get("from", ""))
-        to = Country.objects.get(name=params.get("to", ""))
-        sale = SaleOffer(
-            content=params.get("content", ""),
-            fr=fr,
-            frCity=params.get("frCity", ""),
-            ifrCity=params.get("frCity", "").lower(),
-            frTime=datetime.strptime(params.get("fromTime", ""), "%d.%m.%Y"),
-            to=to,
-            toCity=params.get("toCity", ""),
-            itoCity=params.get("toCity", "").lower(),
-            toTime=datetime.strptime(params.get("toTime", ""), "%d.%m.%Y"),
-            deposit=params.get("deposit", 0),
-            guarant=params.get("guarant", False),
-            owner=GetCurrentUser(request),
-            createTime=datetime.now(),
-        )
-        sale.save()
-        return redirect("/offer/sale/list")
+        try:
+            CheckPost(request)
+            CheckAuth(request)
+
+            if not params.get("from", "").strip():
+                raise SaleFrCountryMissingErr
+            try:
+                fr = Country.objects.get(name=params["from"])
+            except:
+                raise SaleFrCountryInvalidErr
+
+            if not params.get("to", "").strip():
+                raise SaleToCountryMissingErr
+            try:
+                to = Country.objects.get(name=params["to"])
+            except:
+                raise SaleToCountryInvalidErr
+
+            if not params.get("fromTime", "").strip():
+                raise SaleFrDateMissingErr
+            try:
+                frTime = datetime.strptime(params["fromTime"], "%d.%m.%Y")
+            except:
+                raise SaleFrDateInvalidErr
+
+            if not params.get("toTime", "").strip():
+                raise SaleToDateMissingErr
+            try:
+                toTime = datetime.strptime(params["toTime"], "%d.%m.%Y")
+            except:
+                raise SaleToDateInvalidErr
+            sale = SaleOffer(
+                content=params.get("content", ""),
+                fr=fr,
+                frCity=params.get("frCity", ""),
+                ifrCity=params.get("frCity", "").lower(),
+                frTime=frTime,
+                to=to,
+                toCity=params.get("toCity", ""),
+                itoCity=params.get("toCity", "").lower(),
+                toTime=toTime,
+                deposit=params.get("deposit", 0),
+                guarant=params.get("guarant", False),
+                owner=GetCurrentUser(request),
+                createTime=datetime.now(),
+            )
+            sale.save()
+            return redirect("/offer/sale/list")
+        except SaleEditErr as e:
+            raise RedirectExc("/offer/sale/?err={}".format(e.status))
     return RenderToResponse("offer/sale/add.html", request, {
         "url": "/offer/sale",
         "countries": GetCountries(),
+        "err": GetSaleAddMsg(params.get("err", ""))
     })
 
 

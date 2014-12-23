@@ -27,3 +27,15 @@ def GetBackmsgMsg(name):
         "message_is_empty": "Нельзя отправить пустое сообщение",
         "empty_answer_email": "Пустой email для ответа"
     }.get(name, "")
+
+def GetSaleAddMsg(name):
+    return {
+        "fromdate_field_is_empty": "Поле с датой отправления обязательно для заполнения",
+        "fromdate_field_is_invalid": "Поле с датой отправления должно быть в формате дд.мм.гггг",
+        "fromcountry_field_is_empty": "Поле со страной отправления обязательно для заполнения",
+        "fromcountry_field_is_invalid": "Указана страна отправления, отсутствующая в базе",
+        "todate_field_is_empty": "Поле с датой прибытия обязательно для заполнения",
+        "todate_field_is_invalid": "Поле с датой прибытия должно быть в формате дд.мм.гггг",
+        "tocountry_field_is_empty": "Поле со страной прибытия обязательно для заполнения",
+        "tocountry_field_is_invalid": "Указана страна прибытия, отсутствующая в базе"
+    }.get(name, "")

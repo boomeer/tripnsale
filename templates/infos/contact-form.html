@@ -1,0 +1,60 @@
+﻿{% load static %}
+
+<div class="page-wrap bg2">
+<div class="page-header-wrap">
+        <div class="container">
+          <div class="page-header">
+
+
+            <h1>Обратная связь</h1>
+
+          </div> <!-- end page-header -->
+        </div> <!-- end container -->
+      </div> <!-- end page-header-wrap -->
+
+
+<section id="backmsg">
+<div class="bg2">
+  <div class="container content-wrap">
+    <div class="row">
+      <div class="container-fluid">
+        <div class="col-md-8 col-md-offset-2">
+          {% if err %}
+            <div class="alert alert-danger">{{err}}</div>
+          {% else %}
+          <div class="row">
+            <div class="col-md-9 col-md-offset-3" style="font-size: large; margin-bottom: 20px;">Вы можете отправить нам сообщение о проблемах или предложениях.</div>
+          </div>
+          {% endif %}
+          <div class="row">
+            <form class="form-horizontal" role="form" action="" method="post">
+              {% csrf_token %}
+              <input type="hidden" name="act" value="sendMsg">
+              <div class="form-group">
+                  <label for="inputName" class="col-sm-3 control-label">Ваше имя:</label>
+                  <div class="col-sm-9">
+                      <input type="text" class="form-control" id="inputName" name="name" placeholder="Имя" value="{{ name }}" />
+                  </div>
+              </div>
+              <div class="form-group">
+                  <label for="inputEmail" class="col-sm-3 control-label">Email для ответа:</label>
+                  <div class="col-sm-9">
+                      <input type="text" class="form-control" id="inputEmail" name="email" placeholder="Email" value="{{ email }}" />
+                  </div>
+              </div>
+              <div class="form-group">
+                  <label for="inputBody" class="col-sm-3 control-label">Текст сообщения:</label>
+                  <div class="col-sm-9">
+                      <textarea type="text" class="form-control" id="inputBody" name="body" placeholder="Текст сообщения">{{ body }}</textarea>
+                  </div>
+              </div>
+              <div class="col-md-offset-3"><button class="btn btn-default" type="submit">Отправить</button></div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>

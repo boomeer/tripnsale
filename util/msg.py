@@ -20,3 +20,9 @@ def GetBuyEditMsg(name):
     return {
         "buy_edit_ok": "Изменения успешно сохранены",
     }.get(name, "")
+
+def GetBackmsgMsg(name):
+    return {
+        "message_is_empty": "Нельзя отправить пустое сообщение",
+        "empty_answer_email": "Пустой email для ответа"
+    }.get(name, "")

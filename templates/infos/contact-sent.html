@@ -1,0 +1,35 @@
+﻿{% extends "base.html" %}
+{% load static %}
+
+{% block main %}
+<div class="page-wrap bg2" style="margin-top: 0px;">
+<div class="page-header-wrap">
+        <div class="container">
+          <div class="page-header">
+
+
+            <h1>Обратная связь</h1>
+
+          </div> <!-- end page-header -->
+        </div> <!-- end container -->
+      </div> <!-- end page-header-wrap -->
+
+
+<section id="backmsg">
+<div class="bg2">
+  <div class="container content-wrap">
+    <div class="row">
+      <div class="container-fluid">
+        <div class="col-md-8 col-md-offset-2">
+          <div class="alert alert-success">
+            <strong>Сообщение отправлено!</strong><br/>
+            Ответ от нашей службы поддержки придёт на email <strong>{{email}}</strong> в ближайшее время.
+          </div>
+          <a class="btn btn-default" href="/" style="font-size: x-large;"><i class="ai ai-arrow-left" style="font-size: large;"></i> На главную</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+{% endblock %}

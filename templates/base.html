@@ -86,46 +86,55 @@
                       </a>
                   </li>
                 {% endif %}
-              <li>
-                  <a href="/offer/sale/list">
+              <li class="dropdown">
+                  <a class="dropdown-toggle" href="#">
                       <i class="glyphicon glyphicon-plane"></i>
                       Поездки
                   </a>
+                  <ul class="dropdown-menu">
+                      <span class="triangle-up"></span>
+                      <li>
+                          <a href="/offer/sale/list/">
+                              <i class="glyphicon glyphicon-list"></i>
+                              Список
+                          </a>
+                      </li>
+                      <li>
+                          <a href="/offer/sale/">
+                              <i class="glyphicon glyphicon-plus"></i>
+                              Добавить
+                          </a>
+                      </li>
+                  </ul>
               </li>
-              <li>
-                  <a href="/offer/buy/list">
+              <li class="dropdown">
+                  <a class="dropdown-toggle" href="#">
                       <i class="glyphicon glyphicon-briefcase"></i>
                       Заказы
                   </a>
+                  <ul class="dropdown-menu">
+                      <span class="triangle-up"></span>
+                      <li>
+                          <a href="/offer/buy/list/">
+                              <i class="glyphicon glyphicon-list"></i>
+                              Список
+                          </a>
+                      </li>
+                      <li>
+                          <a href="/offer/buy/">
+                              <i class="glyphicon glyphicon-plus"></i>
+                              Добавить
+                          </a>
+                      </li>
+                  </ul>
               </li>
               <li>
-                  <a href="/user/all">
-                      <i class="ai ai-users"></i>
-                      Пользователи
-                  </a>
+              <a href="/user/all">
+                  <i class="ai ai-users"></i>
+                  Пользователи
+              </a>
               </li>
               {% if profileOwner %}
-                  <li class="dropdown">
-                      <a class="dropdown-toggle" href="#">
-                          <i class="glyphicon glyphicon-plus"></i>
-                          Добавить
-                      </a>
-                      <ul class="dropdown-menu">
-                          <span class="triangle-up"></span>
-                          <li>
-                              <a href="/offer/buy/">
-                                  <i class="glyphicon glyphicon-briefcase"></i>
-                                  Заказ
-                              </a>
-                          </li>
-                          <li>
-                              <a href="/offer/sale/">
-                                  <i class="glyphicon glyphicon-plane"></i>
-                                  Поездку
-                              </a>
-                          </li>
-                      </ul>
-                  </li>
                   <li class="dropdown">
                       <a class="dropdown-toggle" href="#">
                           <i class="glyphicon glyphicon-user"></i>

@@ -14,9 +14,16 @@ def GetRegMsg(name):
         "bad_password_len": "Пароль должен иметь от 3 до 30 символов",
         "passwords_are_not_equal": "Пароли не совпадают",
         "offer_wasnt_be_agreed": "Вы должны согласиться с положением оферты",
+        "required_fields_missed": "Заполнены не все обязательные поля"
     }.get(name, "")
 
 def GetBuyEditMsg(name):
     return {
         "buy_edit_ok": "Изменения успешно сохранены",
+    }.get(name, "")
+
+def GetBackmsgMsg(name):
+    return {
+        "message_is_empty": "Нельзя отправить пустое сообщение",
+        "empty_answer_email": "Пустой email для ответа"
     }.get(name, "")

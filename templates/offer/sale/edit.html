@@ -13,13 +13,16 @@
 
 {% block main %}
     <div class="container-fluid">
-        <div class="saleAddForm col-md-6 col-lg-6 col-md-offset-2 col-lg-offset-2">
+        <div class="saleAddForm col-md-8 col-lg-8 col-md-offset-2 col-lg-offset-2">
             <h3>Редактировать поездку</h3>
+            {% if err %}
+                <div class="alert alert-danger">{{err}}</div>
+            {% endif %}
             <form class="form-horizontal" action="" method="post" role="form">
                 {% csrf_token %}
                 <input type="hidden" name="act" value="edit">
                 <div class="fromTo group">
-                    <div class="fromBlock fromToBlock">
+                    <div class="fromBlock fromToBlock col-md-6">
                         <div class="fromToTitle">
                             Отправляюсь
                         </div>
@@ -39,10 +42,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="fromToSepBlock fromToBlock">
-                        <i class="glyphicon glyphicon-arrow-right"></i>
-                    </div>
-                    <div class="toBlock fromToBlock">
+                    <div class="toBlock fromToBlock col-md-6">
                         <div class="fromToTitle">
                             Прибываю
                         </div>

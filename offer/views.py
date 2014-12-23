@@ -83,11 +83,50 @@ class SaleToCountryInvalidErr (SaleEditErr):
     def __init__(self):
         super().__init__("tocountry_field_is_invalid")
 
+class SaleInvalidDepositErr (SaleEditErr):
+    def __init__(self):
+        super().__init__("invalid_deposit")
+
 @SafeView
 def SaleListView(request):
     return RenderToResponse("offer/sale/list.html", request, {
         "url": "/offer/sale/list",
     })
+
+def ExtractSaleFields(params):
+    if not params.get("from", "").strip():
+        raise SaleFrCountryMissingErr
+    try:
+        fr = Country.objects.get(name=params["from"])
+    except:
+        raise SaleFrCountryInvalidErr
+
+    if not params.get("to", "").strip():
+        raise SaleToCountryMissingErr
+    try:
+        to = Country.objects.get(name=params["to"])
+    except:
+        raise SaleToCountryInvalidErr
+
+    if not params.get("fromTime", "").strip():
+        raise SaleFrDateMissingErr
+    try:
+        frTime = datetime.strptime(params["fromTime"], "%d.%m.%Y")
+    except:
+        raise SaleFrDateInvalidErr
+
+    if not params.get("toTime", "").strip():
+        raise SaleToDateMissingErr
+    try:
+        toTime = datetime.strptime(params["toTime"], "%d.%m.%Y")
+    except:
+        raise SaleToDateInvalidErr
+
+    try:
+        deposit = float(params.get("deposit", 0).replace(",", ".").strip())
+    except:
+        raise SaleInvalidDepositErr
+    return (fr, to, frTime, toTime, deposit,)
 
 @login_required(login_url="/user/auth/")
 @SafeView
@@ -99,33 +138,7 @@ def SaleOfferAddView(request):
             CheckPost(request)
             CheckAuth(request)
 
-            if not params.get("from", "").strip():
-                raise SaleFrCountryMissingErr
-            try:
-                fr = Country.objects.get(name=params["from"])
-            except:
-                raise SaleFrCountryInvalidErr
-
-            if not params.get("to", "").strip():
-                raise SaleToCountryMissingErr
-            try:
-                to = Country.objects.get(name=params["to"])
-            except:
-                raise SaleToCountryInvalidErr
-
-            if not params.get("fromTime", "").strip():
-                raise SaleFrDateMissingErr
-            try:
-                frTime = datetime.strptime(params["fromTime"], "%d.%m.%Y")
-            except:
-                raise SaleFrDateInvalidErr
-
-            if not params.get("toTime", "").strip():
-                raise SaleToDateMissingErr
-            try:
-                toTime = datetime.strptime(params["toTime"], "%d.%m.%Y")
-            except:
-                raise SaleToDateInvalidErr
+            fr, to, frTime, toTime, deposit = ExtractSaleFields(params)
             sale = SaleOffer(
                 content=params.get("content", ""),
                 fr=fr,
@@ -136,7 +149,7 @@ def SaleOfferAddView(request):
                 toCity=params.get("toCity", ""),
                 itoCity=params.get("toCity", "").lower(),
                 toTime=toTime,
-                deposit=params.get("deposit", 0),
+                deposit=deposit,
                 guarant=params.get("guarant", False),
                 owner=GetCurrentUser(request),
                 createTime=datetime.now(),
@@ -151,7 +164,7 @@ def SaleOfferAddView(request):
         "err": GetSaleAddMsg(params.get("err", ""))
     })
 
-
+@SafeView
 def SaleEditView(request, id):
     params = request.REQUEST
     sale = SaleOffer.objects.get(id=id)
@@ -159,25 +172,33 @@ def SaleEditView(request, id):
     if sale.owner != GetCurrentUser(request):
         return redirect("/")
     if act == "edit":
-        CheckPost(request)
-        fr = Country.objects.get(name=params.get("from", ""))
-        to = Country.objects.get(name=params.get("to", ""))
-        sale.content = params.get("content", "")
-        sale.fr = fr
-        sale.frCity = params.get("frCity", "")
-        sale.ifrCity = params.get("frCity", "").lower()
-        #sale.frTime = datetime.strptime(params.get("fromTime", ""), "%d.%m.%Y"),
-        sale.to = to
-        sale.toCity = params.get("toCity", "")
-        sale.itoCity = params.get("toCity", "").lower()
-        #sale.toTime = datetime.strptime(params.get("toTime", ""), "%d.%m.%Y"),
-        sale.deposit = float(params.get("deposit", "0").replace(",", "."))
-        sale.guarant = params.get("guarant", False)
-        sale.save()
-        return redirect("/offer/sale/edit/{}".format(sale.id))
+        try:
+            CheckPost(request)
+            fr, to, frTime, toTime, deposit = ExtractSaleFields(params)
+
+            # fr = Country.objects.get(name=params.get("from", ""))
+            # to = Country.objects.get(name=params.get("to", ""))
+            sale.content = params.get("content", "")
+            sale.fr = fr
+            sale.frCity = params.get("frCity", "")
+            sale.ifrCity = params.get("frCity", "").lower()
+            sale.frTime = frTime;
+            #sale.frTime = datetime.strptime(params.get("fromTime", ""), "%d.%m.%Y"),
+            sale.to = to
+            sale.toCity = params.get("toCity", "")
+            sale.itoCity = params.get("toCity", "").lower()
+            sale.toTime = toTime
+            #sale.toTime = datetime.strptime(params.get("toTime", ""), "%d.%m.%Y"),
+            sale.deposit = deposit
+            sale.guarant = params.get("guarant", False)
+            sale.save()
+            return redirect("/offer/sale/list/#{}".format(sale.id))
+        except SaleEditErr as e:
+            raise RedirectExc("/offer/sale/edit/{}?err={}".format(sale.id, e.status))
     return RenderToResponse("offer/sale/edit.html", request, {
         "sale": sale,
         "countries": GetCountries(),
+        "err": GetSaleAddMsg(params.get("err", "")),
     })
 
 

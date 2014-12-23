@@ -37,5 +37,6 @@ def GetSaleAddMsg(name):
         "todate_field_is_empty": "Поле с датой прибытия обязательно для заполнения",
         "todate_field_is_invalid": "Поле с датой прибытия должно быть в формате дд.мм.гггг",
         "tocountry_field_is_empty": "Поле со страной прибытия обязательно для заполнения",
-        "tocountry_field_is_invalid": "Указана страна прибытия, отсутствующая в базе"
+        "tocountry_field_is_invalid": "Указана страна прибытия, отсутствующая в базе",
+        "invalid_deposit": "Некорректное значение депозита"
     }.get(name, "")

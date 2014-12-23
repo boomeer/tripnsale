@@ -200,7 +200,7 @@ def ImView(request):
         return RenderJson({"result": "ok"})
     elif act == "askGuarant":
         conf = Conference.objects.get(id=params.get("conf"))
-        if conf.askGuarant or conf.withGuarant:
+        if conf.askGuarant or conf.plusGuarant:
             raise Exception("bad request")
         conf.askGuarant = True
         conf.save()

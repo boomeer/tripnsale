@@ -24,7 +24,7 @@ def AcceptView(request, confId):
     guarant = GetCurrentUser(request)
     if not guarant.guarant:
         raise Exception("You aren't guarant")
-    conf.askGuarant = True
+    conf.askGuarant = False
     conf2 = Conference(
         plusGuarant=conf,
         askGuarant=False,

@@ -30,6 +30,15 @@ from user.utils import (
     GetCurrentUser,
     GetDjUserByUser,
 )
+from offer.utils import (
+    CheckConnection,
+    SendOfferMail,
+)
+from offer.models import (
+    BuyOffer,
+    SaleOffer,
+    OfferConnection,
+)
 import re
 from datetime import datetime
 
@@ -220,7 +229,27 @@ def ImView(request):
         return RenderJson({"result": "ok"})
     else:
         if "conf" not in params:
+            user = GetCurrentUser(request)
             peer = User.objects.get(id=params.get("peer", 0))
+            buyId = params.get("buy", 0)
+            saleId = params.get("sale", 0)
+            if buyId:
+                offer = BuyOffer.objects.get(id=buyId)
+            elif saleId:
+                offer = SaleOffer.objects.get(id=saleId)
+            if CheckConnection(user, offer):
+                SendOfferMail(user, offer)
+                if type(offer) == BuyOffer:
+                    oc = OfferConnection(
+                        user=user,
+                        buy=offer,
+                    )
+                else:
+                    oc = OfferConnection(
+                        user=user,
+                        sale=offer,
+                    )
+                oc.save()
             conf = GetOrCreateDialog(GetCurrentUser(request), peer)
             return redirect("/user/im?conf={}".format(conf.id))
         conf = Conference.objects.get(id=params.get("conf", 0))

@@ -113,7 +113,7 @@
                                     </a>
                             {% else %}
                                 {% if not sale.closed %}
-                                    <a type="button" class="btn btn-default" href="/user/im?peer={{ sale.owner.id }}">
+                                    <a type="button" class="btn btn-default" href="/user/im?peer={{ sale.owner.id }}&sale={{ sale.id }}">
                                         <i class="glyphicon glyphicon-hand-up"></i>
                                         Связаться
                                     </a>

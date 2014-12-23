@@ -1,7 +1,6 @@
 from django.db import models
 from util.utils import TsExc
 import util.models
-from django.contrib import admin
 from user.models import User
 from datetime import datetime
 from place.models import (
@@ -38,10 +37,6 @@ class BuyOffer(Offer):
     itoCity = models.TextField(default="", blank=True)
     gallery = models.ForeignKey(Gallery)
 
-@admin.register(BuyOffer)
-class BuyOfferAdmin(admin.ModelAdmin):
-    list_display = ('costFrom', 'costTo', 'guarant', 'owner', 'closed', 'removed',)
-
 
 class SaleOffer(Offer):
     fr = models.ForeignKey(Country, related_name="country_from", blank=True, null=True)
@@ -61,7 +56,8 @@ class SaleOffer(Offer):
     def toEnd(self):
         return self.toTime - datetime.now()
 
-@admin.register(SaleOffer)
-class SaleOfferAdmin(admin.ModelAdmin):
-    list_display = ("fr", "frCity", "frTime", "to", "toCity", "toTime", "deposit", "guarant",
-                "owner")
+
+class OfferConnection(models.Model):
+    user = models.ForeignKey(User)
+    buy = models.ForeignKey(BuyOffer, null=True, blank=True)
+    sale = models.ForeignKey(SaleOffer, null=True, blank=True)

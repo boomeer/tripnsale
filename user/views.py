@@ -74,9 +74,13 @@ class PasswordsAreNotEqualErr(RegErr):
     def __init__(self):
         super().__init__("passwords_are_not_equal")
 
-class OfferNotAgreed(RegErr):
+class OfferNotAgreedErr(RegErr):
     def __init__(self):
         super().__init__("offer_wasnt_be_agreed")
+
+class RequiredFieldsMissingErr(RegErr):
+    def __init__(self):
+        super().__init__("required_fields_missed")
 
 class MsgCannotBeEmpty(TsExc):
     def __init__(self):
@@ -108,6 +112,9 @@ def AuthView(request):
     elif act == "reg":
         try:
             CheckPost(request)
+            if not params.get("firstname", "").strip() or not params.get("lastname", "").strip():
+                raise RequiredFieldsMissingErr
+
             if params["password"] != params["password2"]:
                 raise PasswordsAreNotEqualErr
             if not re.compile("^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+$").match(params["email"]):
@@ -115,7 +122,7 @@ def AuthView(request):
             if not (3 <= len(params["password"]) <= 20):
                 raise BadPasswordLengthErr
             if not params.get("offert", 0):
-                raise OfferNotAgreed
+                raise OfferNotAgreedErr
             country = Country.objects.get(name=params.get("country", 0))
 
             if User.objects.filter(username=params["email"]).count():

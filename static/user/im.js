@@ -9,6 +9,30 @@ function ProcOpts(opts)
             $(".guarantBtn").hide();
         }
     }
+    if (opts.toWithGuarant != window.toWithGuarant) {
+        window.toWithGuarant = opts.toWithGuarant;
+        if (window.toWithGuarant) {
+            $(".toWithGuarantBtn").on("click", function() {
+                window.location.href = window.toWithGuarant;
+            });
+            $(".toWithGuarantBtn").show();
+        }
+        else {
+            $(".toWithGuarantBtn").hide();
+        }
+    }
+    if (opts.toWithoutGuarant != window.toWithoutGuarant) {
+        window.toWithoutGuarant = opts.toWithoutGuarant;
+        if (window.toWithoutGuarant) {
+            $(".toWithoutGuarantBtn").on("click", function() {
+                window.location.href = window.toWithoutGuarant;
+            });
+            $(".toWithoutGuarantBtn").show();
+        }
+        else {
+            $(".toWithoutGuarantBtn").hide();
+        }
+    }
     SetUnread(opts.unreadCount);
 }
 

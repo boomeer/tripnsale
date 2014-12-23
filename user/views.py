@@ -200,7 +200,7 @@ def ImView(request):
         return RenderJson({"result": "ok"})
     elif act == "askGuarant":
         conf = Conference.objects.get(id=params.get("conf"))
-        if conf.askGuarant or conf.withGuarant:
+        if conf.askGuarant or conf.plusGuarant:
             raise Exception("bad request")
         conf.askGuarant = True
         conf.save()
@@ -247,8 +247,10 @@ def ImMsgFrameView(request):
             "msgs": msgs,
         }).content.decode("utf-8"),
         "opts": {
-            "addGuarant": not conf.withGuarant and not conf.askGuarant,
+            "addGuarant": not conf.plusGuarant and not conf.askGuarant,
             "unreadCount": GetUnreadCount(request),
+            "toWithGuarant": conf.plusGuarant.url() if conf.plusGuarant and not conf.withGuarant else "",
+            "toWithoutGuarant": conf.plusGuarant.url() if conf.plusGuarant and conf.withGuarant else "",
         },
     })
 
@@ -259,6 +261,8 @@ def ProfileView(request, userid=None):
     user = User.objects.get(id=userid) if userid else GetCurrentUser(request)
     if not user and not userid:
         return redirect("/user/auth/")
+    if not user.visible() and user != GetCurrentUser(request):
+        return redirect("/")
     return RenderToResponse("user/profile.html", request, {
         "url": user.profileUrl() if user else "/user/profile/",
         "prUser": user,

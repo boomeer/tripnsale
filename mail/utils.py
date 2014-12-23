@@ -9,6 +9,7 @@ def SendMail(fr, to, msg):
     try:
         sm = smtplib.SMTP("localhost")
         sm.sendmail(fr, to, msg.encode("utf-8"))
+        sm.quit()
     except:
         raise
         

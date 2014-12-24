@@ -85,7 +85,7 @@
                         <label for="inputDeposit">Депозит:</label>
                     </div>
                     <div class="inputWrapper container-fluid">
-                        <input type="text" class="form-control" id="inputDeposit" name="deposit" value="{{ sale.deposit }}">
+                        <input type="text" class="form-control" id="inputDeposit" name="deposit" value="{{ sale.deposit|floatformat:"0"  }}">
                     </div>
                     <div class="hint">
                         Укажите доступные средства в рублях (или оставьте пустым)
@@ -101,7 +101,7 @@
                 </div>
 
                 <div class="group">
-                    <button type="submit" class="btn btn-default btn-lg">Применить изменения</button>
+                    <button type="submit" class="btn btn-primary btn-lg">Применить изменения</button>
                 </div>
             </form>
         </div>

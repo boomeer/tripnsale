@@ -12,9 +12,16 @@
 {% endblock %}
 
 {% block main %}
+<div class="page-header-wrap">
+       <div class="container">
+         <div class="page-header">
+           <h1>Редактирование поездки</h1>
+         </div>
+       </div>
+     </div>
+
     <div class="container-fluid">
         <div class="saleAddForm col-md-8 col-lg-8 col-md-offset-2 col-lg-offset-2">
-            <h3>Редактировать поездку</h3>
             {% if err %}
                 <div class="alert alert-danger">{{err}}</div>
             {% endif %}

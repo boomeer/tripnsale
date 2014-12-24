@@ -40,7 +40,7 @@
                                         </option>
                                     {% endfor %}
                                 </select>
-                                <input type="text" class="form-control" placeholder="Город" id="inputFromCity" name="frCity">
+                                <input type="text" class="form-control" placeholder="Город" id="inputFromCity" name="frCity" value="{{ profileOwner.city }}">
                             </div>
                             <div class="inputWrapper">
                                 <input type="text" class="form-control" placeholder="Когда" id="inputFromTime" name="fromTime">
@@ -70,31 +70,32 @@
                         </div>
                     </div>
                 </div>
+                <hr>
                 <div class="form-group">
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         <label for="inputContent">Комментарий:</label>
                     </div>
-                    <div class="col-md-10">
+                    <div class="col-md-9 container-fluid">
                         <textarea class="form-control" id="inputContent" name="deposit" rows=4></textarea>
                     </div>
                 </div>
 
-                <div class="group">
-                    <div class="labelWrapper">
+                <div class="form-group">
+                    <div class="col-md-3">
                         <label for="inputDeposit">Депозит:</label>
                     </div>
-                    <div class="inputWrapper">
+                    <div class="inputWrapper container-fluid">
                         <input type="text" class="form-control" id="inputDeposit" name="deposit" value=0>
                     </div>
                     <div class="hint">
                         Укажите доступные средства в рублях (или оставьте пустым)
                     </div>
                 </div>
-                <div class="group">
-                    <div class="labelWrapper">
+                <div class="form-group">
+                    <div class="col-md-3">
                         <label for="inputGuarant">Только с гарантом:</label>
                     </div>
-                    <div class="inputWrapper">
+                    <div class="inputWrapper  container-fluid">
                         <input type="checkbox" id="inputGuarant" name="guarant" checked>
                     </div>
                 </div>

@@ -87,7 +87,7 @@
                   </li>
                 {% endif %}
               <li class="dropdown">
-                  <a class="dropdown-toggle" href="#">
+                  <a class="dropdown-toggle" href="/offer/sale/list/">
                       <i class="glyphicon glyphicon-plane"></i>
                       Поездки
                   </a>
@@ -108,9 +108,9 @@
                   </ul>
               </li>
               <li class="dropdown">
-                  <a class="dropdown-toggle" href="#">
+                  <a class="dropdown-toggle" href="/offer/buy/list/">
                       <i class="glyphicon glyphicon-briefcase"></i>
-                      Заказы
+                      Заявки
                   </a>
                   <ul class="dropdown-menu">
                       <span class="triangle-up"></span>
@@ -136,7 +136,7 @@
               </li>
               {% if profileOwner %}
                   <li class="dropdown">
-                      <a class="dropdown-toggle" href="#">
+                      <a class="dropdown-toggle" href="/user/profile">
                           <i class="glyphicon glyphicon-user"></i>
                           {{ profileOwner.first_name }} {{ profileOwner.last_name }}
                           &nbsp;
@@ -149,6 +149,7 @@
                           </span>
                       </a>
                       <ul class="dropdown-menu">
+                        <span class="triangle-up"></span>
                           <li>
                               <a href="/user/profile">
                                   <i class="ai ai-user"></i>

@@ -56,6 +56,7 @@ INSTALLED_APPS = (
     'gallery',
     'guarant',
     'infos',
+    'valute',
 )
 
 MIDDLEWARE_CLASSES = (

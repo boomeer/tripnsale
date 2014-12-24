@@ -11,49 +11,57 @@
 {% endblock %}
 
 {% block main %}
+<div class="page-header-wrap">
+       <div class="container">
+         <div class="page-header">
+           <h1>Добавление поездки</h1>
+         </div>
+       </div>
+     </div>
     <div class="container-fluid">
-        <div class="saleAddForm col-md-6 col-lg-6 col-md-offset-2 col-lg-offset-2">
-            <h3>Добавить поездку</h3>
+        <div class="saleAddForm col-md-8 col-lg-8 col-md-offset-2 col-lg-offset-2">
+            {% if err %}
+                <div class="alert alert-danger">{{err}}</div>
+            {% endif %}
             <form class="form-horizontal" action="" method="post" role="form">
                 {% csrf_token %}
                 <input type="hidden" name="act" value="add">
-                <div class="fromTo group">
-                    <div class="fromBlock fromToBlock">
+                <div class="fromTo group row">
+                    <div class="fromBlock fromToBlock col-md-6">
                         <div class="fromToTitle">
-                            Отправляюсь
+                            Отправляюсь <span class="req">*</span>
                         </div>
                         <div class="fromToBody">
                             <div class="inputWrapper">
                                 <select id="inputFrom" name="from" placeholder="Страна">
                                     {% for country in countries %}
-                                        <option value="{{ country.name }}">
+                                        <option value="{{ country.name }}" {% if country == profileOwner.country %} selected {% endif %}>
                                             {{ country.title }}
                                         </option>
                                     {% endfor %}
                                 </select>
-                                <input type="text" class="form-control" placeholder="Город" id="inputFromCity" name="frCity">
+                                <input type="text" class="form-control" placeholder="Город" id="inputFromCity" name="frCity" value="{{ profileOwner.city }}">
                             </div>
                             <div class="inputWrapper">
                                 <input type="text" class="form-control" placeholder="Когда" id="inputFromTime" name="fromTime">
                             </div>
                         </div>
                     </div>
-                    <div class="fromToSepBlock fromToBlock">
-                        <i class="glyphicon glyphicon-arrow-right"></i>
-                    </div>
-                    <div class="toBlock fromToBlock">
+                    <div class="toBlock fromToBlock col-md-6">
                         <div class="fromToTitle">
-                            Прибываю
+                            Прибываю <span class="req">*</span>
                         </div>
                         <div class="fromToBody">
                             <div class="inputWrapper">
                                 <select id="inputTo" name="to" placeholder="Страна">
+                                    <option value=""></option>
                                     {% for country in countries %}
                                         <option value="{{ country.name }}">
                                             {{ country.title }}
                                         </option>
                                     {% endfor %}
                                 </select>
+
                                 <input type="text" class="form-control" placeholder="Город" id="inputToCity" name="toCity">
                             </div>
                             <div class="inputWrapper">
@@ -62,37 +70,39 @@
                         </div>
                     </div>
                 </div>
+                <hr/>
                 <div class="form-group">
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         <label for="inputContent">Комментарий:</label>
                     </div>
-                    <div class="col-md-10">
+                    <div class="col-md-9 container-fluid">
                         <textarea class="form-control" id="inputContent" name="deposit" rows=4></textarea>
                     </div>
                 </div>
 
-                <div class="group">
-                    <div class="labelWrapper">
+                <div class="form-group">
+                    <div class="col-md-3">
                         <label for="inputDeposit">Депозит:</label>
                     </div>
-                    <div class="inputWrapper">
+                    <div class="inputWrapper container-fluid">
                         <input type="text" class="form-control" id="inputDeposit" name="deposit" value=0>
                     </div>
                     <div class="hint">
-                        Укажите депозит в долларах
+                        Укажите доступные средства в рублях (или оставьте пустым)
                     </div>
                 </div>
-                <div class="group">
-                    <div class="labelWrapper">
+                <div class="form-group">
+                    <div class="col-md-3">
                         <label for="inputGuarant">Только с гарантом:</label>
                     </div>
-                    <div class="inputWrapper">
+                    <div class="inputWrapper  container-fluid">
                         <input type="checkbox" id="inputGuarant" name="guarant" checked>
                     </div>
                 </div>
 
+                <div class="req">Поля с * обязательны для заполнения</div>
                 <div class="group">
-                    <button type="submit" class="btn btn-default btn-lg">Добавить поезду</button>
+                    <button type="submit" class="btn btn-primary btn-lg">Добавить поездку</button>
                 </div>
             </form>
         </div>

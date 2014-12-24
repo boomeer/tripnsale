@@ -1,9 +1,11 @@
 $(function() {
-    $("#inputFromTime").datepicker();
-    $("#inputFromTime").datepicker("option", "dateFormat", "dd.mm.yy");
-    $("#inputToTime").datepicker();
-    $("#inputToTime").datepicker("option", "dateFormat", "dd.mm.yy");
-    
+    $("#inputFromTime").datepicker({
+        dateFormat: "dd.mm.yy",
+    });
+    $("#inputToTime").datepicker({
+        dateFormat: "dd.mm.yy",
+    });
+
     CountriesAC($("#inputFrom"));
     CountriesAC($("#inputTo"));
 });

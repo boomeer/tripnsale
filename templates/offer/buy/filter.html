@@ -16,6 +16,36 @@
                         {{ buy.content }}
                     </div>
                 </div>
+                <div class="buyFromTo">
+                    {% if buy.fr and buy.to %}
+                        {% if buy.fr %}
+                            <div class="buyFrom buyPlace">
+                                <span>
+                                    <img src="{{ buy.fr.img }}">
+                                    {{ buy.fr.title }}
+                                </span>
+                                <span class="buyCity">
+                                    {{ buy.frCity }}
+                                </span>
+                            </div>
+                        {% endif %}
+                        <div class="buyArrow">
+                            <i class="glyphicon glyphicon-arrow-right"></i>
+                        </div>
+                        {% if buy.to %}
+                            <div class="buyTo buyPlace">
+                                <span>
+                                    <img src="{{ buy.to.img }}">
+                                    {{ buy.to.title }}
+                                </span>
+                                <span class="buyCity">
+                                    {{ buy.toCity }}
+                                </span>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                </div>
+
                 <div class="prices">
                     <span>
                         Готов заплатить:

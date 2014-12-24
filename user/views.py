@@ -130,7 +130,7 @@ def AuthView(request):
     elif act == "reg":
         try:
             CheckPost(request)
-            if not params.get("firstname", "").strip() or not params.get("lastname", "").strip():
+            if not params.get("firstName", "").strip() or not params.get("lastName", "").strip():
                 raise RequiredFieldsMissingErr
 
             if params["password"] != params["password2"]:
@@ -242,11 +242,12 @@ def ImView(request):
             peer = User.objects.get(id=params.get("peer", 0))
             buyId = params.get("buy", 0)
             saleId = params.get("sale", 0)
+            offer = None
             if buyId:
                 offer = BuyOffer.objects.get(id=buyId)
             elif saleId:
                 offer = SaleOffer.objects.get(id=saleId)
-            if CheckConnection(user, offer):
+            if offer and CheckConnection(user, offer):
                 SendOfferMail(user, offer)
                 if type(offer) == BuyOffer:
                     oc = OfferConnection(

@@ -13,8 +13,9 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Country',
             fields=[
-                ('id', models.AutoField(serialize=False, primary_key=True, auto_created=True, verbose_name='ID')),
+                ('id', models.AutoField(serialize=False, auto_created=True, verbose_name='ID', primary_key=True)),
                 ('title', models.TextField(default='')),
+                ('ititle', models.TextField(default='')),
                 ('name', models.TextField(default='')),
             ],
             options={

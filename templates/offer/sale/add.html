@@ -15,7 +15,7 @@
         <div class="saleAddForm col-md-8 col-lg-8 col-md-offset-2 col-lg-offset-2">
             <h3>Добавить поездку</h3>
             {% if err %}
-            <div class="alert alert-danger">{{err}}</div>
+                <div class="alert alert-danger">{{err}}</div>
             {% endif %}
             <form class="form-horizontal" action="" method="post" role="form">
                 {% csrf_token %}
@@ -81,7 +81,7 @@
                         <input type="text" class="form-control" id="inputDeposit" name="deposit" value=0>
                     </div>
                     <div class="hint">
-                        Укажите депозит в долларах
+                        Укажите доступные средства в рублях (или оставьте пустым)
                     </div>
                 </div>
                 <div class="group">

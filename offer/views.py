@@ -98,33 +98,33 @@ def ExtractSaleFields(params):
         raise SaleFrCountryMissingErr
     try:
         fr = Country.objects.get(name=params["from"])
-    except:
+    except ValueError:
         raise SaleFrCountryInvalidErr
 
     if not params.get("to", "").strip():
         raise SaleToCountryMissingErr
     try:
         to = Country.objects.get(name=params["to"])
-    except:
+    except ValueError:
         raise SaleToCountryInvalidErr
 
     if not params.get("fromTime", "").strip():
         raise SaleFrDateMissingErr
     try:
         frTime = datetime.strptime(params["fromTime"], "%d.%m.%Y")
-    except:
+    except ValueError:
         raise SaleFrDateInvalidErr
 
     if not params.get("toTime", "").strip():
         raise SaleToDateMissingErr
     try:
         toTime = datetime.strptime(params["toTime"], "%d.%m.%Y")
-    except:
+    except ValueError:
         raise SaleToDateInvalidErr
 
     try:
-        deposit = float(params.get("deposit", 0).replace(",", ".").strip())
-    except:
+        deposit = round(float(params.get("deposit", "0").replace(",", ".").strip()))
+    except ValueError:
         raise SaleInvalidDepositErr
     return (fr, to, frTime, toTime, deposit,)
 
@@ -176,19 +176,15 @@ def SaleEditView(request, id):
             CheckPost(request)
             fr, to, frTime, toTime, deposit = ExtractSaleFields(params)
 
-            # fr = Country.objects.get(name=params.get("from", ""))
-            # to = Country.objects.get(name=params.get("to", ""))
             sale.content = params.get("content", "")
             sale.fr = fr
             sale.frCity = params.get("frCity", "")
             sale.ifrCity = params.get("frCity", "").lower()
             sale.frTime = frTime;
-            #sale.frTime = datetime.strptime(params.get("fromTime", ""), "%d.%m.%Y"),
             sale.to = to
             sale.toCity = params.get("toCity", "")
             sale.itoCity = params.get("toCity", "").lower()
             sale.toTime = toTime
-            #sale.toTime = datetime.strptime(params.get("toTime", ""), "%d.%m.%Y"),
             sale.deposit = deposit
             sale.guarant = params.get("guarant", False)
             sale.save()

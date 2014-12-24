@@ -46,3 +46,15 @@ def GetSaleAddMsg(name):
         "tocountry_field_is_invalid": "Указана страна прибытия, отсутствующая в базе данных",
         "invalid_deposit": "Некорректное значение депозита"
     }.get(name, "")
+
+def GetEditProfileMsg(name):
+    return {
+        "firstname_is_missing": "Поле с именем должно быть заполнено",
+        "lastname_is_missing": "Поле с фамилией должно быть заполнено",
+        "country_is_invalid": "Указана страна, отсутствующая в базе данных",
+        "bday_is_missing": "Поле с датой рождения должно быть заполнена",
+        "bday_is_invalid": "Поле с датой рождения должно быть в формате дд.мм.гггг",
+        "old_pass_is_invalid": "Неверный пароль",
+        "passwords_are_not_equal": "Введённые пароли не совпадают",
+        "bad_password_len": "Пароль должен иметь от 3 до 30 символов",
+    }.get(name, "")

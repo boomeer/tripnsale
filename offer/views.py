@@ -53,35 +53,35 @@ class SaleEditErr (TsExc):
 
 class SaleFrDateMissingErr (SaleEditErr):
     def __init__(self):
-        super().__init__("fromdate_field_is_empty")
+        super().__init__("fromdate_is_empty")
 
 class SaleFrDateInvalidErr (SaleEditErr):
     def __init__(self):
-        super().__init__("fromdate_field_is_invalid")
+        super().__init__("fromdate_is_invalid")
 
 class SaleFrCountryMissingErr (SaleEditErr):
     def __init__(self):
-        super().__init__("fromcountry_field_is_empty")
+        super().__init__("fromcountry_is_empty")
 
 class SaleFrCountryInvalidErr (SaleEditErr):
     def __init__(self):
-        super().__init__("fromcountry_field_is_invalid")
+        super().__init__("fromcountry_is_invalid")
 
 class SaleToDateMissingErr (SaleEditErr):
     def __init__(self):
-        super().__init__("todate_field_is_empty")
+        super().__init__("todate_is_empty")
 
 class SaleToDateInvalidErr (SaleEditErr):
     def __init__(self):
-        super().__init__("todate_field_is_invalid")
+        super().__init__("todate_is_invalid")
 
 class SaleToCountryMissingErr (SaleEditErr):
     def __init__(self):
-        super().__init__("tocountry_field_is_empty")
+        super().__init__("tocountry_is_empty")
 
 class SaleToCountryInvalidErr (SaleEditErr):
     def __init__(self):
-        super().__init__("tocountry_field_is_invalid")
+        super().__init__("tocountry_is_invalid")
 
 class SaleInvalidDepositErr (SaleEditErr):
     def __init__(self):
@@ -258,37 +258,110 @@ def SaleView(request, id):
         "sale": sale,
     })
 
+class BuyEditErr (TsExc):
+    def __init__(self, msg):
+        super().__init__(msg)
+        self.status = msg
+
+class BuyTitleMissingErr (BuyEditErr):
+    def __init__(self):
+        super().__init__("title_is_missing")
+
+class BuyFrCountryInvalidErr (BuyEditErr):
+    def __init__(self):
+        super().__init__("fromcountry_is_invalid")
+
+class BuyToCountryMissingErr (BuyEditErr):
+    def __init__(self):
+        super().__init__("tocountry_is_empty")
+
+class BuyToCountryInvalidErr (BuyEditErr):
+    def __init__(self):
+        super().__init__("tocountry_field_is_invalid")
+
+class BuyCostFrInvalidErr (BuyEditErr):
+    def __init__(self):
+        super().__init__("costfr_is_invalid")
+
+class BuyCostToMissingErr (BuyEditErr):
+    def __init__(self):
+        super().__init__("costto_is_missing")
+
+class BuyCostToInvalidErr (BuyEditErr):
+    def __init__(self):
+        super().__init__("costto_is_invalid")
+
+def ExtractBuyFields(params):
+    if not params.get("from", "").strip():
+        fr = None
+    else:
+        try:
+            fr = Country.objects.get(name=params["from"])
+        except ValueError:
+            raise BuyFrCountryInvalidErr
+
+    if not params.get("to", "").strip():
+        raise BuyToCountryMissingErr
+    try:
+        to = Country.objects.get(name=params["to"])
+    except ValueError:
+        raise BuyToCountryInvalidErr
+
+    if not params.get("title", "").strip():
+        raise BuyTitleMissingErr
+    title = params["title"]
+
+    try:
+        if not params.get("costFrom", ""):
+            costFrom = 0.0
+        else:
+            costFrom = round(float(params.get("costFrom", "0").replace(",", ".").strip()))
+    except ValueError:
+        raise BuyCostFrInvalidErr
+
+    if not params.get("costTo", "").strip():
+        raise BuyCostToMissingErr
+    try:
+        costTo = round(float(params.get("costTo", "0").replace(",", ".").strip()))
+    except ValueError:
+        raise BuyCostToInvalidErr
+    return (fr, to, title, costFrom, costTo,)
+
 @login_required(login_url="/user/auth/")
 @SafeView
 def BuyOfferAddView(request):
     params = request.REQUEST
     act = params.get("act", "")
     if act == "add":
-        CheckPost(request)
-        CheckAuth(request)
-        gallery = Gallery.objects.get(token=params.get("gallery", ""))
-        fr = Country.objects.get(name=params.get("from", ""))
-        to = Country.objects.get(name=params.get("to", ""))
-        buy = BuyOffer(
-            title=params.get("title", ""),
-            ititle=params.get("title", "").lower(),
-            content=params.get("content", ""),
-            costFrom=params.get("costFrom", None),
-            costTo=params.get("costTo", None),
-            guarant=params.get("guarant", False),
-            fr=fr,
-            frCity=params.get("frCity", ""),
-            ifrCity=params.get("frCity", "").lower(),
-            to=to,
-            toCity=params.get("toCity", ""),
-            itoCity=params.get("toCity", "").lower(),
-            gallery=gallery,
-            owner=GetCurrentUser(request),
-            createTime=datetime.now(),
-        )
-        buy.save()
-        VerifyPhotos(params.get("token", ""))
-        return redirect("/offer/buy/list")
+        try:
+            CheckPost(request)
+            CheckAuth(request)
+
+            fr, to, title, costFrom, costTo = ExtractBuyFields(params)
+
+            gallery = Gallery.objects.get(token=params.get("gallery", ""))
+            buy = BuyOffer(
+                title=title,
+                ititle=title.lower(),
+                content=params.get("content", ""),
+                costFrom=costFrom,
+                costTo=costTo,
+                guarant=params.get("guarant", False),
+                fr=fr,
+                frCity=params.get("frCity", ""),
+                ifrCity=params.get("frCity", "").lower(),
+                to=to,
+                toCity=params.get("toCity", ""),
+                itoCity=params.get("toCity", "").lower(),
+                gallery=gallery,
+                owner=GetCurrentUser(request),
+                createTime=datetime.now(),
+            )
+            buy.save()
+            VerifyPhotos(params.get("token", ""))
+            return redirect("/offer/buy/list")
+        except BuyEditErr as e:
+            raise RedirectExc("/offer/buy/?err={}".format(e.status))
     gallery = CreateGallery()
     token = GetNewId()
     return RenderToResponse("offer/buy/add.html", request, {
@@ -296,6 +369,7 @@ def BuyOfferAddView(request):
         "gallery": gallery,
         "token": token,
         "countries": GetCountries(),
+        "err": GetBuyEditMsg(params.get("err", ""))
     })
 
 
@@ -308,23 +382,25 @@ def BuyEditView(request, id):
     if buy.owner != user:
         return redirect("/")
     if act == "edit":
-        CheckPost(request)
-        fr = Country.objects.get(name=params.get("from", ""))
-        to = Country.objects.get(name=params.get("to", ""))
-        buy.title = params.get("title", "")
-        buy.content = params.get("content", "")
-        buy.costFrom = float(params.get("costFrom", "0").replace(",", "."))
-        buy.costTo = float(params.get("costTo", "0").replace(",", "."))
-        buy.fr = fr
-        buy.frCity = params.get("frCity", "")
-        buy.ifrCity = params.get("frCity", "").lower()
-        buy.to = to
-        buy.toCity = params.get("toCity", "")
-        buy.itoCity = params.get("toCity", "").lower()
-        buy.guarant = params.get("guarant", False)
-        buy.save()
-        VerifyPhotos(params.get("token", ""))
-        return redirect("/offer/buy/edit/{}?msg=buy_edit_ok".format(buy.id))
+        try:
+            CheckPost(request)
+            fr, to, title, costFrom, costTo = ExtractBuyFields(params)
+            buy.title = title
+            buy.content = params.get("content", "")
+            buy.costFrom = costFrom
+            buy.costTo = costTo
+            buy.fr = fr
+            buy.frCity = params.get("frCity", "")
+            buy.ifrCity = params.get("frCity", "").lower()
+            buy.to = to
+            buy.toCity = params.get("toCity", "")
+            buy.itoCity = params.get("toCity", "").lower()
+            buy.guarant = params.get("guarant", False)
+            buy.save()
+            VerifyPhotos(params.get("token", ""))
+            return redirect("/offer/buy/list/#{}".format(buy.id))
+        except BuyEditErr as e:
+            raise RedirectExc("/offer/buy/edit/{}?err={}".format(buy.id, e.status))
     elif act == "makeHead":
         pic = Photo.objects.get(id=params.get("picId"))
         pic.gallery.head = pic
@@ -337,8 +413,7 @@ def BuyEditView(request, id):
     return RenderToResponse("offer/buy/edit.html", request, {
         "url": "/offer/buy/edit/{}/".format(buy.id),
         "buy": buy,
-        "succMsg": GetBuyEditMsg(params.get("msg", "")),
-        "failMsg": GetBuyEditMsg(params.get("err", "")),
+        "err": GetBuyEditMsg(params.get("err", "")),
         "token": GetNewId(),
         "countries": GetCountries(),
     })

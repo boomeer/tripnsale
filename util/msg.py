@@ -19,7 +19,13 @@ def GetRegMsg(name):
 
 def GetBuyEditMsg(name):
     return {
-        "buy_edit_ok": "Изменения успешно сохранены",
+        "title_is_missing": "Название товара должно быть заполнено",
+        "fromcountry_is_invalid": "Указана страна покупки, отсутствующая в базе данных",
+        "tocountry_is_empty": "Поле со страной доставки обязательно для заполнения",
+        "tocountry_field_is_invalid": "Указана страна доставки, отсутствующая в базе данных",
+        "costfr_is_invalid": "Некорректное значение минимальной стоимости",
+        "costto_is_missing": "Поле с максимальной стоимостью обязательно для заполнения",
+        "costto_is_invalid": "Некорректное значение максимальной стоимости",
     }.get(name, "")
 
 def GetBackmsgMsg(name):
@@ -33,10 +39,10 @@ def GetSaleAddMsg(name):
         "fromdate_field_is_empty": "Поле с датой отправления обязательно для заполнения",
         "fromdate_field_is_invalid": "Поле с датой отправления должно быть в формате дд.мм.гггг",
         "fromcountry_field_is_empty": "Поле со страной отправления обязательно для заполнения",
-        "fromcountry_field_is_invalid": "Указана страна отправления, отсутствующая в базе",
+        "fromcountry_field_is_invalid": "Указана страна отправления, отсутствующая в базе данных",
         "todate_field_is_empty": "Поле с датой прибытия обязательно для заполнения",
         "todate_field_is_invalid": "Поле с датой прибытия должно быть в формате дд.мм.гггг",
         "tocountry_field_is_empty": "Поле со страной прибытия обязательно для заполнения",
-        "tocountry_field_is_invalid": "Указана страна прибытия, отсутствующая в базе",
+        "tocountry_field_is_invalid": "Указана страна прибытия, отсутствующая в базе данных",
         "invalid_deposit": "Некорректное значение депозита"
     }.get(name, "")

@@ -364,8 +364,8 @@ def EditProfileView(request):
                 user.set_password(passw)
 
             if not params.get("firstName", "").strip():
-
                 raise FirstnameMissingErr
+
             user.first_name = params["firstName"]
 
             if not params.get("lastName", "").strip():
@@ -379,12 +379,12 @@ def EditProfileView(request):
 
             user.city = params.get("city", "")
             if not params.get("bday", "").strip():
-                user.bday = "01.01.1970"
-            try:
-                datetime.strptime(params["bday"], "%d.%m.%Y")
-            except ValueError:
-                raise BdayInvalidErr
-            user.bday = params.get("bday", "01.01.1970")
+                user.birthday = None
+            else:
+                try:
+                    user.birthday = datetime.strptime(params["bday"], "%d.%m.%Y")
+                except ValueError:
+                    raise BdayInvalidErr
             user.about = params.get("about", "")
 
             if 'avatar' in request.FILES:

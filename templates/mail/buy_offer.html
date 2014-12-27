@@ -2,7 +2,7 @@ From: Trip & Sale <info@tripnsale.com>
 To: {{ buy.owner.email }}
 Subject: На вашу заявку "{{ buy.title }}" откликнулись
 
-{{ user.fullname }} откликнулся на вашу заявку {{ buy.title }}.
+<a href="{{ user.profileUrl }}">{{ user.fullname }}</a> откликнулся на вашу заявку <a href="{{ buy.url }}">{{ buy.title }}</a>.
 
 Спасибо, что Вы с нами!
 

@@ -36,18 +36,22 @@
                         {{ prUser.country.title }} {{ prUser.city }}
                     </div>
                 </div>
-                <div class="row container-fluid profile-item">
-                    <label class="col-sm-3">Дата рождения:</label>
-                    <div class="col-sm-9">
-                        {{ prUser.bday }}
+                {% if prUser.birthday %}
+                    <div class="row container-fluid profile-item">
+                        <label class="col-sm-3">Дата рождения:</label>
+                        <div class="col-sm-9">
+                            {{ prUser.birthday|date:"d.m.Y" }}
+                        </div>
                     </div>
-                </div>
-                <div class="row container-fluid profile-item">
-                    <label class="col-sm-3">О себе:</label>
-                    <div class="col-sm-9">
-                        {{ prUser.about }}
+                {% endif %}
+                {% if prUser.about %}
+                    <div class="row container-fluid profile-item">
+                        <label class="col-sm-3">О себе:</label>
+                        <div class="col-sm-9">
+                            {{ prUser.about }}
+                        </div>
                     </div>
-                </div>
+                {% endif %}
 
                 <div class="profile-action profile-item">
                     {% if prUser.id == user.id %}

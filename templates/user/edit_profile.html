@@ -66,7 +66,7 @@
                 <div class="form-group">
                     <label for="inputBday" class="col-sm-3 control-label">Дата рождения:</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="inputBday" name="bday" placeholder="Дата рождения" {% if prUser.bday != "01.01.1970" %}value="{{ prUser.bday }}"{% endif %} />
+                        <input type="text" class="form-control" id="inputBday" name="bday" placeholder="Дата рождения" {% if prUser.birthday %}value="{{ prUser.birthday|date:"d.m.Y" }}"{% endif %} />
                     </div>
                 </div>
                 <div class="form-group">
@@ -98,19 +98,19 @@
                 <div class="form-group">
                     <label for="inputOldPassword" class="col-sm-3 control-label">Старый пароль:</label>
                     <div class="col-sm-9">
-                        <input type="password" class="form-control" id="inputOldPassword" name="oldPassword" placeholder="Старый пароль">
+                        <input autocomplete="off" type="password" class="form-control" id="inputOldPassword" name="oldPassword" placeholder="Старый пароль">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputPassword" class="col-sm-3 control-label">Новый пароль:</label>
                     <div class="col-sm-9">
-                        <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Новый пароль">
+                        <input autocomplete="off" type="password" class="form-control" id="inputPassword" name="password" placeholder="Новый пароль">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputPassword2" class="col-sm-3 control-label"></label>
                     <div class="col-sm-9">
-                        <input type="password" class="form-control" id="inputPassword2" name="password2" placeholder="Повторите пароль">
+                        <input autocomplete="off" type="password" class="form-control" id="inputPassword2" name="password2" placeholder="Повторите пароль">
                     </div>
                 </div>
                 <hr>

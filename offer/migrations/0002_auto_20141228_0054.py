@@ -7,35 +7,35 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('offer', '0001_initial'),
         ('user', '0001_initial'),
-        ('gallery', '0001_initial'),
+        ('offer', '0001_initial'),
         ('place', '0001_initial'),
+        ('gallery', '0001_initial'),
     ]
 
     operations = [
         migrations.AddField(
             model_name='saleoffer',
             name='owner',
-            field=models.ForeignKey(default=None, null=True, to='user.User', blank=True),
+            field=models.ForeignKey(to='user.User', default=None, null=True, blank=True),
             preserve_default=True,
         ),
         migrations.AddField(
             model_name='saleoffer',
             name='to',
-            field=models.ForeignKey(blank=True, null=True, to='place.Country', related_name='country_to'),
+            field=models.ForeignKey(related_name='country_to', to='place.Country', null=True, blank=True),
             preserve_default=True,
         ),
         migrations.AddField(
             model_name='offerconnection',
             name='buy',
-            field=models.ForeignKey(blank=True, null=True, to='offer.BuyOffer'),
+            field=models.ForeignKey(to='offer.BuyOffer', null=True, blank=True),
             preserve_default=True,
         ),
         migrations.AddField(
             model_name='offerconnection',
             name='sale',
-            field=models.ForeignKey(blank=True, null=True, to='offer.SaleOffer'),
+            field=models.ForeignKey(to='offer.SaleOffer', null=True, blank=True),
             preserve_default=True,
         ),
         migrations.AddField(
@@ -47,7 +47,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='buyoffer',
             name='fr',
-            field=models.ForeignKey(blank=True, null=True, to='place.Country', related_name='buy_country_from'),
+            field=models.ForeignKey(related_name='buy_country_from', to='place.Country', null=True, blank=True),
             preserve_default=True,
         ),
         migrations.AddField(
@@ -59,13 +59,13 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='buyoffer',
             name='owner',
-            field=models.ForeignKey(default=None, null=True, to='user.User', blank=True),
+            field=models.ForeignKey(to='user.User', default=None, null=True, blank=True),
             preserve_default=True,
         ),
         migrations.AddField(
             model_name='buyoffer',
             name='to',
-            field=models.ForeignKey(blank=True, null=True, to='place.Country', related_name='buy_country_to'),
+            field=models.ForeignKey(related_name='buy_country_to', to='place.Country', null=True, blank=True),
             preserve_default=True,
         ),
     ]

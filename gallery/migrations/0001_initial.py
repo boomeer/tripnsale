@@ -14,8 +14,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Gallery',
             fields=[
-                ('id', models.AutoField(serialize=False, auto_created=True, verbose_name='ID', primary_key=True)),
-                ('createTime', models.DateTimeField(default=datetime.datetime(2014, 12, 25, 1, 37, 11, 237333))),
+                ('id', models.AutoField(verbose_name='ID', auto_created=True, serialize=False, primary_key=True)),
+                ('createTime', models.DateTimeField(default=datetime.datetime(2014, 12, 28, 0, 54, 25, 875539))),
                 ('token', models.TextField(default='')),
             ],
             options={
@@ -25,12 +25,12 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Photo',
             fields=[
-                ('id', models.AutoField(serialize=False, auto_created=True, verbose_name='ID', primary_key=True)),
-                ('img', models.ImageField(blank=True, null=True, upload_to='gallery_img')),
-                ('thumbnail', models.ImageField(blank=True, null=True, upload_to='gallery_img')),
+                ('id', models.AutoField(verbose_name='ID', auto_created=True, serialize=False, primary_key=True)),
+                ('img', models.ImageField(null=True, upload_to='gallery_img', blank=True)),
+                ('thumbnail', models.ImageField(null=True, upload_to='gallery_img', blank=True)),
                 ('token', models.TextField(default='')),
                 ('verified', models.BooleanField(default=True)),
-                ('gallery', models.ForeignKey(blank=True, null=True, to='gallery.Gallery', related_name='photos')),
+                ('gallery', models.ForeignKey(related_name='photos', to='gallery.Gallery', null=True, blank=True)),
             ],
             options={
             },
@@ -39,7 +39,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='gallery',
             name='head',
-            field=models.ForeignKey(blank=True, null=True, to='gallery.Photo', related_name='heads'),
+            field=models.ForeignKey(related_name='heads', to='gallery.Photo', null=True, blank=True),
             preserve_default=True,
         ),
     ]

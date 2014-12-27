@@ -13,10 +13,11 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Country',
             fields=[
-                ('id', models.AutoField(serialize=False, auto_created=True, verbose_name='ID', primary_key=True)),
+                ('id', models.AutoField(verbose_name='ID', auto_created=True, serialize=False, primary_key=True)),
                 ('title', models.TextField(default='')),
                 ('ititle', models.TextField(default='')),
                 ('name', models.TextField(default='')),
+                ('order', models.IntegerField(default=0)),
             ],
             options={
             },

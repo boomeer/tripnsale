@@ -41,7 +41,7 @@
                         {{ msgReg }}
                     </div>
                 {% endif %}
-                <form id="auth-form" class="form-horizontal" role="form" action="" method="post">
+                <form autocomplete="off" id="auth-form" class="form-horizontal" role="form" action="" method="post">
                     {% csrf_token %}
                     <input type="hidden" name="act" value="reg">
                     <div class="form-group">

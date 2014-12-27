@@ -58,3 +58,10 @@ def GetEditProfileMsg(name):
         "passwords_are_not_equal": "Введённые пароли не совпадают",
         "bad_password_len": "Пароль должен иметь от 3 до 30 символов",
     }.get(name, "")
+
+def GetGalleryExcMsg(name):
+    return {
+        "image_limit_exceeded": "Превышено кол-во изображений для галлереи",
+        "image_big_size": "Размер файла не должен превышать 6МБ",
+        "image_bad_format": "Неккоректный тип файла",
+    }.get(name, "")

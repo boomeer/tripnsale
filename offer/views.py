@@ -277,7 +277,7 @@ class BuyToCountryMissingErr (BuyEditErr):
 
 class BuyToCountryInvalidErr (BuyEditErr):
     def __init__(self):
-        super().__init__("tocountry_field_is_invalid")
+        super().__init__("tocountry_is_invalid")
 
 class BuyCostFrInvalidErr (BuyEditErr):
     def __init__(self):

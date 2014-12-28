@@ -14,7 +14,7 @@ def GetRegMsg(name):
         "bad_password_len": "Пароль должен иметь от 3 до 30 символов",
         "passwords_are_not_equal": "Пароли не совпадают",
         "offer_wasnt_be_agreed": "Вы должны согласиться с положением оферты",
-        "required_fields_missed": "Заполнены не все обязательные поля"
+        "required_fields_missed": "Заполнены не все обязательные поля",
     }.get(name, "")
 
 def GetBuyEditMsg(name):
@@ -26,6 +26,7 @@ def GetBuyEditMsg(name):
         "costfr_is_invalid": "Некорректное значение минимальной стоимости",
         "costto_is_missing": "Поле с максимальной стоимостью обязательно для заполнения",
         "costto_is_invalid": "Некорректное значение максимальной стоимости",
+        "bad_cost_relations": "Минимальная стоимость больше максимальной",
     }.get(name, "")
 
 def GetBackmsgMsg(name):
@@ -44,7 +45,8 @@ def GetSaleAddMsg(name):
         "todate_is_invalid": "Поле с датой прибытия должно быть в формате дд.мм.гггг",
         "tocountry_is_empty": "Поле со страной прибытия обязательно для заполнения",
         "tocountry_is_invalid": "Указана страна прибытия, отсутствующая в базе данных",
-        "invalid_deposit": "Некорректное значение депозита"
+        "invalid_deposit": "Некорректное значение депозита",
+        "bad_date_relations": "Время отправления больше времени прибытия",
     }.get(name, "")
 
 def GetEditProfileMsg(name):

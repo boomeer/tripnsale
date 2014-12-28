@@ -25,6 +25,13 @@ function TripViewClose()
     $(".tripViewWrapper").html("");
 }
 
+function TripRemove(id)
+{
+    if (confirm("Вы действительно хотите удалить поездку?")) {
+        window.location.href = "/offer/sale/remove/?id=" + id + "&backref=/offer/sale/list/";
+    }
+}
+
 
 $(function() {
     $("#tripsFilterApply").on("click", function() {

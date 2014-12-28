@@ -4,6 +4,7 @@ from PIL import Image
 import os
 from django.core.files import File
 from datetime import datetime
+from util.utils import TsExc
 
 
 def CreateGallery():
@@ -18,6 +19,9 @@ def CreateGallery():
 def CreateGalleryPhoto(gallery, token=None):
     if not token:
         token = GetNewId()
+    if gallery.photos.filter(verified=True).count() \
+        + gallery.photos.filter(verified=False, token=token).count() >= 10:
+        raise TsExc("image_limit_exceeded")
     photo = Photo(
         gallery=gallery,
         token=token,
@@ -26,6 +30,7 @@ def CreateGalleryPhoto(gallery, token=None):
     photo.save(force_insert=True)
     if not gallery.head:
         gallery.head = photo
+        gallery.save()
     return photo
 
 
@@ -36,12 +41,12 @@ def VerifyPhotos(token):
         ph.save()
 
 
-def StoreImage(image, field, sizeLimit=4*2**20):
+def StoreImage(image, field, sizeLimit=6*2**20):
     imageFileExt = os.path.splitext(image.name)[1]
     if imageFileExt not in [".jpg", ".jpeg", ".gif", ".png"]:
-        raise Exception("bad_format")
+        raise TsExc("image_bad_format")
     if image.size > sizeLimit:
-        raise Exception("big_size")
+        raise TsExc("image_big_size")
     filePath = GetNewId() + imageFileExt
     field.save(filePath, image)
     return filePath

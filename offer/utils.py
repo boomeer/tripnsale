@@ -2,6 +2,7 @@ from offer.models import *
 from util.utils import TsExc
 from django.template.loader import render_to_string
 from mail.utils import SendMail
+import tripnsale.settings as settings
 
 
 def CheckConnection(user, offer):
@@ -15,16 +16,20 @@ def CheckConnection(user, offer):
     return not oc.count()
 
 
-def SendOfferMail(user, offer):
+def SendOfferMail(user, offer, conf):
     if type(offer) == BuyOffer:
         content = render_to_string("mail/buy_offer.html", {
             "user": user,
             "buy": offer,
+            "conf": conf,
+            "hostAddr": settings.CURRENT_HOST,
         })
     elif type(offer) == SaleOffer:
         content = render_to_string("mail/sale_offer.html", {
             "user": user,
             "sale": offer,
+            "conf": conf,
+            "hostAddr": settings.CURRENT_HOST,
         })
     else:
         raise TsExc("bad_offer_type")

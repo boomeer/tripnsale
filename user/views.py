@@ -243,13 +243,14 @@ def ImView(request):
             peer = User.objects.get(id=params.get("peer", 0))
             buyId = params.get("buy", 0)
             saleId = params.get("sale", 0)
+            conf = GetOrCreateDialog(GetCurrentUser(request), peer)
             offer = None
             if buyId:
                 offer = BuyOffer.objects.get(id=buyId)
             elif saleId:
                 offer = SaleOffer.objects.get(id=saleId)
             if offer and CheckConnection(user, offer):
-                SendOfferMail(user, offer)
+                SendOfferMail(user, offer, conf)
                 if type(offer) == BuyOffer:
                     oc = OfferConnection(
                         user=user,
@@ -261,7 +262,6 @@ def ImView(request):
                         sale=offer,
                     )
                 oc.save()
-            conf = GetOrCreateDialog(GetCurrentUser(request), peer)
             return redirect("/user/im?conf={}".format(conf.id))
         conf = Conference.objects.get(id=params.get("conf", 0))
         user = GetCurrentUser(request)

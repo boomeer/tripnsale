@@ -32,7 +32,7 @@
                             Отправляюсь <span class="req">*</span>
                         </div>
                         <div class="fromToBody">
-                            <div class="inputWrapper">
+                            <div class="col-md-6">
                                 <select id="inputFrom" name="from" placeholder="Страна">
                                     {% for country in countries %}
                                         <option value="{{ country.name }}" {% if country == profileOwner.country %} selected {% endif %}>
@@ -40,10 +40,9 @@
                                         </option>
                                     {% endfor %}
                                 </select>
-                                <input type="text" class="form-control" placeholder="Город" id="inputFromCity" name="frCity" value="{{ profileOwner.city }}">
                             </div>
-                            <div class="inputWrapper">
-                                <input type="text" class="form-control" placeholder="Когда" id="inputFromTime" name="fromTime">
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" placeholder="Город" id="inputFromCity" name="frCity" value="{{ profileOwner.city }}">
                             </div>
                         </div>
                     </div>
@@ -52,7 +51,7 @@
                             Прибываю <span class="req">*</span>
                         </div>
                         <div class="fromToBody">
-                            <div class="inputWrapper">
+                            <div class="col-md-6">
                                 <select id="inputTo" name="to" placeholder="Страна">
                                     <option value=""></option>
                                     {% for country in countries %}
@@ -61,11 +60,28 @@
                                         </option>
                                     {% endfor %}
                                 </select>
-
+                            </div>
+                            <div class="col-md-6">
                                 <input type="text" class="form-control" placeholder="Город" id="inputToCity" name="toCity">
                             </div>
-                            <div class="inputWrapper">
-                                <input type="text" class="form-control" placeholder="Когда" id="inputToTime" name="toTime">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="container-fluid">
+                        <div class="col-md-12">
+                            <label>Сроки поездки:</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group" style="padding-left: 30px;">
+                            <div class="col-md-3">
+                                <input type="text" class="form-control" placeholder="с" id="inputFromTime" name="fromTime">
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" class="form-control" placeholder="по" id="inputToTime" name="toTime">
                             </div>
                         </div>
                     </div>

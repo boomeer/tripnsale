@@ -1,126 +1,125 @@
 {% load static %}
 
-{% if not sales %}
-    Нет поездок
-{% endif %}
-{% for sale in sales %}
-    {% if sale.visible %}
-        <div class="tripItem {% if sale.closed %}tripItem-closed{% endif %}" onClick="TripView({{ sale.id }});">
-            <div class="tripSection tripMainSection">
-                <div class="tripFromTo">
-                    <div class="tripFrom tripPlace">
-                        <span>
-                            <img src="{{ sale.fr.img }}">
-                            {{ sale.fr.title }}
-                        </span>
-                        <span class="tripCity">
-                            {{ sale.frCity }}
-                        </span>
-                    </div>
-                    <div class="tripArrow">
-                        <i class="glyphicon glyphicon-arrow-right"></i>
-                    </div>
-                    <div class="tripTo tripPlace">
-                        <span>
-                            <img src="{{ sale.to.img }}">
-                            {{ sale.to.title }}
-                        </span>
-                        <span class="tripCity">
-                            {{ sale.toCity }}
-                        </span>
-                    </div>
+{% for sale in block %}
+    <div class="tripItem {% if sale.closed %}tripItem-closed{% endif %}" onClick="TripView({{ sale.id }});">
+        <div class="tripSection tripMainSection">
+            <div class="tripFromTo">
+                <div class="tripFrom tripPlace">
+                    <span>
+                        <img src="{{ sale.fr.img }}">
+                        {{ sale.fr.title }}
+                    </span>
+                    <span class="tripCity">
+                        {{ sale.frCity }}
+                    </span>
                 </div>
-                <div>
-                    <div class="tripDates tripSection">
-                        <span>
-                            {{ sale.frTime|date:"d.m.Y" }} -
-                        </span>
-                        <span>
-                            {{ sale.toTime|date:"d.m.Y" }}
-                        </span>
-                    </div>
-                    <div class="tripSection">
-                        {% if sale.closed %}
-                            <span class="closed">
-                                <i class="ai ai-lock"></i>
-                                Закрытa
-                            </span>
-                        {% endif %}
-                    </div>
+                <div class="tripArrow">
+                    <i class="glyphicon glyphicon-arrow-right"></i>
                 </div>
-                <div>
-                    <div class="tripDeposit tripSection">
-                        <span class="tripSectionTitle">
-                            Депозит:
-                        </span>
-                        <span class="tripSectionContent">
-                            {{ sale.deposit | floatformat:"0"}} руб.
-                        </span>
-                    </div>
-                    <div class="tripGuarant tripSection">
-                        <span>
-                            {% if sale.guarant %}
-                                <div class="guarant">
-                                    <i class="ai ai-shield"></i>
-                                    Только с гарантом
-                                </div>
-                            {% endif %}
-                        </span>
-                    </div>
+                <div class="tripTo tripPlace">
+                    <span>
+                        <img src="{{ sale.to.img }}">
+                        {{ sale.to.title }}
+                    </span>
+                    <span class="tripCity">
+                        {{ sale.toCity }}
+                    </span>
                 </div>
-                <div class="tripComment">
-                    <div class="tripSection">
-                        <div class="tripComment-title">
-                            Комментарий:
-                        </div>
-                        <div class="tripComment-content">
-                            {{ sale.content }}
-                        </div>
-                    </div>
+            </div>
+            <div>
+                <div class="tripDates tripSection">
+                    <span>
+                        {{ sale.frTime|date:"d.m.Y" }} -
+                    </span>
+                    <span>
+                        {{ sale.toTime|date:"d.m.Y" }}
+                    </span>
                 </div>
-                <div class="tripButtons">
-                    {% if profile and not sale.closed and profileOwner == sale.owner %}
-                        <div style="margin-bottom: 4px;">
-                            <a href="/offer/sale/edit/{{ sale.id }}" class="btn btn-default">
-                                <i class="ai ai-pencil"></i>
-                                Редактировать
-                            </a>
-                        </div>
-                        <div>
-                            <a href="/offer/sale/remove/?id={{ sale.id }}" class="btn btn-danger">
-                                <i class="ai ai-close"></i>
-                                Удалить
-                            </a>
-                            <a href="/offer/sale/close/?id={{ sale.id }}" class="btn btn-success">
-                                <i class="ai ai-lock"></i>
-                                Закрыть
-                            </a>
-                        </div>
+                <div class="tripSection">
+                    {% if sale.closed %}
+                        <span class="closed">
+                            <i class="ai ai-lock"></i>
+                            Закрытa
+                        </span>
                     {% endif %}
                 </div>
             </div>
-            <div class="tripOwner tripOwner-right tripSection">
-                <div class="tripSectionContent" onClick="window.location.href='{{ sale.owner.profileUrl }}';">
-                    <div class="tripOwnerAv">
-                        <img src="{{ sale.owner.avatarThumbUrl }}">
+            <div>
+                <div class="tripDeposit tripSection">
+                    <span class="tripSectionTitle">
+                        Депозит:
+                    </span>
+                    <span class="tripSectionContent">
+                        {{ sale.deposit | floatformat:"0"}} руб.
+                    </span>
+                </div>
+                <div class="tripGuarant tripSection">
+                    <span>
+                        {% if sale.guarant %}
+                            <div class="guarant">
+                                <i class="ai ai-shield"></i>
+                                Только с гарантом
+                            </div>
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+            <div class="tripComment">
+                <div class="tripSection">
+                    <div class="tripComment-title">
+                        Комментарий:
                     </div>
-                    <div class="tripOwnerName bboldy">
-                        {{ sale.owner.first_name }} {{ sale.owner.last_name }}
+                    <div class="tripComment-content">
+                        {{ sale.content }}
                     </div>
                 </div>
             </div>
-            <div class="tripOwner tripOwner-invis tripSection">
-                <div class="tripSectionContent">
-                    <div class="tripOwnerAv">
-                        <img src="{{ sale.owner.avatarThumbUrl }}">
+            <div class="tripButtons">
+                {% if profile and not sale.closed and profileOwner == sale.owner %}
+                    <div style="margin-bottom: 4px;">
+                        <a href="/offer/sale/edit/{{ sale.id }}" class="btn btn-default">
+                            <i class="ai ai-pencil"></i>
+                            Редактировать
+                        </a>
                     </div>
-                    <div class="tripOwnerName bboldy">
-                        {{ sale.owner.first_name }} {{ sale.owner.last_name }}
+                    <div>
+                        <a href="/offer/sale/remove/?id={{ sale.id }}" class="btn btn-danger">
+                            <i class="ai ai-close"></i>
+                            Удалить
+                        </a>
+                        <a href="/offer/sale/close/?id={{ sale.id }}" class="btn btn-success">
+                            <i class="ai ai-lock"></i>
+                            Закрыть
+                        </a>
                     </div>
-                </div>
+                {% endif %}
             </div>
-
         </div>
-    {% endif %}
+        <div class="tripOwner tripOwner-right tripSection">
+            <div class="tripSectionContent" onClick="window.location.href='{{ sale.owner.profileUrl }}';">
+                <div class="tripOwnerAv">
+                    <img src="{{ sale.owner.avatarThumbUrl }}">
+                </div>
+                <div class="tripOwnerName bboldy">
+                    {{ sale.owner.first_name }} {{ sale.owner.last_name }}
+                </div>
+            </div>
+        </div>
+        <div class="tripOwner tripOwner-invis tripSection">
+            <div class="tripSectionContent">
+                <div class="tripOwnerAv">
+                    <img src="{{ sale.owner.avatarThumbUrl }}">
+                </div>
+                <div class="tripOwnerName bboldy">
+                    {{ sale.owner.first_name }} {{ sale.owner.last_name }}
+                </div>
+            </div>
+        </div>
+
+    </div>
 {% endfor %}
+
+<div style="text-align: center;">
+    {% include "pagination.html" %}
+</div>
 

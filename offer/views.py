@@ -213,26 +213,26 @@ def SaleFilterView(request):
     params = request.REQUEST
     owner = int(params.get("owner", 0))
     sales = SaleOffer.objects
-    '''
-    sales = sales.filter(
-        fr__ititle__istartswith=params.get("from", "").lower(),
-        to__ititle__istartswith=params.get("to", "").lower(),
-    )
-    '''
     if owner:
         sales = sales.filter(owner__id=owner)
     sales = sales.all()
     sales = [sale for sale in sales if ValidFilter(sale.fr.title + " " + sale.frCity,
                                                     params.get("from", "")) \
                 and ValidFilter(sale.to.title + " " + sale.toCity, params.get("to", ""))]
+    sales = [sale for sale in sales if sale.visible()]
     sales = sorted(sales, key=lambda sale: (sale.closed, -sale.isCurrent(), sale.toEnd(),))
-    page = params.get("page", 1)
-    count = params.get("count", 5)
-    block = sales[(page-1)*count:page*count]
+
+    count = max(0, int(params.get("count", 5)))
+    totalpages = (len(sales) + count - 1) // count
+    page = max(0, min(int(params.get("page", 1)), totalpages - 1))
+    block = sales[page*count:(page+1)*count]
     return RenderToResponse("offer/sale/filter.html", request, {
         "sales": sales,
         "block": block,
+        "page": page,
+        "totalpages": totalpages,
         "profile": int(params.get("profile", 0)),
+        "pagesid": "trips"
     })
 
 
@@ -485,7 +485,7 @@ def BuyFilterView(request):
                 params.get("title", ""))]
     buys = [buy for buy in buys if buy.visible()]
     buys = sorted(buys, key=lambda buy: (buy.closed, -buy.id,))
-    count = max(0, int(params.get("count", 15)))
+    count = max(0, int(params.get("count", 5)))
     totalpages = (len(buys) + count - 1) // count
     page = max(0, min(int(params.get("page", 1)), totalpages - 1))
     block = buys[page*count:(page+1)*count]
@@ -495,6 +495,7 @@ def BuyFilterView(request):
         "page": page,
         "totalpages": totalpages,
         "profile": int(params.get("profile", 0)),
+        "pagesid": "buys"
     })
 
 

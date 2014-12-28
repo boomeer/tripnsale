@@ -1,19 +1,20 @@
-function GetPage()
+function BuyGetPage()
 {
-    var found = window.location.hash.match(/^#page(\d+)$/);
+    var found = window.location.hash.match(/^#buyspage(\d+)$/);
     return (!found ? 1 : found[1]*1);
 }
 
 function BuysRefresh()
 {
-    var bo = $("#buysOwner");
     var bp = $("#buysProfile");
+    var bo = $("#buysOwner");
     $(".buysList").html("Загрузка...");
+    $(".buyViewWrapper").html("");
     $.post("/offer/buy/filter/", {
         "title": $("#buysTitle").val(),
-        "owner": bo ? bo.val() : "",
-        "profile": bo ? bo.val() : "",
-        "page": GetPage() - 1
+        "profile": bp ? bp.val() : "",
+        "page": BuyGetPage() - 1,
+        "owner": bo ? bo.val() : 0
     }, function(res) {
         $(".buysList").html(res);
     });
@@ -21,7 +22,7 @@ function BuysRefresh()
 
 function BuyView(id)
 {
-    window.location.hash = "#" + id;
+    window.location.hash = "#buy" + id;
     $.post("/offer/buy/view/" + id, {}, function(res) {
         $(".buyViewWrapper").html(res);
     });
@@ -33,15 +34,20 @@ function BuyViewClose()
     $(".buyViewWrapper").html("");
 }
 
-function ChangePage()
+function BuyChangePage()
 {
-    if (window.location.hash.match(/^#page\d+$/)) {
+    alert(window.location.hash);
+    if (window.location.hash.match(/^#buyspage\d+$/)) {
         BuysRefresh();
+    } else if (window.location.hash.match(/^#buy\d+$/)) {
+        BuyView(window.location.hash.slice(4));
+    } else {
+        $(".buyViewWrapper").html("");
     }
 }
 
 $(function() {
-    $(window).bind('hashchange', ChangePage);
+    $(window).bind('hashchange', BuyChangePage);
     $("#buysFilterApply").on("click", function() {
         BuysRefresh();
     });
@@ -54,8 +60,8 @@ $(function() {
         BuysRefresh();
     }
 
-    if (window.location.hash.match(/^#\d+&/)) {
-        BuyView(window.location.hash.slice(1));
+    if (window.location.hash.match(/^#buy\d+$/)) {
+        BuyView(window.location.hash.slice(4));
     }
 });
 

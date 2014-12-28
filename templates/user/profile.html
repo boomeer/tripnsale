@@ -22,7 +22,7 @@
             {% if firsttime %}
             <div class="col-md-8 col-md-offset-2 col-xs-12 alert alert-success">
                 <strong>Регистрация завершена!</strong><br/>
-                Теперь Вы можете дополнить информацию о себе. Хороший профиль привлекает больше внимания и увеличивает шансы на то, что другие пользователи обратятся именно к вам!
+                Теперь Вы можете дополнить информацию о себе. Хороший профиль привлекает больше внимания и увеличивает шансы на то, что другие пользователи обратятся именно к Вам!
             </div>
             {% endif %}
             <div class="col-md-6 col-md-offset-3 col-xs-12 userInfo">
@@ -85,8 +85,9 @@
                     <a class="panel-heading" data-toggle="collapse" data-parent="#zbs" href="#sales">
                         Поездки
                     </a>
+                    <input type="hidden" id="tripsOwner" value="{{ prUser.id }}" />
+                    <input type="hidden" id="tripsProfile" value="1" />
                     <div class="panel-collapse collapse" id="sales">
-
                         <div class="col-md-10 col-md-offset-1 tripsList">
                         </div>
                     </div>

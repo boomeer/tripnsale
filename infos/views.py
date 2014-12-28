@@ -43,14 +43,16 @@ def InfoView(request, name):
                     email = params.get("email", user.email)
                     msg = Backmsg(body=params["body"],
                                   email=email,
-                                  user=user)
+                                  user=user,
+                                  name=params.get("name", ""))
                 else:
                     if not params.get("email", ""):
                         raise EmptyAnswerEmailErr
                     email = params.get["email"]
                     msg = Backmsg(body=params.get["body"],
                                   email=email,
-                                  user=None)
+                                  user=None,
+                                  name=params.get("name", ""))
                 msg.save()
                 return RenderToResponse("infos/contact-sent.html", request, {
                     "email": email

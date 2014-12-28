@@ -12,5 +12,6 @@ urlpatterns = patterns('',
     url("^mail/$", UserMailView),
     url("^im/$", ImView),
     url("^im_msg_frame/$", ImMsgFrameView),
+    url("^recover/$", UserRecoverView),
     url("^logout/$", LogoutView),
 )

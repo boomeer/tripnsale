@@ -65,3 +65,10 @@ def GetGalleryExcMsg(name):
         "image_big_size": "Размер файла не должен превышать 6МБ",
         "image_bad_format": "Неккоректный тип файла",
     }.get(name, "")
+
+
+def GetUserRecoverMsg(name):
+    return {
+        "user_does_not_exist": "Пользователь с таким адресом не зарегистрирован",
+        "recover_ok": "Новый пароль был выслан Вам по почте",
+    }.get(name, "")

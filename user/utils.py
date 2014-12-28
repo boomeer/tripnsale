@@ -42,6 +42,15 @@ def SendActivateMail(user):
     SendMail("activate@tripnsale.com", user.email, content)
     
 
+def SendRecoverMail(user, newPassword):
+    content = render_to_string("mail/recover.html", {
+        "user": user,
+        "newPassword": newPassword,
+        "hostAddr": settings.CURRENT_HOST,
+    })
+    SendMail("support@tripnsale.com", user.email, content)
+    
+    
 def CreateDialog(fr, to):
     conf = Conference()
     conf.save()

@@ -482,7 +482,9 @@ def BuyFilterView(request):
         buys = buys.filter(owner__id=owner)
     buys = buys.all()
     buys = [buy for buy in buys if ValidFilter(buy.title + " " + buy.content,
-                params.get("title", ""))]
+                params.get("title", "")) and ValidFilter((buy.fr.title if buy.fr else "") + " " + buy.frCity, 
+                params.get("fr", "")) \
+                and ValidFilter((buy.to.title if buy.to else "") + " " + buy.toCity, params.get("to", ""))]
     buys = [buy for buy in buys if buy.visible()]
     buys = sorted(buys, key=lambda buy: (buy.closed, -buy.id,))
     count = max(0, int(params.get("count", 15)))

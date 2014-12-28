@@ -8,10 +8,14 @@ function BuysRefresh()
 {
     var bp = $("#buysProfile");
     var bo = $("#buysOwner");
+    var fr = $("#buysFilterFrom");
+    var to = $("#buysFilterTo");
     $(".buysList").html("Загрузка...");
     $(".buyViewWrapper").html("");
     $.post("/offer/buy/filter/", {
         "title": $("#buysTitle").val(),
+        "from": fr ? fr.val() : "",
+        "to": to ? to.val() : "",
         "profile": bp ? bp.val() : "",
         "page": BuyGetPage() - 1,
         "owner": bo ? bo.val() : 0
@@ -59,6 +63,12 @@ $(function() {
         BuysRefresh();
     });
     $("#buysTitle").on("input", function() {
+        BuysRefresh();
+    });
+    $("#buysFilterFrom").on("input", function() {
+        BuysRefresh();
+    });
+    $("#buysFilterTo").on("input", function() {
         BuysRefresh();
     });
 

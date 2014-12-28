@@ -75,6 +75,10 @@ class SaleToDateInvalidErr (SaleEditErr):
     def __init__(self):
         super().__init__("todate_is_invalid")
 
+class SaleBadDatesRelations (SaleEditErr):
+    def __init__(self):
+        super().__init__("bad_date_relations")
+
 class SaleToCountryMissingErr (SaleEditErr):
     def __init__(self):
         super().__init__("tocountry_is_empty")
@@ -122,10 +126,16 @@ def ExtractSaleFields(params):
     except ValueError:
         raise SaleToDateInvalidErr
 
+    if frTime > toTime:
+        raise SaleBadDatesRelations
+
     try:
         deposit = round(float(params.get("deposit", "0").replace(",", ".").strip()))
     except ValueError:
         raise SaleInvalidDepositErr
+    if deposit < 0:
+        raise SaleInvalidDepositErr
+
     return (fr, to, frTime, toTime, deposit,)
 
 @login_required(login_url="/user/auth/")
@@ -155,7 +165,7 @@ def SaleOfferAddView(request):
                 createTime=datetime.now(),
             )
             sale.save()
-            return redirect("/offer/sale/list")
+            return redirect("/offer/sale/list#{}".format(sale.id))
         except SaleEditErr as e:
             raise RedirectExc("/offer/sale/?err={}".format(e.status))
     return RenderToResponse("offer/sale/add.html", request, {
@@ -203,26 +213,26 @@ def SaleFilterView(request):
     params = request.REQUEST
     owner = int(params.get("owner", 0))
     sales = SaleOffer.objects
-    '''
-    sales = sales.filter(
-        fr__ititle__istartswith=params.get("from", "").lower(),
-        to__ititle__istartswith=params.get("to", "").lower(),
-    )
-    '''
     if owner:
         sales = sales.filter(owner__id=owner)
     sales = sales.all()
     sales = [sale for sale in sales if ValidFilter(sale.fr.title + " " + sale.frCity,
                                                     params.get("from", "")) \
                 and ValidFilter(sale.to.title + " " + sale.toCity, params.get("to", ""))]
+    sales = [sale for sale in sales if sale.visible()]
     sales = sorted(sales, key=lambda sale: (sale.closed, -sale.isCurrent(), sale.toEnd(),))
-    page = params.get("page", 1)
-    count = params.get("count", 5)
-    block = sales[(page-1)*count:page*count]
+
+    count = max(0, int(params.get("count", 15)))
+    totalpages = (len(sales) + count - 1) // count
+    page = max(0, min(int(params.get("page", 1)), totalpages - 1))
+    block = sales[page*count:(page+1)*count]
     return RenderToResponse("offer/sale/filter.html", request, {
         "sales": sales,
         "block": block,
+        "page": page,
+        "totalpages": totalpages,
         "profile": int(params.get("profile", 0)),
+        "pagesid": "trips"
     })
 
 
@@ -291,6 +301,10 @@ class BuyCostToInvalidErr (BuyEditErr):
     def __init__(self):
         super().__init__("costto_is_invalid")
 
+class BuyBadCostRelations (BuyEditErr):
+    def __init__(self):
+        super().__init__("bad_cost_relations")
+
 def ExtractBuyFields(params):
     if not params.get("from", "").strip():
         fr = None
@@ -316,15 +330,24 @@ def ExtractBuyFields(params):
             costFrom = 0.0
         else:
             costFrom = round(float(params.get("costFrom", "0").replace(",", ".").strip()))
+        if costFrom < 0:
+            raise ValueError
     except ValueError:
         raise BuyCostFrInvalidErr
 
-    if not params.get("costTo", "").strip():
-        raise BuyCostToMissingErr
     try:
-        costTo = round(float(params.get("costTo", "0").replace(",", ".").strip()))
+        if not params.get("costTo", "").strip():
+            raise BuyCostToMissingErr
+        else:
+            costTo = round(float(params.get("costTo", "0").replace(",", ".").strip()))
+        if costTo < 0:
+            raise ValueError
     except ValueError:
         raise BuyCostToInvalidErr
+
+    if costFrom > costTo:
+        raise BuyBadCostRelations
+
     return (fr, to, title, costFrom, costTo,)
 
 @login_required(login_url="/user/auth/")
@@ -359,7 +382,7 @@ def BuyOfferAddView(request):
             )
             buy.save()
             VerifyPhotos(params.get("token", ""))
-            return redirect("/offer/buy/list")
+            return redirect("/offer/buy/list#{}".format(buy.id))
         except BuyEditErr as e:
             raise RedirectExc("/offer/buy/?err={}".format(e.status))
     gallery = CreateGallery()
@@ -424,8 +447,7 @@ def BuyRemoveView(request):
     params = request.REQUEST
     buy = BuyOffer.objects.get(id=params.get("id", 0))
     if buy.owner == GetCurrentUser(request):
-        revert = bool(params.get("revert", False))
-        buy.closed = not revert
+        buy.removed = True
         buy.save()
     backref = params.get("backref", "/user/profile")
     return redirect(backref)
@@ -455,16 +477,13 @@ def BuyFilterView(request):
     params = request.REQUEST
     owner = int(params.get("owner", 0))
     buys = BuyOffer.objects
-    '''
-    buys = buys.filter(
-        ititle__istartswith=params.get("title", "").lower(),
-    )
-    '''
     if owner:
         buys = buys.filter(owner__id=owner)
     buys = buys.all()
     buys = [buy for buy in buys if ValidFilter(buy.title + " " + buy.content,
-                params.get("title", ""))]
+                params.get("title", "")) and ValidFilter((buy.fr.title if buy.fr else "") + " " + buy.frCity,
+                params.get("fr", "")) \
+                and ValidFilter((buy.to.title if buy.to else "") + " " + buy.toCity, params.get("to", ""))]
     buys = [buy for buy in buys if buy.visible()]
     buys = sorted(buys, key=lambda buy: (buy.closed, -buy.id,))
     count = max(0, int(params.get("count", 15)))
@@ -477,6 +496,7 @@ def BuyFilterView(request):
         "page": page,
         "totalpages": totalpages,
         "profile": int(params.get("profile", 0)),
+        "pagesid": "buys"
     })
 
 

@@ -95,7 +95,7 @@
                         <div class="buttons">
                             {% if profileOwner == sale.owner %}
                                 {% if not sale.closed %}
-                                    <a type="button" class="btn btn-default" href="/offer/sale/edit/{{ sale.id }}" title="Редактировать">
+                                    <a type="button" class="btn btn-primary" href="/offer/sale/edit/{{ sale.id }}" title="Редактировать">
                                         <i class="ai ai-pencil"></i>
                                     </a>
                                 {% endif %}
@@ -108,12 +108,12 @@
                                         <i class="ai ai-lock"></i>
                                     </a>
                                 {% endif %}
-                                    <a type="button" class="btn btn-danger" href="/offer/sale/remove/?id={{ sale.id }}&backref=/offer/sale/list/" title="Удалить">
+                                    <button type="button" class="btn btn-danger" onClick="TripRemove({{ sale.id }});" title="Удалить">
                                         <i class="ai ai-close"></i>
-                                    </a>
+                                    </button>
                             {% else %}
                                 {% if not sale.closed %}
-                                    <a type="button" class="btn btn-default" href="/user/im?peer={{ sale.owner.id }}&sale={{ sale.id }}">
+                                    <a type="button" class="btn btn-primary" href="/user/im?peer={{ sale.owner.id }}&sale={{ sale.id }}">
                                         <i class="glyphicon glyphicon-hand-up"></i>
                                         Связаться
                                     </a>

@@ -5,6 +5,7 @@ from user.models import (
 )
 
 class Backmsg(models.Model):
+    name = models.TextField(default="")
     body = models.TextField(default="")
     email = models.TextField(default="")
     user = models.ForeignKey(User, default=None, null=True)

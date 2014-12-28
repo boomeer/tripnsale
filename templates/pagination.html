@@ -1,19 +1,19 @@
 {% if totalpages == 1 %}
   <ul class="pagination">
     <li {% if page == 0 %}class="active"{% endif %}>
-        <a href="#page1">1</a>
+        <a href="#{{ pagesid }}page1">1</a>
     </li>
   </ul>
 {% elif totalpages > 1 %}
   <ul class="pagination">
     {% if page >= 3 %}
       <li>
-          <a href="#page1">1</a>
+          <a href="#{{ pagesid }}page1">1</a>
       </li>
     {% endif %}
     {% if page == 4 %}
       <li>
-        <a href="#page2">2</a>
+        <a href="#{{ pagesid }}page2">2</a>
       </li>
     {% elif page >= 5 %}
       <li class="disabled">
@@ -23,31 +23,31 @@
 
     {% if page|add:-2 >= 0 %}
       <li>
-        <a href="#page{{ page|add:-1 }}">{{ page|add:-1 }}</a>
+        <a href="#{{ pagesid }}page{{ page|add:-1 }}">{{ page|add:-1 }}</a>
       </li>
     {% endif %}
     {% if page|add:-1 >= 0 %}
       <li>
-        <a href="#page{{ page }}">{{ page }}</a>
+        <a href="#{{ pagesid }}page{{ page }}">{{ page }}</a>
       </li>
     {% endif %}
     <li class="active">
-      <a href="#page{{ page|add:1 }}">{{ page|add:1 }}</a>
+      <a href="#{{ pagesid }}page{{ page|add:1 }}">{{ page|add:1 }}</a>
     </li>
     {% if page|add:1 < totalpages %}
       <li>
-        <a href="#page{{ page|add:2 }}">{{ page|add:2 }}</a>
+        <a href="#{{ pagesid }}page{{ page|add:2 }}">{{ page|add:2 }}</a>
       </li>
     {% endif %}
     {% if page|add:2 < totalpages %}
       <li>
-        <a href="#page{{ page|add:3 }}">{{ page|add:3 }}</a>
+        <a href="#{{ pagesid }}page{{ page|add:3 }}">{{ page|add:3 }}</a>
       </li>
     {% endif %}
 
     {% if page == totalpages|add:-5 %}
       <li>
-        <a href="#page{{ totalpages|add:-1 }}">{{ totalpages|add:-1 }}</a>
+        <a href="#{{ pagesid }}page{{ totalpages|add:-1 }}">{{ totalpages|add:-1 }}</a>
       </li>
     {% elif page < totalpages|add:-4 %}
       <li class="disabled">
@@ -56,7 +56,7 @@
     {% endif %}
     {% if page < totalpages|add:-3 %}
       <li>
-          <a href="#page{{ totalpages }}">{{ totalpages }}</a>
+          <a href="#{{ pagesid }}page{{ totalpages }}">{{ totalpages }}</a>
       </li>
     {% endif %}
   </ul>

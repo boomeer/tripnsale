@@ -50,6 +50,11 @@ class SaleOffer(Offer):
     deposit = models.FloatField(default=None)
     guarant = models.BooleanField(default=False)
 
+    def __init__(self, *args, **argv):
+        super().__init__(*args, **argv)
+        if self.toTime.date() < datetime.now().date():
+            self.closed = True
+
     def isCurrent(self):
         return self.frTime <= datetime.now() <= self.toTime
 

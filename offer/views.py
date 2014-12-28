@@ -75,6 +75,10 @@ class SaleToDateInvalidErr (SaleEditErr):
     def __init__(self):
         super().__init__("todate_is_invalid")
 
+class SaleBadDatesRelations (SaleEditErr):
+    def __init__(self):
+        super().__init__("bad_date_relations")
+
 class SaleToCountryMissingErr (SaleEditErr):
     def __init__(self):
         super().__init__("tocountry_is_empty")
@@ -122,10 +126,16 @@ def ExtractSaleFields(params):
     except ValueError:
         raise SaleToDateInvalidErr
 
+    if frTime > toTime:
+        raise SaleBadDatesRelations
+
     try:
         deposit = round(float(params.get("deposit", "0").replace(",", ".").strip()))
     except ValueError:
         raise SaleInvalidDepositErr
+    if deposit < 0:
+        raise SaleInvalidDepositErr
+
     return (fr, to, frTime, toTime, deposit,)
 
 @login_required(login_url="/user/auth/")
@@ -291,6 +301,10 @@ class BuyCostToInvalidErr (BuyEditErr):
     def __init__(self):
         super().__init__("costto_is_invalid")
 
+class BuyBadCostRelations (BuyEditErr):
+    def __init__(self):
+        super().__init__("bad_cost_relations")
+
 def ExtractBuyFields(params):
     if not params.get("from", "").strip():
         fr = None
@@ -316,15 +330,24 @@ def ExtractBuyFields(params):
             costFrom = 0.0
         else:
             costFrom = round(float(params.get("costFrom", "0").replace(",", ".").strip()))
+        if costFrom < 0:
+            raise ValueError
     except ValueError:
         raise BuyCostFrInvalidErr
 
-    if not params.get("costTo", "").strip():
-        raise BuyCostToMissingErr
     try:
-        costTo = round(float(params.get("costTo", "0").replace(",", ".").strip()))
+        if not params.get("costTo", "").strip():
+            raise BuyCostToMissingErr
+        else:
+            costTo = round(float(params.get("costTo", "0").replace(",", ".").strip()))
+        if costTo < 0:
+            raise ValueError
     except ValueError:
         raise BuyCostToInvalidErr
+
+    if costFrom > costTo:
+        raise BuyBadCostRelations
+
     return (fr, to, title, costFrom, costTo,)
 
 @login_required(login_url="/user/auth/")
@@ -455,11 +478,6 @@ def BuyFilterView(request):
     params = request.REQUEST
     owner = int(params.get("owner", 0))
     buys = BuyOffer.objects
-    '''
-    buys = buys.filter(
-        ititle__istartswith=params.get("title", "").lower(),
-    )
-    '''
     if owner:
         buys = buys.filter(owner__id=owner)
     buys = buys.all()

@@ -13,6 +13,19 @@
                         {{ sale.frCity }}
                     </span>
                 </div>
+                <div class="tripArrow">
+                    <i class="glyphicon glyphicon-arrow-right"></i>
+                </div>
+                <div class="tripTo tripPlace">
+                    <span>
+                        <img src="{{ sale.to.img }}">
+                        {{ sale.to.title }}
+                    </span>
+                    <span class="tripCity">
+                        {{ sale.toCity }}
+                    </span>
+                </div>
+
                 <div>
                     <div class="tripDates tripSection">
                         <span>
@@ -38,15 +51,6 @@
                             </span>
                         {% endif %}
                     </div>
-                </div>
-                <div class="tripTo tripPlace">
-                    <span>
-                        <img src="{{ sale.to.img }}">
-                        {{ sale.to.title }}
-                    </span>
-                    <span class="tripCity">
-                        {{ sale.toCity }}
-                    </span>
                 </div>
             </div>
             <div>

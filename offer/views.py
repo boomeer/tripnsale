@@ -165,7 +165,7 @@ def SaleOfferAddView(request):
                 createTime=datetime.now(),
             )
             sale.save()
-            return redirect("/offer/sale/list#{}".format(sale.id))
+            return redirect("/offer/sale/list")
         except SaleEditErr as e:
             raise RedirectExc("/offer/sale/?err={}".format(e.status))
     return RenderToResponse("offer/sale/add.html", request, {
@@ -222,7 +222,7 @@ def SaleFilterView(request):
     sales = [sale for sale in sales if sale.visible()]
     sales = sorted(sales, key=lambda sale: (sale.closed, -sale.isCurrent(), sale.toEnd(),))
 
-    count = max(0, int(params.get("count", 5)))
+    count = max(0, int(params.get("count", 15)))
     totalpages = (len(sales) + count - 1) // count
     page = max(0, min(int(params.get("page", 1)), totalpages - 1))
     block = sales[page*count:(page+1)*count]
@@ -382,7 +382,7 @@ def BuyOfferAddView(request):
             )
             buy.save()
             VerifyPhotos(params.get("token", ""))
-            return redirect("/offer/buy/list#{}".format(buy.id))
+            return redirect("/offer/buy/list")
         except BuyEditErr as e:
             raise RedirectExc("/offer/buy/?err={}".format(e.status))
     gallery = CreateGallery()
@@ -485,7 +485,7 @@ def BuyFilterView(request):
                 params.get("title", ""))]
     buys = [buy for buy in buys if buy.visible()]
     buys = sorted(buys, key=lambda buy: (buy.closed, -buy.id,))
-    count = max(0, int(params.get("count", 5)))
+    count = max(0, int(params.get("count", 15)))
     totalpages = (len(buys) + count - 1) // count
     page = max(0, min(int(params.get("page", 1)), totalpages - 1))
     block = buys[page*count:(page+1)*count]

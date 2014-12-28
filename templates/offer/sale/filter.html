@@ -50,24 +50,6 @@
                 </div>
             </div>
             <div>
-                <div class="tripDates tripSection">
-                    <span>
-                        {{ sale.frTime|date:"d.m.Y" }} -
-                    </span>
-                    <span>
-                        {{ sale.toTime|date:"d.m.Y" }}
-                    </span>
-                </div>
-                <div class="tripSection">
-                    {% if sale.closed %}
-                        <span class="closed">
-                            <i class="ai ai-lock"></i>
-                            Закрытa
-                        </span>
-                    {% endif %}
-                </div>
-            </div>
-            <div>
                 <div class="tripDeposit tripSection">
                     <span class="tripSectionTitle">
                         Депозит:

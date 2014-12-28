@@ -44,7 +44,6 @@ function BuyViewClose()
 
 function BuyChangePage()
 {
-    alert(window.location.hash);
     if (window.location.hash.match(/^#buyspage\d+$/)) {
         BuysRefresh();
     } else if (window.location.hash.match(/^#buy\d+$/)) {

@@ -466,12 +466,15 @@ def BuyFilterView(request):
     buys = [buy for buy in buys if ValidFilter(buy.title + " " + buy.content,
                 params.get("title", ""))]
     buys = sorted(buys, key=lambda buy: (buy.closed, -buy.id,))
-    page = params.get("page", 1)
-    count = params.get("count", 5)
-    block = buys[(page-1)*count:page*count]
+    count = max(0, int(params.get("count", 5)))
+    totalpages = (len(buys) + count - 1) // count
+    page = max(0, min(int(params.get("page", 1)), totalpages - 1))
+    block = buys[page*count:(page+1)*count]
     return RenderToResponse("offer/buy/filter.html", request, {
         "buys": buys,
         "block": block,
+        "page": page,
+        "totalpages": totalpages,
         "profile": int(params.get("profile", 0)),
     })
 

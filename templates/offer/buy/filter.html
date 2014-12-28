@@ -1,7 +1,6 @@
-{% if not buys %}
-    Нет заказов
-{% endif %}
-{% for buy in buys %}
+{% include "pagination.html" %}
+
+{% for buy in block %}
     {% if buy.visible %}
         <div class="buy-item {% if buy.closed %}buy-item-closed{% endif %}" onClick="BuyView({{ buy.id }})">
             <div class="buy-section photo">
@@ -108,6 +107,8 @@
 
         </div>
     {% endif %}
+{% empty %}
+    Нет заявок
 {% endfor %}
 
 

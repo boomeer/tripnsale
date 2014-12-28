@@ -1,10 +1,17 @@
+function GetPage()
+{
+    var found = window.location.hash.match(/^#page(\d+)$/);
+    return (!found ? 1 : found[1]*1);
+}
+
 function BuysRefresh(user, profile)
-{        
+{
     $(".buysList").html("Загрузка...");
     $.post("/offer/buy/filter/", {
         "title": $("#buysTitle").val(),
         "owner": user ? user : 0,
         "profile": profile,
+        "page": GetPage() - 1
     }, function(res) {
         $(".buysList").html(res);
     });
@@ -24,8 +31,15 @@ function BuyViewClose()
     $(".buyViewWrapper").html("");
 }
 
+function ChangePage()
+{
+    if (window.location.hash.match(/^#page\d+$/)) {
+        BuysRefresh();
+    }
+}
 
 $(function() {
+    $(window).bind('hashchange', ChangePage);
     $("#buysFilterApply").on("click", function() {
         BuysRefresh();
     });
@@ -38,7 +52,7 @@ $(function() {
         BuysRefresh();
     }
 
-    if (window.location.hash) {
+    if (window.location.hash.match(/^#\d+&/)) {
         BuyView(window.location.hash.slice(1));
     }
 });

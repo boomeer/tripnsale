@@ -1,4 +1,5 @@
-{% include "pagination.html" %}
+<input type="hidden" id="buysOwner" value="{{ owner }}" />
+<input type="hidden" id="buysProfile" value="{{ profile }}" />
 
 {% for buy in block %}
     {% if buy.visible %}
@@ -111,4 +112,7 @@
     Нет заявок
 {% endfor %}
 
+<div style="text-align: center;">
+    {% include "pagination.html" %}
+</div>
 

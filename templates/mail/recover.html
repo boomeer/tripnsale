@@ -1,14 +1,11 @@
 From: Trip & Sale <support@tripnsale.com>
 To: {{ user.email }}
-Subject: {{ user.first_name }}, добро пожаловать на Trip&Sale! Пожалуйста, подтвердите вашу учетную запись.
+Subject: Восстановление пароля
 
 {{ user.first_name }},
 Вы делали запрос на изменение пароля.
 Ваш новый пароль: {{ newPassword }}.
-Вы можете изменить пароль <a href="{{ hostAddr }}{{ user.profileUrl }}">здесь</a>.
-
-Спасибо за выбор Trip & Sale!
-Желаем Вам удачи в поисках!
+Войдите, используя новый пароль, здесь: http://{{ hostAddr }}/user/auth/.
 
 --
 

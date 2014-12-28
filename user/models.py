@@ -18,7 +18,7 @@ class User(authModels.User):
     activated = models.BooleanField(default=True)
     activateCode = models.TextField(default="")
     guarant = models.BooleanField(default=False)
-    birthday = models.DateField(default=None, null=True)
+    birthday = models.DateField(default=None, null=True, blank=True)
     about = models.TextField(default="", blank=True)
     hidden = models.BooleanField(default=False)
 

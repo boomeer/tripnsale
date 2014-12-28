@@ -4,13 +4,13 @@ function GetPage()
     return (!found ? 1 : found[1]*1);
 }
 
-function BuysRefresh(user, profile)
+function BuysRefresh()
 {
     $(".buysList").html("Загрузка...");
     $.post("/offer/buy/filter/", {
         "title": $("#buysTitle").val(),
-        "owner": user ? user : 0,
-        "profile": profile,
+        "owner": $("#buysOwner").val(),
+        "profile": $("#buysProfile").val(),
         "page": GetPage() - 1
     }, function(res) {
         $(".buysList").html(res);

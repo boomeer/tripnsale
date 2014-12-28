@@ -13,8 +13,31 @@
                         {{ sale.frCity }}
                     </span>
                 </div>
-                <div class="tripArrow">
-                    <i class="glyphicon glyphicon-arrow-right"></i>
+                <div>
+                    <div class="tripDates tripSection">
+                        <span>
+                            {{ sale.frTime|date:"d.m.Y" }} -
+                        </span>
+                        <span>
+                            {{ sale.toTime|date:"d.m.Y" }}
+                        </span>
+                        {% if sale.isCurrent %}
+                            <span class="inTrip">
+                                <i class="ai ai-earth"></i>
+                                <span>
+                                    В поездке
+                                </span>
+                            </span>
+                        {% endif %}
+                    </div>
+                    <div class="tripSection">
+                        {% if sale.closed %}
+                            <span class="closed">
+                                <i class="ai ai-lock"></i>
+                                Закрытa
+                            </span>
+                        {% endif %}
+                    </div>
                 </div>
                 <div class="tripTo tripPlace">
                     <span>
@@ -117,6 +140,8 @@
         </div>
 
     </div>
+{% empty %}
+    Нет поездок
 {% endfor %}
 
 <div style="text-align: center;">

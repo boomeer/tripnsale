@@ -28,6 +28,14 @@ function BuyView(id)
     });
 }
 
+function BuyRemove(id)
+{
+    if (confirm("Вы действительно хотите удалить заказ?")) {
+        window.location.href = "/offer/buy/remove/?id=" + id + "&backref=/offer/buy/list/";
+    }
+}
+
+
 function BuyViewClose()
 {
     window.location.hash = "";

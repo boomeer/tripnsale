@@ -42,8 +42,14 @@ def AcceptView(request, confId):
     msg.save()
     msg2 = SystemMsg(
         conf=conf,
-        content="Гарант принял вашу заявку. Перейдите в отдельную конференцию по кнопке внизу диалога",
+        content="Гарант принял вашу заявку",
         time=datetime.now(),
     )
     msg2.save()
+    msg3 = SystemMsg(
+        conf=conf,
+        content="Перейдите в отдельную конференцию по кнопке внизу диалога",
+        time=datetime.now(),
+    )
+    msg3.save()
     return redirect("/user/im?conf={}".format(conf.id))

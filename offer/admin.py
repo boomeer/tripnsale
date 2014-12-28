@@ -10,7 +10,7 @@ class BuyOfferAdmin(admin.ModelAdmin):
 @admin.register(SaleOffer)
 class SaleOfferAdmin(admin.ModelAdmin):
     list_display = ("fr", "frCity", "frTime", "to", "toCity", "toTime", "deposit", "guarant",
-                "owner")
+                "owner", "closed",)
 
 
 @admin.register(OfferConnection)

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block main %}
+    <div class="page-header-wrap">
+       <div class="container">
+         <div class="page-header">
+           <h1>Восстановление пароля</h1>
+         </div>
+       </div>
+    </div>
+    {% if msgErr %}
+        <div class="alert alert-danger">
+            {{ msgErr }}
+        </div>
+    {% endif %}
+    {% if msg %}
+        <div class="alert alert-success">
+            {{ msg }}
+        </div>
+    {% endif %}
+    <div class="container-fluid" style="margin-top: 10px;">
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-2">
+                <div>
+                    Введите адрес электронной почты, на которую зарегистрирован Ваш профиль.
+                </div>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <div class="col-sm-4">
+                            <input class="form-control" type="email" name="email" placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12" style="margin-top: 10px;">
+                            <button type="submit" class="btn btn-default btn-lg">
+                                Восстановить пароль
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+{% endblock %}

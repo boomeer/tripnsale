@@ -19,6 +19,7 @@ from util.utils import (
 from util.msg import(
     GetEditProfileMsg,
     GetRegMsg,
+    GetUserRecoverMsg,
 )
 from gallery.utils import StoreImage, MakeThumbnail
 from user.models import *
@@ -425,4 +426,27 @@ def UserMailView(request):
     return RenderToResponse("user/mail.html", request, {
         "url": "/user/mail",
         "confs": confs,
+    })
+
+
+@SafeView
+def UserRecoverView(request):
+    params = request.REQUEST
+    msg = ""
+    msgErr = ""
+    if request.method == "POST":
+        email = params.get("email", "")
+        user = User.objects.filter(username=email).all()
+        if not user:
+            msgErr = "user_does_not_exist"
+        else:
+            msg = "recover_ok"
+            user = user[0]
+            newPassword = GetNewId()[0:8]
+            user.set_password(newPassword)
+            user.save()
+            SendRecoverMail(user, newPassword)
+    return RenderToResponse("user/recover.html", request, {
+        "msg": GetUserRecoverMsg(msg),
+        "msgErr": GetUserRecoverMsg(msgErr),
     })

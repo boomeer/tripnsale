@@ -38,6 +38,14 @@
                         <span>
                             {{ sale.toTime|date:"d.m.Y" }}
                         </span>
+                        {% if sale.isCurrent %}
+                            <span class="inTrip">
+                                <i class="ai ai-earth"></i>
+                                <span>
+                                    В поездке
+                                </span>
+                            </span>
+                        {% endif %}
                     </div>
                     <div class="tripSection">
                         {% if sale.closed %}

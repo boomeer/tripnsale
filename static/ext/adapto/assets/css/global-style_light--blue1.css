@@ -2011,6 +2011,35 @@ textarea.input-lg, .input-group-lg > textarea.form-control, textarea.order-quant
     color: rgba(187, 187, 187, 0.35);
     background-color: #333; }
 
+.btn-primary1 {
+  color: #fff;
+  background-color: #5db4ee;
+  border-color: #46a9ec; }
+  /* line 502, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\adapto/bootstrap/mixins */
+  .btn-primary1:hover, .btn-primary1:focus, .btn-primary1:active, .btn-primary1.active, .btn-primary1.is-checked {
+    color: #fff;
+    background-color: #38a3ea;
+    border-color: #178edd; }
+  /* line 507, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\adapto/bootstrap/mixins */
+  .open .btn-primary1.dropdown-toggle {
+    color: #fff;
+    background-color: #38a3ea;
+    border-color: #178edd; }
+  /* line 513, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\adapto/bootstrap/mixins */
+  .btn-primary1:active, .btn-primary1.active, .btn-primary1.is-checked {
+    background-image: none; }
+  /* line 516, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\adapto/bootstrap/mixins */
+  .open .btn-primary1.dropdown-toggle {
+    background-image: none; }
+  /* line 526, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\adapto/bootstrap/mixins */
+  .btn-primary1.disabled, .btn-primary1.disabled:hover, .btn-primary1.disabled:focus, .btn-primary1.disabled:active, .btn-primary1.disabled.active, .btn-primary1.disabled.is-checked, .btn-primary1[disabled], .btn-primary1[disabled]:hover, .btn-primary1[disabled]:focus, .btn-primary1[disabled]:active, .btn-primary1[disabled].active, .btn-primary1[disabled].is-checked, fieldset[disabled] .btn-primary1, fieldset[disabled] .btn-primary1:hover, fieldset[disabled] .btn-primary1:focus, fieldset[disabled] .btn-primary1:active, fieldset[disabled] .btn-primary1.active, fieldset[disabled] .btn-primary1.is-checked {
+    background-color: #5db4ee;
+    border-color: #46a9ec; }
+  /* line 532, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\adapto/bootstrap/mixins */
+  .btn-primary1 .badge {
+    color: #5db4ee;
+    background-color: #fff; }
+
 /* line 60, C:\Users\isaak\Web Directory\Theme Development\Bootstrap Theme Development\Adapto\adapto.com\source\stylesheets\adapto/bootstrap/buttons */
 .btn-primary {
   color: #fff;
@@ -10494,7 +10523,7 @@ hr.double--inverse {
     .portfolio-home-top {
       //background-image: none;
       //background: #f4f4f4;
-      background: #e4e0db url('../img/home/uber-back.png') no-repeat center;
+      background: #e4e0db url('/static/uber-back-mob.png') no-repeat center;
       height: auto; } }
   @media (min-width: 1630px) {
     .portfolio-home-top {

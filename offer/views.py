@@ -466,7 +466,7 @@ def BuyFilterView(request):
     buys = [buy for buy in buys if ValidFilter(buy.title + " " + buy.content,
                 params.get("title", ""))]
     buys = sorted(buys, key=lambda buy: (buy.closed, -buy.id,))
-    count = max(0, int(params.get("count", 5)))
+    count = max(0, int(params.get("count", 15)))
     totalpages = (len(buys) + count - 1) // count
     page = max(0, min(int(params.get("page", 1)), totalpages - 1))
     block = buys[page*count:(page+1)*count]

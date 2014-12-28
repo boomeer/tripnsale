@@ -165,7 +165,7 @@ def SaleOfferAddView(request):
                 createTime=datetime.now(),
             )
             sale.save()
-            return redirect("/offer/sale/list#{}".format(sale.id))
+            return redirect("/offer/sale/list#trip{}".format(sale.id))
         except SaleEditErr as e:
             raise RedirectExc("/offer/sale/?err={}".format(e.status))
     return RenderToResponse("offer/sale/add.html", request, {
@@ -382,7 +382,7 @@ def BuyOfferAddView(request):
             )
             buy.save()
             VerifyPhotos(params.get("token", ""))
-            return redirect("/offer/buy/list#{}".format(buy.id))
+            return redirect("/offer/buy/list#buy{}".format(buy.id))
         except BuyEditErr as e:
             raise RedirectExc("/offer/buy/?err={}".format(e.status))
     gallery = CreateGallery()

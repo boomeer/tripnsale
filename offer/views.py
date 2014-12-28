@@ -447,8 +447,7 @@ def BuyRemoveView(request):
     params = request.REQUEST
     buy = BuyOffer.objects.get(id=params.get("id", 0))
     if buy.owner == GetCurrentUser(request):
-        revert = bool(params.get("revert", False))
-        buy.closed = not revert
+        buy.removed = True
         buy.save()
     backref = params.get("backref", "/user/profile")
     return redirect(backref)
@@ -482,7 +481,7 @@ def BuyFilterView(request):
         buys = buys.filter(owner__id=owner)
     buys = buys.all()
     buys = [buy for buy in buys if ValidFilter(buy.title + " " + buy.content,
-                params.get("title", "")) and ValidFilter((buy.fr.title if buy.fr else "") + " " + buy.frCity, 
+                params.get("title", "")) and ValidFilter((buy.fr.title if buy.fr else "") + " " + buy.frCity,
                 params.get("fr", "")) \
                 and ValidFilter((buy.to.title if buy.to else "") + " " + buy.toCity, params.get("to", ""))]
     buys = [buy for buy in buys if buy.visible()]

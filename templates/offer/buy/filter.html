@@ -28,15 +28,41 @@
                     <div class="buyArrow">
                         <i class="glyphicon glyphicon-arrow-right"></i>
                     </div>
-                    {% if buy.to %}
+                </div>
+                <div class="buyFromTo">
+                    {% if buy.fr or buy.to %}
+                        <div class="buyFrom buyPlace">
+                            {% if buy.fr %}
+                                <span>
+                                    <img src="{{ buy.fr.img }}">
+                                    {{ buy.fr.title }}
+                                </span>
+                                <span class="buyCity">
+                                    {{ buy.frCity }}
+                                </span>
+                            {% else %}
+                                <span>
+                                    Не указано
+                                </span>
+                            {% endif %}
+                        </div>
+                        <div class="buyArrow">
+                            <i class="glyphicon glyphicon-arrow-right"></i>
+                        </div>
                         <div class="buyTo buyPlace">
-                            <span>
-                                <img src="{{ buy.to.img }}">
-                                {{ buy.to.title }}
-                            </span>
-                            <span class="buyCity">
-                                {{ buy.toCity }}
-                            </span>
+                            {% if buy.to %}
+                                <span>
+                                    <img src="{{ buy.to.img }}">
+                                    {{ buy.to.title }}
+                                </span>
+                                <span class="buyCity">
+                                    {{ buy.toCity }}
+                                </span>
+                            {% else %}
+                                <span>
+                                    Не указано
+                                </span>
+                            {% endif %}
                         </div>
                     {% endif %}
                 {% endif %}

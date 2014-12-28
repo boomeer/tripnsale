@@ -86,6 +86,7 @@
                         Поездки
                     </a>
                     <div class="panel-collapse collapse" id="sales">
+
                         <div class="col-md-10 col-md-offset-1 tripsList">
                         </div>
                     </div>
@@ -94,6 +95,8 @@
                     <a class="panel-heading" data-toggle="collapse" data-parent="#zbs" href="#buys">
                         Заказы
                     </a>
+                    <input type="hidden" id="buysOwner" value="{{ prUser.id }}" />
+                    <input type="hidden" id="buysProfile" value="1" />
                     <div class="panel-collapse collapse" id="buys">
                         <div class="col-md-10 col-md-offset-1 buysList">
                         </div>

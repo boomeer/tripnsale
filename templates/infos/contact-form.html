@@ -1,60 +1,128 @@
-﻿{% load static %}
 
-<div class="page-wrap bg2">
-<div class="page-header-wrap">
+    <div class="page-wrap" class="bg0" style="margin-top:0px;">
+      <div class="page-header-wrap">
         <div class="container">
           <div class="page-header">
 
 
-            <h1>Обратная связь</h1>
+            <h1 >Есть предложения?</h1>
 
           </div> <!-- end page-header -->
         </div> <!-- end container -->
       </div> <!-- end page-header-wrap -->
 
 
-<section id="backmsg">
-<div class="bg2">
-  <div class="container content-wrap">
-    <div class="row">
-      <div class="container-fluid">
-        <div class="col-md-8 col-md-offset-2">
-          {% if err %}
-            <div class="alert alert-danger">{{err}}</div>
-          {% else %}
-          <div class="row">
-            <div class="col-md-9 col-md-offset-3" style="font-size: large; margin-bottom: 20px;">Вы можете отправить нам сообщение о проблемах или предложениях.</div>
-          </div>
-          {% endif %}
-          <div class="row">
-            <form class="form-horizontal" role="form" action="" method="post">
-              {% csrf_token %}
-              <input type="hidden" name="act" value="sendMsg">
-              <div class="form-group">
-                  <label for="inputName" class="col-sm-3 control-label">Ваше имя:</label>
-                  <div class="col-sm-9">
-                      <input type="text" class="form-control" id="inputName" name="name" placeholder="Имя" value="{{ name }}" />
-                  </div>
-              </div>
-              <div class="form-group">
-                  <label for="inputEmail" class="col-sm-3 control-label">Email для ответа:</label>
-                  <div class="col-sm-9">
-                      <input type="text" class="form-control" id="inputEmail" name="email" placeholder="Email" value="{{ email }}" />
-                  </div>
-              </div>
-              <div class="form-group">
-                  <label for="inputBody" class="col-sm-3 control-label">Текст сообщения:</label>
-                  <div class="col-sm-9">
-                      <textarea type="text" class="form-control" id="inputBody" name="body" placeholder="Текст сообщения">{{ body }}</textarea>
-                  </div>
-              </div>
-              <div class="col-md-offset-3"><button class="btn btn-default" type="submit">Отправить</button></div>
 
-            </form>
-          </div>
-        </div>
+    <div class="container content-wrap">
+
+  <div class="row">
+
+    <article>
+      <div class="col-md-8">
+          <h2>Напишите нам!</h2>
+<p class="lead">Мы ждем Ваших отзывов, предложений и пожеланий.</p>
+
+<div class="well" style="overflow: hidden;">
+  {% if err %}
+    <div class="alert alert-danger">{{err}}</div>
+  {% endif %}
+  <form
+    class="form-horizontal"
+    role="form"
+    id="contactForm"
+    data-bv-feedbackicons-valid="ai ai-checkmark"
+    data-bv-feedbackicons-invalid="ai ai-close"
+    data-bv-feedbackicons-validating="ai ai-spinner"
+    action=""
+    method="post"
+      >
+    {% csrf_token %}
+    <input type="hidden" value="sendMsg" name="act">
+    <div class="form-group">
+      <label for="name" class="col-sm-2 control-label">Имя</label>
+      <div class="col-sm-10">
+        <input
+          type="text"
+          class="form-control"
+          name="name"
+          placeholder="Введите Ваше имя"
+          data-bv-notempty="true"
+          data-bv-notempty-message="Необходимо ввести имя!"
+          value="{{ name }}"
+        >
       </div>
     </div>
-  </div>
+    <div class="form-group">
+      <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+      <div class="col-sm-10">
+        <input type="email"
+          class="form-control"
+          name="email"
+          id="inputEmail3"
+          placeholder="Введите Ваш email"
+          value="{{ email }}"
+        >
+      </div>
+    </div>
+    <div class="col-sm-12">
+      <div class="form-group">
+        <textarea class="form-control" style="min-height:300px; max-height:500px;" placeholder="Ваше сообщение..." name="body"></textarea>
+      </div>
+    </div>
+    <div class="col-sm-6 col-sm-offset-3">
+      <button type="submit" class="btn btn-primary btn-lg btn-block">Отправить сообщение!</button>
+    </div>
+  </form>
 </div>
-</section>
+
+
+      </div>
+    </article>
+
+    <aside class="col-md-4">
+            <div class="panel-nav sidebar-right">
+
+        <!-- structural blocks -->
+  <!-- Contact -->
+  <div class="sidebar-group">
+    <div class="headline">
+      <h3>Контакты</h3>
+    </div>
+      <address>
+        <ins class="text-center">По вопросам сотрудничества</ins>
+        <div style="margin-top:5px"> <span class="ai ai-globe ai-circle" style="margin-right: 5px;"></span><a href="mailto:cooperation@tripnsale.com">cooperation@tripnsale.com</a></div>
+      </address>
+      <address>
+       <ins class="text-center"> По вопросам рекламы</ins>
+        <div style="margin-top:5px"> <span class="ai ai-newspaper ai-circle" style="margin-right: 5px;"></span><a href="mailto:commercial@tripnsale.com">commercial@tripnsale.com</a></div>
+      </address>
+      <address>
+        <ins class="text-center">Прочие вопросы</ins>
+        <div style="margin-top:5px"> <span class="ai ai-envelope ai-circle" style="margin-right: 5px;"></span><a href="mailto:info@tripnsale.com">info@tripnsale.com</a></div>
+      </address>
+
+  </div> <!-- end sidebar-group -->
+
+  <!-- Connect -->
+  <div class="sidebar-group">
+    <div class="headline">
+      <h3>Социальные сети</h3>
+    </div>
+    <ul class="list-inline icons--social-media">
+    <li class="tooltip-link" data-toggle="tooltip" data-placement="top" title="VK"><a href="#"><span class="ai ai-2x ai-vk" style="color: #4f90bd">&nbsp;</span></a></li>
+  <li class="tooltip-link" data-toggle="tooltip" data-placement="top" title="Facebook"><a href="#"><span class="ai ai-2x ai-facebook2" style="color: #4f90bd"></span></a></li>
+</ul>
+  </div> <!-- end sidebar-group -->
+
+</div>
+      </div> <!-- end toc -->
+    </aside>
+
+
+  </div> <!-- end row -->
+
+</div> <!-- end container -->
+
+
+    </div> <!-- end page-wrap -->
+

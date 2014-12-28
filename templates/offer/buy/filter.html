@@ -1,113 +1,108 @@
-<input type="hidden" id="buysOwner" value="{{ owner }}" />
-<input type="hidden" id="buysProfile" value="{{ profile }}" />
-
 {% for buy in block %}
-    {% if buy.visible %}
-        <div class="buy-item {% if buy.closed %}buy-item-closed{% endif %}" onClick="BuyView({{ buy.id }})">
-            <div class="buy-section photo">
-                <img src="{{ buy.gallery.getHeadUrl }}" alt="">
-            </div>
-            <div class="buy-section content">
-                <div>
-                    <div class="title">
-                        {{ buy.title }}
-                    </div>
-                    <div class="comment">
-                        {{ buy.content }}
-                    </div>
-                </div>
-                <div class="buyFromTo">
-                    {% if buy.fr and buy.to %}
-                        {% if buy.fr %}
-                            <div class="buyFrom buyPlace">
-                                <span>
-                                    <img src="{{ buy.fr.img }}">
-                                    {{ buy.fr.title }}
-                                </span>
-                                <span class="buyCity">
-                                    {{ buy.frCity }}
-                                </span>
-                            </div>
-                        {% endif %}
-                        <div class="buyArrow">
-                            <i class="glyphicon glyphicon-arrow-right"></i>
-                        </div>
-                        {% if buy.to %}
-                            <div class="buyTo buyPlace">
-                                <span>
-                                    <img src="{{ buy.to.img }}">
-                                    {{ buy.to.title }}
-                                </span>
-                                <span class="buyCity">
-                                    {{ buy.toCity }}
-                                </span>
-                            </div>
-                        {% endif %}
-                    {% endif %}
-                </div>
-
-                <div class="prices">
-                    <span>
-                        Готов заплатить:
-                    </span>
-                    <span>
-                        <span class="bboldy">{{ buy.costFrom|floatformat:"0" }} руб.</span>
-                        -
-                        <span class="bboldy">{{ buy.costTo|floatformat:"0" }} руб.</span>
-                    </span>
-                    <span class="guarant">
-                        {% if buy.guarant %}
-                            <i class="ai ai-shield"></i>
-                            Только с гарантом
-                        {% endif %}
-                    </span>
-                </div>
-                <div>
-                    {% if profile and not buy.closed and profileOwner == buy.owner %}
-                        <div style="margin-bottom: 4px;">
-                            <a href="/offer/buy/edit/{{ buy.id }}" class="btn btn-default">
-                                <i class="ai ai-pencil"></i>
-                                Редактировать
-                            </a>
-                        </div>
-                        <div>
-                            <a href="/offer/buy/remove/?id={{ buy.id }}" class="btn btn-danger">
-                                <i class="ai ai-close"></i>
-                                Удалить
-                            </a>
-                            <a href="/offer/buy/close/?id={{ buy.id }}" class="btn btn-success">
-                                <i class="ai ai-lock"></i>
-                                Закрыть
-                            </a>
-                        </div>
-                    {% endif %}
-                    {% if buy.closed %}
-                        <span class="closed">
-                            <i class="ai ai-lock"></i>
-                            Закрыт
-                        </span>
-                    {% endif %}
-                </div>
-            </div>
-            <div class="buy-section owner owner-right" onClick="window.location.href='{{ buy.owner.profileUrl }}';">
-                <div class="owner-av">
-                    <img src="{{ buy.owner.avatarThumbUrl }}">
-                </div>
-                <div>
-                    {{ buy.owner.first_name }} {{ buy.owner.last_name }}
-                </div>
-            </div>
-            <div class="buy-section owner owner-invis">
-                <div class="owner-av">
-                    <img src="{{ buy.owner.avatarThumbUrl }}">
-                </div>
-                <div>
-                    {{ buy.owner.first_name }} {{ buy.owner.last_name }}
-                </div>
-            </div>
-
+    <div class="buy-item {% if buy.closed %}buy-item-closed{% endif %}" onClick="BuyView({{ buy.id }})">
+        <div class="buy-section photo">
+            <img src="{{ buy.gallery.getHeadUrl }}" alt="">
         </div>
-    {% endif %}
+        <div class="buy-section content">
+            <div>
+                <div class="title">
+                    {{ buy.title }}
+                </div>
+                <div class="comment">
+                    {{ buy.content }}
+                </div>
+            </div>
+            <div class="buyFromTo">
+                {% if buy.fr and buy.to %}
+                    {% if buy.fr %}
+                        <div class="buyFrom buyPlace">
+                            <span>
+                                <img src="{{ buy.fr.img }}">
+                                {{ buy.fr.title }}
+                            </span>
+                            <span class="buyCity">
+                                {{ buy.frCity }}
+                            </span>
+                        </div>
+                    {% endif %}
+                    <div class="buyArrow">
+                        <i class="glyphicon glyphicon-arrow-right"></i>
+                    </div>
+                    {% if buy.to %}
+                        <div class="buyTo buyPlace">
+                            <span>
+                                <img src="{{ buy.to.img }}">
+                                {{ buy.to.title }}
+                            </span>
+                            <span class="buyCity">
+                                {{ buy.toCity }}
+                            </span>
+                        </div>
+                    {% endif %}
+                {% endif %}
+            </div>
+
+            <div class="prices">
+                <span>
+                    Готов заплатить:
+                </span>
+                <span>
+                    <span class="bboldy">{{ buy.costFrom|floatformat:"0" }} руб.</span>
+                    -
+                    <span class="bboldy">{{ buy.costTo|floatformat:"0" }} руб.</span>
+                </span>
+                <span class="guarant">
+                    {% if buy.guarant %}
+                        <i class="ai ai-shield"></i>
+                        Только с гарантом
+                    {% endif %}
+                </span>
+            </div>
+            <div>
+                {% if profile and not buy.closed and profileOwner == buy.owner %}
+                    <div style="margin-bottom: 4px;">
+                        <a href="/offer/buy/edit/{{ buy.id }}" class="btn btn-default">
+                            <i class="ai ai-pencil"></i>
+                            Редактировать
+                        </a>
+                    </div>
+                    <div>
+                        <a href="/offer/buy/remove/?id={{ buy.id }}" class="btn btn-danger">
+                            <i class="ai ai-close"></i>
+                            Удалить
+                        </a>
+                        <a href="/offer/buy/close/?id={{ buy.id }}" class="btn btn-success">
+                            <i class="ai ai-lock"></i>
+                            Закрыть
+                        </a>
+                    </div>
+                {% endif %}
+                {% if buy.closed %}
+                    <span class="closed">
+                        <i class="ai ai-lock"></i>
+                        Закрыт
+                    </span>
+                {% endif %}
+            </div>
+        </div>
+        <div class="buy-section owner owner-right" onClick="window.location.href='{{ buy.owner.profileUrl }}';">
+            <div class="owner-av">
+                <img src="{{ buy.owner.avatarThumbUrl }}">
+            </div>
+            <div>
+                {{ buy.owner.first_name }} {{ buy.owner.last_name }}
+            </div>
+        </div>
+        <div class="buy-section owner owner-invis">
+            <div class="owner-av">
+                <img src="{{ buy.owner.avatarThumbUrl }}">
+            </div>
+            <div>
+                {{ buy.owner.first_name }} {{ buy.owner.last_name }}
+            </div>
+        </div>
+
+    </div>
 {% empty %}
     Нет заявок
 {% endfor %}

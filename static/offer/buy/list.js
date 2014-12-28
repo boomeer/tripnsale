@@ -6,11 +6,13 @@ function GetPage()
 
 function BuysRefresh()
 {
+    var bo = $("#buysOwner");
+    var bp = $("#buysProfile");
     $(".buysList").html("Загрузка...");
     $.post("/offer/buy/filter/", {
         "title": $("#buysTitle").val(),
-        "owner": $("#buysOwner").val(),
-        "profile": $("#buysProfile").val(),
+        "owner": bo ? bo.val() : "",
+        "profile": bo ? bo.val() : "",
         "page": GetPage() - 1
     }, function(res) {
         $(".buysList").html(res);

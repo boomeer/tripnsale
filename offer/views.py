@@ -465,6 +465,7 @@ def BuyFilterView(request):
     buys = buys.all()
     buys = [buy for buy in buys if ValidFilter(buy.title + " " + buy.content,
                 params.get("title", ""))]
+    buys = [buy for buy in buys if buy.visible()]
     buys = sorted(buys, key=lambda buy: (buy.closed, -buy.id,))
     count = max(0, int(params.get("count", 15)))
     totalpages = (len(buys) + count - 1) // count

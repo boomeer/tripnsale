@@ -48,8 +48,8 @@ def InfoView(request, name):
                 else:
                     if not params.get("email", ""):
                         raise EmptyAnswerEmailErr
-                    email = params.get["email"]
-                    msg = Backmsg(body=params.get["body"],
+                    email = params["email"]
+                    msg = Backmsg(body=params["body"],
                                   email=email,
                                   user=None,
                                   name=params.get("name", ""))

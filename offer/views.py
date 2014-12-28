@@ -14,8 +14,14 @@ from place.models import (
 from place.utils import (
     GetCountries,
 )
+from util.utils import (
+    ValidFilter,
+    TsExc,
+    RedirectExc,
+)
 from util.msg import (
     GetBuyEditMsg,
+    GetSaleAddMsg,
 )
 from util.utils import (
     SafeView,
@@ -38,9 +44,48 @@ from gallery.models import (
     Gallery,
     Photo,
 )
-from util.utils import ValidFilter
 from datetime import datetime
 
+class SaleEditErr (TsExc):
+    def __init__(self, msg):
+        super().__init__(msg)
+        self.status = msg
+
+class SaleFrDateMissingErr (SaleEditErr):
+    def __init__(self):
+        super().__init__("fromdate_is_empty")
+
+class SaleFrDateInvalidErr (SaleEditErr):
+    def __init__(self):
+        super().__init__("fromdate_is_invalid")
+
+class SaleFrCountryMissingErr (SaleEditErr):
+    def __init__(self):
+        super().__init__("fromcountry_is_empty")
+
+class SaleFrCountryInvalidErr (SaleEditErr):
+    def __init__(self):
+        super().__init__("fromcountry_is_invalid")
+
+class SaleToDateMissingErr (SaleEditErr):
+    def __init__(self):
+        super().__init__("todate_is_empty")
+
+class SaleToDateInvalidErr (SaleEditErr):
+    def __init__(self):
+        super().__init__("todate_is_invalid")
+
+class SaleToCountryMissingErr (SaleEditErr):
+    def __init__(self):
+        super().__init__("tocountry_is_empty")
+
+class SaleToCountryInvalidErr (SaleEditErr):
+    def __init__(self):
+        super().__init__("tocountry_is_invalid")
+
+class SaleInvalidDepositErr (SaleEditErr):
+    def __init__(self):
+        super().__init__("invalid_deposit")
 
 @SafeView
 def SaleListView(request):
@@ -48,39 +93,78 @@ def SaleListView(request):
         "url": "/offer/sale/list",
     })
 
+def ExtractSaleFields(params):
+    if not params.get("from", "").strip():
+        raise SaleFrCountryMissingErr
+    try:
+        fr = Country.objects.get(name=params["from"])
+    except ValueError:
+        raise SaleFrCountryInvalidErr
+
+    if not params.get("to", "").strip():
+        raise SaleToCountryMissingErr
+    try:
+        to = Country.objects.get(name=params["to"])
+    except ValueError:
+        raise SaleToCountryInvalidErr
+
+    if not params.get("fromTime", "").strip():
+        raise SaleFrDateMissingErr
+    try:
+        frTime = datetime.strptime(params["fromTime"], "%d.%m.%Y")
+    except ValueError:
+        raise SaleFrDateInvalidErr
+
+    if not params.get("toTime", "").strip():
+        raise SaleToDateMissingErr
+    try:
+        toTime = datetime.strptime(params["toTime"], "%d.%m.%Y")
+    except ValueError:
+        raise SaleToDateInvalidErr
+
+    try:
+        deposit = round(float(params.get("deposit", "0").replace(",", ".").strip()))
+    except ValueError:
+        raise SaleInvalidDepositErr
+    return (fr, to, frTime, toTime, deposit,)
+
 @login_required(login_url="/user/auth/")
 @SafeView
 def SaleOfferAddView(request):
     params = request.REQUEST
     act = params.get("act", "")
     if act == "add":
-        CheckPost(request)
-        CheckAuth(request)
-        fr = Country.objects.get(name=params.get("from", ""))
-        to = Country.objects.get(name=params.get("to", ""))
-        sale = SaleOffer(
-            content=params.get("content", ""),
-            fr=fr,
-            frCity=params.get("frCity", ""),
-            ifrCity=params.get("frCity", "").lower(),
-            frTime=datetime.strptime(params.get("fromTime", ""), "%d.%m.%Y"),
-            to=to,
-            toCity=params.get("toCity", ""),
-            itoCity=params.get("toCity", "").lower(),
-            toTime=datetime.strptime(params.get("toTime", ""), "%d.%m.%Y"),
-            deposit=params.get("deposit", 0),
-            guarant=params.get("guarant", False),
-            owner=GetCurrentUser(request),
-            createTime=datetime.now(),
-        )
-        sale.save()
-        return redirect("/offer/sale/list")
+        try:
+            CheckPost(request)
+            CheckAuth(request)
+
+            fr, to, frTime, toTime, deposit = ExtractSaleFields(params)
+            sale = SaleOffer(
+                content=params.get("content", ""),
+                fr=fr,
+                frCity=params.get("frCity", ""),
+                ifrCity=params.get("frCity", "").lower(),
+                frTime=frTime,
+                to=to,
+                toCity=params.get("toCity", ""),
+                itoCity=params.get("toCity", "").lower(),
+                toTime=toTime,
+                deposit=deposit,
+                guarant=params.get("guarant", False),
+                owner=GetCurrentUser(request),
+                createTime=datetime.now(),
+            )
+            sale.save()
+            return redirect("/offer/sale/list")
+        except SaleEditErr as e:
+            raise RedirectExc("/offer/sale/?err={}".format(e.status))
     return RenderToResponse("offer/sale/add.html", request, {
         "url": "/offer/sale",
         "countries": GetCountries(),
+        "err": GetSaleAddMsg(params.get("err", ""))
     })
 
-
+@SafeView
 def SaleEditView(request, id):
     params = request.REQUEST
     sale = SaleOffer.objects.get(id=id)
@@ -88,25 +172,29 @@ def SaleEditView(request, id):
     if sale.owner != GetCurrentUser(request):
         return redirect("/")
     if act == "edit":
-        CheckPost(request)
-        fr = Country.objects.get(name=params.get("from", ""))
-        to = Country.objects.get(name=params.get("to", ""))
-        sale.content = params.get("content", "")
-        sale.fr = fr
-        sale.frCiry = params.get("frCity", "")
-        sale.ifrCiry = params.get("frCity", "").lower()
-        #sale.frTime = datetime.strptime(params.get("fromTime", ""), "%d.%m.%Y"),
-        sale.to = to
-        sale.toCity = params.get("toCity", "")
-        sale.itoCity = params.get("toCity", "").lower()
-        #sale.toTime = datetime.strptime(params.get("toTime", ""), "%d.%m.%Y"),
-        sale.deposit = float(params.get("deposit", "0").replace(",", "."))
-        sale.guarant = params.get("guarant", False)
-        sale.save()
-        return redirect("/offer/sale/edit/{}".format(sale.id))
+        try:
+            CheckPost(request)
+            fr, to, frTime, toTime, deposit = ExtractSaleFields(params)
+
+            sale.content = params.get("content", "")
+            sale.fr = fr
+            sale.frCity = params.get("frCity", "")
+            sale.ifrCity = params.get("frCity", "").lower()
+            sale.frTime = frTime;
+            sale.to = to
+            sale.toCity = params.get("toCity", "")
+            sale.itoCity = params.get("toCity", "").lower()
+            sale.toTime = toTime
+            sale.deposit = deposit
+            sale.guarant = params.get("guarant", False)
+            sale.save()
+            return redirect("/offer/sale/list/#{}".format(sale.id))
+        except SaleEditErr as e:
+            raise RedirectExc("/offer/sale/edit/{}?err={}".format(sale.id, e.status))
     return RenderToResponse("offer/sale/edit.html", request, {
         "sale": sale,
         "countries": GetCountries(),
+        "err": GetSaleAddMsg(params.get("err", "")),
     })
 
 
@@ -164,9 +252,80 @@ def SaleCloseView(request):
 @SafeView
 def SaleView(request, id):
     sale = SaleOffer.objects.get(id=id)
+    if not sale.visible():
+        raise Exception("not found")
     return RenderToResponse("offer/sale/view.html", request, {
         "sale": sale,
     })
+
+class BuyEditErr (TsExc):
+    def __init__(self, msg):
+        super().__init__(msg)
+        self.status = msg
+
+class BuyTitleMissingErr (BuyEditErr):
+    def __init__(self):
+        super().__init__("title_is_missing")
+
+class BuyFrCountryInvalidErr (BuyEditErr):
+    def __init__(self):
+        super().__init__("fromcountry_is_invalid")
+
+class BuyToCountryMissingErr (BuyEditErr):
+    def __init__(self):
+        super().__init__("tocountry_is_empty")
+
+class BuyToCountryInvalidErr (BuyEditErr):
+    def __init__(self):
+        super().__init__("tocountry_is_invalid")
+
+class BuyCostFrInvalidErr (BuyEditErr):
+    def __init__(self):
+        super().__init__("costfr_is_invalid")
+
+class BuyCostToMissingErr (BuyEditErr):
+    def __init__(self):
+        super().__init__("costto_is_missing")
+
+class BuyCostToInvalidErr (BuyEditErr):
+    def __init__(self):
+        super().__init__("costto_is_invalid")
+
+def ExtractBuyFields(params):
+    if not params.get("from", "").strip():
+        fr = None
+    else:
+        try:
+            fr = Country.objects.get(name=params["from"])
+        except ValueError:
+            raise BuyFrCountryInvalidErr
+
+    if not params.get("to", "").strip():
+        raise BuyToCountryMissingErr
+    try:
+        to = Country.objects.get(name=params["to"])
+    except ValueError:
+        raise BuyToCountryInvalidErr
+
+    if not params.get("title", "").strip():
+        raise BuyTitleMissingErr
+    title = params["title"]
+
+    try:
+        if not params.get("costFrom", ""):
+            costFrom = 0.0
+        else:
+            costFrom = round(float(params.get("costFrom", "0").replace(",", ".").strip()))
+    except ValueError:
+        raise BuyCostFrInvalidErr
+
+    if not params.get("costTo", "").strip():
+        raise BuyCostToMissingErr
+    try:
+        costTo = round(float(params.get("costTo", "0").replace(",", ".").strip()))
+    except ValueError:
+        raise BuyCostToInvalidErr
+    return (fr, to, title, costFrom, costTo,)
 
 @login_required(login_url="/user/auth/")
 @SafeView
@@ -174,29 +333,43 @@ def BuyOfferAddView(request):
     params = request.REQUEST
     act = params.get("act", "")
     if act == "add":
-        CheckPost(request)
-        CheckAuth(request)
-        gallery = Gallery.objects.get(token=params.get("gallery", ""))
-        buy = BuyOffer(
-            title=params.get("title", ""),
-            ititle=params.get("title", "").lower(),
-            content=params.get("content", ""),
-            costFrom=params.get("costFrom", None),
-            costTo=params.get("costTo", None),
-            guarant=params.get("guarant", False),
-            gallery=gallery,
-            owner=GetCurrentUser(request),
-            createTime=datetime.now(),
-        )
-        buy.save()
-        VerifyPhotos(params.get("token", ""))
-        return redirect("/offer/buy/list")
+        try:
+            CheckPost(request)
+            CheckAuth(request)
+
+            fr, to, title, costFrom, costTo = ExtractBuyFields(params)
+
+            gallery = Gallery.objects.get(token=params.get("gallery", ""))
+            buy = BuyOffer(
+                title=title,
+                ititle=title.lower(),
+                content=params.get("content", ""),
+                costFrom=costFrom,
+                costTo=costTo,
+                guarant=params.get("guarant", False),
+                fr=fr,
+                frCity=params.get("frCity", ""),
+                ifrCity=params.get("frCity", "").lower(),
+                to=to,
+                toCity=params.get("toCity", ""),
+                itoCity=params.get("toCity", "").lower(),
+                gallery=gallery,
+                owner=GetCurrentUser(request),
+                createTime=datetime.now(),
+            )
+            buy.save()
+            VerifyPhotos(params.get("token", ""))
+            return redirect("/offer/buy/list")
+        except BuyEditErr as e:
+            raise RedirectExc("/offer/buy/?err={}".format(e.status))
     gallery = CreateGallery()
     token = GetNewId()
     return RenderToResponse("offer/buy/add.html", request, {
         "url": "/offer/buy",
         "gallery": gallery,
         "token": token,
+        "countries": GetCountries(),
+        "err": GetBuyEditMsg(params.get("err", ""))
     })
 
 
@@ -209,14 +382,25 @@ def BuyEditView(request, id):
     if buy.owner != user:
         return redirect("/")
     if act == "edit":
-        CheckPost(request)
-        buy.title = params.get("title", "")
-        buy.content = params.get("content", "")
-        buy.costFrom = float(params.get("costFrom", "0").replace(",", "."))
-        buy.costTo = float(params.get("costTo", "0").replace(",", "."))
-        buy.save()
-        VerifyPhotos(params.get("token", ""))
-        return redirect("/offer/buy/edit/{}?msg=buy_edit_ok".format(buy.id))
+        try:
+            CheckPost(request)
+            fr, to, title, costFrom, costTo = ExtractBuyFields(params)
+            buy.title = title
+            buy.content = params.get("content", "")
+            buy.costFrom = costFrom
+            buy.costTo = costTo
+            buy.fr = fr
+            buy.frCity = params.get("frCity", "")
+            buy.ifrCity = params.get("frCity", "").lower()
+            buy.to = to
+            buy.toCity = params.get("toCity", "")
+            buy.itoCity = params.get("toCity", "").lower()
+            buy.guarant = params.get("guarant", False)
+            buy.save()
+            VerifyPhotos(params.get("token", ""))
+            return redirect("/offer/buy/list/#{}".format(buy.id))
+        except BuyEditErr as e:
+            raise RedirectExc("/offer/buy/edit/{}?err={}".format(buy.id, e.status))
     elif act == "makeHead":
         pic = Photo.objects.get(id=params.get("picId"))
         pic.gallery.head = pic
@@ -229,9 +413,9 @@ def BuyEditView(request, id):
     return RenderToResponse("offer/buy/edit.html", request, {
         "url": "/offer/buy/edit/{}/".format(buy.id),
         "buy": buy,
-        "succMsg": GetBuyEditMsg(params.get("msg", "")),
-        "failMsg": GetBuyEditMsg(params.get("err", "")),
+        "err": GetBuyEditMsg(params.get("err", "")),
         "token": GetNewId(),
+        "countries": GetCountries(),
     })
 
 
@@ -240,9 +424,11 @@ def BuyRemoveView(request):
     params = request.REQUEST
     buy = BuyOffer.objects.get(id=params.get("id", 0))
     if buy.owner == GetCurrentUser(request):
-        buy.removed = True
+        revert = bool(params.get("revert", False))
+        buy.closed = not revert
         buy.save()
-    return redirect("/user/profile")
+    backref = params.get("backref", "/user/profile")
+    return redirect(backref)
 
 
 @SafeView
@@ -250,9 +436,11 @@ def BuyCloseView(request):
     params = request.REQUEST
     buy = BuyOffer.objects.get(id=params.get("id", 0))
     if buy.owner == GetCurrentUser(request):
-        buy.closed = True
+        revert = bool(params.get("revert", False))
+        buy.closed = not revert
         buy.save()
-    return redirect("/user/profile")
+    backref = params.get("backref", "/user/profile")
+    return redirect(backref)
 
 
 @SafeView
@@ -278,12 +466,15 @@ def BuyFilterView(request):
     buys = [buy for buy in buys if ValidFilter(buy.title + " " + buy.content,
                 params.get("title", ""))]
     buys = sorted(buys, key=lambda buy: (buy.closed, -buy.id,))
-    page = params.get("page", 1)
-    count = params.get("count", 5)
-    block = buys[(page-1)*count:page*count]
+    count = max(0, int(params.get("count", 15)))
+    totalpages = (len(buys) + count - 1) // count
+    page = max(0, min(int(params.get("page", 1)), totalpages - 1))
+    block = buys[page*count:(page+1)*count]
     return RenderToResponse("offer/buy/filter.html", request, {
         "buys": buys,
         "block": block,
+        "page": page,
+        "totalpages": totalpages,
         "profile": int(params.get("profile", 0)),
     })
 
@@ -291,6 +482,8 @@ def BuyFilterView(request):
 @SafeView
 def BuyView(request, id):
     buy = BuyOffer.objects.get(id=id)
+    if not buy.visible():
+        raise Exception("not found")
     return RenderToResponse("offer/buy/view.html", request, {
         "buy": buy,
     })

@@ -3,13 +3,18 @@
         <div class="title">
             {% if msgGroup.0.fr %}
             <div class="author bboldy">
-                <a href="/user/profile/{{ msgGroup.0.fr.username }}/" class="bboldy {% if msgGroup.0.fr.guarant %}guarant{% endif %}">
-                    <img src="{{ msgGroup.0.fr.avatarThumbUrl }}" class="peerAv">
-                    {% if msgGroup.0.fr.guarant %}
+                {% if msgGroup.0.fr.guarant %}
+                    <span class="bboldy guarant">
+                        <img src="{{ msgGroup.0.fr.avatarThumbUrl }}" class="peerAv">
                         <i class="ai ai-shield"></i>
-                    {% endif %}
-                    {{ msgGroup.0.fr.first_name }} {{ msgGroup.0.fr.last_name }}:
-                </a>
+                        Гарант:
+                    </span>
+                {% else %}
+                    <a href="{{ msgGroup.0.fr.profileUrl }}" class="bboldy">
+                        <img src="{{ msgGroup.0.fr.avatarThumbUrl }}" class="peerAv">
+                        {{ msgGroup.0.fr.first_name }} {{ msgGroup.0.fr.last_name }}:
+                    </a>
+                {% endif %}
             </div>
             {% endif %}
         </div>

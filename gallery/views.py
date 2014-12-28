@@ -1,8 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
 from django.http import JsonResponse
 from util.utils import SafeView
 from gallery.models import *
 from gallery.utils import *
+from util.utils import TsExc
+from util.msg import GetGalleryExcMsg
 
 
 @SafeView
@@ -12,8 +14,9 @@ def GalleryAddPhotoView(request):
     photoToken = params.get("token")
     files = []
     for photo in request.FILES.getlist("photos"):
-        ph = CreateGalleryPhoto(gallery, photoToken)
+        ph = None
         try:
+            ph = CreateGalleryPhoto(gallery, photoToken)
             filePath = StoreImage(photo, ph.img)
             MakeThumbnail(ph.img, ph.thumbnail)
             ph.save()
@@ -21,10 +24,14 @@ def GalleryAddPhotoView(request):
                 "name": filePath,
                 "thumbnailUrl": ph.img.url,
             })
-        except:
+        except TsExc as e:
             files.append({
             })
-            ph.delete()
+            if ph:
+                ph.delete()
+            return JsonResponse({
+                "files": [{"error": GetGalleryExcMsg(str(e))}],
+            })
     return JsonResponse({
         "files": files,
     })

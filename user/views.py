@@ -14,8 +14,12 @@ from util.utils import (
     RedirectExc,
     RenderToResponse,
     CheckPost,
-    GetRegMsg,
     GetNewId,
+)
+from util.msg import(
+    GetEditProfileMsg,
+    GetRegMsg,
+    GetUserRecoverMsg,
 )
 from gallery.utils import StoreImage, MakeThumbnail
 from user.models import *
@@ -30,8 +34,23 @@ from user.utils import (
     GetCurrentUser,
     GetDjUserByUser,
 )
+from offer.utils import (
+    CheckConnection,
+    SendOfferMail,
+)
+from offer.models import (
+    BuyOffer,
+    SaleOffer,
+    OfferConnection,
+)
 import re
 from datetime import datetime
+
+
+class EditErr(TsExc):
+    def __init__(self, msg):
+        super().__init__(msg)
+        self.status = msg
 
 class RegErr(TsExc):
     def __init__(self, msg):
@@ -62,21 +81,25 @@ class DuplicateEmailErr(RegErr):
     def __init__(self):
         super().__init__("email_is_not_unique")
 
-class PasswordIsInvalidErr(RegErr):
+class PasswordIsInvalidErr(RegErr, EditErr):
     def __init__(self):
         super().__init__("password_is_invalid")
 
-class BadPasswordLengthErr(RegErr):
+class BadPasswordLengthErr(RegErr, EditErr):
     def __init__(self):
         super().__init__("bad_password_len")
 
-class PasswordsAreNotEqualErr(RegErr):
+class PasswordsAreNotEqualErr(RegErr, EditErr):
     def __init__(self):
         super().__init__("passwords_are_not_equal")
 
-class OfferNotAgreed(RegErr):
+class OfferNotAgreedErr(RegErr):
     def __init__(self):
         super().__init__("offer_wasnt_be_agreed")
+
+class RequiredFieldsMissingErr(RegErr):
+    def __init__(self):
+        super().__init__("required_fields_missed")
 
 class MsgCannotBeEmpty(TsExc):
     def __init__(self):
@@ -108,6 +131,9 @@ def AuthView(request):
     elif act == "reg":
         try:
             CheckPost(request)
+            if not params.get("firstName", "").strip() or not params.get("lastName", "").strip():
+                raise RequiredFieldsMissingErr
+
             if params["password"] != params["password2"]:
                 raise PasswordsAreNotEqualErr
             if not re.compile("^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+$").match(params["email"]):
@@ -115,7 +141,7 @@ def AuthView(request):
             if not (3 <= len(params["password"]) <= 20):
                 raise BadPasswordLengthErr
             if not params.get("offert", 0):
-                raise OfferNotAgreed
+                raise OfferNotAgreedErr
             country = Country.objects.get(name=params.get("country", 0))
 
             if User.objects.filter(username=params["email"]).count():
@@ -200,7 +226,7 @@ def ImView(request):
         return RenderJson({"result": "ok"})
     elif act == "askGuarant":
         conf = Conference.objects.get(id=params.get("conf"))
-        if conf.askGuarant or conf.withGuarant:
+        if conf.askGuarant or conf.plusGuarant:
             raise Exception("bad request")
         conf.askGuarant = True
         conf.save()
@@ -213,8 +239,29 @@ def ImView(request):
         return RenderJson({"result": "ok"})
     else:
         if "conf" not in params:
+            user = GetCurrentUser(request)
             peer = User.objects.get(id=params.get("peer", 0))
+            buyId = params.get("buy", 0)
+            saleId = params.get("sale", 0)
             conf = GetOrCreateDialog(GetCurrentUser(request), peer)
+            offer = None
+            if buyId:
+                offer = BuyOffer.objects.get(id=buyId)
+            elif saleId:
+                offer = SaleOffer.objects.get(id=saleId)
+            if offer and CheckConnection(user, offer):
+                SendOfferMail(user, offer, conf)
+                if type(offer) == BuyOffer:
+                    oc = OfferConnection(
+                        user=user,
+                        buy=offer,
+                    )
+                else:
+                    oc = OfferConnection(
+                        user=user,
+                        sale=offer,
+                    )
+                oc.save()
             return redirect("/user/im?conf={}".format(conf.id))
         conf = Conference.objects.get(id=params.get("conf", 0))
         user = GetCurrentUser(request)
@@ -247,8 +294,10 @@ def ImMsgFrameView(request):
             "msgs": msgs,
         }).content.decode("utf-8"),
         "opts": {
-            "addGuarant": not conf.withGuarant and not conf.askGuarant,
+            "addGuarant": not conf.plusGuarant and not conf.askGuarant,
             "unreadCount": GetUnreadCount(request),
+            "toWithGuarant": conf.plusGuarant.url() if conf.plusGuarant and not conf.withGuarant else "",
+            "toWithoutGuarant": conf.plusGuarant.url() if conf.plusGuarant and conf.withGuarant else "",
         },
     })
 
@@ -259,12 +308,41 @@ def ProfileView(request, userid=None):
     user = User.objects.get(id=userid) if userid else GetCurrentUser(request)
     if not user and not userid:
         return redirect("/user/auth/")
+    if not user.visible() and user != GetCurrentUser(request):
+        return redirect("/")
     return RenderToResponse("user/profile.html", request, {
         "url": user.profileUrl() if user else "/user/profile/",
         "prUser": user,
         "firsttime": params.get("firsttime", ""),
     })
 
+class FirstnameMissingErr(EditErr):
+    def __init__(self):
+        super().__init__("firstname_is_missing")
+
+class LastnameMissingErr(EditErr):
+    def __init__(self):
+        super().__init__("lastname_is_missing")
+
+class InvalidCountryErr(EditErr):
+    def __init__(self):
+        super().__init__("country_is_invalid")
+
+class BdayMissingErr(EditErr):
+    def __init__(self):
+        super().__init__("bday_is_missing")
+
+class BdayInvalidErr(EditErr):
+    def __init__(self):
+        super().__init__("bday_is_invalid")
+
+class OldPassInvalidErr(EditErr):
+    def __init__(self):
+        super().__init__("old_pass_is_invalid")
+
+class BadPasswordLengthErr(EditErr):
+    def __init__(self):
+        super().__init__("bad_password_len")
 
 @login_required(login_url="/user/auth/")
 @SafeView
@@ -273,31 +351,55 @@ def EditProfileView(request):
     user = GetCurrentUser(request)
     act = params.get("act", "")
     if user and act == "edit":
-        oldPassw = params.get("oldPassword", "")
-        passw = params.get("password", "")
-        passw2 = params.get("password2", "")
-        if oldPassw or passw or passw2:
-            if not authenticate(username=user.username, password=oldPassw):
-                raise Exception("wrong_old_password")
-            if passw != passw2:
-                raise Exception("passwords_are_not_equal")
-            user.set_password(passw)
-        user.first_name = params.get("firstName", "")
-        user.last_name = params.get("lastName", "")
-        user.country = Country.objects.get(name=params.get("country", ""))
-        user.city = params.get("city", "")
-        user.bday = params.get("bday", "01.01.1970")
-        user.about = params.get("about", "")
+        try:
+            oldPassw = params.get("oldPassword", "")
+            passw = params.get("password", "")
+            passw2 = params.get("password2", "")
+            if oldPassw or passw or passw2:
+                if not authenticate(username=user.username, password=oldPassw):
+                    raise OldPassInvalidErr
+                if passw != passw2:
+                    raise PasswordsAreNotEqualErr
+                if not (3 <= len(passw) <= 20):
+                    raise BadPasswordLengthErr
+                user.set_password(passw)
 
-        if 'avatar' in request.FILES:
-            StoreImage(request.FILES['avatar'], user.avatar)
-            MakeThumbnail(user.avatar, user.avatarThumb)
-        user.save()
-        return redirect("/user/profile/")
+            if not params.get("firstName", "").strip():
+                raise FirstnameMissingErr
+
+            user.first_name = params["firstName"]
+
+            if not params.get("lastName", "").strip():
+                raise LastnameMissingErr
+            user.last_name = params["lastName"]
+
+            try:
+                user.country = Country.objects.get(name=params.get("country", ""))
+            except:
+                raise InvalidCountryErr
+
+            user.city = params.get("city", "")
+            if not params.get("bday", "").strip():
+                user.birthday = None
+            else:
+                try:
+                    user.birthday = datetime.strptime(params["bday"], "%d.%m.%Y")
+                except ValueError:
+                    raise BdayInvalidErr
+            user.about = params.get("about", "")
+
+            if 'avatar' in request.FILES:
+                StoreImage(request.FILES['avatar'], user.avatar)
+                MakeThumbnail(user.avatar, user.avatarThumb)
+            user.save()
+            return redirect("/user/profile/")
+        except EditErr as e:
+            raise RedirectExc("/user/edit_profile/?err={}".format(e.status))
     return RenderToResponse("user/edit_profile.html", request, {
         "url": "/user/edit_profile/",
         "prUser": user,
         "countries": GetCountries(),
+        "err": GetEditProfileMsg(params.get("err", ""))
     })
 
 
@@ -321,22 +423,30 @@ def UserMailView(request):
         u = conf.users.all()
         conf.peer = u[0] if u[1] == user else u[1]
         conf.msg = conf.msgs.latest("time")
-    '''
-    lastMsg = {}
-    for msg in msgs:
-        peer = msg.fr if msg.to == user else msg.to
-        last = lastMsg.get(peer, None)
-        if not last or last.time < msg.time:
-            lastMsg[peer] = msg
-    dialogs = [{
-        "peer": peer,
-        "msg": msg,
-    } for peer, msg in lastMsg.items()]
-    dialogs = sorted(dialogs, key=lambda self: self["msg"].time)
-    dialogs.reverse()
-    '''
     return RenderToResponse("user/mail.html", request, {
         "url": "/user/mail",
-        #"dialogs": dialogs,
         "confs": confs,
+    })
+
+
+@SafeView
+def UserRecoverView(request):
+    params = request.REQUEST
+    msg = ""
+    msgErr = ""
+    if request.method == "POST":
+        email = params.get("email", "")
+        user = User.objects.filter(username=email).all()
+        if not user:
+            msgErr = "user_does_not_exist"
+        else:
+            msg = "recover_ok"
+            user = user[0]
+            newPassword = GetNewId()[0:8]
+            user.set_password(newPassword)
+            user.save()
+            SendRecoverMail(user, newPassword)
+    return RenderToResponse("user/recover.html", request, {
+        "msg": GetUserRecoverMsg(msg),
+        "msgErr": GetUserRecoverMsg(msgErr),
     })

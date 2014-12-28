@@ -20,7 +20,7 @@
     <div class="profile-wrap container-fluid">
         <div class="row">
             {% if firsttime %}
-            <div class="col-md-8 col-md-offset-1 col-xs-12 alert alert-success">
+            <div class="col-md-8 col-md-offset-2 col-xs-12 alert alert-success">
                 <strong>Регистрация завершена!</strong><br/>
                 Теперь Вы можете дополнить информацию о себе. Хороший профиль привлекает больше внимания и увеличивает шансы на то, что другие пользователи обратятся именно к вам!
             </div>
@@ -36,18 +36,22 @@
                         {{ prUser.country.title }} {{ prUser.city }}
                     </div>
                 </div>
-                <div class="row container-fluid profile-item">
-                    <label class="col-sm-3">Дата рождения:</label>
-                    <div class="col-sm-9">
-                        {{ prUser.bday }}
+                {% if prUser.birthday %}
+                    <div class="row container-fluid profile-item">
+                        <label class="col-sm-3">Дата рождения:</label>
+                        <div class="col-sm-9">
+                            {{ prUser.birthday|date:"d.m.Y" }}
+                        </div>
                     </div>
-                </div>
-                <div class="row container-fluid profile-item">
-                    <label class="col-sm-3">О себе:</label>
-                    <div class="col-sm-9">
-                        {{ prUser.about }}
+                {% endif %}
+                {% if prUser.about %}
+                    <div class="row container-fluid profile-item">
+                        <label class="col-sm-3">О себе:</label>
+                        <div class="col-sm-9">
+                            {{ prUser.about }}
+                        </div>
                     </div>
-                </div>
+                {% endif %}
 
                 <div class="profile-action profile-item">
                     {% if prUser.id == user.id %}
@@ -67,12 +71,14 @@
                 <img src="{{ prUser.avatarUrl }}" style="max-width: 200px; max-height: 200px;">
             </div>
         </div>
-        <div class="row" style="margin-top: 20px;">
-            <div class="col-md-8 col-md-offset-2 col-xs-12">
-                <a href="/offer/sale" class="btn btn-default"><i class="glyphicon glyphicon-plus"></i> Новая поездка</a>
-                <a href="/offer/buy" class="btn btn-default"><i class="glyphicon glyphicon-plus"></i> Новый заказ</a>
+        {% if prUser.id == user.id %}
+            <div class="row" style="margin-top: 20px;">
+                <div class="col-md-8 col-md-offset-2 col-xs-12">
+                    <a href="/offer/sale" class="btn btn-default"><i class="glyphicon glyphicon-plus"></i> Новая поездка</a>
+                    <a href="/offer/buy" class="btn btn-default"><i class="glyphicon glyphicon-plus"></i> Новый заказ</a>
+                </div>
             </div>
-        </div>
+        {% endif %}
         <div class="row">
             <div class="panel-group col-md-8 col-md-offset-2 col-xs-12" id="zbs">
                 <div class="panel panel-primary" style="margin-top:20px;">
@@ -100,4 +106,39 @@
     </div>
     <div class="tripViewWrapper">
     </div>
+    <div id="blueimp-gallery" class="blueimp-gallery">
+        <!-- The container for the modal slides -->
+        <div class="slides"></div>
+        <!-- Controls for the borderless lightbox -->
+        <h3 class="title"></h3>
+        <a class="prev">‹</a>
+        <a class="next">›</a>
+        <a class="close">×</a>
+        <a class="play-pause"></a>
+        <ol class="indicator"></ol>
+        <!-- The modal dialog, which will be used to wrap the lightbox content -->
+        <div class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title"></h4>
+                    </div>
+                    <div class="modal-body next">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left prev">
+                            <i class="glyphicon glyphicon-chevron-left"></i>
+                            Пред.
+                        </button>
+                        <button type="button" class="btn btn-default next">
+                            След.
+                            <i class="glyphicon glyphicon-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}

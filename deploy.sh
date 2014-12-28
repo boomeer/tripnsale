@@ -3,11 +3,10 @@
 git stash
 git pull origin master
 git stash pop
-kill -SIGINT `cat /tmp/tripnsale_dev.pid`
+kill -SIGINT `cat /tmp/tripnsale.pid`
 cd static
 ./lessr.js
 cd ..
-./manage.py collectstatic
-./manage.py makemigrations
+echo yes | ./manage.py collectstatic
 ./manage.py migrate
-uwsgi --ini tripnsale/uwsgi.ini
+uwsgi --ini tripnsale/../tripnsale/uwsgi.ini

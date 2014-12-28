@@ -1,7 +1,7 @@
-{% if not buys %}
-    Нет заказов
-{% endif %}
-{% for buy in buys %}
+<input type="hidden" id="buysOwner" value="{{ owner }}" />
+<input type="hidden" id="buysProfile" value="{{ profile }}" />
+
+{% for buy in block %}
     {% if buy.visible %}
         <div class="buy-item {% if buy.closed %}buy-item-closed{% endif %}" onClick="BuyView({{ buy.id }})">
             <div class="buy-section photo">
@@ -16,14 +16,52 @@
                         {{ buy.content }}
                     </div>
                 </div>
+                <div class="buyFromTo">
+                    {% if buy.fr or buy.to %}
+                        <div class="buyFrom buyPlace">
+                            {% if buy.fr %}
+                                <span>
+                                    <img src="{{ buy.fr.img }}">
+                                    {{ buy.fr.title }}
+                                </span>
+                                <span class="buyCity">
+                                    {{ buy.frCity }}
+                                </span>
+                            {% else %}
+                                <span>
+                                    Не указано
+                                </span>
+                            {% endif %}
+                        </div>
+                        <div class="buyArrow">
+                            <i class="glyphicon glyphicon-arrow-right"></i>
+                        </div>
+                        <div class="buyTo buyPlace">
+                            {% if buy.to %}
+                                <span>
+                                    <img src="{{ buy.to.img }}">
+                                    {{ buy.to.title }}
+                                </span>
+                                <span class="buyCity">
+                                    {{ buy.toCity }}
+                                </span>
+                            {% else %}
+                                <span>
+                                    Не указано
+                                </span>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                </div>
+
                 <div class="prices">
                     <span>
                         Готов заплатить:
                     </span>
                     <span>
-                        <span class="bboldy">{{ buy.costFrom|floatformat }}$</span>
+                        <span class="bboldy">{{ buy.costFrom|floatformat:"0" }} руб.</span>
                         -
-                        <span class="bboldy">{{ buy.costTo|floatformat }}$</span>
+                        <span class="bboldy">{{ buy.costTo|floatformat:"0" }} руб.</span>
                     </span>
                     <span class="guarant">
                         {% if buy.guarant %}
@@ -53,6 +91,7 @@
                     {% endif %}
                     {% if buy.closed %}
                         <span class="closed">
+                            <i class="ai ai-lock"></i>
                             Закрыт
                         </span>
                     {% endif %}
@@ -77,6 +116,11 @@
 
         </div>
     {% endif %}
+{% empty %}
+    Нет заявок
 {% endfor %}
 
+<div style="text-align: center;">
+    {% include "pagination.html" %}
+</div>
 

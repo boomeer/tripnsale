@@ -53,7 +53,7 @@
                                 Депозит:
                             </span>
                             <span class="deposit-content trip-item-content">
-                                {{ sale.deposit }} $
+                                {{ sale.deposit|floatformat:"0" }} руб.
                             </span>
                         </div>
                         <div class="guarant">
@@ -100,11 +100,11 @@
                                     </a>
                                 {% endif %}
                                 {% if sale.closed %}
-                                    <a type="button" class="btn btn-success" href="/offer/sale/close/?id={{ sale.id }}&revert=1&backref=/offer/sale/list/" title="Открыть">
+                                    <a type="button" class="btn btn-success" href="/offer/sale/close/?id={{ sale.id }}&revert=1&backref=/offer/sale/list/#{{ sale.id }}" title="Открыть">
                                         <i class="ai ai-unlocked"></i>
                                     </a>
                                 {% else %}
-                                    <a type="button" class="btn btn-warning" href="/offer/sale/close/?id={{ sale.id }}&backref=/offer/sale/list/" title="Закрыть">
+                                    <a type="button" class="btn btn-warning" href="/offer/sale/close/?id={{ sale.id }}&backref=/offer/sale/list/#{{ sale.id }}" title="Закрыть">
                                         <i class="ai ai-lock"></i>
                                     </a>
                                 {% endif %}
@@ -112,10 +112,12 @@
                                         <i class="ai ai-close"></i>
                                     </a>
                             {% else %}
-                                <a type="button" class="btn btn-default" href="/user/im?peer={{ sale.owner.id }}">
-                                    <i class="glyphicon glyphicon-hand-up"></i>
-                                    Связаться
-                                </a>
+                                {% if not sale.closed %}
+                                    <a type="button" class="btn btn-default" href="/user/im?peer={{ sale.owner.id }}&sale={{ sale.id }}">
+                                        <i class="glyphicon glyphicon-hand-up"></i>
+                                        Связаться
+                                    </a>
+                                {% endif %}
                             {% endif %}
                         </div>
                     </div>

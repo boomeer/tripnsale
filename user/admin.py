@@ -7,5 +7,10 @@ class ConferenceAdmin(admin.ModelAdmin):
     list_display = ("getTitle", "askGuarant", "withGuarant",)
 
 
-admin.site.register(User)
+@admin.register(User)
+class UserAdmin(admin.ModelAdmin):
+    list_display = ("username", "email", "first_name", "last_name", "country",
+                    "city", "activated", "guarant", "hidden",)
+
+
 admin.site.register(Msg)

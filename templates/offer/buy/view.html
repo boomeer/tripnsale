@@ -8,66 +8,136 @@
         <div class="buyViewContent">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-8">
-                        <div class="title">
-                            <div class="buy-item-content">
-                                {{ buy.title }}
+                    <div class="col-md-9">
+                        <div>
+                            <div class="title">
+                                <div class="buy-item-content">
+                                    {{ buy.title }}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="cost">
+                                <span class="cost-title buy-item-title">
+                                    Цена:
+                                </span>
+                                <span class="cost-content buy-item-content">
+                                    {{ buy.costFrom|floatformat:"0" }} руб. - {{ buy.costTo|floatformat:"0" }} руб.
+                                </span>
                             </div>
                         </div>
-                        <hr>
-                        <div class="cost">
-                            <span class="cost-title buy-item-title">
-                                Цена:
-                            </span>
-                            <span class="cost-content buy-item-content">
-                                {{ buy.costFrom }} $ - {{ buy.costTo }} $
-                            </span>
+                        <div class="guarant">
+                            {% if buy.guarant %}
+                                <i class="ai ai-shield"></i>
+                                Только с гарантом
+                            {% endif %}
+                        </div>
+                        <div>
+                            <hr>
+                            {% if buy.fr %}
+                                <div>
+                                    <span class="buy-item-title">
+                                        Откуда:
+                                    </span>
+                                    <span class="buy-item-content">
+                                        <img src="{{ buy.fr.img }}">
+                                        {{ buy.fr.title }}
+                                        <span class="city">
+                                            {{ buy.frCity }}
+                                        </span>
+                                    </span>
+                                </div>
+                            {% endif %}
+                            {% if buy.to %}
+                                <div>
+                                    <span class="buy-item-title">
+                                        Куда:
+                                    </span>
+                                    <span class="buy-item-content">
+                                        <img src="{{ buy.to.img }}">
+                                        {{ buy.to.title }}
+                                        <span class="city">
+                                            {{ buy.toCity }}
+                                        </span>
+                                    </span>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div>
+                            <hr>
+                            <div>
+                                <h5>
+                                    Комментарий:
+                                </h5>
+                            </div>
+                            <div>
+                                {{ buy.content }}
+                            </div>
+                        </div>
+                        <div>
+                            <hr>
+                            <div>
+                                <h5>
+                                    Фото:
+                                </h5>
+                            </div>
+                            <div id="links">
+                                {% for photo in buy.gallery.getPhotos %}
+                                    <a href="{{ photo.url }}" title="" data-gallery>
+                                        <img src="{{ photo.thumbUrl }}" alt="">
+                                    </a>
+                                {% endfor %}
+                            </div>
                         </div>
                     </div>
-                    <div class="owner col-md-4">
-                        <div class="owner-name">
+                    <div class="owner col-md-3">
+                        <div class="owner-av">
                             <a href="{{ buy.owner.profileUrl }}">
+                                <img src="{{ buy.owner.avatarUrl }}">
+                            </a>
+                        </div>
+                        <div class="owner-name">
+                            <a href="{{ buy.owner.profileUrl }}" class="bboldy">
                                 {{ buy.owner.first_name }} {{ buy.owner.last_name }}
                             </a>
                         </div>
-                        <div class="owner-av">
-                            <img src="{{ buy.owner.avatarUrl }}">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
                         <hr>
-                        <div>
-                            <h5>
-                                Фото
-                            </h5>
-                        </div>
-                        <div id="links">
-                            {% for photo in buy.gallery.getPhotos %}
-                                <a href="{{ photo.url }}" title="" data-gallery>
-                                    <img src="{{ photo.thumbUrl }}" alt="">
-                                </a>
-                            {% endfor %}
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <hr>
-                        {% if profileOwner == buy.owner %}
-                            <a type="button" class="btn btn-default" href="/offer/buy/edit/{{ buy.id }}">
-                                <i class="ai ai-pencil"></i>
-                                Редактировать
-                            </a>
-                        {% else %}
-                            <a type="button" class="btn btn-default" href="/user/im?peer={{ buy.owner.id }}">
-                                <i class="glyphicon glyphicon-hand-up"></i>
-                                Связаться
-                            </a>
+                        {% if buy.closed %}
+                            <div class="buyClosed">
+                                <span>
+                                    <i class="ai ai-lock"></i>
+                                    Заказ закрыт
+                                </span>
+                            </div>
                         {% endif %}
+                        <div class="buttons">
+                            {% if profileOwner == buy.owner %}
+                                {% if not buy.closed %}
+                                    <a type="button" class="btn btn-default" href="/offer/buy/edit/{{ buy.id }}" title="Редактировать">
+                                        <i class="ai ai-pencil"></i>
+                                    </a>
+                                {% endif %}
+                                {% if buy.closed %}
+                                    <a type="button" class="btn btn-success" href="/offer/buy/close/?id={{ buy.id }}&revert=1&backref=/offer/buy/list/#{{ buy.id }}" title="Открыть">
+                                        <i class="ai ai-unlocked"></i>
+                                    </a>
+                                {% else %}
+                                    <a type="button" class="btn btn-warning" href="/offer/buy/close/?id={{ buy.id }}&backref=/offer/buy/list/#{{ buy.id }}" title="Закрыть">
+                                        <i class="ai ai-lock"></i>
+                                    </a>
+                                {% endif %}
+                                    <a type="button" class="btn btn-danger" href="/offer/buy/remove/?id={{ buy.id }}&backref=/offer/buy/list/" title="Удалить">
+                                        <i class="ai ai-close"></i>
+                                    </a>
+                            {% else %}
+                                {% if not buy.closed %}
+                                    <a type="button" class="btn btn-default" href="/user/im?peer={{ buy.owner.id }}&buy={{ buy.id }}">
+                                        <i class="glyphicon glyphicon-hand-up"></i>
+                                        Связаться
+                                    </a>
+                                {% endif %}
+                            {% endif %}
+                        </div>
                     </div>
-
                 </div>
             </div>
         </div>

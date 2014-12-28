@@ -1,0 +1,13 @@
+From: Trip & Sale <info@tripnsale.com>
+To: {{ sale.owner.email }}
+Subject: На вашу заявку "{{ sale.fr.title }} -> {{ sale.to.title}}" откликнулись
+
+{{ user.fullname }} откликнулся на вашу заявку {{ sale.fr.title }} -> {{ sale.to.title}}.
+Вы можете перейти в диалог по этой ссылке: http://{{ hostAddr }}{{ conf.url }}.
+
+Спасибо, что Вы с нами!
+
+--
+
+С уважением, команда Trip & Sale.
+info@tripnsale.com

@@ -12,20 +12,24 @@
 {% endblock %}
 
 {% block main %}
-    <div class="page-header-wrap">
+<div class="page-header-wrap">
        <div class="container">
-         <div class="page-header text-center">
-           <h1>Список пользователей</h1>
-         </div> 
-       </div> 
+         <div class="page-header">
+           <h1>Редактирование поездки</h1>
+         </div>
+       </div>
      </div>
+
     <div class="container-fluid">
-        <div class="saleAddForm col-md-6 col-lg-6 col-md-offset-2 col-lg-offset-2">
+        <div class="saleAddForm col-md-8 col-lg-8 col-md-offset-2 col-lg-offset-2">
+            {% if err %}
+                <div class="alert alert-danger">{{err}}</div>
+            {% endif %}
             <form class="form-horizontal" action="" method="post" role="form">
                 {% csrf_token %}
                 <input type="hidden" name="act" value="edit">
-                <div class="fromTo group">
-                    <div class="fromBlock fromToBlock">
+                <div class="fromTo group row">
+                    <div class="fromBlock fromToBlock col-md-6">
                         <div class="fromToTitle">
                             Отправляюсь
                         </div>
@@ -45,10 +49,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="fromToSepBlock fromToBlock">
-                        <i class="glyphicon glyphicon-arrow-right"></i>
-                    </div>
-                    <div class="toBlock fromToBlock">
+                    <div class="toBlock fromToBlock col-md-6">
                         <div class="fromToTitle">
                             Прибываю
                         </div>
@@ -69,37 +70,38 @@
                         </div>
                     </div>
                 </div>
+                <hr/>
                 <div class="form-group">
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         <label for="inputContent">Комментарий:</label>
                     </div>
-                    <div class="col-md-10">
+                    <div class="col-md-9 container-fluid">
                         <textarea class="form-control" id="inputContent" name="content" rows=4>{{ sale.content }}</textarea>
                     </div>
                 </div>
 
-                <div class="group">
-                    <div class="labelWrapper">
+                <div class="form-group">
+                    <div class="col-md-3">
                         <label for="inputDeposit">Депозит:</label>
                     </div>
-                    <div class="inputWrapper">
-                        <input type="text" class="form-control" id="inputDeposit" name="deposit" value="{{ sale.deposit }}">
+                    <div class="inputWrapper container-fluid">
+                        <input type="text" class="form-control" id="inputDeposit" name="deposit" value="{{ sale.deposit|floatformat:"0"  }}">
                     </div>
                     <div class="hint">
-                        Укажите депозит в долларах
+                        Укажите доступные средства в рублях (или оставьте пустым)
                     </div>
                 </div>
-                <div class="group">
-                    <div class="labelWrapper">
+                <div class="form-group">
+                    <div class="col-md-3">
                         <label for="inputGuarant">Только с гарантом:</label>
                     </div>
-                    <div class="inputWrapper">
+                    <div class="inputWrapper container-fluid">
                         <input type="checkbox" id="inputGuarant" name="guarant" {% if sale.guarant %}checked{% endif %}>
                     </div>
                 </div>
 
                 <div class="group">
-                    <button type="submit" class="btn btn-default btn-lg">Применить изменения</button>
+                    <button type="submit" class="btn btn-primary btn-lg">Применить изменения</button>
                 </div>
             </form>
         </div>

@@ -21,20 +21,22 @@
     <div class="user-list container-fluid bg0">
         <div class="col-md-8 col-md-offset-2">
             {% for user in users %}
-                <div class="user container-fluid" onclick="window.location.href='{{ user.profileUrl }}';">
-                    <div class="col-md-2">
-                        <img src="{{ user.avatarThumbUrl }}" style="max-width: 100px;">
-                    </div>
-                    <div class="col-md-10">
-                        <div class="bboldy">
-                            {{ user.first_name }} {{ user.last_name }}
+                {% if user.visible %}
+                    <div class="user container-fluid" onclick="window.location.href='{{ user.profileUrl }}';">
+                        <div class="col-md-2">
+                            <img src="{{ user.avatarThumbUrl }}" style="max-width: 100px;">
                         </div>
-                        <div>
-                            <img src="{{ user.country.img }}">
-                            {{ user.country.title }} {{ user.city }}
+                        <div class="col-md-10">
+                            <div class="bboldy">
+                                {{ user.first_name }} {{ user.last_name }}
+                            </div>
+                            <div>
+                                <img src="{{ user.country.img }}">
+                                {{ user.country.title }} {{ user.city }}
+                            </div>
                         </div>
                     </div>
-                </div>
+                {% endif %}
             {% endfor %}
         </div>
     </div>

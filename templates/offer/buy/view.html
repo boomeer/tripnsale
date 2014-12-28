@@ -33,30 +33,34 @@
                         </div>
                         <div>
                             <hr>
-                            <div>
-                                <span class="buy-item-title">
-                                    Откуда:
-                                </span>
-                                <span class="buy-item-content">
-                                    <img src="{{ buy.fr.img }}">
-                                    {{ buy.fr.title }}
-                                    <span class="city">
-                                        {{ buy.frCity }}
+                            {% if buy.fr %}
+                                <div>
+                                    <span class="buy-item-title">
+                                        Откуда:
                                     </span>
-                                </span>
-                            </div>
-                            <div>
-                                <span class="buy-item-title">
-                                    Куда:
-                                </span>
-                                <span class="buy-item-content">
-                                    <img src="{{ buy.to.img }}">
-                                    {{ buy.to.title }}
-                                    <span class="city">
-                                        {{ buy.toCity }}
+                                    <span class="buy-item-content">
+                                        <img src="{{ buy.fr.img }}">
+                                        {{ buy.fr.title }}
+                                        <span class="city">
+                                            {{ buy.frCity }}
+                                        </span>
                                     </span>
-                                </span>
-                            </div>
+                                </div>
+                            {% endif %}
+                            {% if buy.to %}
+                                <div>
+                                    <span class="buy-item-title">
+                                        Куда:
+                                    </span>
+                                    <span class="buy-item-content">
+                                        <img src="{{ buy.to.img }}">
+                                        {{ buy.to.title }}
+                                        <span class="city">
+                                            {{ buy.toCity }}
+                                        </span>
+                                    </span>
+                                </div>
+                            {% endif %}
                         </div>
                         <div>
                             <hr>

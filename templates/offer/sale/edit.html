@@ -12,9 +12,15 @@
 {% endblock %}
 
 {% block main %}
+    <div class="page-header-wrap">
+       <div class="container">
+         <div class="page-header text-center">
+           <h1>Список пользователей</h1>
+         </div> 
+       </div> 
+     </div>
     <div class="container-fluid">
         <div class="saleAddForm col-md-6 col-lg-6 col-md-offset-2 col-lg-offset-2">
-            <h3>Редактировать поездку</h3>
             <form class="form-horizontal" action="" method="post" role="form">
                 {% csrf_token %}
                 <input type="hidden" name="act" value="edit">

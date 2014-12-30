@@ -14,7 +14,7 @@ function BuysRefresh()
     $(".buyViewWrapper").html("");
     $.post("/offer/buy/filter/", {
         "title": $("#buysTitle").val(),
-        "from": fr ? fr.val() : "",
+        "fr": fr ? fr.val() : "",
         "to": to ? to.val() : "",
         "profile": bp ? bp.val() : "",
         "page": BuyGetPage() - 1,

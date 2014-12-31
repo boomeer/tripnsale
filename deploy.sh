@@ -1,7 +1,11 @@
 #!/bin/bash
 
 git stash
-git pull origin master
+if [ $# -eq 0 ] ; then
+    git pull origin master
+else
+    git pull origin $1
+fi
 git stash pop
 kill -SIGINT `cat /tmp/tripnsale.pid`
 cd static

@@ -59,6 +59,9 @@ class Conference(models.Model):
     def url(self):
         return "/user/im?conf={}".format(self.id)
 
+    def __str__(self):
+        return self.getTitle()
+
 
 class ConferenceMsg(models.Model):
     conf = models.ForeignKey(Conference, related_name="msgs")

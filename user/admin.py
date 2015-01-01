@@ -13,4 +13,7 @@ class UserAdmin(admin.ModelAdmin):
                     "city", "activated", "guarant", "hidden",)
 
 
-admin.site.register(Msg)
+@admin.register(ConferenceMsg)
+class ConferenceMsgAdmin(admin.ModelAdmin):
+    list_display = ("content", "conf", "fr", "time", "new",)
+    list_filter = ("conf", "fr",)

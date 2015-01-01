@@ -405,12 +405,27 @@ def EditProfileView(request):
 
 @SafeView
 def UsersView(request):
-    users = User.objects.all()
     return RenderToResponse("user/list.html", request, {
         "url": "/user/all",
-        "users": users,
     })
 
+@SafeView
+def UsersFilterView(request):
+    params = request.REQUEST
+    users = User.objects.all()
+    users = [ user for user in users if user.visible() ]
+    count = int(params.get("count", 30))
+    page = int(params.get("page", 0))
+    totalpages = (len(users) + count - 1) // count
+    block = users[page*count:(page + 1)*count]
+    return RenderToResponse("user/filter.html", request, {
+        "url": "/user/all",
+        "users": users,
+        "block": block,
+        "page": page,
+        "totalpages": totalpages,
+        "pagesid": "users"
+    })
 
 @login_required(login_url="/user/auth/")
 @SafeView

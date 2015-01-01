@@ -1,0 +1,21 @@
+
+{% for user in block %}
+    <div class="user container-fluid" onclick="window.location.href='{{ user.profileUrl }}';">
+        <div class="col-md-2">
+            <img src="{{ user.avatarThumbUrl }}" style="max-width: 100px;">
+        </div>
+        <div class="col-md-10">
+            <div class="bboldy">
+                {{ user.first_name }} {{ user.last_name }}
+            </div>
+            <div>
+                <img src="{{ user.country.img }}">
+                {{ user.country.title }} {{ user.city }}
+            </div>
+        </div>
+    </div>
+{% endfor %}
+
+<div style="text-align: center;">
+    {% include "pagination.html" %}
+</div>

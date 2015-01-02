@@ -11,6 +11,16 @@ function TextToDate(text)
     }
 }
 
+function FromDateHightlight(date)
+{
+    return [ true, (date - toDate == 0 ? "ui-state-highlight2" : ""), "" ];
+}
+
+function ToDateHightlight(date)
+{
+    return [ true, (date - frDate == 0 ? "ui-state-highlight2" : ""), "" ];
+}
+
 function FromDateSelected(dateText, obj)
 {
     frDate = TextToDate(dateText);
@@ -19,6 +29,7 @@ function FromDateSelected(dateText, obj)
         $("#inputToTime").datepicker("setDate", toDate);
     }
     $("#inputToTime").datepicker("option", "defaultDate", frDate);
+
 }
 
 function ToDateSelected(dateText, obj)
@@ -32,20 +43,25 @@ function ToDateSelected(dateText, obj)
 }
 
 $(function() {
+    frDate = TextToDate($("#inputFromTime").val());
+    toDate = TextToDate($("#inputToTime").val());
     $.datepicker.setDefaults($.datepicker.regional['ru']);
     $("#inputFromTime").datepicker(
         {
             "dateFormat": "dd.mm.yy",
-            "minDate": "-1m",
-            "maxDate": "+3m",
-            "onSelect": FromDateSelected
+            "showOtherMonths": true,
+            "selectOtherMonths": true,
+            "onSelect": FromDateSelected,
+            "beforeShowDay": FromDateHightlight
         });
     $("#inputToTime").datepicker(
         {
             "dateFormat": "dd.mm.yy",
             "minDate": "+1d",
-            "maxDate": "+3m",
-            "onSelect": ToDateSelected
+            "showOtherMonths": true,
+            "selectOtherMonths": true,
+            "onSelect": ToDateSelected,
+            "beforeShowDay": ToDateHightlight
         });
 
     CountriesAC($("#inputFrom"));

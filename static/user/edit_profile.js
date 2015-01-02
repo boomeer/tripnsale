@@ -7,8 +7,9 @@ $(function() {
     $("#inputBday").datepicker(
         {
             "dateFormat": "dd.mm.yy",
-            "maxDate": "-16y",
             "changeYear": true,
+            "showOtherMonths": true,
+            "selectOtherMonths": true,
             "changeMonth": true
         });
     CountriesAC("#inputCountry");

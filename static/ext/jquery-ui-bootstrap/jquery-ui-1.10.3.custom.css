@@ -696,18 +696,6 @@
 	color: gray;
 }
 
-.ui-datepicker-today a:hover {
-	background-color: #808080;
-	color: #ffffff;
-
-}
-.ui-datepicker-today a {
-	background-color: #BFBFBF;
-	cursor: pointer;
-	padding: 0 4px;
-	margin-bottom: 0;
-}
-
 .ui-datepicker td a {
 	margin-bottom: 0;
 	border: 0;
@@ -727,7 +715,7 @@
 	filter: none;
 }
 
-.ui-datepicker td .ui-state-highlight{
+.ui-datepicker td .ui-state-active {
 	color: #ffffff;
 	background-color: #5bc0de;
 	border-color: #46b8da;
@@ -738,9 +726,9 @@
 	border-radius: 4px;
 }
 
-.ui-datepicker td .ui-state-active {
+.ui-datepicker td.ui-state-highlight2 a {
 	color: #333333;
-    background-color: #ebebeb;
+    background-color: #e3e3e3;
     border-color: #adadad;
 	margin-bottom: 0;
 	font-size: normal;

@@ -8,9 +8,10 @@ $(function() {
         {
             "dateFormat": "dd.mm.yy",
             "changeYear": true,
+            "yearRange": "1900:",
             "showOtherMonths": true,
             "selectOtherMonths": true,
-            "changeMonth": true
+            "changeMonth": true,
         });
     CountriesAC("#inputCountry");
 });

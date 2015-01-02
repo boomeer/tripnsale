@@ -468,14 +468,15 @@
 .ui-datepicker .ui-datepicker-next .ui-icon {
 	margin-top: -0.9em;
 	margin-left: -1em;
+	color: #428bca;
 }
 .ui-datepicker .ui-datepicker-prev .ui-icon:before {
-    content: "\e7ec";
+    content: "\e7ec                 ";
     font-size: 2em;
 }
 
 .ui-datepicker .ui-datepicker-next .ui-icon:before {
-    content: "\e7ef";
+    content: "\e7ef                 ";
     font-size: 2em;
 }
 

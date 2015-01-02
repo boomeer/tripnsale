@@ -468,7 +468,7 @@
 .ui-datepicker .ui-datepicker-next .ui-icon {
 	margin-top: -0.9em;
 	margin-left: -1em;
-	color: #428bca;
+	color: #333;
 }
 .ui-datepicker .ui-datepicker-prev .ui-icon:before {
     content: "\e7ec                 ";

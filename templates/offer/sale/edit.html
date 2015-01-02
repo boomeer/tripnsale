@@ -45,7 +45,7 @@
                                 <input type="text" class="form-control" placeholder="Город" id="inputFromCity" name="frCity" value="{{ sale.frCity }}">
                             </div>
                             <div class="inputWrapper">
-                                <input type="text" class="form-control" placeholder="Когда" id="inputFromTime" name="fromTime" value="{{ sale.frTime|date:"d.m.Y" }}">
+                                <input type="text" class="form-control datepicker" placeholder="Когда" id="inputFromTime" name="fromTime" value="{{ sale.frTime|date:"d.m.Y" }}" autocomplete="off" readonly />
                             </div>
                         </div>
                     </div>
@@ -65,7 +65,7 @@
                                 <input type="text" class="form-control" placeholder="Город" id="inputToCity" name="toCity" value="{{ sale.toCity }}">
                             </div>
                             <div class="inputWrapper">
-                                <input type="text" class="form-control" placeholder="Когда" id="inputToTime" name="toTime" value="{{ sale.toTime|date:"d.m.Y" }}">
+                                <input type="text" class="form-control datepicker" placeholder="Когда" id="inputToTime" name="toTime" value="{{ sale.toTime|date:"d.m.Y" }}" autocomplete="off" readonly />
                             </div>
                         </div>
                     </div>

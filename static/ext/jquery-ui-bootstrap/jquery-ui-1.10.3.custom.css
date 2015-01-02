@@ -715,6 +715,10 @@
 	filter: none;
 }
 
+.ui-datepicker td:not(.ui-datepicker-other-month) .ui-state-default {
+	color: #333;
+}
+
 .ui-datepicker td .ui-state-active {
 	color: #ffffff;
 	background-color: #5bc0de;

@@ -1,3 +1,7 @@
+function ClearDate() {
+    $("#inputBday").datepicker("setDate", "");
+}
+
 $(function() {
     $.datepicker.setDefaults($.datepicker.regional['ru']);
     $("#inputBday").datepicker(

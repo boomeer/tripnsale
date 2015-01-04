@@ -6,6 +6,8 @@ import argparse
 import sys
 from datetime import (datetime, time, date, timedelta)
 from time import sleep
+import django
+django.setup()
 
 def run(force=False):
     util.valute.UpdateRates(force=force)
@@ -52,7 +54,6 @@ def main(argv):
 
         pdate = cdate
         sleep(60)
-
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

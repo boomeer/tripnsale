@@ -7,12 +7,12 @@ import sys
 from datetime import (datetime, time, date, timedelta)
 from time import sleep
 
-def run():
-    util.valute.UpdateRates()
+def run(force=False):
+    util.valute.UpdateRates(force=force)
 
 def main(argv):
     if not argv.daemon:
-        run()
+        run(argv.force)
         return
 
     pdate = datetime.now().date()
@@ -30,7 +30,7 @@ def main(argv):
         runned = False
         def runonce(runned):
             if not runned:
-                run()
+                run(argv.force)
             return True
         ctime = datetime.now().time()
         cdate = datetime.now().date()
@@ -65,6 +65,8 @@ if __name__ == "__main__":
     parser.add_argument("-i", "--interval", dest="interval", metavar="minutes", type=int,
                         default=None, help="if set, the daemon will run with given interval. "
                                            "if --daemon wasn't set, option will be ignored")
+    parser.add_argument("-f", "--force", dest="force", action="store_true",
+                        default=False, help="if set, database will be updated anyway")
     argv = parser.parse_args()
     if not argv.time:
         argv.time = [ time() ]

@@ -10,7 +10,6 @@ from time import sleep
 def run():
     util.valute.UpdateRates()
 
-
 def main(argv):
     if not argv.daemon:
         run()
@@ -37,7 +36,6 @@ def main(argv):
         cdate = datetime.now().date()
 
         if intv == 0:
-            print("int")
             runned = runonce(runned)
             intv = argv.interval
         if intv > 0:

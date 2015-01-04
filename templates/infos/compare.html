@@ -1,4 +1,13 @@
+{% extends "base.html" %}
+
 {% load static %}
+{% load valuteutils %}
+
+{% block own_head %}
+  <link rel="stylesheet" href="{% static "css/infos/compare.css" %}">
+{% endblock %}
+
+{% block main %}
     <!-- FOR BODY background-noise: add 'bg-noise' to this div -->
     <div class="page-wrap bg0" style="margin-top: 0px;">
 
@@ -48,27 +57,30 @@
 <section class="col-md-8 col-md-push-4 flush-right">
   <div class="row">
     <div class="col-md-6 text-center" style="padding-top: 30px;">
-      <p class="lead">~36 тысячи рублей за версию с 16gb памяти.</p>
+      <p class="lead">~{{ 650|convertvalute:usd|textthousands}} рублей за версию с 16gb памяти.<i class="notabene"></i></p>
     </div>
     <div class="col-md-6 text-center" style="padding-top: 30px;">
-      <p class="lead">~54 тысячи рублей за версию с 16gb памяти.</p>
+      <p class="lead">~{{ 54000|textthousands }} рублей за версию с 16gb памяти.<i class="notabene"></i></p>
     </div>
     <div class="col-md-12 text-center" style="padding-top: 0px;">
-      <p class="lead">Разница 18000 рублей.</p>
+      <p class="lead">Разница около {{ 650|convertvalute:usd|valutesub:54000|valuteround:2 }} рублей.</p>
     </div>
   </div> <!-- end row -->
   <hr>
   <div class="row">
     <div class="col-md-6 text-center" style="padding-top: 30px;">
-      <p class="lead">~47 тысячи рублей за версию с 128gb памяти.</p>
+      <p class="lead">~{{ 850|convertvalute:usd|textthousands}} рублей за версию с 128gb памяти.<i class="notabene"></i></p>
     </div>
     <div class="col-md-6 text-center" style="padding-top: 30px;">
-      <p class="lead">~70 тысяч рублей за версию с 128gb памяти.</p>
+      <p class="lead">~{{ 70000|textthousands}} рублей за версию с 128gb памяти.<i class="notabene"></i></p>
     </div>
     <div class="col-md-12 text-center" style="padding-top: 0px;">
-      <p class="lead">Разница 23000 рублей.</p>
+      <p class="lead">Разница около {{ 850|convertvalute:usd|valutesub:70000|valuteround:2 }} рублей.</p>
     </div>
   </div> <!-- end row -->
+  <div class="row">
+    <div class="footnote">* Используются актуальные цены 04.01.2015</div>
+  </div>
 </section>
 
 <aside class="col-md-4 col-md-pull-8">
@@ -119,11 +131,12 @@
 <div class="container content-wrap bg2">
   <div class="row">
     <div class="col-md-6 text-center" style="padding-top: 30px;">
-      <p class="lead">GUESS Confidential Avery ~6200 рублей в США.</p>
+      <p class="lead">GUESS Confidential Avery ~{{ 118|convertvalute:usd|valuteround:2 }} рублей в США. <i class="notabene"></i></p>
     </div>
     <div class="col-md-6 text-center" style="padding-top: 30px;">
-      <p class="lead">GUESS Confidential Avery ~12000 рублей в России.</p>
+      <p class="lead">GUESS Confidential Avery ~{{ 11950|valuteround:2 }} рублей в России. <i class="notabene"></i></p>
     </div>
+    <div class="footnote">* Используются актуальные цены 04.01.2015</div>
     <div class="col-md-12 text-center" style="padding-top: 0px;">
       <hr style="padding-bottom: 20px">
       <p class="lead">Нетрудно заметить, как сильно разнятся цены на сумки одного и того же бренда в США и России.</p>
@@ -184,15 +197,16 @@
 <div class="container content-wrap bg2">
   <div class="row">
     <div class="col-md-6 text-center" style="padding-top: 30px;">
-      <p class="lead">~3300 рублей за протеин в США.</p>
+      <p class="lead">~{{ 57.48|convertvalute:usd|valuteround:2 }} рублей за протеин в США. <i class="notabene"></i></p>
     </div>
     <div class="col-md-6 text-center" style="padding-top: 30px;">
-      <p class="lead">~5800 рублей за протеин в России.</p>
+      <p class="lead">~{{ 5760|valuteround:2 }} рублей за протеин в России. <i class="notabene"></i></p>
     </div>
     <div class="col-md-12 text-center" style="padding-top: 0px;">
-      <p class="lead">Разница 2500 рублей. (75% цены для данного товара)</p>
+      <p class="lead">Разница около {{ 57.48|convertvalute:usd|valutesub:5760|valuteround:2 }} рублей. (75% цены для данного товара)</p>
     </div>
   </div> <!-- end row -->
+  <div class="footnote">* Используются актуальные цены 04.01.2015</div>
 </div>
 </div>
 </section>
@@ -209,7 +223,7 @@
       <p><br></p>
     </div>
   </div>
-
+  <div class="footnote">* Используется курс валют ЦБ РФ от {{ usd.date|date:"d E Y" }}</div>
 </div>
 </div>
 </section>
@@ -218,6 +232,4 @@
 
 </div>
 
-
-
-
+{% endblock %}

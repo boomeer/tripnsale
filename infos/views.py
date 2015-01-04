@@ -3,6 +3,9 @@ from util.utils import RenderToResponse
 from infos.models import (
     Backmsg,
 )
+from valute.models import (
+    Valute,
+)
 from util.utils import (
     SafeView,
     TsExc,
@@ -66,6 +69,11 @@ def InfoView(request, name):
                 "email": user.email if user else "",
                 "name": "{} {}".format(user.first_name, user.last_name) if user else ""
             })
+    elif name == "compare":
+        usdcourse = Valute.objects.filter(fromId__exact="USD")[0]
+        return RenderToResponse("infos/compare.html", request, {
+            "usd": usdcourse,
+        })
     else:
         return RenderToResponse("infos/with_base.html", request, {
             "filepath": "infos/{}.html".format(name),

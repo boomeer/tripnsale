@@ -6,3 +6,6 @@
 *~
 tripnsale/priv_settings.py
 static/css
+*.sublime-project
+*.sublime-workspace
+*.sqlite3

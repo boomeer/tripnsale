@@ -16,10 +16,9 @@ class Gallery(models.Model):
     def er(self, photo):
         if self.head == photo:
             phs = self.photos.all()
+            self.head = None
             if len(phs) >= 2:
                 self.head = phs[0] if phs[0] != photo else phs[1]
-            else:
-                self.head = None
         self.save()
         photo.delete()
 
@@ -31,7 +30,7 @@ class Gallery(models.Model):
         return str(id)
 
     def getHeadUrl(self):
-        return self.head.thumbnail.url if self.head else settings.STATIC_URL + "/no-photo.jpg"
+        return self.head.thumbUrl() if self.head else settings.STATIC_URL + "/no-photo.jpg"
 
 @admin.register(Gallery)
 class GalleryAdmin(admin.ModelAdmin):

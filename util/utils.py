@@ -6,6 +6,7 @@ from util.exc import *
 from util.msg import *
 from valute.models import Valute
 from datetime import datetime
+from django.utils.html import escape
 
 import string
 import random
@@ -17,7 +18,7 @@ def SafeViewFunc(func, *arg, **argv):
     except RedirectExc as e:
         return redirect(str(e))
     except Exception as e:
-        return HttpResponse("Error({}): {}".format(type(e), e))
+        return HttpResponse(escape("Error({}): {}".format(type(e), e)))
 
 
 def SafeView(func):

@@ -27,22 +27,31 @@
                             <div class="col-md-3 peer bboldy container">
                                 {% if profileOwner.guarant %}
                                     <div>
-                                    {% for peer in conf.users.all %}
-                                        {% if peer != profileOwner %}
-                                            <div style="padding: 4px 0px;">
-                                                <a href="{{ peer.profileUrl }}" target="_blank" class="bboldy">
-                                                    <img src="{{ peer.avatarThumbUrl }}" class="peerAv">
-                                                    {{ peer.first_name }} {{ peer.last_name }}
-                                                </a>
-                                            </div>
-                                        {% endif %}
-                                    {% endfor %}
+                                        {% for peer in conf.users.all %}
+                                            {% if peer != profileOwner %}
+                                                <div style="padding: 4px 0px;">
+                                                    <a href="{{ peer.profileUrl }}" target="_blank" class="bboldy">
+                                                        <img src="{{ peer.avatarThumbUrl }}" class="peerAv">
+                                                        {{ peer.first_name }} {{ peer.last_name }}
+                                                    </a>
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
                                     </div>
                                 {% else %}
-                                    <a href="{{ conf.peer.profileUrl }}" target="_blank" class="bboldy">
-                                        <img src="{{ conf.peer.avatarThumbUrl }}" class="peerAv">
-                                        {{ conf.peer.first_name }} {{ conf.peer.last_name }}
-                                    </a>
+                                    <div>
+                                        {% for peer in conf.users.all %}
+                                            {% if peer != profileOwner and not peer.guarant %}
+                                                <div style="padding: 4px 0px;">
+                                                    <a href="{{ peer.profileUrl }}" target="_blank" class="bboldy">
+                                                        <img src="{{ peer.avatarThumbUrl }}" class="peerAv">
+                                                        {{ peer.first_name }} {{ peer.last_name }}
+                                                    </a>
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+
                                     <div>
                                         {% if conf.withGuarant %}
                                             <span class="bboldy guarant">

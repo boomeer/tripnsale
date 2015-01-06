@@ -1,3 +1,7 @@
+from datetime import (
+    datetime,
+    timedelta,
+)
 from django.shortcuts import render
 from util.utils import RenderToResponse
 from infos.models import (
@@ -71,8 +75,10 @@ def InfoView(request, name):
             })
     elif name == "compare":
         usdcourse = Valute.objects.filter(fromId__exact="USD")[0]
+        costUpdTime = datetime.now() - timedelta(minutes=27)
         return RenderToResponse("infos/compare.html", request, {
             "usd": usdcourse,
+            "costUpdTime": costUpdTime,
         })
     else:
         return RenderToResponse("infos/with_base.html", request, {

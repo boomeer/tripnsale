@@ -79,7 +79,7 @@
     </div>
   </div> <!-- end row -->
   <div class="row">
-    <div class="footnote">* Используются актуальные цены 04.01.2015</div>
+    <div class="footnote">* Используются актуальные цены {{ costUpdTime|date:"d E Y" }}</div>
   </div>
 </section>
 
@@ -136,8 +136,7 @@
     <div class="col-md-6 text-center" style="padding-top: 30px;">
       <p class="lead">GUESS Confidential Avery ~{{ 11950|valuteround:2 }} рублей в России. <i class="notabene"></i></p>
     </div>
-    <div class="footnote">* Используются актуальные цены 04.01.2015</div>
-    <div class="col-md-12 text-center" style="padding-top: 0px;">
+    <div class="footnote">* Используются актуальные цены {{ costUpdTime|date:"d E Y" }}<div class="col-md-12 text-center" style="padding-top: 0px;">
       <hr style="padding-bottom: 20px">
       <p class="lead">Нетрудно заметить, как сильно разнятся цены на сумки одного и того же бренда в США и России.</p>
       <div class="row">
@@ -206,9 +205,7 @@
       <p class="lead">Разница около {{ 57.48|convertvalute:usd|valuteround:2|valutesub:5760|valuteround:2 }} рублей. (75% цены для данного товара)</p>
     </div>
   </div> <!-- end row -->
-  <div class="footnote">* Используются актуальные цены 04.01.2015</div>
-</div>
-</div>
+  <div class="footnote">* Используются актуальные цены {{ costUpdTime|date:"d E Y" }}</div>
 </section>
 
 <section id="macys">

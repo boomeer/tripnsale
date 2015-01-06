@@ -74,10 +74,8 @@ def InfoView(request, name):
                 "name": "{} {}".format(user.first_name, user.last_name) if user else ""
             })
     elif name == "compare":
-        usdcourse = Valute.objects.filter(fromId__exact="USD")[0]
         costUpdTime = datetime.now() - timedelta(minutes=27)
         return RenderToResponse("infos/compare.html", request, {
-            "usd": usdcourse,
             "costUpdTime": costUpdTime,
         })
     else:

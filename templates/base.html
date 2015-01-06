@@ -1,6 +1,6 @@
 {% load bootstrap3 %}
 {% load static %}
-
+{% load valuteutils %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -94,6 +94,30 @@ Trip&Sale поможет тебе в этом! {% endblock %}" />
                       </a>
                   </li>
                 {% endif %}
+              <li class="dropdown">
+                  <a class="dropdown-toggle" href="/offer/sale/list/">
+                      <i class="ai ai-coin"></i>
+                      Курсы валют
+                  </a>
+                  <ul class="dropdown-menu">
+                      <span class="triangle-up"></span>
+                      <li>
+                        <span class="valuterow">
+                          <strong>{{ usdCourse.fromVal|valuteround:0 }}$</strong> - {{ usdCourse.toVal|valuteround:-2 }} руб.
+                        </span>
+                      </li>
+                      <li>
+                        <span class="valuterow">
+                          <strong>{{ euroCourse.fromVal|valuteround:0 }}&#8364;</strong> - {{ euroCourse.toVal|valuteround:-2 }} руб.
+                        </span>
+                      </li>
+                      <li>
+                        <span class="valuteFootnote">
+                          Курс ЦБ РФ на {{ now|date:"d.m.Y" }}
+                        </span>
+                      </li>
+                  </ul>
+              </li>
               <li class="dropdown">
                   <a class="dropdown-toggle" href="/offer/sale/list/">
                       <i class="glyphicon glyphicon-plane"></i>

@@ -12,4 +12,4 @@ class Valute(models.Model):
     fromId = models.TextField()
     toVal = models.FloatField(default=1.0)
     toName = models.TextField(default="Российский рубль")
-    toId = models.TextField(default="RUR")
+    toId = models.TextField(default="RUB")

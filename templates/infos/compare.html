@@ -57,25 +57,25 @@
 <section class="col-md-8 col-md-push-4 flush-right">
   <div class="row">
     <div class="col-md-6 text-center" style="padding-top: 30px;">
-      <p class="lead">~{{ 650|convertvalute:usd|textthousands}} рублей за версию с 16gb памяти.<i class="notabene"></i></p>
+      <p class="lead">~{{ 650|convertvalute:usdCourse|textthousands}} рублей за версию с 16gb памяти.<i class="notabene"></i></p>
     </div>
     <div class="col-md-6 text-center" style="padding-top: 30px;">
       <p class="lead">~{{ 54000|textthousands }} рублей за версию с 16gb памяти.<i class="notabene"></i></p>
     </div>
     <div class="col-md-12 text-center" style="padding-top: 0px;">
-      <p class="lead">Разница около {{ 650|convertvalute:usd|valuteround:3|valutesub:54000|valuteround:3 }} рублей.</p>
+      <p class="lead">Разница около {{ 650|convertvalute:usdCourse|valuteround:3|valutesub:54000|valuteround:3 }} рублей.</p>
     </div>
   </div> <!-- end row -->
   <hr>
   <div class="row">
     <div class="col-md-6 text-center" style="padding-top: 30px;">
-      <p class="lead">~{{ 850|convertvalute:usd|textthousands}} рублей за версию с 128gb памяти.<i class="notabene"></i></p>
+      <p class="lead">~{{ 850|convertvalute:usdCourse|textthousands}} рублей за версию с 128gb памяти.<i class="notabene"></i></p>
     </div>
     <div class="col-md-6 text-center" style="padding-top: 30px;">
       <p class="lead">~{{ 70000|textthousands}} рублей за версию с 128gb памяти.<i class="notabene"></i></p>
     </div>
     <div class="col-md-12 text-center" style="padding-top: 0px;">
-      <p class="lead">Разница около {{ 850|convertvalute:usd|valuteround:3|valutesub:70000|valuteround:3 }} рублей.</p>
+      <p class="lead">Разница около {{ 850|convertvalute:usdCourse|valuteround:3|valutesub:70000|valuteround:3 }} рублей.</p>
     </div>
   </div> <!-- end row -->
   <div class="row">
@@ -131,7 +131,7 @@
 <div class="container content-wrap bg2">
   <div class="row">
     <div class="col-md-6 text-center" style="padding-top: 30px;">
-      <p class="lead">GUESS Confidential Avery ~{{ 118|convertvalute:usd|valuteround:2 }} рублей в США. <i class="notabene"></i></p>
+      <p class="lead">GUESS Confidential Avery ~{{ 118|convertvalute:usdCourse|valuteround:2 }} рублей в США. <i class="notabene"></i></p>
     </div>
     <div class="col-md-6 text-center" style="padding-top: 30px;">
       <p class="lead">GUESS Confidential Avery ~{{ 11950|valuteround:2 }} рублей в России. <i class="notabene"></i></p>
@@ -196,13 +196,13 @@
 <div class="container content-wrap bg2">
   <div class="row">
     <div class="col-md-6 text-center" style="padding-top: 30px;">
-      <p class="lead">~{{ 57.48|convertvalute:usd|valuteround:2 }} рублей за протеин в США. <i class="notabene"></i></p>
+      <p class="lead">~{{ 57.48|convertvalute:usdCourse|valuteround:2 }} рублей за протеин в США. <i class="notabene"></i></p>
     </div>
     <div class="col-md-6 text-center" style="padding-top: 30px;">
       <p class="lead">~{{ 5760|valuteround:2 }} рублей за протеин в России. <i class="notabene"></i></p>
     </div>
     <div class="col-md-12 text-center" style="padding-top: 0px;">
-      <p class="lead">Разница около {{ 57.48|convertvalute:usd|valuteround:2|valutesub:5760|valuteround:2 }} рублей. (75% цены для данного товара)</p>
+      <p class="lead">Разница около {{ 57.48|convertvalute:usdCourse|valuteround:2|valutesub:5760|valuteround:2 }} рублей. (75% цены для данного товара)</p>
     </div>
   </div> <!-- end row -->
   <div class="footnote">* Используются актуальные цены {{ costUpdTime|date:"d E Y" }}</div>
@@ -220,7 +220,7 @@
       <p><br></p>
     </div>
   </div>
-  <div class="footnote">* Используется курс валют ЦБ РФ от {{ usd.date|date:"d E Y" }}</div>
+  <div class="footnote">* Используется курс валют ЦБ РФ от {{ usdCourse.date|date:"d E Y" }}</div>
 </div>
 </div>
 </section>

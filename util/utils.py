@@ -4,6 +4,8 @@ from user.utils import GetCurrentUser, GetUnreadCount
 from user.models import Msg
 from util.exc import *
 from util.msg import *
+from valute.models import Valute
+from datetime import datetime
 
 import string
 import random
@@ -25,10 +27,16 @@ def SafeView(func):
 def RenderToResponse(templPath, request, params):
     user = GetCurrentUser(request)
     unreadCount = GetUnreadCount(request)
+    usdcourse = Valute.objects.filter(fromId__exact="USD")[0]
+    eurocourse = Valute.objects.filter(fromId__exact="EUR")[0]
+
     params = dict(
         params,
         profileOwner=GetCurrentUser(request),
         unreadCount=unreadCount,
+        usdCourse=usdcourse,
+        euroCourse=eurocourse,
+        now=datetime.now(),
     )
     return render_to_response(templPath, RequestContext(request, params))
 

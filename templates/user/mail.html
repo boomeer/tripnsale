@@ -25,18 +25,33 @@
                         <input type="hidden" class="peer" value="{{ conf.peer.id }}">
                         <div class="row">
                             <div class="col-md-3 peer bboldy container">
-                                <a href="{{ conf.peer.profileUrl }}" target="_blank" class="bboldy">
-                                    <img src="{{ conf.peer.avatarThumbUrl }}" class="peerAv">
-                                    {{ conf.peer.first_name }} {{ conf.peer.last_name }}
-                                </a>
-                                <div>
-                                {% if conf.withGuarant %}
-                                    <span class="bboldy guarant">
-                                        <i class="ai ai-shield"></i>
-                                        Сделка с гарантом
-                                    </span>
+                                {% if profileOwner.guarant %}
+                                    <div>
+                                    {% for peer in conf.users.all %}
+                                        {% if peer != profileOwner %}
+                                            <div style="padding: 4px 0px;">
+                                                <a href="{{ peer.profileUrl }}" target="_blank" class="bboldy">
+                                                    <img src="{{ peer.avatarThumbUrl }}" class="peerAv">
+                                                    {{ peer.first_name }} {{ peer.last_name }}
+                                                </a>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                    </div>
+                                {% else %}
+                                    <a href="{{ conf.peer.profileUrl }}" target="_blank" class="bboldy">
+                                        <img src="{{ conf.peer.avatarThumbUrl }}" class="peerAv">
+                                        {{ conf.peer.first_name }} {{ conf.peer.last_name }}
+                                    </a>
+                                    <div>
+                                        {% if conf.withGuarant %}
+                                            <span class="bboldy guarant">
+                                                <i class="ai ai-shield"></i>
+                                                Сделка с гарантом
+                                            </span>
+                                        {% endif %}
+                                    </div>
                                 {% endif %}
-                                </div>
                             </div>
                             <div class="col-md-6 {% if conf.msg.new %}bg1 dialog-unread{% endif %}">
                                 {% if profileOwner == conf.msg.fr %}

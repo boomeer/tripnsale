@@ -38,7 +38,7 @@ function ProcOpts(opts)
 
 function ScrollToBottom()
 {
-    $("html,body").animate({ scrollTop: $("body").height() }, "fast");
+    $("html,body").animate({ scrollTop: $(".msgsWrapper").height() + $("body").height() }, "fast");
 }
 
 function RefreshMsgs(scroll) {

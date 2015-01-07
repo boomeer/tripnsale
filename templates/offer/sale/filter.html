@@ -117,6 +117,17 @@
                 </a>
             </div>
         </div>
+        <div class="tripOwner tripOwner-invis tripSection">
+            <div class="tripSectionContent">
+                <a class="profileLink tripOwnerAv" href="{{ sale.owner.profileUrl }}">
+                    <img src="{{ sale.owner.avatarThumbUrl }}">
+                </a>
+                <a class="profileLink tripOwnerName bboldy" href="{{ sale.owner.profileUrl }}">
+                    {{ sale.owner.first_name }} {{ sale.owner.last_name }}
+                </a>
+            </div>
+        </div>
+
     </div>
 {% empty %}
     Нет поездок

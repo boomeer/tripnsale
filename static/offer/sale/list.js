@@ -9,7 +9,6 @@ function TripsGetPage(defaultPage)
 
 function TripsRefresh()
 {
-    console.log("TripsRefresh::begin!");
     var sp = $("#tripsProfile");
     var so = $("#tripsOwner");
     var fr = $("#tripsFilterFrom");
@@ -23,15 +22,12 @@ function TripsRefresh()
         "page": TripsGetPage(),
         "owner": so ? so.val() : 0
     }, function(res) {
-        console.log("TripsRefresh::gotha!");
-
         $(".tripsList").html(res);
     });
 }
 
 function TripView(id)
 {
-    console.log("TripsView!");
     window.location.hash = "#trip" + id;
     $.post("/offer/sale/view/" + id, {}, function(res) {
         $(".tripViewWrapper").html(res);
@@ -41,7 +37,6 @@ function TripView(id)
 
 function TripViewClose(changehash)
 {
-    console.log("TripsViewClose!");
     window.location.hash = "";
     $(".tripViewWrapper").html("");
     unlockScroll();
@@ -57,7 +52,6 @@ function TripRemove(id)
 
 function TripChangePage()
 {
-    console.log("TripsChangePage!");
     if (window.location.hash.match(/^#tripspage\d+$/)) {
         TripsRefresh();
         unlockScroll();

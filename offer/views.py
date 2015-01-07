@@ -91,11 +91,40 @@ class SaleInvalidDepositErr (SaleEditErr):
     def __init__(self):
         super().__init__("invalid_deposit")
 
+
+def SaleFilterExtractParams(request, static=False):
+    params = request.REQUEST
+    owner = int(params.get("owner", 0))
+    sales = SaleOffer.objects
+    if owner:
+        sales = sales.filter(owner__id=owner)
+    sales = sales.all()
+    sales = [sale for sale in sales if ValidFilter(sale.fr.title + " " + sale.frCity,
+                                                    params.get("from", "")) \
+                and ValidFilter(sale.to.title + " " + sale.toCity, params.get("to", ""))]
+    sales = [sale for sale in sales if sale.visible()]
+    sales = sorted(sales, key=lambda sale: (sale.closed, -sale.isCurrent(), sale.toEnd(),))
+
+    count = max(0, int(params.get("count", 15)))
+    totalpages = (len(sales) + count - 1) // count
+    page = max(1, min(int(params.get("page", 1)), totalpages)) - 1
+    block = sales[page*count:(page+1)*count]
+    return {
+        "sales": sales,
+        "saleblock": block,
+        "page": page,
+        "totalpages": totalpages,
+        "profile": int(params.get("profile", 0)),
+        "pagesid": "trips" if not static else "#"
+    }
+
+
 @SafeView
 def SaleListView(request):
-    return RenderToResponse("offer/sale/list.html", request, {
-        "url": "/offer/sale/list",
-    })
+    filterparams = SaleFilterExtractParams(request, True)
+    # filterparams = {}
+    filterparams.update({ "url": "/offer/sale/list" })
+    return RenderToResponse("offer/sale/list.html", request, filterparams)
 
 def ExtractSaleFields(params):
     if not params.get("from", "").strip():
@@ -207,33 +236,10 @@ def SaleEditView(request, id):
         "err": GetSaleAddMsg(params.get("err", "")),
     })
 
-
 @SafeView
 def SaleFilterView(request):
-    params = request.REQUEST
-    owner = int(params.get("owner", 0))
-    sales = SaleOffer.objects
-    if owner:
-        sales = sales.filter(owner__id=owner)
-    sales = sales.all()
-    sales = [sale for sale in sales if ValidFilter(sale.fr.title + " " + sale.frCity,
-                                                    params.get("from", "")) \
-                and ValidFilter(sale.to.title + " " + sale.toCity, params.get("to", ""))]
-    sales = [sale for sale in sales if sale.visible()]
-    sales = sorted(sales, key=lambda sale: (sale.closed, -sale.isCurrent(), sale.toEnd(),))
-
-    count = max(0, int(params.get("count", 15)))
-    totalpages = (len(sales) + count - 1) // count
-    page = max(0, min(int(params.get("page", 1)), totalpages - 1))
-    block = sales[page*count:(page+1)*count]
-    return RenderToResponse("offer/sale/filter.html", request, {
-        "sales": sales,
-        "block": block,
-        "page": page,
-        "totalpages": totalpages,
-        "profile": int(params.get("profile", 0)),
-        "pagesid": "trips"
-    })
+    return RenderToResponse("offer/sale/filter.html", request,
+                            SaleFilterExtractParams(request))
 
 
 @SafeView

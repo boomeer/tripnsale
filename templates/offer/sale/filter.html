@@ -1,6 +1,6 @@
 {% load static %}
 
-{% for sale in block %}
+{% for sale in saleblock %}
     <div class="tripItem {% if sale.closed %}tripItem-closed{% endif %}" onClick="TripView({{ sale.id }});">
         <div class="tripSection tripMainSection">
             <div class="tripFromTo">

@@ -1,62 +1,102 @@
 {% if totalpages == 1 %}
   <ul class="pagination">
     <li {% if page == 0 %}class="active"{% endif %}>
-        <a href="#{{ pagesid }}page1">1</a>
+      {% if pagesid == "#" %}
+        <a class="pagination-link pagination-static" href="?page=1">1</a>
+      {% else %}
+        <a class="pagination-link pagination-dynamic" href="#{{ pagesid }}page1">1</a>
+      {% endif %}
     </li>
   </ul>
 {% elif totalpages > 1 %}
   <ul class="pagination">
     {% if page >= 3 %}
       <li>
-          <a href="#{{ pagesid }}page1">1</a>
+        {% if pagesid == "#" %}
+          <a class="pagination-link pagination-static" href="?page=1">1</a>
+        {% else %}
+          <a class="pagination-link pagination-dynamic" href="#{{ pagesid }}page1">1</a>
+        {% endif %}
       </li>
     {% endif %}
     {% if page == 4 %}
       <li>
-        <a href="#{{ pagesid }}page2">2</a>
+        {% if pagesid == "#" %}
+          <a class="pagination-link pagination-static" href="?page=2">2</a>
+        {% else %}
+          <a class="pagination-link pagination-dynamic" href="#{{ pagesid }}page2">2</a>
+        {% endif %}
       </li>
     {% elif page >= 5 %}
       <li class="disabled">
-        <a href="#">...</a>
+        <a class="pagination-link" href="#">...</a>
       </li>
     {% endif %}
 
     {% if page|add:-2 >= 0 %}
       <li>
-        <a href="#{{ pagesid }}page{{ page|add:-1 }}">{{ page|add:-1 }}</a>
+        {% if pagesid == "#" %}
+          <a class="pagination-link pagination-static" href="?page={{ page|add:-1 }}">{{ page|add:-1 }}</a>
+        {% else %}
+          <a class="pagination-link pagination-dynamic" href="#{{ pagesid }}page{{ page|add:-1 }}">{{ page|add:-1 }}</a>
+        {% endif %}
       </li>
     {% endif %}
     {% if page|add:-1 >= 0 %}
       <li>
-        <a href="#{{ pagesid }}page{{ page }}">{{ page }}</a>
+        {% if pagesid == "#" %}
+          <a class="pagination-link pagination-static" href="?page={{ page }}">{{ page }}</a>
+        {% else %}
+          <a class="pagination-link pagination-dynamic" href="#{{ pagesid }}page{{ page }}">{{ page }}</a>
+        {% endif %}
       </li>
     {% endif %}
     <li class="active">
-      <a href="#{{ pagesid }}page{{ page|add:1 }}">{{ page|add:1 }}</a>
+      {% if pagesid == "#" %}
+        <a class="pagination-link pagination-static" href="?page={{ page|add:1 }}">{{ page|add:1 }}</a>
+      {% else %}
+        <a class="pagination-link pagination-dynamic" href="#{{ pagesid }}page{{ page|add:1 }}">{{ page|add:1 }}</a>
+      {% endif %}
     </li>
     {% if page|add:1 < totalpages %}
       <li>
-        <a href="#{{ pagesid }}page{{ page|add:2 }}">{{ page|add:2 }}</a>
+        {% if pagesid == "#" %}
+          <a class="pagination-link pagination-static" href="?page={{ page|add:2 }}">{{ page|add:2 }}</a>
+        {% else %}
+          <a class="pagination-link pagination-dynamic" href="#{{ pagesid }}page{{ page|add:2 }}">{{ page|add:2 }}</a>
+        {% endif %}
       </li>
     {% endif %}
     {% if page|add:2 < totalpages %}
       <li>
-        <a href="#{{ pagesid }}page{{ page|add:3 }}">{{ page|add:3 }}</a>
+        {% if pagesid == "#" %}
+          <a class="pagination-link pagination-static" href="?page={{ page|add:3 }}">{{ page|add:3 }}</a>
+        {% else %}
+          <a class="pagination-link pagination-dynamic" href="#{{ pagesid }}page{{ page|add:3 }}">{{ page|add:3 }}</a>
+        {% endif %}
       </li>
     {% endif %}
 
     {% if page == totalpages|add:-5 %}
       <li>
-        <a href="#{{ pagesid }}page{{ totalpages|add:-1 }}">{{ totalpages|add:-1 }}</a>
+        {% if pagesid == "#" %}
+          <a class="pagination-link pagination-static" href="?page={{ totalpages|add:-1 }}">{{ totalpages|add:-1 }}</a>
+        {% else %}
+          <a class="pagination-link pagination-dynamic" href="#{{ pagesid }}page{{ totalpages|add:-1 }}">{{ totalpages|add:-1 }}</a>
+        {% endif %}
       </li>
     {% elif page < totalpages|add:-4 %}
       <li class="disabled">
-        <a href="#">...</a>
+        <a class="pagination-link" href="#">...</a>
       </li>
     {% endif %}
     {% if page < totalpages|add:-3 %}
       <li>
-          <a href="#{{ pagesid }}page{{ totalpages }}">{{ totalpages }}</a>
+        {% if pagesid == "#" %}
+          <a class="pagination-link pagination-static" href="?page={{ totalpages }}">{{ totalpages }}</a>
+        {% else %}
+          <a class="pagination-link pagination-dynamic" href="#{{ pagesid }}page{{ totalpages }}">{{ totalpages }}</a>
+        {% endif %}
       </li>
     {% endif %}
   </ul>

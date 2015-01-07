@@ -1,7 +1,10 @@
-function TripsGetPage()
+function TripsGetPage(defaultPage)
 {
+    if (typeof defaultPage == "undefined") {
+        defaultPage = 1;
+    }
     var found = window.location.hash.match(/^#tripspage(\d+)$/);
-    return (!found ? 1 : found[1]*1);
+    return (!found ? defaultPage : found[1]*1);
 }
 
 function TripsRefresh()
@@ -16,7 +19,7 @@ function TripsRefresh()
         "from": fr ? fr.val() : "",
         "to": to ? to.val() : "",
         "profile": sp ? sp.val() : 0,
-        "page": TripsGetPage() - 1,
+        "page": TripsGetPage(),
         "owner": so ? so.val() : 0
     }, function(res) {
         $(".tripsList").html(res);
@@ -56,6 +59,19 @@ function TripChangePage()
     }
 }
 
+function TripChangeHref()
+{
+    var jthis = $(this);
+    var chref = jthis.attr("href");
+    var m = chref.match(/^\?page=(\d+)$/);
+    if (!m || !m.length || m.length < 2) {
+
+        return;
+    }
+    jthis.attr("href", "#tripspage" + m[1]);
+    jthis.off("focus click mouseenter");
+}
+
 $(function() {
     $(window).bind('hashchange', TripChangePage);
     $("#tripsFilterApply").on("click", function() {
@@ -68,10 +84,19 @@ $(function() {
         TripsRefresh();
     });
 
-    var block = $("#blockStartupList");
-    if (!(block && block.val() == 1)) {
+    if (TripsGetPage(null) != null) {
         TripsRefresh();
+    } else {
+        $(".pagination-link.pagination-static")
+            .mouseenter(TripChangeHref)
+            .focus(TripChangeHref)
+            .click(function(e) {
+                    TripChangeHref.call(this);
+
+                }
+            );
     }
+
 
     if (window.location.hash.match(/^#trip\d+$/)) {
         TripView(window.location.hash.slice(5));

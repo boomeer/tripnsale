@@ -7,6 +7,7 @@ from util.msg import *
 from valute.models import Valute
 from datetime import datetime
 from django.utils.html import escape
+import tripnsale.settings as settings
 
 import string
 import random
@@ -18,7 +19,9 @@ def SafeViewFunc(func, *arg, **argv):
     except RedirectExc as e:
         return redirect(str(e))
     except Exception as e:
-        return HttpResponse(escape("Error({}): {}".format(type(e), e)))
+        if not settings.DEBUG:
+            return HttpResponse(escape("Error({}): {}".format(type(e), e)))
+        raise e
 
 
 def SafeView(func):

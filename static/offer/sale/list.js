@@ -94,10 +94,14 @@ $(function() {
             .focus(TripChangeHref)
             .click(function(e) {
                     TripChangeHref.call(this);
-
                 }
             );
     }
+
+    $(".tripItem .fullInfo").hide();
+    $(".tripOwner.tripOwner-right.tripSection").click(function(e) {
+        e.stopPropagation();
+    });
 
     if (window.location.hash.match(/^#trip\d+$/)) {
         TripView(window.location.hash.slice(5));

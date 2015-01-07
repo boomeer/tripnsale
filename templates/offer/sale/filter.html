@@ -73,16 +73,21 @@
                     </span>
                 </div>
             </div>
-            <div class="tripComment">
-                <div class="tripSection">
-                    <div class="tripComment-title">
-                        Комментарий:
-                    </div>
-                    <div class="tripComment-content">
-                        {{ sale.content }}
+            {% if sale.content %}
+                <div class="tripComment">
+                    <div class="tripSection">
+                        <div class="tripComment-title">
+                            Комментарий:
+                        </div>
+                        <div class="tripComment-content">
+                            {{ sale.content }}
+                        </div>
                     </div>
                 </div>
-            </div>
+            {% endif %}
+            {% if static %}
+                <a class="fullInfo" href="/offer/sale/{{ sale.id }}">Подробнее</a>
+            {% endif %}
             <div class="tripButtons">
                 {% if profile and not sale.closed and profileOwner == sale.owner %}
                     <div style="margin-bottom: 4px;">
@@ -105,13 +110,13 @@
             </div>
         </div>
         <div class="tripOwner tripOwner-right tripSection">
-            <div class="tripSectionContent" onClick="window.location.href='{{ sale.owner.profileUrl }}';">
-                <div class="tripOwnerAv">
+            <div class="tripSectionContent">
+                <a class="profileLink tripOwnerAv" href="{{ sale.owner.profileUrl }}">
                     <img src="{{ sale.owner.avatarThumbUrl }}">
-                </div>
-                <div class="tripOwnerName bboldy">
+                </a>
+                <a class="profileLink tripOwnerName bboldy" href="{{ sale.owner.profileUrl }}">
                     {{ sale.owner.first_name }} {{ sale.owner.last_name }}
-                </div>
+                </a>
             </div>
         </div>
         <div class="tripOwner tripOwner-invis tripSection">

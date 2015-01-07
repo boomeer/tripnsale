@@ -100,7 +100,7 @@
 
                 .owner-av {
                     text-align: center;
-                    
+
                     img {
                         max-width: 100%;
                         max-height: 200px;
@@ -111,7 +111,7 @@
             .tripClosed {
                 text-align: center;
                 margin-bottom: 6px;
-                
+
                 > span {
                     padding: 3px 6px;
                     border-radius: 3px;
@@ -132,7 +132,7 @@
     padding-top: 20px;
     height: 100%;
 }
-/* DON'T INCUDE .tripsList INSIDE .trips !!! */ 
+/* DON'T INCUDE .tripsList INSIDE .trips !!! */
 .tripsList {
     .tripItem {
         border: 1px solid #ccc;
@@ -158,7 +158,7 @@
             background-color: rgba(150, 150, 10, 0.1);
         }
 
- 
+
         .tripSection {
             vertical-align: top;
             display: inline-block;
@@ -196,7 +196,7 @@
 
                 .tripFrom {
                 }
-                
+
                 .tripTo {
                 }
             }
@@ -207,7 +207,7 @@
                     color: #3b90a5;
                 }
             }
-            
+
             .tripDates {
                 font-size: 11pt;
             }
@@ -261,11 +261,15 @@
             .tripSectionContent {
                 text-align: center;
 
-                .tripOwnerAv {
-                    img {
-                        border: 1px solid #ddd;
-                        max-height: 128px;
-                        max-width: 100%;
+                .profileLink {
+                    display: block;
+                    &.tripOwnerAv {
+                        img {
+                            display: inline-block;
+                            border: 1px solid #ddd;
+                            max-height: 128px;
+                            max-width: 100%;
+                        }
                     }
                 }
             }

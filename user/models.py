@@ -23,10 +23,10 @@ class User(authModels.User):
     hidden = models.BooleanField(default=False)
 
     def avatarUrl(self):
-        return self.avatar.url if self.avatar else "{}user/av_default.png".format(settings.STATIC_URL)
+        return self.avatar.url if self.avatar else os.path.join(settings.STATIC_URL, "user/av_default.png")
 
     def avatarThumbUrl(self):
-        return self.avatarThumb.url if self.avatarThumb else "{}/user/av_default.png".format(settings.STATIC_URL)
+        return self.avatarThumb.url if self.avatarThumb else os.path.join(settings.STATIC_URL, "user/av_default.png")
 
     def profileUrl(self):
         return "/user/profile/{}/".format(self.id)

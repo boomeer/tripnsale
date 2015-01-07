@@ -232,7 +232,7 @@ def SaleEditView(request, id):
             sale.deposit = deposit
             sale.guarant = params.get("guarant", False)
             sale.save()
-            return redirect("/offer/sale/list/#{}".format(sale.id))
+            return redirect("/offer/sale/{}".format(sale.id))
         except SaleEditErr as e:
             raise RedirectExc("/offer/sale/edit/{}?err={}".format(sale.id, e.status))
     return RenderToResponse("offer/sale/edit.html", request, {

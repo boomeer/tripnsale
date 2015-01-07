@@ -56,7 +56,7 @@ class SaleOffer(Offer):
             self.closed = True
 
     def isCurrent(self):
-        return self.frTime <= datetime.now() <= self.toTime
+        return self.frTime.date() <= datetime.now().date() <= self.toTime.date()
 
     def toEnd(self):
         return self.toTime - datetime.now()

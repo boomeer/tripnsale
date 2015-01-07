@@ -100,7 +100,7 @@ $(function() {
     }
 
     $(".tripItem .fullInfo").hide();
-    $("tripOwner-right .tripOwner.tripOwner-right.tripSection").click(function(e) {
+    $(".tripOwner.tripOwner-right.tripSection").click(function(e) {
         e.stopPropagation();
     });
 

@@ -142,6 +142,7 @@
         background-color: rgba(250, 250, 250, 0.2);
         cursor: pointer;
         position: relative;
+        min-height: 170px;
 
         &.tripItem-closed {
             opacity: 0.8;
@@ -240,6 +241,9 @@
         .tripOwner {
             width: 20%;
             max-width: 300px;
+            max-height: 170px;
+            position: absolute;
+            right: 0px;
             padding-right: 10px;
             text-align: center;
 
@@ -249,20 +253,12 @@
                 }
             }
 
-            &.tripOwner-invis {
-                opacity: 0;
-            }
-
-            &.tripOwner-right {
-                position: absolute;
-                right: 0;
-            }
-
             .tripSectionContent {
                 text-align: center;
 
                 .profileLink {
                     display: block;
+
                     &.tripOwnerAv {
                         img {
                             display: inline-block;

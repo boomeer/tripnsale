@@ -32,12 +32,14 @@ function TripView(id)
     $.post("/offer/sale/view/" + id, {}, function(res) {
         $(".tripViewWrapper").html(res);
     });
+    lockScroll();
 }
 
 function TripViewClose(changehash)
 {
     window.location.hash = "";
     $(".tripViewWrapper").html("");
+    unlockScroll();
 }
 
 function TripRemove(id)
@@ -96,7 +98,6 @@ $(function() {
                 }
             );
     }
-
 
     if (window.location.hash.match(/^#trip\d+$/)) {
         TripView(window.location.hash.slice(5));

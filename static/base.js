@@ -1,3 +1,38 @@
+var prevOverflow = null;
+var scrollPosition = null;
+
+function lockScroll(){
+    $html = $('html');
+    $body = $('body');
+    var initWidth = $body.outerWidth();
+    var initHeight = $body.outerHeight();
+
+    scrollPosition = [
+        self.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft,
+        self.pageYOffset || document.documentElement.scrollTop  || document.body.scrollTop
+    ];
+    prevOverflow = $html.css('overflow');
+    $html.css('overflow', 'hidden');
+    window.scrollTo(scrollPosition[0], scrollPosition[1]);
+
+    var marginR = $body.outerWidth()-initWidth;
+    var marginB = $body.outerHeight()-initHeight;
+    $body.css({'margin-right': marginR,'margin-bottom': marginB});
+}
+
+function unlockScroll(){
+    if (prevOverflow === null || scrollPosition === null) {
+        console.log("dfgdfsg");
+        return;
+    }
+    $html = $('html');
+    $body = $('body');
+    $html.css('overflow', "");
+    window.scrollTo(scrollPosition[0], scrollPosition[1]);
+
+    $body.css({'margin-right': 0, 'margin-bottom': 0});
+}
+
 function RefrUnread()
 {
     if (window.unread) {

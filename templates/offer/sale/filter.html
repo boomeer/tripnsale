@@ -91,12 +91,10 @@
             <div class="tripButtons">
                 {% if profile and not sale.closed and profileOwner == sale.owner %}
                     <div style="margin-bottom: 4px;">
-                        <a href="/offer/sale/edit/{{ sale.id }}" class="btn btn-default">
+                        <a href="/offer/sale/edit/{{ sale.id }}" class="btn btn-primary">
                             <i class="ai ai-pencil"></i>
                             Редактировать
                         </a>
-                    </div>
-                    <div>
                         <a href="/offer/sale/remove/?id={{ sale.id }}" class="btn btn-danger">
                             <i class="ai ai-close"></i>
                             Удалить

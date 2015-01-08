@@ -1,5 +1,7 @@
 @import "../../conf.less";
 
+@ownerPartWidth: 12em;
+
 .tripViewBg {
     position: fixed;
     z-index: @tripViewZ;
@@ -177,7 +179,9 @@
         }
 
         .tripMainSection {
-            // max-width: 70%;
+            width: 100%;
+            margin-right: -@ownerPartWidth;
+            float: left;
 
             .closed {
                 padding: 3px 6px;
@@ -248,6 +252,7 @@
         }
 
         .tripOwner {
+            width: @ownerPartWidth;
             padding-right: 10px;
             text-align: center;
 

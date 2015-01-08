@@ -30,9 +30,9 @@ function TripView(id)
 {
     window.location.hash = "#trip" + id;
     $.post("/offer/sale/view/" + id, {}, function(res) {
+        lockScroll();
         $(".tripViewWrapper").html(res);
     });
-    lockScroll();
 }
 
 function TripViewClose(changehash)

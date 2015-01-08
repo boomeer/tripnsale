@@ -180,9 +180,11 @@
 
         .tripMainSection {
             width: 100%;
-            margin-right: -@ownerPartWidth;
-            padding-right: @ownerPartWidth;
-            float: left;
+            @media (min-width: 767px) {
+                margin-right: -@ownerPartWidth;
+                padding-right: @ownerPartWidth + 5;
+                float: left;
+            }
 
             .closed {
                 padding: 3px 6px;

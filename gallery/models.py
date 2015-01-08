@@ -2,13 +2,13 @@ from django.db import models
 from django.contrib import admin
 import tripnsale.settings as settings
 from datetime import datetime
-
+import os.path
 
 class Gallery(models.Model):
     head = models.ForeignKey("Photo", blank=True, null=True, related_name="heads")
     createTime = models.DateTimeField(default=datetime.now())
     token = models.TextField(default="")
-    
+
     def add(self, photo):
         photo.gallery = self
         photo.save()
@@ -30,7 +30,7 @@ class Gallery(models.Model):
         return str(id)
 
     def getHeadUrl(self):
-        return self.head.thumbUrl() if self.head else settings.STATIC_URL + "/no-photo.jpg"
+        return self.head.thumbUrl() if self.head else os.path.join(settings.STATIC_URL, "no-photo.jpg")
 
 @admin.register(Gallery)
 class GalleryAdmin(admin.ModelAdmin):
@@ -43,7 +43,7 @@ class Photo(models.Model):
     thumbnail = models.ImageField(upload_to="gallery_img", blank=True, null=True)
     token = models.TextField(default="")
     verified = models.BooleanField(default=True)
-    
+
     def thumbUrl(self):
         return self.thumbnail.url if self.thumbnail else ""
 

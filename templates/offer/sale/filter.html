@@ -1,8 +1,8 @@
 {% load static %}
 
 {% for sale in saleblock %}
-    <div class="tripItem {% if sale.closed %}tripItem-closed{% endif %}" onClick="TripView({{ sale.id }});">
-        <div class="tripSection tripMainSection">
+    <div class="tripItem {% if sale.closed %}tripItem-closed{% endif %} row container-fluid" onClick="TripView({{ sale.id }});">
+        <div class="tripSection tripMainSection col-xs-12 col-sm-9 col-lg-11">
             <div class="tripFromTo">
                 <div class="tripFrom tripPlace">
                     <span>
@@ -54,6 +54,14 @@
                 </div>
             </div>
             <div>
+                <div class="visible-xs ownerSmall tripSection">
+                    <span class="tripSectionTitle">
+                        Путешественник:
+                    </span>
+                    <a class="tripSectionContent profileLink bboldy" href="/user/profile/{{ sale.owner.id }}">
+                        {{ sale.owner.first_name }} {{ sale.owner.last_name }}
+                    </a>
+                </div>
                 <div class="tripDeposit tripSection">
                     <span class="tripSectionTitle">
                         Депозит:
@@ -107,7 +115,7 @@
                 {% endif %}
             </div>
         </div>
-        <div class="tripOwner tripOwner-right tripSection">
+        <div class="tripOwner tripOwner-right tripSection hidden-xs col-sm-3 col-lg-1">
             <div class="tripSectionContent">
                 <a class="profileLink tripOwnerAv" href="{{ sale.owner.profileUrl }}">
                     <img src="{{ sale.owner.avatarThumbUrl }}">

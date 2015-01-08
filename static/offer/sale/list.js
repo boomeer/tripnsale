@@ -103,6 +103,9 @@ $(function() {
     $(".tripOwner.tripOwner-right.tripSection").click(function(e) {
         e.stopPropagation();
     });
+    $(".profileLink").click(function(e) {
+        e.stopPropagation();
+    });
 
     if (window.location.hash.match(/^#trip\d+$/)) {
         TripView(window.location.hash.slice(5));

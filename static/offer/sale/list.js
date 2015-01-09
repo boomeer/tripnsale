@@ -32,9 +32,11 @@ function TripsRefresh()
     });
 }
 
-function TripView(id)
+function TripView(id, notChangeHash)
 {
-    window.location.hash = "#trip" + id;
+    if (!notChangeHash) {
+        window.location.hash = "#trip" + id;
+    }
     $.post("/offer/sale/view/" + id, {}, function(res) {
         LockScroll();
         $(".tripViewWrapper").html(res);
@@ -66,7 +68,7 @@ function TripChangePage()
             TripsRefresh();
         }
     } else if (window.location.hash.match(/^#trip\d+$/)) {
-        TripView(window.location.hash.slice(5));
+        TripView(window.location.hash.slice(5), true);
     } else {
         TripViewClose();
     }

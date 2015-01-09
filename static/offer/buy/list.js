@@ -32,9 +32,11 @@ function BuysRefresh()
     });
 }
 
-function BuyView(id)
+function BuyView(id, notChangeHash)
 {
-    window.location.hash = "#buy" + id;
+    if (!notChangeHash) {
+        window.location.hash = "#buy" + id;
+    }
     $.post("/offer/buy/view/" + id, {}, function(res) {
         $(".buyViewWrapper").html(res);
         LockScroll();
@@ -77,7 +79,7 @@ function BuyChangePage()
             BuysRefresh();
         }
     } else if (window.location.hash.match(/^#buy\d+$/)) {
-        BuyView(window.location.hash.slice(4));
+        BuyView(window.location.hash.slice(4), true);
     } else {
         BuyViewClose();
     }

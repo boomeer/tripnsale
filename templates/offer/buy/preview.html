@@ -67,13 +67,13 @@
                                     <span class="comment-title">
                                         Комментарий:
                                     </span>
-                                    <span class="comment-content">
+                                    <span class="comment-content buy-item-content">
                                         {{ buy.content }}
                                     </span>
                                 </div>
                             </div>
                         {% endif %}
-                        {% if buy.gallery.getPhotos %}
+                        {% if buy.gallery.getPhotos|length %}
                             <hr>
                             <div>
                                 <div class="buy-item-title">

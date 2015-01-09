@@ -7,6 +7,12 @@ function TripsGetPage(defaultPage)
     return (!found ? defaultPage : found[1]*1);
 }
 
+function TripsGetRealPage()
+{
+    console.log($("#tripsPage").val());
+    return $("#tripsPage").val();
+}
+
 function TripsRefresh()
 {
     var sp = $("#tripsProfile");
@@ -35,9 +41,11 @@ function TripView(id)
     });
 }
 
-function TripViewClose(changehash)
+function TripViewClose(notChangeHash)
 {
-    window.location.hash = "";
+    if (!notChangeHash) {
+        window.location.hash = "#tripspage" + TripsGetRealPage();
+    }
     $(".tripViewWrapper").html("");
     UnlockScroll();
 }
@@ -53,13 +61,14 @@ function TripRemove(id)
 function TripChangePage()
 {
     if (window.location.hash.match(/^#tripspage\d+$/)) {
-        TripsRefresh();
-        UnlockScroll();
+        TripViewClose(true);
+        if (TripsGetPage() != TripsGetRealPage()) {
+            TripsRefresh();
+        }
     } else if (window.location.hash.match(/^#trip\d+$/)) {
         TripView(window.location.hash.slice(5));
     } else {
-        $(".tripViewWrapper").html("");
-        UnlockScroll();
+        TripViewClose();
     }
 }
 
@@ -81,7 +90,7 @@ $(function() {
     $("#tripsFilterFrom").on("input", TripsRefresh);
     $("#tripsFilterTo").on("input", TripsRefresh);
 
-    if (TripsGetPage(null) != null && TripsGetPage() != $("#tripsPage").val()) {
+    if (TripsGetPage(null) != null && TripsGetPage() != TripsGetRealPage()) {
         TripsRefresh();
     } else {
         $(".pagination-link.pagination-static")

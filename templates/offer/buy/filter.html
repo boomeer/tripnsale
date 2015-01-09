@@ -81,19 +81,17 @@
             <div>
                 {% if profile and not buy.closed and profileOwner == buy.owner %}
                     <div style="margin-bottom: 4px;">
-                        <a href="/offer/buy/edit/{{ buy.id }}" class="btn btn-default">
+                        <a href="/offer/buy/edit/{{ buy.id }}" class="fast-profile-btn btn btn-primary">
                             <i class="ai ai-pencil"></i>
                             Редактировать
                         </a>
-                    </div>
-                    <div>
-                        <a href="/offer/buy/remove/?id={{ buy.id }}" class="btn btn-danger">
-                            <i class="ai ai-close"></i>
-                            Удалить
-                        </a>
-                        <a href="/offer/buy/close/?id={{ buy.id }}" class="btn btn-warning">
+                        <a href="/offer/buy/close/?id={{ buy.id }}" class="fast-profile-btn btn btn-warning">
                             <i class="ai ai-lock"></i>
                             Закрыть
+                        </a>
+                        <a href="/offer/buy/remove/?id={{ buy.id }}" class="fast-profile-btn btn btn-danger">
+                            <i class="ai ai-close"></i>
+                            Удалить
                         </a>
                     </div>
                 {% endif %}

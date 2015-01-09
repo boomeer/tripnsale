@@ -55,14 +55,9 @@ def MakeThumbnail(imgField, field):
     with tempfile.NamedTemporaryFile(suffix=".jpeg") as tmpf:
         im = Image.open(imgField.path)
         im.thumbnail((128, 128,))
-        im.save(tmpf, "JPEG")
+        try:
+            im.save(tmpf, "JPEG")
+        except OSError:
+            raise TsExc("image_bad_format")
 
         StoreImage(File(tmpf), field)
-
-    # thumbTempPath = "/tmp/" + GetNewId() + ".jpg"
-    # im = Image.open(imgField.path)
-    # im.thumbnail((128, 128,))
-    # im.save(thumbTempPath, "JPEG")
-    # with open(thumbTempPath, "rb") as f:
-    #     ff = File(f)
-    #     StoreImage(ff, field)

@@ -59,6 +59,8 @@ def GetEditProfileMsg(name):
         "old_pass_is_invalid": "Неверный пароль",
         "passwords_are_not_equal": "Введённые пароли не совпадают",
         "bad_password_len": "Пароль должен иметь от 3 до 30 символов",
+        "image_big_size": "Размер файла не должен превышать 6МБ",
+        "image_bad_format": "Неккоректный тип файла",
     }.get(name, "")
 
 def GetGalleryExcMsg(name):

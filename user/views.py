@@ -395,6 +395,8 @@ def EditProfileView(request):
             return redirect("/user/profile/")
         except EditErr as e:
             raise RedirectExc("/user/edit_profile/?err={}".format(e.status))
+        except TsExc as e:
+            raise RedirectExc("/user/edit_profile/?err={}".format(str(e)))
     return RenderToResponse("user/edit_profile.html", request, {
         "url": "/user/edit_profile/",
         "prUser": user,

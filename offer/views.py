@@ -201,9 +201,9 @@ def SaleOfferAddView(request):
             sale.save()
             return redirect("/offer/sale/list#trip{}".format(sale.id))
         except SaleEditErr as e:
-            raise RedirectExc("/offer/sale/?err={}".format(e.status))
+            raise RedirectExc("/offer/sale/add/?err={}".format(e.status))
     return RenderToResponse("offer/sale/add.html", request, {
-        "url": "/offer/sale",
+        "url": "/offer/sale/add/",
         "countries": GetCountries(),
         "err": GetSaleAddMsg(params.get("err", ""))
     })
@@ -403,11 +403,11 @@ def BuyOfferAddView(request):
             VerifyPhotos(params.get("token", ""))
             return redirect("/offer/buy/list#buy{}".format(buy.id))
         except BuyEditErr as e:
-            raise RedirectExc("/offer/buy/?err={}".format(e.status))
+            raise RedirectExc("/offer/buy/add?err={}".format(e.status))
     gallery = CreateGallery()
     token = GetNewId()
     return RenderToResponse("offer/buy/add.html", request, {
-        "url": "/offer/buy",
+        "url": "/offer/buy/add/",
         "gallery": gallery,
         "token": token,
         "countries": GetCountries(),

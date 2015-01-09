@@ -1,12 +1,15 @@
 @import "../../conf.less";
 
+@ownerPartWidth: 12em;
+@previewPicturePartWidth: 10em;
+
 .buyViewBg {
     position: fixed;
     z-index: @buyViewZ;
     top: 0px;
     height: 100%;
     width: 100%;
-    
+
     .buyViewGoBack {
         position: absolute;
         z-index: @buyViewZ + 10;
@@ -18,7 +21,7 @@
 
     .buyViewGoBack:hover {
     }
-    
+
     .buyView {
         position: absolute;
         z-index: @buyViewZ + 20;
@@ -66,7 +69,7 @@
             .buyClosed {
                 text-align: center;
                 margin-bottom: 6px;
-                
+
                 > span {
                     padding: 3px 6px;
                     border-radius: 3px;
@@ -85,7 +88,7 @@
                 text-align: center;
                 .owner-name {
                 }
-                
+
                 .owner-av {
                     img {
                         max-width: 100%;
@@ -155,21 +158,23 @@
 
             .buyFrom {
             }
-            
+
             .buyTo {
             }
         }
 
-
         .buy-section {
             vertical-align: top;
-            display: inline-block;
+            display: block;
+            float: left;
+        }
+        .clear-section {
+            clear: both;
         }
 
         .photo {
-            width: 20%;
+            width: @previewPicturePartWidth;
             text-align: center;
-            padding: 10px;
 
             img {
                 max-width: 100%;
@@ -178,13 +183,20 @@
         }
 
         .guarant {
-            padding-left: 8px;
             font-weight: 900;
             color: #600;
         }
 
         .content {
-            max-width: 60%;
+            @media (min-width: 767px) {
+                margin-left: -@previewPicturePartWidth;
+                padding-left: @previewPicturePartWidth + 1;
+
+                margin-right: -@ownerPartWidth;
+                padding-right: @ownerPartWidth + 5;
+            }
+            width: 100%;
+
 
             .title {
                 font-weight: 900;
@@ -198,11 +210,9 @@
         }
 
         .owner {
-            width: 15%;
-            max-width: 300px;
-            font-weight: 900;
-            text-align: center;
+            width: @ownerPartWidth;
             padding-right: 10px;
+            text-align: center;
 
             &:hover {
                 * {
@@ -210,23 +220,52 @@
                 }
             }
 
-            &.owner-invis {
-                opacity: 0;
-            }
+            .section-content {
+                text-align: center;
 
-            &.owner-right {
-                position: absolute;
-                right: 0;
-            }
-            
-            .owner-av {
-                padding: 10px 0px;
+                .profile-link {
+                    display: block;
 
-                img {
-                    max-width: 100%;
-                    max-height: 100px;
+                    &.owner-av {
+                        img {
+                            display: inline-block;
+                            border: 1px solid #ddd;
+                            max-height: 128px;
+                            max-width: 100%;
+                        }
+                    }
                 }
             }
         }
+
+        // .owner {
+        //     width: @ownerPartWidth;
+        //     font-weight: 900;
+        //     padding-right: 10px;
+
+        //     &:hover {
+        //         * {
+        //             color: #900;
+        //         }
+        //     }
+
+        //     &.owner-invis {
+        //         opacity: 0;
+        //     }
+
+        //     &.owner-right {
+        //         position: absolute;
+        //         right: 0;
+        //     }
+
+        //     .owner-av {
+        //         padding: 10px 0px;
+
+        //         img {
+        //             max-width: 100%;
+        //             max-height: 100px;
+        //         }
+        //     }
+        // }
     }
 }

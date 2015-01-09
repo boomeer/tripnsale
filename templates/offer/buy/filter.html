@@ -1,6 +1,10 @@
+{% load static %}
+
+<input type="hidden" id="buysPage" value="{{ page|add:1 }}" />
+
 {% for buy in buyblock %}
-    <div class="buy-item {% if buy.closed %}buy-item-closed{% endif %}" onClick="BuyView({{ buy.id }})">
-        <div class="buy-section photo">
+    <div class="buy-item container-fluid {% if buy.closed %}buy-item-closed{% endif %}" onclick="BuyView({{ buy.id }})">
+        <div class="buy-section photo hidden-xs">
             <img src="{{ buy.gallery.getHeadUrl }}" alt="">
         </div>
         <div class="buy-section content">
@@ -50,11 +54,13 @@
                 <span>
                     Готов заплатить:
                 </span>
-                <span>
+                <span class="indissoluble">
                     <span class="bboldy">{{ buy.costFrom|floatformat:"0" }} руб.</span>
                     -
                     <span class="bboldy">{{ buy.costTo|floatformat:"0" }} руб.</span>
                 </span>
+            </div>
+            <div class="indissoluble">
                 <span class="guarant">
                     {% if buy.guarant %}
                         <i class="ai ai-shield"></i>
@@ -62,6 +68,9 @@
                     {% endif %}
                 </span>
             </div>
+            {% if static %}
+                <a class="full-info" href="/offer/buy/{{ sale.id }}">Подробнее</a>
+            {% endif %}
             <div>
                 {% if profile and not buy.closed and profileOwner == buy.owner %}
                     <div style="margin-bottom: 4px;">
@@ -75,7 +84,7 @@
                             <i class="ai ai-close"></i>
                             Удалить
                         </a>
-                        <a href="/offer/buy/close/?id={{ buy.id }}" class="btn btn-success">
+                        <a href="/offer/buy/close/?id={{ buy.id }}" class="btn btn-warning">
                             <i class="ai ai-lock"></i>
                             Закрыть
                         </a>
@@ -89,22 +98,17 @@
                 {% endif %}
             </div>
         </div>
-        <div class="buy-section owner owner-right" onClick="window.open('{{ buy.owner.profileUrl }}');">
-            <div class="owner-av">
-                <img src="{{ buy.owner.avatarThumbUrl }}">
-            </div>
-            <div>
-                {{ buy.owner.first_name }} {{ buy.owner.last_name }}
-            </div>
-        </div>
-        <div class="buy-section owner owner-invis">
-            <div class="owner-av">
-                <img src="{{ buy.owner.avatarThumbUrl }}">
-            </div>
-            <div>
-                {{ buy.owner.first_name }} {{ buy.owner.last_name }}
+         <div class="buy-section owner-right owner hidden-xs">
+            <div class="section-content">
+                <a class="profile-link owner-av" href="{{ buy.owner.profileUrl }}">
+                    <img src="{{ buy.owner.avatarThumbUrl }}">
+                </a>
+                <a class="profile-link owner-name bboldy" href="{{ buy.owner.profileUrl }}">
+                    {{ buy.owner.first_name }} {{ buy.owner.last_name }}
+                </a>
             </div>
         </div>
+        <span class="clear-section"></span>
 
     </div>
 {% empty %}

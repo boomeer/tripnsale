@@ -484,15 +484,7 @@ def BuyCloseView(request):
     return redirect(backref)
 
 
-@SafeView
-def BuyListView(request):
-    return RenderToResponse("offer/buy/list.html", request, {
-        "url": "/offer/buy/list",
-    })
-
-
-@SafeView
-def BuyFilterView(request):
+def BuyFilterExtractParams(request, static=False):
     params = request.REQUEST
     owner = int(params.get("owner", 0))
     buys = BuyOffer.objects
@@ -505,18 +497,30 @@ def BuyFilterView(request):
                 and ValidFilter((buy.to.title if buy.to else "") + " " + buy.toCity, params.get("to", ""))]
     buys = [buy for buy in buys if buy.visible()]
     buys = sorted(buys, key=lambda buy: (buy.closed, -buy.id,))
-    count = max(0, int(params.get("count", 15)))
+    count = max(0, int(params.get("count", 5)))
     totalpages = (len(buys) + count - 1) // count
-    page = max(0, min(int(params.get("page", 1)), totalpages - 1))
+    page = max(1, min(int(params.get("page", 1)), totalpages)) - 1
     block = buys[page*count:(page+1)*count]
-    return RenderToResponse("offer/buy/filter.html", request, {
+    return {
         "buys": buys,
-        "block": block,
+        "buyblock": block,
         "page": page,
+        "static": static,
         "totalpages": totalpages,
         "profile": int(params.get("profile", 0)),
-        "pagesid": "buys"
-    })
+        "pagesid": "buys" if not static else "#",
+    }
+
+@SafeView
+def BuyListView(request):
+    namespace = BuyFilterExtractParams(request, True)
+    namespace["url"] = "/offer/buy/list"
+    return RenderToResponse("offer/buy/list.html", request, namespace)
+
+@SafeView
+def BuyFilterView(request):
+    return RenderToResponse("offer/buy/filter.html", request,
+        BuyFilterExtractParams(request))
 
 
 @SafeView

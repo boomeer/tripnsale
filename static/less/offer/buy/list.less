@@ -7,30 +7,39 @@
     position: fixed;
     z-index: @buyViewZ;
     top: 0px;
-    height: 100%;
+    bottom: 0px;
     width: 100%;
+    padding-right: 10%;
+    padding-left: 10%;
+    overflow-y: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+    @media (min-width: 767px) {
+        padding-top: 100px;
+        padding-bottom: 100px;
+    }
+    @media (max-width: 767px) {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
 
     .buyViewGoBack {
         position: absolute;
         z-index: @buyViewZ + 10;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.7);
         cursor: pointer;
+        top: 0px;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
     }
 
     .buyViewGoBack:hover {
     }
 
     .buyView {
-        position: absolute;
+        position: relative;
         z-index: @buyViewZ + 20;
-        overflow-y: auto;
-        top: 100px;
-        bottom: 100px;
-        left: 10%;
-        right: 10%;
         background-color: #fff;
+        min-height: 100%;
         border: 1px solid #888;
         border-radius: 3px;
 
@@ -66,6 +75,10 @@
             .title {
             }
 
+            .buy-title {
+                font-size: 14pt;
+            }
+
             .buyClosed {
                 text-align: center;
                 margin-bottom: 6px;
@@ -95,6 +108,19 @@
                         max-height: 200px;
                     }
                 }
+            }
+
+            .comment {
+                .comment-title {
+                    font-weight: 900;
+                }
+                .comment-content {
+                    display: block;
+                }
+            }
+
+            .full-info {
+                margin-bottom: 30px;
             }
 
             .buttons {
@@ -206,6 +232,16 @@
             .prices {
                 font-size: 10pt;
                 color: #555;
+            }
+
+            .comment {
+                .comment-title {
+                    font-weight: 900;
+                }
+                .comment-content {
+                    display: block;
+                    padding-left: 5px;
+                }
             }
         }
 

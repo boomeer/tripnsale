@@ -6,11 +6,11 @@
 {% endblock %}
 
 {% block own_head %}
-    <script src="{% static "offer/buy/list.js" %}" type="text/javascript"></script>
-    <script src="{% static "offer/sale/list.js" %}" type="text/javascript"></script>
+    <!-- <script src="{% static "offer/buy/list.js" %}" type="text/javascript"></script>
+    <script src="{% static "offer/sale/list.js" %}" type="text/javascript"></script> -->
     <script src="{% static "user/profile.js" %}" type="text/javascript"></script>
-    <link rel="stylesheet" href="{% static "css/offer/buy/list.css" %}">
-    <link rel="stylesheet" href="{% static "css/offer/sale/list.css" %}">
+    <!-- <link rel="stylesheet" href="{% static "css/offer/buy/list.css" %}">
+    <link rel="stylesheet" href="{% static "css/offer/sale/list.css" %}"> -->
     <link rel="stylesheet" href="{% static "css/user/profile.css" %}">
 {% endblock %}
 
@@ -20,10 +20,10 @@
     <div class="profile-wrap container-fluid">
         <div class="row">
             {% if firsttime %}
-            <div class="col-md-8 col-md-offset-2 col-xs-12 alert alert-success">
-                <strong>Регистрация завершена!</strong><br/>
-                Теперь Вы можете дополнить информацию о себе. Хороший профиль привлекает больше внимания и увеличивает шансы на то, что другие пользователи обратятся именно к Вам!
-            </div>
+                <div class="col-md-8 col-md-offset-2 col-xs-12 alert alert-success">
+                    <strong>Регистрация завершена!</strong><br/>
+                    Теперь Вы можете дополнить информацию о себе. Хороший профиль привлекает больше внимания и увеличивает шансы на то, что другие пользователи обратятся именно к Вам!
+                </div>
             {% endif %}
             <div class="col-md-6 col-md-offset-3 col-xs-12 userInfo">
                 <h3>Профиль: <strong>{{ prUser.first_name }} {{ prUser.last_name }}</strong></h3>
@@ -79,7 +79,7 @@
                 </div>
             </div>
         {% endif %}
-        <div class="row">
+        <!-- <div class="row">
             <div class="panel-group col-md-8 col-md-offset-2 col-xs-12" id="zbs">
                 <div class="panel panel-primary" style="margin-top:20px;">
                     <a class="panel-heading" data-toggle="collapse" data-parent="#zbs" href="#sales">
@@ -106,7 +106,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
     <div class="buyViewWrapper">
     </div>

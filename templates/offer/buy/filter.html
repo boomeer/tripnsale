@@ -12,9 +12,6 @@
                 <div class="title">
                     {{ buy.title }}
                 </div>
-                <div class="comment">
-                    {{ buy.content }}
-                </div>
             </div>
             <div class="buyFromTo">
                 {% if buy.fr or buy.to %}
@@ -68,6 +65,16 @@
                     {% endif %}
                 </span>
             </div>
+            {% if buy.content %}
+                <div class="comment">
+                    <span class="comment-title">
+                        Комментарий:
+                    </span>
+                    <span class="comment-content">
+                        {{ buy.content }}
+                    </span>
+                </div>
+            {% endif %}
             {% if static %}
                 <a class="full-info" href="/offer/buy/{{ sale.id }}">Подробнее</a>
             {% endif %}

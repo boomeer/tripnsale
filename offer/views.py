@@ -497,7 +497,7 @@ def BuyFilterExtractParams(request, static=False):
                 and ValidFilter((buy.to.title if buy.to else "") + " " + buy.toCity, params.get("to", ""))]
     buys = [buy for buy in buys if buy.visible()]
     buys = sorted(buys, key=lambda buy: (buy.closed, -buy.id,))
-    count = max(0, int(params.get("count", 5)))
+    count = max(0, int(params.get("count", 15)))
     totalpages = (len(buys) + count - 1) // count
     page = max(1, min(int(params.get("page", 1)), totalpages)) - 1
     block = buys[page*count:(page+1)*count]
@@ -528,7 +528,7 @@ def BuyView(request, id):
     buy = BuyOffer.objects.get(id=id)
     if not buy.visible():
         raise Exception("not found")
-    return RenderToResponse("offer/buy/view.html", request, {
+    return RenderToResponse("offer/buy/preview.html", request, {
         "buy": buy,
     })
 

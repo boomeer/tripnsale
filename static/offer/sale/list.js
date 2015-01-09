@@ -9,7 +9,6 @@ function TripsGetPage(defaultPage)
 
 function TripsGetRealPage()
 {
-    console.log($("#tripsPage").val());
     return $("#tripsPage").val();
 }
 

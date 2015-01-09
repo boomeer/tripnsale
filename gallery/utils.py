@@ -5,7 +5,7 @@ import os
 from django.core.files import File
 from datetime import datetime
 from util.utils import TsExc
-
+import tempfile
 
 def CreateGallery():
     g = Gallery(
@@ -52,10 +52,17 @@ def StoreImage(image, field, sizeLimit=6*2**20):
     return filePath
 
 def MakeThumbnail(imgField, field):
-    thumbTempPath = "/tmp/" + GetNewId() + ".jpg"
-    im = Image.open(imgField.path)
-    im.thumbnail((128, 128,))
-    im.save(thumbTempPath, "JPEG")
-    with open(thumbTempPath, "rb") as f:
-        ff = File(f)
-        StoreImage(ff, field)
+    with tempfile.NamedTemporaryFile(suffix=".jpeg") as tmpf:
+        im = Image.open(imgField.path)
+        im.thumbnail((128, 128,))
+        im.save(tmpf, "JPEG")
+
+        StoreImage(File(tmpf), field)
+
+    # thumbTempPath = "/tmp/" + GetNewId() + ".jpg"
+    # im = Image.open(imgField.path)
+    # im.thumbnail((128, 128,))
+    # im.save(thumbTempPath, "JPEG")
+    # with open(thumbTempPath, "rb") as f:
+    #     ff = File(f)
+    #     StoreImage(ff, field)

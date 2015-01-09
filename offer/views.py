@@ -440,7 +440,7 @@ def BuyEditView(request, id):
             buy.guarant = params.get("guarant", False)
             buy.save()
             VerifyPhotos(params.get("token", ""))
-            return redirect("/offer/buy/list/#{}".format(buy.id))
+            return redirect("/offer/buy/{}".format(buy.id))
         except BuyEditErr as e:
             raise RedirectExc("/offer/buy/edit/{}?err={}".format(buy.id, e.status))
     elif act == "makeHead":
@@ -522,9 +522,17 @@ def BuyFilterView(request):
     return RenderToResponse("offer/buy/filter.html", request,
         BuyFilterExtractParams(request))
 
-
 @SafeView
 def BuyView(request, id):
+    buy = BuyOffer.objects.get(id=id)
+    if not buy.visible():
+        raise Exception("not found")
+    return RenderToResponse("offer/buy/view.html", request, {
+        "buy": buy,
+    })
+
+@SafeView
+def BuyPreview(request, id):
     buy = BuyOffer.objects.get(id=id)
     if not buy.visible():
         raise Exception("not found")

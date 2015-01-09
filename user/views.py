@@ -223,7 +223,7 @@ def ImView(request):
             time=datetime.now(),
         )
         msg.save()
-        return RenderJson({"result": "ok"})
+        return JsonResponse({"result": "ok"})
     elif act == "askGuarant":
         conf = Conference.objects.get(id=params.get("conf"))
         if conf.askGuarant or conf.plusGuarant:
@@ -236,7 +236,7 @@ def ImView(request):
             time=datetime.now(),
         )
         msg.save()
-        return RenderJson({"result": "ok"})
+        return JsonResponse({"result": "ok"})
     else:
         if "conf" not in params:
             user = GetCurrentUser(request)
@@ -438,7 +438,10 @@ def UserMailView(request):
     confs.sort(key=lambda conf: conf.msgs.latest("time").time, reverse=True)
     for conf in confs:
         u = conf.users.all()
-        conf.peer = u[0] if u[1] == user else u[1]
+        try:
+            conf.peer = u[0] if u[1] == user else u[1]
+        except:
+            raise Exception(len(u))
         conf.msg = conf.msgs.latest("time")
     return RenderToResponse("user/mail.html", request, {
         "url": "/user/mail",

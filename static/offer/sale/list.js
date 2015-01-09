@@ -26,27 +26,12 @@ function TripsRefresh()
     });
 }
 
-function CheckTripHeight()
-{
-    var $tripview2 = $(".tripView2");
-    if (!$tripview2) {
-        return;
-    }
-    if ($tripview2.height() > $("body").height() - 200) {
-        $(".tripView").css("bottom", "initial");
-    } else {
-        $(".tripView").css("bottom", "");
-    }
-}
-
 function TripView(id)
 {
     window.location.hash = "#trip" + id;
     $.post("/offer/sale/view/" + id, {}, function(res) {
         LockScroll();
         $(".tripViewWrapper").html(res);
-
-        // CheckTripHeight();
     });
 }
 
@@ -96,7 +81,7 @@ $(function() {
     $("#tripsFilterFrom").on("input", TripsRefresh);
     $("#tripsFilterTo").on("input", TripsRefresh);
 
-    if (TripsGetPage(null) != null) {
+    if (TripsGetPage(null) != null && TripsGetPage() != $("#tripsPage").val()) {
         TripsRefresh();
     } else {
         $(".pagination-link.pagination-static")

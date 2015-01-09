@@ -214,7 +214,7 @@ def ImView(request):
         user = GetCurrentUser(request)
         content = params.get("content", "").strip()
         if not content:
-            raise MsgCannotbeEmptyErr
+            return JsonResponse({"result": "ok"})
         conf = Conference.objects.get(id=params.get("conf", 0))
         msg = ConferenceMsg(
             conf=conf,

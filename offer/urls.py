@@ -3,9 +3,10 @@ from offer.views import *
 
 
 urlpatterns = patterns('',
+    url("^buy/(?P<id>[0-9]{1,})$", BuyView),
     url("^buy/add/$", BuyOfferAddView),
     url("^buy/filter/$", BuyFilterView),
-    url("^buy/view/(?P<id>[0-9]{1,})$", BuyView),
+    url("^buy/view/(?P<id>[0-9]{1,})$", BuyPreview),
     url("^buy/edit/(?P<id>[0-9]{1,})$", BuyEditView),
     url("^buy/list/$", BuyListView),
     url("^buy/remove/$", BuyRemoveView),

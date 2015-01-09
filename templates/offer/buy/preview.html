@@ -122,11 +122,11 @@
                                     </a>
                                 {% endif %}
                                 {% if buy.closed %}
-                                    <a type="button" class="btn btn-success" href="/offer/buy/close/?id={{ buy.id }}&revert=1&backref=/offer/buy/list/#{{ buy.id }}" title="Открыть">
+                                    <a type="button" class="btn btn-success" href="/offer/buy/close/?id={{ buy.id }}&revert=1&backref=/offer/buy/list/#buy{{ buy.id }}" title="Открыть">
                                         <i class="ai ai-unlocked"></i>
                                     </a>
                                 {% else %}
-                                    <a type="button" class="btn btn-warning" href="/offer/buy/close/?id={{ buy.id }}&backref=/offer/buy/list/#{{ buy.id }}" title="Закрыть">
+                                    <a type="button" class="btn btn-warning" href="/offer/buy/close/?id={{ buy.id }}&backref=/offer/buy/list/#buy{{ buy.id }}" title="Закрыть">
                                         <i class="ai ai-lock"></i>
                                     </a>
                                 {% endif %}

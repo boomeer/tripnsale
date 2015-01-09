@@ -8,6 +8,14 @@
 
 {% block own_head %}
     <link rel="stylesheet" href="{% static "css/offer/sale/view.css" %}"/>
+    <script type="text/javascript">
+        function TripRemove(id)
+        {
+            if (confirm("Вы действительно хотите удалить поездку?")) {
+                window.location.href = "/offer/sale/remove/?id=" + id + "&backref=/offer/sale/list/";
+            }
+        }
+    </script>
 {% endblock %}
 
 {% block main %}

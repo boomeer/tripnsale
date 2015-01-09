@@ -1,4 +1,4 @@
-{% for buy in block %}
+{% for buy in buyblock %}
     <div class="buy-item {% if buy.closed %}buy-item-closed{% endif %}" onClick="BuyView({{ buy.id }})">
         <div class="buy-section photo">
             <img src="{{ buy.gallery.getHeadUrl }}" alt="">

@@ -1,7 +1,9 @@
 var prevOverflow = null;
 var scrollPosition = null;
 
-function lockScroll(){
+function PreventDefaultEvent(e) { e.preventDefault(); }
+function StopPropagationEvent(e) { e.stopPropagation(); }
+function LockScroll(){
     $html = $('html');
     $body = $('body');
     var initWidth = $body.outerWidth();
@@ -20,7 +22,7 @@ function lockScroll(){
     $body.css({'margin-right': marginR,'margin-bottom': marginB});
 }
 
-function unlockScroll(){
+function UnlockScroll(){
     if (prevOverflow === null || scrollPosition === null) {
         console.log("dfgdfsg");
         return;

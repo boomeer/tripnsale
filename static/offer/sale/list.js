@@ -26,12 +26,27 @@ function TripsRefresh()
     });
 }
 
+function CheckTripHeight()
+{
+    var $tripview2 = $(".tripView2");
+    if (!$tripview2) {
+        return;
+    }
+    if ($tripview2.height() > $("body").height() - 200) {
+        $(".tripView").css("bottom", "initial");
+    } else {
+        $(".tripView").css("bottom", "");
+    }
+}
+
 function TripView(id)
 {
     window.location.hash = "#trip" + id;
     $.post("/offer/sale/view/" + id, {}, function(res) {
-        lockScroll();
+        LockScroll();
         $(".tripViewWrapper").html(res);
+
+        // CheckTripHeight();
     });
 }
 
@@ -39,7 +54,7 @@ function TripViewClose(changehash)
 {
     window.location.hash = "";
     $(".tripViewWrapper").html("");
-    unlockScroll();
+    UnlockScroll();
 }
 
 function TripRemove(id)
@@ -54,12 +69,12 @@ function TripChangePage()
 {
     if (window.location.hash.match(/^#tripspage\d+$/)) {
         TripsRefresh();
-        unlockScroll();
+        UnlockScroll();
     } else if (window.location.hash.match(/^#trip\d+$/)) {
         TripView(window.location.hash.slice(5));
     } else {
         $(".tripViewWrapper").html("");
-        unlockScroll();
+        UnlockScroll();
     }
 }
 
@@ -77,15 +92,9 @@ function TripChangeHref()
 
 $(function() {
     $(window).bind('hashchange', TripChangePage);
-    $("#tripsFilterApply").on("click", function() {
-        TripsRefresh();
-    });
-    $("#tripsFilterFrom").on("input", function() {
-        TripsRefresh();
-    });
-    $("#tripsFilterTo").on("input", function() {
-        TripsRefresh();
-    });
+    $("#tripsFilterApply").on("click", TripsRefresh);
+    $("#tripsFilterFrom").on("input", TripsRefresh);
+    $("#tripsFilterTo").on("input", TripsRefresh);
 
     if (TripsGetPage(null) != null) {
         TripsRefresh();
@@ -100,12 +109,8 @@ $(function() {
     }
 
     $(".tripItem .fullInfo").hide();
-    $(".tripOwner.tripOwner-right.tripSection").click(function(e) {
-        e.stopPropagation();
-    });
-    $(".profileLink").click(function(e) {
-        e.stopPropagation();
-    });
+    $(".tripOwner.tripOwner-right.tripSection").click(StopPropagationEvent);
+    $(".profileLink").click(StopPropagationEvent);
 
     if (window.location.hash.match(/^#trip\d+$/)) {
         TripView(window.location.hash.slice(5));

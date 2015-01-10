@@ -19,7 +19,6 @@ function TripsRefresh(page)
     var fr = $("#tripsFilterFrom");
     var to = $("#tripsFilterTo");
     $(".tripsList").html("Загрузка...");
-    $(".tripViewWrapper").html("");
     $.post("/offer/sale/filter/", {
         "from": fr ? fr.val() : "",
         "to": to ? to.val() : "",
@@ -39,15 +38,62 @@ function TripRefreshPage()
     TripsRefresh(TripsGetRealPage());
 }
 
-function TripView(id, notChangeHash)
+function TripCloseImpl(id, revert, refreshview /* = true */, refreshpage /* = true */)
+{
+    if (typeof refreshpage == "undefined") {
+        refreshpage = true;
+    }
+    if (typeof refreshview == "undefined") {
+        refreshview = true;
+    }
+
+    $.post("/offer/sale/close/", {
+        "id": id,
+        "revert": revert,
+        "async": true
+    }, function(res) {
+        if (refreshpage) {
+            TripRefreshView(id);
+        }
+        if (refreshview) {
+            TripRefreshPage();
+        }
+    });
+}
+
+function TripClose(id, refreshview /* = true */, refreshpage /* = true */)
+{
+    TripCloseImpl(id, false, refreshview, refreshpage);
+}
+
+function TripReopen(id, refreshview /* = true */, refreshpage /* = true */)
+{
+    TripCloseImpl(id, true, refreshview, refreshpage);
+}
+
+function TripRefreshView(id, editBackref)
+{
+    $(".tripViewContent").html("Загрузка...");
+    $.ajax("/offer/sale/view/" + id, {
+        "data": (editBackref ? { "editBackref": editBackref } : {}),
+        "success": function(res) {
+            $(".tripViewContent").html(res);
+        },
+        "error": function() {
+            TripViewClose();
+        },
+    });
+
+}
+
+function TripView(id, notChangeHash, editBackref)
 {
     if (!notChangeHash) {
         window.location.hash = "#trip" + id;
     }
-    $.post("/offer/sale/view/" + id, {}, function(res) {
-        LockScroll();
-        $(".tripViewWrapper").html(res);
-    });
+    LockScroll();
+    $(".tripViewWrapper").show();
+    TripRefreshView(id, editBackref);
 }
 
 function TripViewClose(notChangeHash)
@@ -55,13 +101,27 @@ function TripViewClose(notChangeHash)
     if (!notChangeHash) {
         window.location.hash = "#tripspage" + TripsGetRealPage();
     }
-    $(".tripViewWrapper").html("");
+    $(".tripViewWrapper").hide();
+    $(".tripViewContent").html("");
     UnlockScroll();
 }
 
 function TripRemove(id)
 {
     if (confirm("Вы действительно хотите удалить поездку?")) {
-        window.location.href = "/offer/sale/remove/?id=" + id + "&backref=/offer/sale/list/";
+        var $tripViewContent = $(".tripViewContent");
+        if ($tripViewContent) {
+            $(".tripViewContent").html("Подождите, пожалуйста");
+        }
+        $.post("/offer/sale/remove/", {
+            "id": id,
+            "async": true
+        }, function(res) {
+            var $tripViewContent = $(".tripViewContent");
+            if ($tripViewContent) {
+                TripViewClose();
+            }
+            TripRefreshPage();
+        });
     }
 }

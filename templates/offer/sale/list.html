@@ -58,6 +58,17 @@
             </div>
         </div>
     </div>
-    <div class="tripViewWrapper">
+    <div class="tripViewWrapper" style="display: none;">
+        <div class="tripViewBg">
+            <div class="tripViewGoBack" onClick="TripViewClose();">
+            </div>
+            <div class="tripView bg0">
+                <button type="button" class="tripViewCloseBtn btn btn-default" onClick="TripViewClose();">
+                    <span class="glyphicon glyphicon-remove-circle"></span>
+                </button>
+                <div class="tripViewContent">
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}

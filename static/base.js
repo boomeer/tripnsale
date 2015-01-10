@@ -24,7 +24,6 @@ function LockScroll(){
 
 function UnlockScroll(){
     if (prevOverflow === null || scrollPosition === null) {
-        console.log("dfgdfsg");
         return;
     }
     $html = $('html');

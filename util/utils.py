@@ -69,3 +69,6 @@ def ValidFilter(text, filt):
         if not ok:
             return False
     return True
+
+def ParseBool(text):
+    return bool(text.strip()) and text.strip().lower() != "false" and text.strip() != "0"

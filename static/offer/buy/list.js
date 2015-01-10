@@ -26,10 +26,11 @@ function BuyChangePage()
 
 $(function() {
     $(window).bind('hashchange', BuyChangePage);
-    $("#buysFilterApply").on("click", BuysRefresh);
-    $("#buysTitle").on("input", BuysRefresh);
-    $("#buysFilterFrom").on("input", BuysRefresh);
-    $("#buysFilterTo").on("input", BuysRefresh);
+    var refr = function () { BuysRefresh(); };
+    $("#buysFilterApply").on("click", refr);
+    $("#buysTitle").on("input", refr);
+    $("#buysFilterFrom").on("input", refr);
+    $("#buysFilterTo").on("input", refr);
 
     if (BuyGetPage(null) != null && BuyGetPage() != BuyGetRealPage()) {
         BuysRefresh();

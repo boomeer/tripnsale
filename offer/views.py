@@ -28,6 +28,7 @@ from util.utils import (
     RenderToResponse,
     CheckPost,
     GetNewId,
+    ParseBool,
 )
 from user.utils import (
     GetCurrentUser,
@@ -267,16 +268,19 @@ def SaleRemoveView(request):
 @SafeView
 def SaleCloseView(request):
     params = request.REQUEST
+
     sale = SaleOffer.objects.get(id=params.get("id", 0))
     if sale.owner == GetCurrentUser(request):
-        revert = bool(params.get("revert", False))
+        revert = ParseBool(params.get("revert", ""))
         sale.closed = not revert
         sale.save()
+
     if params.get("async", False):
         return JsonResponse({"result": "ok"})
     else:
         backref = params.get("backref", "/offer/sale/list/#trip{}".format(sale.id))
         return redirect(backref)
+
 
 @SafeView
 def SaleView(request, id):
@@ -289,11 +293,13 @@ def SaleView(request, id):
 
 @SafeView
 def SalePreview(request, id):
+    params = request.REQUEST
     sale = SaleOffer.objects.get(id=id)
     if not sale.visible():
         raise Exception("not found")
     return RenderToResponse("offer/sale/preview.html", request, {
         "sale": sale,
+        "editBackref": params.get("editBackref", "")
     })
 
 class BuyEditErr (TsExc):
@@ -495,7 +501,7 @@ def BuyCloseView(request):
     params = request.REQUEST
     buy = BuyOffer.objects.get(id=params.get("id", 0))
     if buy.owner == GetCurrentUser(request):
-        revert = bool(int(params.get("revert", 0)))
+        revert = ParseBool(params.get("revert", ""))
         buy.closed = not revert
         buy.save()
 

@@ -6,7 +6,7 @@ function TripChangePage()
             TripsRefresh();
         }
     } else if (window.location.hash.match(/^#trip\d+$/)) {
-        TripView(window.location.hash.slice(5), true);
+        TripView(window.location.hash.slice(5), true, "/offer/sale/list/" + window.location.hash);
     } else {
         TripViewClose();
     }
@@ -26,9 +26,10 @@ function TripChangeHref()
 
 $(function() {
     $(window).bind('hashchange', TripChangePage);
-    $("#tripsFilterApply").on("click", TripsRefresh);
-    $("#tripsFilterFrom").on("input", TripsRefresh);
-    $("#tripsFilterTo").on("input", TripsRefresh);
+    var refr = function() { TripsRefresh(); };
+    $("#tripsFilterApply").on("click", refr);
+    $("#tripsFilterFrom").on("input", refr);
+    $("#tripsFilterTo").on("input", refr);
 
     if (TripsGetPage(null) != null && TripsGetPage() != TripsGetRealPage()) {
         TripsRefresh();
@@ -47,6 +48,6 @@ $(function() {
     $(".profileLink").click(StopPropagationEvent);
 
     if (window.location.hash.match(/^#trip\d+$/)) {
-        TripView(window.location.hash.slice(5));
+        TripView(window.location.hash.slice(5), true, "/offer/sale/list/" + window.location.hash);
     }
 });

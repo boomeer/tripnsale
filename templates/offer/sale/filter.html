@@ -2,7 +2,7 @@
 
 <input type="hidden" id="tripsPage" value="{{ page|add:1 }}" />
 {% for sale in saleblock %}
-    <div class="tripItem {% if sale.closed %}tripItem-closed{% endif %} row container-fluid" onClick="TripView({{ sale.id }});">
+    <div class="tripItem {% if sale.closed %}tripItem-closed{% endif %} row container-fluid" onclick="location.hash = '#trip{{ sale.id }}';">
         <div class="tripSection tripMainSection">
             <div class="tripFromTo">
                 <div class="tripFrom tripPlace">
@@ -100,18 +100,18 @@
             <div class="tripButtons">
                 {% if profile and not sale.closed and profileOwner == sale.owner %}
                     <div style="margin-bottom: 4px;">
-                        <a href="/offer/sale/edit/{{ sale.id }}" class="fast-profile-btn btn btn-primary">
+                        <a href="/offer/sale/edit/{{ sale.id }}?backref=/user/profile/" class="fast-profile-btn btn btn-primary">
                             <i class="ai ai-pencil"></i>
                             Редактировать
                         </a>
-                        <a href="/offer/sale/close/?id={{ sale.id }}" class="fast-profile-btn btn btn-warning">
+                        <button onclick="TripClose({{ sale.id }});" class="fast-profile-btn btn btn-warning">
                             <i class="ai ai-lock"></i>
                             Закрыть
-                        </a>
-                        <a href="/offer/sale/remove/?id={{ sale.id }}" class="fast-profile-btn btn btn-danger">
+                        </button>
+                        <button onclick="TripRemove({{ sale.id }});" class="fast-profile-btn btn btn-danger">
                             <i class="ai ai-close"></i>
                             Удалить
-                        </a>
+                        </button>
                     </div>
                 {% endif %}
             </div>

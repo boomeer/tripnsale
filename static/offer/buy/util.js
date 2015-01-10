@@ -77,10 +77,14 @@ function BuyRefreshView(id, editBackref)
 {
 
     $(".buyViewContent").html("Загрузка...");
-    $.post("/offer/buy/view/" + id,
-        (editBackref ? { "editBackref": editBackref } : {}),
-        function(res) {
+    $.ajax("/offer/buy/view/" + id, {
+        "data": (editBackref ? { "editBackref": editBackref } : {}),
+        "success": function(res) {
             $(".buyViewContent").html(res);
+        },
+        "error": function() {
+            BuyViewClose();
+        },
     });
 }
 
@@ -105,11 +109,11 @@ function BuyRemove(id)
             "id": id,
             "async": true
         }, function(res) {
-            BuysRefreshPage();
             var $buyViewContent = $(".buyViewContent");
             if ($buyViewContent) {
-                BuyViewClose(true);
+                BuyViewClose();
             }
+            BuysRefreshPage();
         });
     }
 }

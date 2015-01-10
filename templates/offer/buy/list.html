@@ -60,7 +60,18 @@
             </div>
         </div>
     </div>
-    <div class="buyViewWrapper">
+    <div class="buyViewWrapper" style="display: none;">
+        <div class="buyViewBg">
+            <div class="buyViewGoBack" onClick="BuyViewClose();">
+            </div>
+            <div class="buyView bg0">
+                <button type="button" class="buyViewCloseBtn btn btn-default" onClick="BuyViewClose();">
+                    <span class="glyphicon glyphicon-remove-circle"></span>
+                </button>
+                <div class="buyViewContent">
+                </div>
+            </div>
+        </div>
     </div>
     <div id="blueimp-gallery" class="blueimp-gallery">
         <!-- The container for the modal slides -->

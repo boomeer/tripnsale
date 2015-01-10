@@ -18,7 +18,7 @@ function BuyChangePage()
             BuysRefresh();
         }
     } else if (window.location.hash.match(/^#buy\d+$/)) {
-        BuyView(window.location.hash.slice(4), true);
+        BuyView(window.location.hash.slice(4), true, "/offer/buy/list/" + window.location.hash);
     } else {
         BuyViewClose();
     }
@@ -48,7 +48,7 @@ $(function() {
     $(".profile-link").click(StopPropagationEvent);
 
     if (window.location.hash.match(/^#buy\d+$/)) {
-        BuyView(window.location.hash.slice(4));
+        BuyView(window.location.hash.slice(4), true, "/offer/buy/list/" + window.location.hash);
     }
 });
 

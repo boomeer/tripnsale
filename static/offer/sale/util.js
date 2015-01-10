@@ -12,7 +12,7 @@ function TripsGetRealPage()
     return $("#tripsPage").val();
 }
 
-function TripsRefresh()
+function TripsRefresh(page)
 {
     var sp = $("#tripsProfile");
     var so = $("#tripsOwner");
@@ -24,7 +24,7 @@ function TripsRefresh()
         "from": fr ? fr.val() : "",
         "to": to ? to.val() : "",
         "profile": sp ? sp.val() : 0,
-        "page": TripsGetPage(),
+        "page": (page ? page : TripsGetPage()),
         "owner": so ? so.val() : 0
     }, function(res) {
         $(".tripsList").html(res);
@@ -32,6 +32,11 @@ function TripsRefresh()
         $(".tripOwner.tripOwner-right.tripSection").click(StopPropagationEvent);
         $(".profileLink").click(StopPropagationEvent);
     });
+}
+
+function TripRefreshPage()
+{
+    TripsRefresh(TripsGetRealPage());
 }
 
 function TripView(id, notChangeHash)

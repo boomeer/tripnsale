@@ -199,14 +199,16 @@ def SaleOfferAddView(request):
                 createTime=datetime.now(),
             )
             sale.save()
-            return redirect("/offer/sale/list#trip{}".format(sale.id))
+            backref = params.get("backref", "/offer/sale/list#trip{}".format(sale.id))
+            return redirect(backref)
         except SaleEditErr as e:
             raise RedirectExc("/offer/sale/add/?err={}".format(e.status))
-    return RenderToResponse("offer/sale/add.html", request, {
-        "url": "/offer/sale/add/",
-        "countries": GetCountries(),
-        "err": GetSaleAddMsg(params.get("err", ""))
-    })
+    else:
+        return RenderToResponse("offer/sale/add.html", request, {
+            "url": "/offer/sale/add/",
+            "countries": GetCountries(),
+            "err": GetSaleAddMsg(params.get("err", ""))
+        })
 
 @SafeView
 def SaleEditView(request, id):
@@ -232,14 +234,16 @@ def SaleEditView(request, id):
             sale.deposit = deposit
             sale.guarant = params.get("guarant", False)
             sale.save()
-            return redirect("/offer/sale/{}".format(sale.id))
+            backref = params.get("backref", "/offer/sale/list/#trip{}".format(sale.id))
+            return redirect(backref)
         except SaleEditErr as e:
             raise RedirectExc("/offer/sale/edit/{}?err={}".format(sale.id, e.status))
-    return RenderToResponse("offer/sale/edit.html", request, {
-        "sale": sale,
-        "countries": GetCountries(),
-        "err": GetSaleAddMsg(params.get("err", "")),
-    })
+    else:
+        return RenderToResponse("offer/sale/edit.html", request, {
+            "sale": sale,
+            "countries": GetCountries(),
+            "err": GetSaleAddMsg(params.get("err", "")),
+        })
 
 @SafeView
 def SaleFilterView(request):
@@ -254,9 +258,11 @@ def SaleRemoveView(request):
     if sale.owner == GetCurrentUser(request):
         sale.removed = True
         sale.save()
-    backref = params.get("backref", "/user/profile")
-    return redirect(backref)
-
+    if params.get("async", False):
+        return JsonResponse({"result": "ok"})
+    else:
+        backref = params.get("backref", "/offer/sale/list/")
+        return redirect(backref)
 
 @SafeView
 def SaleCloseView(request):
@@ -266,8 +272,11 @@ def SaleCloseView(request):
         revert = bool(params.get("revert", False))
         sale.closed = not revert
         sale.save()
-    backref = params.get("backref", "/user/profile")
-    return redirect(backref)
+    if params.get("async", False):
+        return JsonResponse({"result": "ok"})
+    else:
+        backref = params.get("backref", "/offer/sale/list/#trip{}".format(sale.id))
+        return redirect(backref)
 
 @SafeView
 def SaleView(request, id):
@@ -401,18 +410,20 @@ def BuyOfferAddView(request):
             )
             buy.save()
             VerifyPhotos(params.get("token", ""))
-            return redirect("/offer/buy/list#buy{}".format(buy.id))
+            backref = params.get("backref", "/offer/buy/list#buy{}".format(buy.id))
+            return redirect(backref)
         except BuyEditErr as e:
             raise RedirectExc("/offer/buy/add?err={}".format(e.status))
-    gallery = CreateGallery()
-    token = GetNewId()
-    return RenderToResponse("offer/buy/add.html", request, {
-        "url": "/offer/buy/add/",
-        "gallery": gallery,
-        "token": token,
-        "countries": GetCountries(),
-        "err": GetBuyEditMsg(params.get("err", ""))
-    })
+    else:
+        gallery = CreateGallery()
+        token = GetNewId()
+        return RenderToResponse("offer/buy/add.html", request, {
+            "url": "/offer/buy/add/",
+            "gallery": gallery,
+            "token": token,
+            "countries": GetCountries(),
+            "err": GetBuyEditMsg(params.get("err", ""))
+        })
 
 
 @SafeView
@@ -440,18 +451,22 @@ def BuyEditView(request, id):
             buy.guarant = params.get("guarant", False)
             buy.save()
             VerifyPhotos(params.get("token", ""))
-            return redirect("/offer/buy/{}".format(buy.id))
+
+            backref = params.get("backref", "/offer/buy/{}".format(buy.id))
+            return redirect(backref)
         except BuyEditErr as e:
             raise RedirectExc("/offer/buy/edit/{}?err={}".format(buy.id, e.status))
     elif act == "makeHead":
         pic = Photo.objects.get(id=params.get("picId"))
         pic.gallery.head = pic
         pic.gallery.save()
-        return redirect("/offer/buy/edit/{}".format(buy.id))
+        backref = params.get("backref", "/offer/buy/edit/{}".format(buy.id))
+        return redirect(backref)
     elif act == "erasePic":
         pic = Photo.objects.get(id=params.get("picId"))
         buy.gallery.er(pic)
-        return redirect("/offer/buy/edit/{}".format(buy.id))
+        backref = params.get("backref", "/offer/buy/edit/{}".format(buy.id))
+        return redirect(backref)
     return RenderToResponse("offer/buy/edit.html", request, {
         "url": "/offer/buy/edit/{}/".format(buy.id),
         "buy": buy,
@@ -468,8 +483,11 @@ def BuyRemoveView(request):
     if buy.owner == GetCurrentUser(request):
         buy.removed = True
         buy.save()
-    backref = params.get("backref", "/user/profile")
-    return redirect(backref)
+    if params.get("async", False):
+        return JsonResponse({"result": "ok"})
+    else:
+        backref = params.get("backref", "/offer/buy/list/")
+        return redirect(backref)
 
 
 @SafeView
@@ -477,12 +495,15 @@ def BuyCloseView(request):
     params = request.REQUEST
     buy = BuyOffer.objects.get(id=params.get("id", 0))
     if buy.owner == GetCurrentUser(request):
-        revert = bool(params.get("revert", False))
+        revert = bool(int(params.get("revert", 0)))
         buy.closed = not revert
         buy.save()
-    backref = params.get("backref", "/user/profile")
-    return redirect(backref)
 
+    if params.get("async", False):
+        return JsonResponse({"result": "ok"})
+    else:
+        backref = params.get("backref", "/offer/buy/list#buy{}".format(buy.id))
+        return redirect(backref)
 
 def BuyFilterExtractParams(request, static=False):
     params = request.REQUEST
@@ -533,11 +554,13 @@ def BuyView(request, id):
 
 @SafeView
 def BuyPreview(request, id):
+    params = request.REQUEST
     buy = BuyOffer.objects.get(id=id)
     if not buy.visible():
         raise Exception("not found")
     return RenderToResponse("offer/buy/preview.html", request, {
         "buy": buy,
+        "editBackref": params.get("editBackref", ""),
     })
 
 

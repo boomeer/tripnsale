@@ -13,7 +13,7 @@ function OnHashChange()
         }
     } else if (window.location.hash.match(/^#buy\d+$/)) {
         TripViewClose(true);
-        BuyView(window.location.hash.slice(4), true);
+        BuyView(window.location.hash.slice(4), true, "/user/profile/" + window.location.hash);
     } else if (window.location.hash.match(/^#tripspage\d+$/)) {
         CloseAll();
         if (TripsGetPage() != TripsGetRealPage()) {
@@ -21,7 +21,7 @@ function OnHashChange()
         }
     } else if (window.location.hash.match(/^#trip\d+$/)) {
         BuyViewClose(true);
-        TripView(window.location.hash.slice(5), true);
+        TripView(window.location.hash.slice(5), true, "/user/profile/" + window.location.hash);
     } else {
         CloseAll();
     }

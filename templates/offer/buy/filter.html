@@ -3,7 +3,7 @@
 <input type="hidden" id="buysPage" value="{{ page|add:1 }}" />
 
 {% for buy in buyblock %}
-    <div class="buy-item container-fluid {% if buy.closed %}buy-item-closed{% endif %}" onclick="BuyView({{ buy.id }})">
+    <div class="buy-item container-fluid {% if buy.closed %}buy-item-closed{% endif %}" onclick="location.hash = '#buy{{ buy.id }}';">
         <div class="buy-section photo hidden-xs">
             <img src="{{ buy.gallery.getHeadUrl }}" alt="">
         </div>
@@ -81,18 +81,18 @@
             <div>
                 {% if profile and not buy.closed and profileOwner == buy.owner %}
                     <div style="margin-bottom: 4px;">
-                        <a href="/offer/buy/edit/{{ buy.id }}" class="fast-profile-btn btn btn-primary">
+                        <a href="/offer/buy/edit/{{ buy.id }}?backref=/user/profile/" class="fast-profile-btn btn btn-primary">
                             <i class="ai ai-pencil"></i>
                             Редактировать
                         </a>
-                        <a href="/offer/buy/close/?id={{ buy.id }}" class="fast-profile-btn btn btn-warning">
+                        <button onclick="BuyClose({{ buy.id }});" class="fast-profile-btn btn btn-warning">
                             <i class="ai ai-lock"></i>
                             Закрыть
-                        </a>
-                        <a href="/offer/buy/remove/?id={{ buy.id }}" class="fast-profile-btn btn btn-danger">
+                        </button>
+                        <button onclick="BuyRemove({{ buy.id }});" class="fast-profile-btn btn btn-danger">
                             <i class="ai ai-close"></i>
                             Удалить
-                        </a>
+                        </button>
                     </div>
                 {% endif %}
                 {% if buy.closed %}

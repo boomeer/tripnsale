@@ -12,20 +12,19 @@ function BuyGetRealPage()
     return $("#buysPage").val();
 }
 
-function BuysRefresh()
+function BuysRefresh(page)
 {
     var bp = $("#buysProfile");
     var bo = $("#buysOwner");
     var fr = $("#buysFilterFrom");
     var to = $("#buysFilterTo");
     $(".buysList").html("Загрузка...");
-    $(".buyViewWrapper").html("");
     $.post("/offer/buy/filter/", {
         "title": $("#buysTitle").val(),
         "fr": fr ? fr.val() : "",
         "to": to ? to.val() : "",
         "profile": bp ? bp.val() : "",
-        "page": BuyGetPage(),
+        "page": (page ? page : BuyGetPage()),
         "owner": bo ? bo.val() : 0
     }, function(res) {
         $(".buysList").html(res);
@@ -35,21 +34,83 @@ function BuysRefresh()
     });
 }
 
-function BuyView(id, notChangeHash)
+function BuysRefreshPage()
+{
+    BuysRefresh(BuyGetRealPage());
+}
+
+
+function BuyCloseImpl(id, revert, refreshview /* = true */, refreshpage /* = true */)
+{
+    if (typeof refreshpage == "undefined") {
+        refreshpage = true;
+    }
+    if (typeof refreshview == "undefined") {
+        refreshview = true;
+    }
+
+    $.post("/offer/buy/close/", {
+        "id": id,
+        "revert": revert,
+        "async": true
+    }, function(res) {
+        if (refreshpage) {
+            BuyRefreshView(id);
+        }
+        if (refreshview) {
+            BuysRefreshPage();
+        }
+    });
+}
+
+function BuyClose(id, refreshview /* = true */, refreshpage /* = true */)
+{
+    BuyCloseImpl(id, 0, refreshview, refreshpage);
+}
+
+function BuyReopen(id, refreshview /* = true */, refreshpage /* = true */)
+{
+    BuyCloseImpl(id, 1, refreshview, refreshpage);
+}
+
+function BuyRefreshView(id, editBackref)
+{
+
+    $(".buyViewContent").html("Загрузка...");
+    $.post("/offer/buy/view/" + id,
+        (editBackref ? { "editBackref": editBackref } : {}),
+        function(res) {
+            $(".buyViewContent").html(res);
+    });
+}
+
+function BuyView(id, notChangeHash, editBackref)
 {
     if (!notChangeHash) {
         window.location.hash = "#buy" + id;
     }
-    $.post("/offer/buy/view/" + id, {}, function(res) {
-        $(".buyViewWrapper").html(res);
-        LockScroll();
-    });
+    LockScroll();
+    $(".buyViewWrapper").show();
+    BuyRefreshView(id, editBackref);
 }
 
 function BuyRemove(id)
 {
     if (confirm("Вы действительно хотите удалить заказ?")) {
-        window.location.href = "/offer/buy/remove/?id=" + id + "&backref=/offer/buy/list/";
+        var $buyViewContent = $(".buyViewContent");
+        if ($buyViewContent) {
+            $(".buyViewContent").html("Подождите, пожалуйста");
+        }
+        $.post("/offer/buy/remove/", {
+            "id": id,
+            "async": true
+        }, function(res) {
+            BuysRefreshPage();
+            var $buyViewContent = $(".buyViewContent");
+            if ($buyViewContent) {
+                BuyViewClose(true);
+            }
+        });
     }
 }
 
@@ -58,6 +119,7 @@ function BuyViewClose(notChangeHash)
     if (!notChangeHash) {
         window.location.hash = "#buyspage" + BuyGetRealPage();
     }
-    $(".buyViewWrapper").html("");
+    $(".buyViewWrapper").hide();
+    $(".buyViewContent").html("");
     UnlockScroll();
 }

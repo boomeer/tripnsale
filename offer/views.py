@@ -458,7 +458,7 @@ def BuyEditView(request, id):
             buy.save()
             VerifyPhotos(params.get("token", ""))
 
-            backref = params.get("backref", "/offer/buy/{}".format(buy.id))
+            backref = params.get("backref", "/offer/buy/list/#buy{}".format(buy.id))
             return redirect(backref)
         except BuyEditErr as e:
             raise RedirectExc("/offer/buy/edit/{}?err={}".format(buy.id, e.status))

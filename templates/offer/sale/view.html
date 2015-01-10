@@ -122,7 +122,7 @@
                 <div class="buttons">
                     {% if profileOwner == sale.owner %}
                         {% if not sale.closed %}
-                            <a type="button" class="btn btn-primary" href="/offer/sale/edit/{{ sale.id }}" title="Редактировать">
+                            <a type="button" class="btn btn-primary" href="/offer/sale/edit/{{ sale.id }}?backref=/offer/sale/{{ sale.id }}" title="Редактировать">
                                 <i class="ai ai-pencil"></i>
                             </a>
                         {% endif %}

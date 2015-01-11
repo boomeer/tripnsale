@@ -58,12 +58,18 @@
                 </span>
             </div>
             <div class="indissoluble">
-                <span class="guarant">
-                    {% if buy.guarant %}
+                {% if buy.guarant %}
+                    <span class="guarant">
                         <i class="ai ai-shield"></i>
                         Только с гарантом
-                    {% endif %}
-                </span>
+                    </span>
+                {% endif %}
+                {% if buy.closed %}
+                    <span class="closed">
+                        <i class="ai ai-lock"></i>
+                        Закрыт
+                    </span>
+                {% endif %}
             </div>
             {% if buy.content %}
                 <div class="comment">
@@ -94,12 +100,6 @@
                             Удалить
                         </button>
                     </div>
-                {% endif %}
-                {% if buy.closed %}
-                    <span class="closed">
-                        <i class="ai ai-lock"></i>
-                        Закрыт
-                    </span>
                 {% endif %}
             </div>
         </div>

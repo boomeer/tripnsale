@@ -1,3 +1,5 @@
+var gTripEditBackref;
+
 function TripsGetPage(defaultPage)
 {
     if (typeof defaultPage == "undefined") {
@@ -73,6 +75,13 @@ function TripReopen(id, refreshview /* = true */, refreshpage /* = true */)
 
 function TripRefreshView(id, editBackref)
 {
+    if (editBackref) {
+        editBackref = encodeURIComponent(editBackref);
+        gTripEditBackref = editBackref;
+    } else {
+        editBackref = gTripEditBackref;
+    }
+
     $(".tripViewContent").html("Загрузка...");
     $.ajax("/offer/sale/view/" + id, {
         "data": (editBackref ? { "editBackref": editBackref } : {}),

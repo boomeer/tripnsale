@@ -1,3 +1,5 @@
+var gBuyEditBackref;
+
 function BuyGetPage(defultPage)
 {
     if (typeof defaultPage == "undefined") {
@@ -75,7 +77,15 @@ function BuyReopen(id, refreshview /* = true */, refreshpage /* = true */)
 
 function BuyRefreshView(id, editBackref)
 {
+    console.log(editBackref);
+    if (editBackref) {
+        editBackref = encodeURIComponent(editBackref);
+        gBuyEditBackref = editBackref;
+    } else {
+        editBackref = gBuyEditBackref;
+    }
 
+    console.log(editBackref, (editBackref ? "123" : "321"));
     $(".buyViewContent").html("Загрузка...");
     $.ajax("/offer/buy/view/" + id, {
         "data": (editBackref ? { "editBackref": editBackref } : {}),

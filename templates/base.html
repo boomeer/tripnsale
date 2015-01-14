@@ -104,12 +104,12 @@ Trip&Sale поможет тебе в этом! {% endblock %}" />
                       <span class="triangle-up"></span>
                       <li>
                         <span class="valuterow">
-                          <strong>{{ usdCourse.fromVal|valuteround:0 }}$</strong> - {{ usdCourse.toVal|valuteround:-2 }} руб.
+                          <strong>{{ usdCourse.fromVal|valuteround:0 }}$</strong> - {{ usdCourse.toVal|valuteround:-2|floatformat:2 }} руб.
                         </span>
                       </li>
                       <li>
                         <span class="valuterow">
-                          <strong>{{ euroCourse.fromVal|valuteround:0 }}&#8364;</strong> - {{ euroCourse.toVal|valuteround:-2 }} руб.
+                          <strong>{{ euroCourse.fromVal|valuteround:0 }}&#8364;</strong> - {{ euroCourse.toVal|valuteround:-2|floatformat:2 }} руб.
                         </span>
                       </li>
                       <li>

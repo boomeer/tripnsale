@@ -6,6 +6,7 @@
 *~
 tripnsale/priv_settings.py
 static/css
+.version_suffix
 *.sublime-project
 *.sublime-workspace
 *.sqlite3

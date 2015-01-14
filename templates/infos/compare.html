@@ -203,7 +203,19 @@
       <p class="lead">~{{ 5760|valuteround:2 }} рублей за протеин в России. <i class="notabene"></i></p>
     </div>
     <div class="col-md-12 text-center" style="padding-top: 0px;">
-      <p class="lead">Разница около {{ 57.48|convertvalute:usdCourse|valuteround:2|valutesub:5760|valuteround:2 }} рублей. (75% цены для данного товара)</p>
+      <p class="lead">Разница около {{ 57.48|convertvalute:usdCourse|valuteround:2|valutesub:5760|valuteround:2 }} рублей.
+        {% if 57.48|convertvalute:usdCourse|valuteround:2|valutesub:5760|valuteround:2 > 57.48|convertvalute:usdCourse|valuteround:2|valuteperc:0.75 %}
+          (более 75% цены для данного товара)
+        {% elif 57.48|convertvalute:usdCourse|valuteround:2|valutesub:5760|valuteround:2 > 57.48|convertvalute:usdCourse|valuteround:2|valuteperc:0.70 %}
+          (более 70% цены для данного товара)
+        {% elif 57.48|convertvalute:usdCourse|valuteround:2|valutesub:5760|valuteround:2 > 57.48|convertvalute:usdCourse|valuteround:2|valuteperc:0.60 %}
+          (более 60% цены для данного товара)
+        {% elif 57.48|convertvalute:usdCourse|valuteround:2|valutesub:5760|valuteround:2 > 57.48|convertvalute:usdCourse|valuteround:2|valuteperc:0.5 %}
+          (более 50% цены для данного товара)
+        {% elif 57.48|convertvalute:usdCourse|valuteround:2|valutesub:5760|valuteround:2 == 57.48|convertvalute:usdCourse|valuteround:2|valuteperc:0.5 %}
+          (50% цены для данного товара)
+        {% endif %}
+      </p>
     </div>
   </div> <!-- end row -->
   <div class="footnote">* Используются актуальные цены {{ costUpdTime|date:"d E Y" }}</div>

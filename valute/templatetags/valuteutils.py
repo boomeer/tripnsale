@@ -16,6 +16,10 @@ def valutesub(first, second):
     return abs(float(first) - float(second))
 
 @register.filter
+def valuteperc(val, perc):
+    return float(val)*perc
+
+@register.filter
 def textthousands(value, lang="ru"):
     thtext = "thousands"
     thval = int(round(float(value)/10**3))

@@ -1,13 +1,14 @@
 {% extends "base.html" %}
 {% load static %}
+{% load ccstatic %}
 
 {% block own_title %}
 Редактирование профиля -
 {% endblock %}
 
 {% block own_head %}
-    <script src="{% static "user/edit_profile.js" %}" type="text/javascript"></script>
-    <link rel="stylesheet" href="{% static "css/user/edit_profile.css" %}">
+    <script src="{% ccstatic "user/edit_profile.js" %}" type="text/javascript"></script>
+    <link rel="stylesheet" href="{% ccstatic "css/user/edit_profile.css" %}">
     {% include "file-upload.html" %}
 {% endblock %}
 

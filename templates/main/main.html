@@ -1,9 +1,10 @@
 {% extends "base.html" %}
 {% load static %}
+{% load ccstatic %}
 
 {% block own_head %}
-    <script src="{% static "main/main.js" %}"></script>
-    <link rel="stylesheet" href="{% static "css/main/main.css" %}"/>
+    <script src="{% ccstatic "main/main.js" %}"></script>
+    <link rel="stylesheet" href="{% ccstatic "css/main/main.css" %}"/>
 {% endblock %}
 
 {% block main %}
@@ -123,7 +124,7 @@
     <div class="row">
       <div class="three-col-img-block space--big">
         <div class="col-sm-4 col-sm-offset-4 no-border text-center wow fadeInLeft" data-wow-duration="1.4s" data-wow-delay=".2s">
-            <img src="{% static "ext/adapto/assets/img/TestBox.png" %}" alt="" class="img-responsive visible-sm visible-lg" style="margin-top: 35px;">
+            <img src="{% ccstatic "ext/adapto/assets/img/TestBox.png" %}" alt="" class="img-responsive visible-sm visible-lg" style="margin-top: 35px;">
         </div>
       </div>
     </div>

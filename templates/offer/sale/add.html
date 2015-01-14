@@ -1,13 +1,14 @@
 {% extends "base.html" %}
 {% load static %}
+{% load ccstatic %}
 
 {% block own_title %}
 Добавление поездки -
 {% endblock %}
 
 {% block own_head %}
-    <script src="{% static "offer/sale/add.js" %}" type="text/javascript"></script>
-    <link rel="stylesheet" href="{% static "css/offer/sale/add.css" %}">
+    <script src="{% ccstatic "offer/sale/add.js" %}" type="text/javascript"></script>
+    <link rel="stylesheet" href="{% ccstatic "css/offer/sale/add.css" %}">
 {% endblock %}
 
 {% block main %}

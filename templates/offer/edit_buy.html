@@ -1,13 +1,14 @@
 {% extends "base.html" %}
 {% load static %}
+{% load ccstatic %}
 
 {% block own_title %}
 Редактирование заказа -
 {% endblock %}
 
 {% block own_head %}
-    <script src="{% static "offer/buy/add.js" %}" type="text/javascript"></script>
-    <link rel="stylesheet" href="{% static "css/offer/buy/add.css" %}">
+    <script src="{% ccstatic "offer/buy/add.js" %}" type="text/javascript"></script>
+    <link rel="stylesheet" href="{% ccstatic "css/offer/buy/add.css" %}">
 {% endblock %}
 
 {% block main %}

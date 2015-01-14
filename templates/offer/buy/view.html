@@ -1,13 +1,14 @@
 {% extends "base.html" %}
 
 {% load static %}
+{% load ccstatic %}
 
 {% block own_title %}
 Заказ -
 {% endblock %}
 
 {% block own_head %}
-    <link rel="stylesheet" href="{% static "css/offer/buy/view.css" %}"/>
+    <link rel="stylesheet" href="{% ccstatic "css/offer/buy/view.css" %}"/>
     <script type="text/javascript">
         function BuyRemove(id)
         {

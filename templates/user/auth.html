@@ -1,9 +1,10 @@
 {% extends "base.html" %}
 {% load static %}
+{% load ccstatic %}
 
 {% block own_head %}
-    <script src="{% static "user/auth.js" %}" type="text/javascript"></script>
-    <link rel="stylesheet" href="{% static "css/user/auth.css" %}">
+    <script src="{% ccstatic "user/auth.js" %}" type="text/javascript"></script>
+    <link rel="stylesheet" href="{% ccstatic "css/user/auth.css" %}">
 {% endblock %}
 
 {% block own_title %}

@@ -1,13 +1,14 @@
 {% extends "base.html" %}
 
 {% load static %}
+{% load ccstatic %}
 
 {% block own_title %}
 Поездка -
 {% endblock %}
 
 {% block own_head %}
-    <link rel="stylesheet" href="{% static "css/offer/sale/view.css" %}"/>
+    <link rel="stylesheet" href="{% ccstatic "css/offer/sale/view.css" %}"/>
     <script type="text/javascript">
         function TripRemove(id)
         {

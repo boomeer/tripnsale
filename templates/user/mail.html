@@ -1,13 +1,14 @@
 {% extends "base.html" %}
 {% load static %}
+{% load ccstatic %}
 
 {% block own_title %}
 Сообщения -
 {% endblock %}
 
 {% block own_head %}
-    <script src="{% static "user/mail.js" %}" type="text/javascript"></script>
-    <link rel="stylesheet" href="{% static "css/user/mail.css" %}">
+    <script src="{% ccstatic "user/mail.js" %}" type="text/javascript"></script>
+    <link rel="stylesheet" href="{% ccstatic "css/user/mail.css" %}">
 {% endblock %}
 
 {% block main %}

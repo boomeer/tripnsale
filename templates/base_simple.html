@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 {% load static %}
+{% load ccstatic %}
 
 {% block own_head %}
-    <link rel="stylesheet" href="{% static "css/base_simple.css" %}">
+    <link rel="stylesheet" href="{% ccstatic "css/base_simple.css" %}">
     {% block own_head2 %}{% endblock %}
 {% endblock %}
 

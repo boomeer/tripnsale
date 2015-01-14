@@ -1,14 +1,15 @@
 {% extends "base.html" %}
 {% load static %}
+{% load ccstatic %}
 
 {% block own_title %}
 Редактирование поездки -
 {% endblock %}
 
 {% block own_head %}
-    <link rel="stylesheet" href="{% static "css/offer/sale/add.css" %}">
-    <script src="{% static "offer/sale/edit.js" %}" type="text/javascript"></script>
-    <link rel="stylesheet" href="{% static "css/offer/sale/edit.css" %}">
+    <link rel="stylesheet" href="{% ccstatic "css/offer/sale/add.css" %}">
+    <script src="{% ccstatic "offer/sale/edit.js" %}" type="text/javascript"></script>
+    <link rel="stylesheet" href="{% ccstatic "css/offer/sale/edit.css" %}">
 {% endblock %}
 
 {% block main %}

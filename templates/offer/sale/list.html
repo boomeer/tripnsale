@@ -1,14 +1,15 @@
 {% extends "base_list.html" %}
 {% load static %}
+{% load ccstatic %}
 
 {% block own_title %}
 Список поездок -
 {% endblock %}
 
 {% block own_head %}
-    <script src="{% static "offer/sale/list.js" %}"></script>
-    <script src="{% static "offer/sale/util.js" %}"></script>
-    <link rel="stylesheet" href="{% static "css/offer/sale/list.css" %}"/>
+    <script src="{% ccstatic "offer/sale/list.js" %}"></script>
+    <script src="{% ccstatic "offer/sale/util.js" %}"></script>
+    <link rel="stylesheet" href="{% ccstatic "css/offer/sale/list.css" %}"/>
 {% endblock %}
 
 {% block main %}

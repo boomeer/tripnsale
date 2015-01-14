@@ -1,42 +1,43 @@
 {% load bootstrap3 %}
 {% load static %}
+{% load ccstatic %}
 {% load valuteutils %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link href="{% static "favicon.png" %}" rel="shortcut icon" type="image/x-icon" />
+    <link href="{% ccstatic "favicon.png" %}" rel="shortcut icon" type="image/x-icon" />
     <meta name="title" content="{% block own_meta_title %}{% endblock %}Trip&Sale - Сделай это дешевле!" />
     <meta name="description" content="{% block meta_description %}{% block own_meta_description %}{% endblock %} Хочешь товар из-за границы к себе в город?
 Много путешествуешь и готов зарабатывать на этом?
 Trip&Sale поможет тебе в этом! {% endblock %}" />
-    <link rel="image_src" href="{% block meta_image %}{% static "description.png" %}{% endblock %}" />
+    <link rel="image_src" href="{% block meta_image %}{% ccstatic "description.png" %}{% endblock %}" />
     <link name="keywords" content="Tripnsale, Trip, Sale, Путешествия, покупка, заграница, страна, купить, привезти, продать {% block own_keywords %}{% endblock %}" />
 
     <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="//code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/i18n/jquery-ui-i18n.min.js"></script>
-    <link rel="stylesheet" href="{% static "ext/jquery-ui-bootstrap/jquery-ui-1.10.3.custom.css" %}">
-    <link href="{% static "ext/select2/select2.min.css" %}" rel="stylesheet"/>
-    <script src="{% static "ext/select2/select2.js" %}"></script>
-    <script src="{% static "place/country.js" %}"></script>
+    <link rel="stylesheet" href="{% ccstatic "ext/jquery-ui-bootstrap/jquery-ui-1.10.3.custom.css" %}">
+    <link href="{% ccstatic "ext/select2/select2.min.css" %}" rel="stylesheet"/>
+    <script src="{% ccstatic "ext/select2/select2.js" %}"></script>
+    <script src="{% ccstatic "place/country.js" %}"></script>
     {% bootstrap_css %}
     {% bootstrap_javascript %}
     <link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Italianno' rel='stylesheet' type='text/css'>
-    <link href="{% static "ext/adapto/assets/css/global-style_light--blue1.min.css" %}" rel="stylesheet">
-    <link href="{% static "ext/adapto/assets/revolution-slider/css/settings.min.css" %}" rel="stylesheet" type="text/css" media="all" />
+    <link href="{% ccstatic "ext/adapto/assets/css/global-style_light--blue1.min.css" %}" rel="stylesheet">
+    <link href="{% ccstatic "ext/adapto/assets/revolution-slider/css/settings.min.css" %}" rel="stylesheet" type="text/css" media="all" />
     <script src="//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
-    <script src="{% static "ext/image-gallery/js/bootstrap-image-gallery.min.js" %}"></script>
+    <script src="{% ccstatic "ext/image-gallery/js/bootstrap-image-gallery.min.js" %}"></script>
     <link rel="stylesheet" href="//blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
-    <link rel="stylesheet" href="{% static "ext/image-gallery/css/bootstrap-image-gallery.min.css" %}">
+    <link rel="stylesheet" href="{% ccstatic "ext/image-gallery/css/bootstrap-image-gallery.min.css" %}">
 
-    <script src="{% static "base.js" %}"></script>
-    <script src="{% static "csrf.js" %}"></script>
-    <script src="{% static "top_panel.js" %}"></script>
-    <link rel="stylesheet" href="{% static "css/base.css" %}">
-    <link rel="stylesheet" href="{% static "css/top_panel.css" %}"/>
+    <script src="{% ccstatic "base.js" %}"></script>
+    <script src="{% ccstatic "csrf.js" %}"></script>
+    <script src="{% ccstatic "top_panel.js" %}"></script>
+    <link rel="stylesheet" href="{% ccstatic "css/base.css" %}">
+    <link rel="stylesheet" href="{% ccstatic "css/top_panel.css" %}"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {% block own_head %}{% endblock %}
     <title>
@@ -349,11 +350,11 @@ Trip&Sale поможет тебе в этом! {% endblock %}" />
     <!-- SCRIPTS -->
     <!-- Global Scripts -->
 
-    <script src="{% static "ext/adapto/assets/js/global-adapto.js" %}"></script>
-    <script src="{% static "ext/adapto/assets/js/global-bootstrap.min.js" %}"></script>
+    <script src="{% ccstatic "ext/adapto/assets/js/global-adapto.js" %}"></script>
+    <script src="{% ccstatic "ext/adapto/assets/js/global-bootstrap.min.js" %}"></script>
 
-<script src="{% static "ext/adapto/assets/js/owl.carousel.min.js" %}"></script>
-<script src="{% static "ext/adapto/assets/js/wow.min.js" %}"></script>
+<script src="{% ccstatic "ext/adapto/assets/js/owl.carousel.min.js" %}"></script>
+<script src="{% ccstatic "ext/adapto/assets/js/wow.min.js" %}"></script>
 <script>
   // for testimonial slider
   var owl = $("#testimonials");
@@ -370,8 +371,8 @@ new WOW().init();
 
 
       <!-- Revolution Slider REQUIRED JS files -->
-<script src="{% static "ext/adapto/assets/revolution-slider/js/jquery.themepunch.revolution.min.js" %}"></script>
-<script src="{% static "ext/adapto/assets/revolution-slider/js/jquery.themepunch.plugins.min.js" %}"></script>
+<script src="{% ccstatic "ext/adapto/assets/revolution-slider/js/jquery.themepunch.revolution.min.js" %}"></script>
+<script src="{% ccstatic "ext/adapto/assets/revolution-slider/js/jquery.themepunch.plugins.min.js" %}"></script>
 
 <script>
   // Revolution Slider SETTINGS

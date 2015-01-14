@@ -1,14 +1,15 @@
 {% extends "base.html" %}
 {% load static %}
+{% load ccstatic %}
 
 {% block own_title %}
 Заказы -
 {% endblock %}
 
 {% block own_head %}
-    <script src="{% static "offer/buy/list.js" %}"></script>
-    <script src="{% static "offer/buy/util.js" %}"></script>
-    <link rel="stylesheet" href="{% static "css/offer/buy/list.css" %}"/>
+    <script src="{% ccstatic "offer/buy/list.js" %}"></script>
+    <script src="{% ccstatic "offer/buy/util.js" %}"></script>
+    <link rel="stylesheet" href="{% ccstatic "css/offer/buy/list.css" %}"/>
 {% endblock %}
 
 {% block main %}

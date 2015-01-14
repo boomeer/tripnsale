@@ -1,13 +1,14 @@
 {% extends "base_list.html" %}
 {% load static %}
+{% load ccstatic %}
 
 {% block own_title %}
 Сообщения -
 {% endblock %}
 
 {% block own_head %}
-    <script src="{% static "user/im.js" %}"></script>
-    <link rel="stylesheet" href="{% static "css/user/im.css" %}"/>
+    <script src="{% ccstatic "user/im.js" %}"></script>
+    <link rel="stylesheet" href="{% ccstatic "css/user/im.css" %}"/>
 {% endblock %}
 
 {% block main %}

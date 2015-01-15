@@ -70,6 +70,11 @@ $(function() {
     $(window).resize(CheckFooter);
     $(window).resize(CheckHeader);
 
+    $("#header .annoying-row .closebtn").click(function() {
+        $("#header .annoying-row").slideUp(CheckHeader);
+        $(".main").animate({ "margin-top": $("header .header-base").outerHeight()});
+        $(".page-wrap2").animate({"margin-top": -$("header .header-base").outerHeight()});
+    });
     // oh my god
     setTimeout (CheckFooter, 100);
     setTimeout (CheckHeader, 100);

@@ -70,8 +70,12 @@ $(function() {
     $(window).resize(CheckFooter);
     $(window).resize(CheckHeader);
 
-    $("#header .annoying-row .closebtn").click(function() {
-        $("#header .annoying-row").slideUp(CheckHeader);
+    var $annrow = $("#header .annoying-row");
+    $annrow.find(".closebtn").click(function() {
+        $annrow.slideUp(function() {
+            $annrow.removeClass("main-only-show");
+            CheckHeader();
+        });
         $(".main").animate({ "margin-top": $("header .header-base").outerHeight()});
         $(".page-wrap2").animate({"margin-top": -$("header .header-base").outerHeight()});
     });

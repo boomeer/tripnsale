@@ -1,0 +1,379 @@
+{% load bootstrap3 %}
+{% load static %}
+{% load ccstatic %}
+{% load valuteutils %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="{% ccstatic "favicon.png" %}" rel="shortcut icon" type="image/x-icon" />
+
+    <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="//code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/i18n/jquery-ui-i18n.min.js"></script>
+    <link rel="stylesheet" href="{% ccstatic "ext/jquery-ui-bootstrap/jquery-ui-1.10.3.custom.css" %}">
+    <link href="{% ccstatic "ext/select2/select2.min.css" %}" rel="stylesheet"/>
+    <script src="{% ccstatic "ext/select2/select2.js" %}"></script>
+    <script src="{% ccstatic "place/country.js" %}"></script>
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Italianno' rel='stylesheet' type='text/css'>
+    <link href="{% ccstatic "ext/adapto/assets/css/global-style_light--blue1.min.css" %}" rel="stylesheet">
+    <link href="{% ccstatic "ext/adapto/assets/revolution-slider/css/settings.min.css" %}" rel="stylesheet" type="text/css" media="all" />
+    <script src="//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
+    <script src="{% ccstatic "ext/image-gallery/js/bootstrap-image-gallery.min.js" %}"></script>
+    <link rel="stylesheet" href="//blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
+    <link rel="stylesheet" href="{% ccstatic "ext/image-gallery/css/bootstrap-image-gallery.min.css" %}">
+
+    <script src="{% ccstatic "base.js" %}"></script>
+    <script src="{% ccstatic "csrf.js" %}"></script>
+    <script src="{% ccstatic "top_panel.js" %}"></script>
+    <link rel="stylesheet" href="{% ccstatic "css/base.css" %}">
+    <link rel="stylesheet" href="{% ccstatic "css/top_panel.css" %}"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% block own_head %}{% endblock %}
+    <title>
+      {% block own_title %}{% endblock %}Trip&Sale - Сделай это дешевле!
+    </title>
+</head>
+<body id="top">
+  <header id="header" class="header slide animated" role="banner">
+    <div class="container header-base">
+      <div class="row">
+
+        <div class="navbar-header">
+
+          <!-- TOGGLE BUTTON for mobile -->
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="ai ai-menu ai-2x ai-primary"></span>
+          </button>
+
+          <!-- sitewide logo LINK TO ROOT INDEX (home) PAGE -->
+          <a href="/" class="navbar-brand">
+            <!-- sitewide LOGO HERE (as text, image, or both) -->
+            <span class="logo-top">
+              Trip<span class="ai ai-compass"></span>Sale
+            </span>
+            <!-- Hidden text in an h1 tag for SEO purposes -->
+            <h1 class="text-hide">Adapto Theme</h1>
+          </a> <!-- end site-wide logo link -->
+
+        </div> <!-- end navbar-header -->
+
+        <!-- NAVIGATION -->
+        <div class="collapse navbar-collapse">
+          <nav class="navbar nobcg" role="navigation">
+            <ul class="nav navbar-nav navbar-right">
+                {% if profileOwner.guarant %}
+                  <li>
+                      <a href="/guarant/asks">
+                          <i class="ai ai-shield"></i>
+                            Запросы гаранта
+                      </a>
+                  </li>
+                {% endif %}
+              <li class="dropdown">
+                  <a class="dropdown-toggle" href="#">
+                      <i class="ai ai-coin"></i>
+                      Exchange Rates
+                  </a>
+                  <ul class="dropdown-menu">
+                      <span class="triangle-up"></span>
+                      <li>
+                        <span class="valuterow">
+                          <strong>{{ usdCourse.fromVal|valuteround:0 }}$</strong> - {{ usdCourse.toVal|valuteround:-2|floatformat:2 }} rub
+                        </span>
+                      </li>
+                      <li>
+                        <span class="valuterow">
+                          <strong>{{ euroCourse.fromVal|valuteround:0 }}&#8364;</strong> - {{ euroCourse.toVal|valuteround:-2|floatformat:2 }} rub
+                        </span>
+                      </li>
+                  </ul>
+              </li>
+              <li class="dropdown">
+                  <a class="dropdown-toggle" href="/offer/sale/list/">
+                      <i class="glyphicon glyphicon-plane"></i>
+                      Routes
+                  </a>
+                  <ul class="dropdown-menu">
+                      <span class="triangle-up"></span>
+                      <li>
+                          <a href="/offer/sale/list/">
+                              <i class="glyphicon glyphicon-list"></i>
+                              List
+                          </a>
+                      </li>
+                      <li>
+                          <a href="/offer/sale/add/">
+                              <i class="glyphicon glyphicon-plus"></i>
+                              Add
+                          </a>
+                      </li>
+                  </ul>
+              </li>
+              <li class="dropdown">
+                  <a class="dropdown-toggle" href="/offer/buy/list/">
+                      <i class="glyphicon glyphicon-briefcase"></i>
+                      Orders
+                  </a>
+                  <ul class="dropdown-menu">
+                      <span class="triangle-up"></span>
+                      <li>
+                          <a href="/offer/buy/list/">
+                              <i class="glyphicon glyphicon-list"></i>
+                              List
+                          </a>
+                      </li>
+                      <li>
+                          <a href="/offer/buy/add/">
+                              <i class="glyphicon glyphicon-plus"></i>
+                              Add
+                          </a>
+                      </li>
+                  </ul>
+              </li>
+              <li>
+              <a href="/user/all">
+                  <i class="ai ai-users"></i>
+                  Users
+              </a>
+              </li>
+              {% if profileOwner %}
+                  <li class="dropdown">
+                      <a class="dropdown-toggle" href="/user/profile">
+                          <i class="glyphicon glyphicon-user"></i>
+                          {{ profileOwner.first_name }} {{ profileOwner.last_name }}
+                          &nbsp;
+                          <span style="color: #006;">
+                              <span class="unread unread-count-wrapper" style="display: none;">
+                                  <i class="ai ai-envelope"></i>
+                                      <span class="unread-count">
+                                      </span>
+                              </span>
+                          </span>
+                      </a>
+                      <ul class="dropdown-menu">
+                        <span class="triangle-up"></span>
+                          <li>
+                              <a href="/user/profile">
+                                  <i class="ai ai-user"></i>
+                                  Profile
+                              </a>
+                          </li>
+                          <li>
+                              <a href="/user/mail">
+                                  <i class="glyphicon glyphicon-envelope"></i>
+                                  Messages
+                                  <span class="unread-count-wrapper" style="display: none;">
+                                      (<span class="unread-count">
+                                      </span>)
+                                  </span>
+                              </a>
+                          </li>
+                          <hr class="hr-transparent">
+                          <li>
+                              <a href="/user/logout?backref={{ url }}">
+                                  <i class="glyphicon glyphicon-log-out"></i>
+                                  Sign Out
+                              </a>
+                          </li>
+                      </ul>
+                  </li>
+              {% else %}
+                  <li>
+                      <a href="/user/auth">
+                          <i class="glyphicon glyphicon-collapse-up"></i>
+                          Sign Up
+                      </a>
+                  </li>
+                  <li class="dropdown">
+                      <a class="dropdown-toggle" href="#">
+                          <i class="glyphicon glyphicon-log-in"></i>
+                          Sign In
+                      </a>
+                      <ul class="dropdown-menu">
+                          <span class="triangle-up"></span>
+                          <li>
+                              <div class="userLoginForm" style="display: inline-block; width: 400px; padding-left: 30px; padding-top: 4px;">
+                                  <form class="form-horizontal" style="" role="form" action="/user/auth/" method="post">
+                                      {% csrf_token %}
+                                      <input type="hidden" name="act" value="login">
+                                      <input type="hidden" name="backref" value="{{ url }}">
+                                      <div class="form-group">
+                                          <div class="col-sm-5 colMin">
+                                              <input type="text" class="form-control" id="inputLoginUsername" name="email" placeholder="Email">
+                                          </div>
+                                          <div class="col-sm-5 colMin">
+                                              <input type="password" class="form-control" id="inputLoginPassword" name="password" placeholder="Пароль">
+                                          </div>
+                                          <div class="col-sm-2 colMin">
+                                              <button type="submit" class="btn btn-primary">
+                                                  <i class="glyphicon glyphicon-log-in"></i>
+                                              </button>
+                                          </div>
+                                      </div>
+                                  </form>
+                                <button class="btn btn-warning" style="padding: 0px 4px; margin: 2px 8px; float: right;" onClick="document.location.href='/user/recover';">
+                                    Forget your pass?
+                                </button>
+                              </div>
+                          </li>
+                      </ul>
+                  </li>
+                  <li>
+                  {% endif %}
+              </ul>
+          </nav> <!-- END TOP NAVIGATION -->
+        </div> <!-- end navbar wrapper -->
+      </div> <!-- end row -->
+    </div> <!-- end container -->
+  </header>
+      <!-- FOR BODY background-noise: add 'bg-noise' to this div -->
+<div class="main-wrap bg0">
+    <div class="main">
+        {% block main %}{% endblock %}
+    </div>
+</div>
+
+<!-- FOOTER -->
+{% block footer %}
+  <footer class="site-footer footer bgBlueDark">
+    <div class="container">
+
+      <div class="row" style="color: White;">
+
+        <div class="col-md-8 site-footer--col">
+          <div class="headline site-footer--heading text-center" style="margin-bottom: 10px;">
+            <h3 style="color: White;">Trip&Sale</h3>
+          </div>
+          <div class="row">
+            <div class="col-md-3 col-md-offset-1 text-center">
+              <a href="/info/contact-form/" style="font-size: 13pt; color: rgba(255,255,255,.90);">Your suggestions and ideas</a>
+            </div>
+            <div class="col-md-3 col-md-offset-4 text-center">
+              <a href="/info/contact-minimalist/" style="font-size: 13pt; color: rgba(255,255,255,.90);">Contacts</a>
+            </div>
+          </div>
+        <div class="row">
+          <div class="container-fluid">
+            <div <div class="text-center" style="color: rgba(255,255,255,.85);">
+              <div class="features--feature-wrap" style="margin-top: 0px;">
+                <i class="ai ai-4x ai-compass"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+         <div class="row">
+            <div class="col-md-3 col-md-offset-1 text-center">
+              <a href="/info/faqs/" style="font-size: 13pt; color: rgba(255,255,255,.90);">F.A.Q.</a>
+            </div>
+            <div class="col-md-3 col-md-offset-4 text-center">
+              <a href="/info/security/" style="font-size: 13pt; color: rgba(255,255,255,.90);">Guarantee-service</a>
+            </div>
+          </div>
+        </div> <!-- end col -->
+
+
+        <div class="col-md-4 site-footer--col">
+          <div class="headline site-footer--heading text-center" style="margin-bottom: 10px;">
+            <h3 style="color: White;">&nbsp;</h3>
+          </div>
+          <div class="row text-center">
+            <a href="/info/blog/" style="font-size: 13pt; color: rgba(255,255,255,.90);">News</a>
+          </div>
+          <div class="row text-center">
+            <a href="/info/about/" style="font-size: 13pt; color: rgba(255,255,255,.90);">About us</a>
+          </div>
+          <div class="row text-center">
+            <a href="/info/rules/" style="font-size: 13pt; color: rgba(255,255,255,.90);">Rules</a>
+          </div>
+
+        </div> <!-- end col -->
+      </div> <!-- end row -->
+
+      <!-- divider -->
+      <div class="row">
+        <div class="col-xs-12">
+          <hr class="double--inverse" style="margin-top: 10px">
+        </div>
+      </div> <!-- end row -->
+
+      <!-- meta row -->
+      <div class="row">
+        <div class="site-footer--meta">
+          <span class="col-xs-4 col-xs-offset-4 text-center">
+            <a href="#top" title="Scroll to Top" data-toggle="smoothScroll"><i class="ai ai-2x ai-arrow-up3"></i></a>
+          </span>
+          <div class="col-xs-4 text-right">
+            <ul class="list-inline icons--social-media">
+    <li class="tooltip-link" data-toggle="tooltip" data-placement="top" title="VK"><a href="http://vk.com/share.php?url=http://tripnsale.com"><span class="ai ai-2x ai-vk" style="color: #4f90bd"></span></a></li>
+    <li class="tooltip-link" data-toggle="tooltip" data-placement="top" title="Facebook"><a href="#"><span class="ai ai-2x ai-facebook2" style="color: #4f90bd"></span></a></li>
+  </ul>
+          </div>
+        </div> <!-- end meta -->
+      </div> <!-- end row -->
+
+    </div>  <!-- end container -->
+
+
+  </footer>
+{% endblock %}
+    <!-- SCRIPTS -->
+    <!-- Global Scripts -->
+
+    <script src="{% ccstatic "ext/adapto/assets/js/global-adapto.js" %}"></script>
+    <script src="{% ccstatic "ext/adapto/assets/js/global-bootstrap.min.js" %}"></script>
+
+<script src="{% ccstatic "ext/adapto/assets/js/owl.carousel.min.js" %}"></script>
+<script src="{% ccstatic "ext/adapto/assets/js/wow.min.js" %}"></script>
+<script>
+  // for testimonial slider
+  var owl = $("#testimonials");
+  owl.owlCarousel({
+    singleItem: true,
+    autoPlay: 10000,
+    pagination: false
+  });
+  // Fit-vids for responsive video
+  $(".vid-wrap").fitVids();
+new WOW().init();
+</script>
+
+
+
+      <!-- Revolution Slider REQUIRED JS files -->
+<script src="{% ccstatic "ext/adapto/assets/revolution-slider/js/jquery.themepunch.revolution.min.js" %}"></script>
+<script src="{% ccstatic "ext/adapto/assets/revolution-slider/js/jquery.themepunch.plugins.min.js" %}"></script>
+
+<script>
+  // Revolution Slider SETTINGS
+  var revapi;
+  jQuery(document).ready(function() {
+     revapi = jQuery('.tp-banner').revolution(
+    {
+      delay:              11000,
+      startwidth:         1170,
+      startheight:        440,
+      hideThumbs:         10,
+      fullWidth:          "off",
+      forceFullWidth:     "off",
+      navigationType:     "none",
+      navigationStyle:    "square",
+      touchenabled:       "on",
+    });
+  }); //ready
+
+</script>
+
+<script>
+    SetUnread({{ unreadCount }});
+</script>
+
+
+
+</body>
+</html>

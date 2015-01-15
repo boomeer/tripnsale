@@ -78,6 +78,10 @@ def InfoView(request, name):
         return RenderToResponse("infos/compare.html", request, {
             "costUpdTime": costUpdTime,
         })
+    elif name == "faqs_eng":
+        return RenderToResponse("infos/with_base_eng.html", request, {
+            "filepath": "infos/faqs_eng.html",
+        })
     else:
         return RenderToResponse("infos/with_base.html", request, {
             "filepath": "infos/{}.html".format(name),

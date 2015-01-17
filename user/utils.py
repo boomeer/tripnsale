@@ -6,6 +6,7 @@ from django.template.loader import render_to_string
 from mail.utils import (
     SendMail,
 )
+from datetime import datetime, timedelta
 
 
 class AuthErr(TsExc):
@@ -49,6 +50,35 @@ def SendRecoverMail(user, newPassword):
         "hostAddr": settings.CURRENT_HOST,
     })
     SendMail("support@tripnsale.com", user.email, content)
+
+
+def SendUnreadMsgMail(user, msg):
+    content = render_to_string("mail/unread.html", {
+        "to": user.email,
+        "user": user,
+        "msg": msg,
+        "hostAddr": settings.CURRENT_HOST,
+    })
+    SendMail("support@tripnsale.com", user.email, content)
+
+
+def CheckUnreadMsgs(hours=12, checkNotified=True):
+    timeToSend = datetime.now() - timedelta(hours=hours)
+    msgs = ConferenceMsg.objects.filter(new=True, time__lte=timeToSend)
+    if checkNotified:
+        msgs = msgs.filter(notified=False)
+    msgs = msgs.all()
+    sends = set()
+    for msg in msgs:
+        tos = [u for u in msg.conf.users.all() if u != msg.fr]
+        for u in tos:
+            msg.notified = True
+            msg.save()
+            if (u, msg.conf,) in sends:
+                continue
+            sends.add((u, msg.conf,))
+            print("Send notification about unread msg for user {}({})".format(u.fullname(), u.email))
+            SendUnreadMsgMail(u, msg)
     
     
 def CreateDialog(fr, to):
@@ -56,6 +86,7 @@ def CreateDialog(fr, to):
     conf.save()
     conf.users.add(fr, to)
     return conf
+
 
 def GetOrCreateDialog(fr, to):
     confs = Conference.objects.filter(users=fr).all()

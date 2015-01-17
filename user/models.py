@@ -69,6 +69,7 @@ class ConferenceMsg(models.Model):
     content = models.TextField(default="")
     time = models.DateTimeField(default=datetime.now())
     new = models.BooleanField(default=True)
+    notified = models.BooleanField(default=False)
 
 
 class SystemMsg(ConferenceMsg):

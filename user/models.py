@@ -6,6 +6,7 @@ from place.models import (
     Country,
 )
 import os
+from util.parse import ParsedText
 
 
 class User(authModels.User):
@@ -70,6 +71,9 @@ class ConferenceMsg(models.Model):
     time = models.DateTimeField(default=datetime.now())
     new = models.BooleanField(default=True)
     notified = models.BooleanField(default=False)
+
+    def parse(self):
+        return ParsedText(self.content)
 
 
 class SystemMsg(ConferenceMsg):

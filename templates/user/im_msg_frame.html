@@ -23,7 +23,15 @@
                 {% if msg.fr %}
                     <div class="msg {% if msg.new %}bg1 msg-unread{% endif %} container-fluid">
                         <div class="content col-md-8">
-                            {{ msg.content }}
+                            {% for line in msg.parse.lines %}
+                                {% for word in line.words %}
+                                    {% if word.isLink %}
+                                        <a href="{{ word.word }}">{{ word.word }}</a>
+                                    {% else %}
+                                        {{ word.word }}
+                                    {% endif %}
+                                {% endfor %}
+                            {% endfor %}
                         </div>
                         <div class="time col-md-4">
                             {{ msg.time|date:"d.m.Y" }} {{ msg.time|time:"H:i:s" }}

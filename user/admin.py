@@ -10,7 +10,7 @@ class ConferenceAdmin(admin.ModelAdmin):
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
     list_display = ("username", "email", "first_name", "last_name", "country",
-                    "city", "activated", "guarant", "hidden",)
+                    "city", "activated", "guarant", "hidden", "emailNotify",)
 
 
 @admin.register(ConferenceMsg)

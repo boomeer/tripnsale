@@ -36,7 +36,7 @@ def SendOfferMail(user, offer, conf):
         })
     else:
         raise TsExc("bad_offer_type")
-    SendMail("info@tripnsale.com", offer.owner.email, content)
+    SendMail(user, content)
 
 class SaleEditErr (TsExc):
     def __init__(self, msg):

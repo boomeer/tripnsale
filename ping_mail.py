@@ -9,5 +9,5 @@ import sys
 if __name__ == "__main__":
     django.setup()
     print("sending...")
-    SendMail("test@tripnsale.com", sys.argv[1], "it's dummy")
+    SendMail("info@tripnsale.com", sys.argv[1], "it's dummy")
     

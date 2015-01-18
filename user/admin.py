@@ -15,5 +15,5 @@ class UserAdmin(admin.ModelAdmin):
 
 @admin.register(ConferenceMsg)
 class ConferenceMsgAdmin(admin.ModelAdmin):
-    list_display = ("content", "conf", "fr", "time", "new",)
+    list_display = ("content", "conf", "fr", "time", "new", "notified",)
     list_filter = ("conf", "fr",)

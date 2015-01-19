@@ -22,7 +22,7 @@ def CheckConnection(user, offer):
 def SendOfferMail(peer, offer, conf):
     if type(offer) == BuyOffer:
         content = render_to_string("mail/buy_offer.html", {
-            "user": buy.owner,
+            "user": offer.owner,
             "peer": peer,
             "buy": offer,
             "conf": conf,
@@ -30,7 +30,7 @@ def SendOfferMail(peer, offer, conf):
         })
     elif type(offer) == SaleOffer:
         content = render_to_string("mail/sale_offer.html", {
-            "user": sale.owner,
+            "user": offer.owner,
             "peer": peer,
             "sale": offer,
             "conf": conf,

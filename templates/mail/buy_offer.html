@@ -1,8 +1,8 @@
 From: Trip & Sale <info@tripnsale.com>
-To: {{ buy.owner.email }}
+To: {{ user.email }}
 Subject: На вашу заявку "{{ buy.title }}" откликнулись
 
-{{ user.fullname }} откликнулся на вашу заявку {{ buy.title }}.
+{{ peer.fullname }} откликнулся на вашу заявку {{ buy.title }}.
 Вы можете перейти в диалог по этой ссылке: http://{{ hostAddr }}{{ conf.url }}.
 
 Спасибо, что Вы с нами!

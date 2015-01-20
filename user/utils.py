@@ -40,7 +40,7 @@ def SendActivateMail(user):
         "user": user,
         "hostAddr": settings.CURRENT_HOST,
     })
-    SendMail("activate@tripnsale.com", user.email, content)
+    SendMail(user, content)
     
 
 def SendRecoverMail(user, newPassword):
@@ -49,7 +49,7 @@ def SendRecoverMail(user, newPassword):
         "newPassword": newPassword,
         "hostAddr": settings.CURRENT_HOST,
     })
-    SendMail("support@tripnsale.com", user.email, content)
+    SendMail(user, content)
 
 
 def SendUnreadMsgMail(user, msg):
@@ -59,7 +59,7 @@ def SendUnreadMsgMail(user, msg):
         "msg": msg,
         "hostAddr": settings.CURRENT_HOST,
     })
-    SendMail("support@tripnsale.com", user.email, content)
+    SendMail(user, content)
 
 
 def CheckUnreadMsgs(hours=12, checkNotified=True):

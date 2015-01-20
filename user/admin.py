@@ -10,10 +10,10 @@ class ConferenceAdmin(admin.ModelAdmin):
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
     list_display = ("username", "email", "first_name", "last_name", "country",
-                    "city", "activated", "guarant", "hidden",)
+                    "city", "activated", "guarant", "hidden", "emailNotify",)
 
 
 @admin.register(ConferenceMsg)
 class ConferenceMsgAdmin(admin.ModelAdmin):
-    list_display = ("content", "conf", "fr", "time", "new",)
+    list_display = ("content", "conf", "fr", "time", "new", "notified",)
     list_filter = ("conf", "fr",)

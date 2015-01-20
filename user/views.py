@@ -388,6 +388,8 @@ def EditProfileView(request):
                     raise BdayInvalidErr
             user.about = params.get("about", "")
 
+            user.emailNotify = params.get("emailNotify", False)
+
             if 'avatar' in request.FILES:
                 StoreImage(request.FILES['avatar'], user.avatar)
                 MakeThumbnail(user.avatar, user.avatarThumb)

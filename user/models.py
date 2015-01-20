@@ -6,6 +6,7 @@ from place.models import (
     Country,
 )
 import os
+from util.parse import ParsedText
 
 
 class User(authModels.User):
@@ -21,6 +22,7 @@ class User(authModels.User):
     birthday = models.DateField(default=None, null=True, blank=True)
     about = models.TextField(default="", blank=True)
     hidden = models.BooleanField(default=False)
+    emailNotify = models.BooleanField(default=True)
 
     def avatarUrl(self):
         return self.avatar.url if self.avatar else os.path.join(settings.STATIC_URL, "user/av_default.png")
@@ -70,6 +72,9 @@ class ConferenceMsg(models.Model):
     time = models.DateTimeField(default=datetime.now())
     new = models.BooleanField(default=True)
     notified = models.BooleanField(default=False)
+
+    def parse(self):
+        return ParsedText(self.content)
 
 
 class SystemMsg(ConferenceMsg):

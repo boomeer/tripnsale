@@ -138,23 +138,28 @@
                     {% endif %}
                     <div class="buttons">
                         {% if profileOwner == buy.owner %}
-                            {% if not buy.closed %}
-                                <a type="button" class="btn btn-primary" href="/offer/buy/edit/{{ buy.id }}?backref=/offer/buy/{{ buy.id }}" title="Редактировать">
-                                    <i class="ai ai-pencil"></i>
-                                </a>
-                            {% endif %}
-                            {% if buy.closed %}
-                                <a type="button" class="btn btn-success" href="/offer/buy/close/?id={{ buy.id }}&revert=1&backref=/offer/buy/{{ buy.id }}" title="Открыть">
-                                    <i class="ai ai-unlocked"></i>
-                                </a>
-                            {% else %}
-                                <a type="button" class="btn btn-warning" href="/offer/buy/close/?id={{ buy.id }}&backref=/offer/buy/{{ buy.id }}" title="Закрыть">
-                                    <i class="ai ai-lock"></i>
-                                </a>
-                            {% endif %}
+                            <div>
+                                {% if not buy.closed %}
+                                    <a type="button" class="btn btn-primary" href="/offer/buy/edit/{{ buy.id }}?backref=/offer/buy/{{ buy.id }}" title="Редактировать">
+                                        <i class="ai ai-pencil"></i>
+                                    </a>
+                                {% endif %}
+                                {% if buy.closed %}
+                                    <a type="button" class="btn btn-success" href="/offer/buy/close/?id={{ buy.id }}&revert=1&backref=/offer/buy/{{ buy.id }}" title="Открыть">
+                                        <i class="ai ai-unlocked"></i>
+                                    </a>
+                                {% else %}
+                                    <a type="button" class="btn btn-warning" href="/offer/buy/close/?id={{ buy.id }}&backref=/offer/buy/{{ buy.id }}" title="Закрыть">
+                                        <i class="ai ai-lock"></i>
+                                    </a>
+                                {% endif %}
                                 <button type="button" class="btn btn-danger" onClick="BuyRemove({{ buy.id }});" title="Удалить">
                                     <i class="ai ai-close"></i>
                                 </button>
+                            </div>
+                            <div style="margin-top: 10px;">
+                                <a class="btn btn-primary" href="/offer/buy/recommend/{{ buy.id }}">Рекомендации</a>
+                            </div>
                         {% else %}
                             {% if not buy.closed %}
                                 {% if connected %}

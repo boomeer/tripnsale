@@ -13,6 +13,7 @@ from offer.utils import (
     SaleEditErr,
     ExtractSaleFields,
     SaleFilterExtractParams,
+    SaleExtractRecommend,
     SaleIsConnected,
     BuyEditErr,
     ExtractBuyFields,
@@ -227,6 +228,7 @@ def SaleRecommendView(request, id):
 def BuyOfferAddView(request):
     params = request.REQUEST
     act = params.get("act", "")
+    owner = GetCurrentUser(request)
     if act == "add":
         try:
             CheckPost(request)
@@ -249,12 +251,16 @@ def BuyOfferAddView(request):
                 toCity=params.get("toCity", ""),
                 itoCity=params.get("toCity", "").lower(),
                 gallery=gallery,
-                owner=GetCurrentUser(request),
+                owner=owner,
                 createTime=datetime.now(),
             )
             buy.save()
             VerifyPhotos(params.get("token", ""))
-            backref = params.get("backref", "/offer/buy/list#buy{}".format(buy.id))
+            # backref = params.get("backref", "/offer/buy/list#buy{}".format(buy.id))
+            if SaleExtractRecommend(buy, owner, limit=1):
+                backref = "/offer/buy/recommend/{}?first_time=true".format(buy.id)
+            else:
+                backref = "/offer/buy/list#buy{}".format(buy.id)
             return redirect(backref)
         except BuyEditErr as e:
             raise RedirectExc("/offer/buy/add?err={}".format(e.status))
@@ -382,4 +388,14 @@ def BuyPreview(request, id):
         "connected": BuyIsConnected(request, id),
     })
 
+@SafeView
+def BuyRecommendView(request, id):
+    params = request.REQUEST
+    buy = BuyOffer.objects.get(id=id)
+    if buy.owner != GetCurrentUser(request):
+        return redirect("/offer/buy/{}".format(id))
 
+    filterparams = SaleFilterExtractParams(request, static=True, recommend=buy)
+    filterparams["recBuy"] = buy
+    filterparams["firstTime"] = ParseBool(params.get("first_time", ""))
+    return RenderToResponse("offer/buy/recommend.html", request, filterparams)

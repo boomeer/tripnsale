@@ -2,11 +2,18 @@ from offer.models import *
 from util.utils import (
     ValidFilter,
     TsExc,
+    GetCurrentUser,
+)
+from util.exc import (
+    RedirectExc,
 )
 from django.template.loader import render_to_string
 from mail.utils import SendMail
 import tripnsale.settings as settings
+import collections
+from datetime import datetime, timedelta
 
+Recommend = collections.namedtuple('Recommend', ['new', 'rank', 'offer'])
 
 def CheckConnection(user, offer):
     oc = OfferConnection.objects.filter(user=user)
@@ -124,9 +131,10 @@ def ExtractSaleFields(params):
 
     return (fr, to, frTime, toTime, deposit,)
 
-def SaleFilterExtractParams(request, static=False):
+def SaleFilterExtractParams(request, static=False, recommend=None):
     params = request.REQUEST
     owner = int(params.get("owner", 0))
+    recom = recommend if recommend != None else params.get("recommend", None)
     sales = SaleOffer.objects
     if owner:
         sales = sales.filter(owner__id=owner)
@@ -135,6 +143,8 @@ def SaleFilterExtractParams(request, static=False):
                                                     params.get("from", "")) \
                 and ValidFilter(sale.to.title + " " + sale.toCity, params.get("to", ""))]
     sales = [sale for sale in sales if sale.visible()]
+    if recom != None:
+        sales = FilterRecommend(sales, int(recom))
     sales = sorted(sales, key=lambda sale: (sale.closed, -sale.isCurrent(), sale.toEnd(),))
 
     count = max(0, int(params.get("count", 15)))
@@ -151,6 +161,12 @@ def SaleFilterExtractParams(request, static=False):
         "static": static,
     }
 
+def SaleIsConnected(request, id):
+    if GetCurrentUser(request):
+        return len(OfferConnection.objects.filter(user__id=GetCurrentUser(request).id,
+                                                       sale__id=id).all()) > 0
+    else:
+        return False
 
 class BuyEditErr (TsExc):
     def __init__(self, msg):
@@ -234,9 +250,9 @@ def ExtractBuyFields(params):
 
     return (fr, to, title, costFrom, costTo,)
 
-def BuyFilterExtractParams(request, static=False):
-    params = request.REQUEST
+def _BuyExtractList(params):
     owner = int(params.get("owner", 0))
+
     buys = BuyOffer.objects
     if owner:
         buys = buys.filter(owner__id=owner)
@@ -247,10 +263,92 @@ def BuyFilterExtractParams(request, static=False):
                 and ValidFilter((buy.to.title if buy.to else "") + " " + buy.toCity, params.get("to", ""))]
     buys = [buy for buy in buys if buy.visible()]
     buys = sorted(buys, key=lambda buy: (buy.closed, -buy.id,))
-    count = max(0, int(params.get("count", 15)))
+    return buys
+
+def BuyExtractRecommend(sale, user=None, limit=None):
+    buys = BuyOffer.objects.filter(to__id=sale.fr.id)
+    buys = buys.exclude(owner__id=sale.owner.id)
+    buys = buys.all()
+
+    visits = SaleRecommendVisit.objects
+    if user:
+        visits = visits.filter(user__id=user.id)
+    else:
+        visits = visits.filter(baseOffer__id=sale.id)
+
+    visits = visits.filter(visType=SaleRecommendVisit.VISITED)
+    visits = dict([ (visit.recOffer.id, visit.time + timedelta(minutes=5),) for visit in visits.all() ])
+
+    if user:
+        connections = OfferConnection.objects.filter(user__id=user.id)
+        connections = connections.exclude(buy=None)
+        connections = set([ conn.buy.id for conn in connections.all() ])
+    else:
+        connections = set()
+
+    rangedBuy = []
+    curTime = datetime.now()
+    for buy in buys:
+        if limit and len(rangedBuy) > limit:
+            break
+        rank = 0.0
+        if not buy.visible() or buy.closed:
+            continue
+
+        if buy.fr != None:
+            if buy.fr.id == sale.to.id:
+                rank += 2.0
+            else:
+                continue
+
+        if buy.ifrCity == sale.itoCity:
+            rank += 1.0
+
+        if buy.itoCity == sale.ifrCity:
+            rank += 1.0
+
+        buy.connected = buy.id in connections
+
+        buy.new = not buy.connected and \
+                  buy.createTime > sale.createTime and \
+                  visits.get(buy.id, curTime) >= curTime
+        buy.visited = buy.id in visits
+        buy.rank = rank
+        rangedBuy.append(buy)
+    return sorted(rangedBuy, key=lambda x: (not x.new, -x.rank, -x.id))
+
+def BuyFilterExtractParams(request, static=False, recommend=None):
+    params = request.REQUEST
+    user = GetCurrentUser(request)
+
+    recBuy = recommend
+    if recBuy == None and params.get("recommend") != None:
+        recBuy = int(params["recommend"])
+    if type(recBuy) == int:
+        recBuy = SaleOffer.objects.get(id=recBuy)
+
+    if recBuy and (not user or recBuy.owner.id != user.id):
+        raise RedirectExc("/offer/sale/{}".format(recBuy.id))
+
+    if not recBuy:
+        buys = _BuyExtractList(params)
+    else:
+        buys = BuyExtractRecommend(recBuy, user)
+    count = max(0, int(params.get("count", 5)))
     totalpages = (len(buys) + count - 1) // count
     page = max(1, min(int(params.get("page", 1)), totalpages)) - 1
     block = buys[page*count:(page+1)*count]
+    if recBuy:
+        curTime = datetime.now()
+        for buy in block:
+            if not buy.visited:
+                vis = SaleRecommendVisit(user=user,
+                                         visType=SaleRecommendVisit.VISITED,
+                                         time=curTime,
+                                         baseOffer=recBuy,
+                                         recOffer=buy)
+                vis.save()
+
     return {
         "buys": buys,
         "buyblock": block,
@@ -261,4 +359,9 @@ def BuyFilterExtractParams(request, static=False):
         "pagesid": "buys" if not static else "#",
     }
 
-
+def BuyIsConnected(request, id):
+    if GetCurrentUser(request):
+        return len(OfferConnection.objects.filter(user__id=GetCurrentUser(request).id,
+                                                  buy__id=id).all()) > 0
+    else:
+        return False

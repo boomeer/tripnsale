@@ -127,10 +127,20 @@
                         </button>
                 {% else %}
                     {% if not buy.closed %}
-                        <a type="button" class="btn btn-primary" href="/user/im?peer={{ buy.owner.id }}&buy={{ buy.id }}">
-                            <i class="glyphicon glyphicon-hand-up"></i>
-                            Связаться
-                        </a>
+                        {% if connected %}
+                            <div>
+                                <a type="button" class="btn btn-primary" href="/user/im?peer={{ buy.owner.id }}&buy={{ buy.id }}">
+                                    <i class="glyphicon glyphicon-hand-up"></i>
+                                    Перейти к диалогу
+                                </a>
+                            </div>
+                            <small>Вы уже связывались с создателем этого заказа</small>
+                        {% else %}
+                            <a type="button" class="btn btn-primary" href="/user/im?peer={{ buy.owner.id }}&buy={{ buy.id }}">
+                                <i class="glyphicon glyphicon-hand-up"></i>
+                                Связаться
+                            </a>
+                        {% endif %}
                     {% endif %}
                 {% endif %}
             </div>

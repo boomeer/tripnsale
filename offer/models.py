@@ -61,6 +61,35 @@ class SaleOffer(Offer):
     def toEnd(self):
         return self.toTime - datetime.now()
 
+class AbstractRecommendVisit(util.models.ContentHolder):
+    class Meta:
+        abstract = True
+
+    EMAIL = "M"
+    VISITED = "V"
+    VISIT_TYPE = (
+        (EMAIL, "email",),
+        (VISITED, "visited",),
+    )
+    visType = models.CharField(max_length=1,
+                               choices=VISIT_TYPE,
+                               default=VISITED)
+    user = models.ForeignKey(User)
+    time = models.DateTimeField(default=datetime.now())
+
+class SaleRecommendVisit(AbstractRecommendVisit):
+    baseOffer = models.ForeignKey(SaleOffer)
+    recOffer = models.ForeignKey(BuyOffer)
+
+    def __init__(self, *args, **argv):
+        super().__init__(*args, **argv)
+
+class BuyRecommendVisit(AbstractRecommendVisit):
+    baseOffer = models.ForeignKey(BuyOffer)
+    recOffer = models.ForeignKey(SaleOffer)
+
+    def __init__(self, *args, **argv):
+        super().__init__(*args, **argv)
 
 class OfferConnection(models.Model):
     user = models.ForeignKey(User)

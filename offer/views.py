@@ -7,14 +7,18 @@ from django.template import RequestContext
 from offer.models import (
     BuyOffer,
     SaleOffer,
+    OfferConnection,
 )
 from offer.utils import (
     SaleEditErr,
     ExtractSaleFields,
     SaleFilterExtractParams,
+    SaleIsConnected,
     BuyEditErr,
     ExtractBuyFields,
+    BuyExtractRecommend,
     BuyFilterExtractParams,
+    BuyIsConnected,
 )
 from place.models import (
     Country,
@@ -57,7 +61,7 @@ from datetime import datetime
 
 @SafeView
 def SaleListView(request):
-    filterparams = SaleFilterExtractParams(request, True)
+    filterparams = SaleFilterExtractParams(request, static=True)
     filterparams.update({ "url": "/offer/sale/list" })
     return RenderToResponse("offer/sale/list.html", request, filterparams)
 
@@ -72,6 +76,7 @@ def SaleOfferView(request, id):
 def SaleOfferAddView(request):
     params = request.REQUEST
     act = params.get("act", "")
+    owner = GetCurrentUser(request)
     if act == "add":
         try:
             CheckPost(request)
@@ -90,11 +95,15 @@ def SaleOfferAddView(request):
                 toTime=toTime,
                 deposit=deposit,
                 guarant=params.get("guarant", False),
-                owner=GetCurrentUser(request),
+                owner=owner,
                 createTime=datetime.now(),
             )
             sale.save()
-            backref = params.get("backref", "/offer/sale/list#trip{}".format(sale.id))
+            # backref = params.get("backref", "/offer/sale/list#trip{}".format(sale.id))
+            if BuyExtractRecommend(sale, owner, limit=1):
+                backref = "/offer/sale/recommend/{}?first_time=true".format(sale.id)
+            else:
+                backref = "/offer/sale/list#trip{}".format(sale.id)
             return redirect(backref)
         except SaleEditErr as e:
             raise RedirectExc("/offer/sale/add/?err={}".format(e.status))
@@ -111,7 +120,7 @@ def SaleEditView(request, id):
     sale = SaleOffer.objects.get(id=id)
     act = params.get("act", "")
     if sale.owner != GetCurrentUser(request):
-        return redirect("/")
+        return redirect("/offer/sale/{}".format(id))
     if act == "edit":
         try:
             CheckPost(request)
@@ -183,6 +192,7 @@ def SaleView(request, id):
         raise Exception("not found")
     return RenderToResponse("offer/sale/view.html", request, {
         "sale": sale,
+        "connected": SaleIsConnected(request, id),
     })
 
 @SafeView
@@ -191,10 +201,26 @@ def SalePreview(request, id):
     sale = SaleOffer.objects.get(id=id)
     if not sale.visible():
         raise Exception("not found")
+
     return RenderToResponse("offer/sale/preview.html", request, {
         "sale": sale,
-        "editBackref": params.get("editBackref", "")
+        "editBackref": params.get("editBackref", ""),
+        "connected": SaleIsConnected(request, id),
     })
+
+@SafeView
+def SaleRecommendView(request, id):
+    params = request.REQUEST
+    sale = SaleOffer.objects.get(id=id)
+    if sale.owner != GetCurrentUser(request):
+        return redirect("/offer/sale/{}".format(id))
+
+    filterparams = BuyFilterExtractParams(request, static=True, recommend=sale)
+    filterparams["recSale"] = sale
+    filterparams["firstTime"] = ParseBool(params.get("first_time", ""))
+    return RenderToResponse("offer/sale/recommend.html", request, filterparams)
+
+
 
 @login_required(login_url="/user/auth/")
 @SafeView
@@ -341,6 +367,7 @@ def BuyView(request, id):
         raise Exception("not found")
     return RenderToResponse("offer/buy/view.html", request, {
         "buy": buy,
+        "connected": BuyIsConnected(request, id),
     })
 
 @SafeView
@@ -352,6 +379,7 @@ def BuyPreview(request, id):
     return RenderToResponse("offer/buy/preview.html", request, {
         "buy": buy,
         "editBackref": params.get("editBackref", ""),
+        "connected": BuyIsConnected(request, id),
     })
 
 

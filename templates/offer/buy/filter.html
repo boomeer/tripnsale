@@ -4,7 +4,7 @@
 <input type="hidden" id="buysPage" value="{{ page|add:1 }}" />
 
 {% for buy in buyblock %}
-    <div class="buy-item container-fluid {% if buy.closed %}buy-item-closed{% endif %}" onclick="location.hash = '#buy{{ buy.id }}';">
+    <div class="buy-item container-fluid {% if buy.closed %}buy-item-closed{% elif buy.connected %}buy-item-connected{% elif buy.new %}buy-item-new{% endif %}" onclick="location.hash = '#buy{{ buy.id }}';">
         <div class="buy-section photo hidden-xs">
             <img src="{{ buy.gallery.getHeadUrl }}" alt="">
         </div>
@@ -47,7 +47,14 @@
                     {% endif %}
                 {% endif %}
             </div>
-
+            <div class="visible-xs owner-small">
+                <span>
+                    Создатель:
+                </span>
+                <a class="indissoluble bboldy" href="/user/profile/{{ buy.owner.id }}">
+                    {{ buy.owner.first_name }} {{ buy.owner.last_name }}
+                </a>
+            </div>
             <div class="prices">
                 <span>
                     Готов заплатить:
@@ -66,9 +73,19 @@
                     </span>
                 {% endif %}
                 {% if buy.closed %}
-                    <span class="closed">
+                    <span class="status-box closed">
                         <i class="ai ai-lock"></i>
                         Закрыт
+                    </span>
+                {% elif buy.connected %}
+                    <span class="status-box connected">
+                        <i class="ai ai-thumbs-up"></i>
+                        Диалог установлен
+                    </span>
+                {% elif buy.new %}
+                    <span class="status-box  new">
+                        <i class="ai ai-star3"></i>
+                        Новый
                     </span>
                 {% endif %}
             </div>

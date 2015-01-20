@@ -45,20 +45,20 @@
                             </span>
                         {% endif %}
                     </div>
-                    <div class="tripSection">
-                        {% if sale.closed %}
+                    {% if sale.closed %}
+                        <div class="tripSection">
                             <span class="closed">
                                 <i class="ai ai-lock"></i>
                                 Закрытa
                             </span>
-                        {% endif %}
-                    </div>
+                        </div>
+                    {% endif %}
                 </div>
             </div>
             <div>
                 <div class="visible-xs ownerSmall tripSection">
                     <span class="tripSectionTitle">
-                        Путешественник:
+                        Создатель:
                     </span>
                     <a class="tripSectionContent profileLink bboldy" href="/user/profile/{{ sale.owner.id }}">
                         {{ sale.owner.first_name }} {{ sale.owner.last_name }}

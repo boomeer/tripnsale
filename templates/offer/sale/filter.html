@@ -3,7 +3,7 @@
 
 <input type="hidden" id="tripsPage" value="{{ page|add:1 }}" />
 {% for sale in saleblock %}
-    <div class="tripItem {% if sale.closed %}tripItem-closed{% endif %} row container-fluid" onclick="location.hash = '#trip{{ sale.id }}';">
+    <div class="tripItem {% if sale.closed %}tripItem-closed{% elif sale.connected %}tripItem-connected{% elif sale.new %}tripItem-new{% endif %} row container-fluid" onclick="location.hash = '#trip{{ sale.id }}';">
         <div class="tripSection tripMainSection">
             <div class="tripFromTo">
                 <div class="tripFrom tripPlace">
@@ -45,20 +45,28 @@
                             </span>
                         {% endif %}
                     </div>
-                    <div class="tripSection">
-                        {% if sale.closed %}
-                            <span class="closed">
-                                <i class="ai ai-lock"></i>
-                                Закрытa
-                            </span>
-                        {% endif %}
-                    </div>
+                    {% if sale.closed %}
+                        <span class="status-box closed">
+                            <i class="ai ai-lock"></i>
+                            Закрыта
+                        </span>
+                    {% elif sale.connected %}
+                        <span class="status-box connected">
+                            <i class="ai ai-thumbs-up"></i>
+                            Диалог установлен
+                        </span>
+                    {% elif sale.new %}
+                        <span class="status-box  new">
+                            <i class="ai ai-star3"></i>
+                            Новая
+                        </span>
+                    {% endif %}
                 </div>
             </div>
             <div>
                 <div class="visible-xs ownerSmall tripSection">
                     <span class="tripSectionTitle">
-                        Путешественник:
+                        Создатель:
                     </span>
                     <a class="tripSectionContent profileLink bboldy" href="/user/profile/{{ sale.owner.id }}">
                         {{ sale.owner.first_name }} {{ sale.owner.last_name }}

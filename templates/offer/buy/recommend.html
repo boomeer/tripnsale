@@ -1,0 +1,49 @@
+{% extends "base_list.html" %}
+{% load static %}
+{% load ccstatic %}
+
+{% block own_title %}
+Рекомендуемые поездки -
+{% endblock %}
+
+{% block own_head %}
+    <script src="{% ccstatic "offer/sale/list.js" %}"></script>
+    <script src="{% ccstatic "offer/sale/util.js" %}"></script>
+    <link rel="stylesheet" href="{% ccstatic "css/offer/sale/list.css" %}"/>
+{% endblock %}
+
+{% block main %}
+     <div class="page-header-wrap">
+       <div class="container">
+         <div class="page-header">
+           <h1>Рекомендуемые поездки</h1>
+         </div>
+       </div>
+     </div>
+
+    {% if firstTime %}
+        <div class="alert alert-success col-md-10 col-md-offset-1">
+            <strong>Заказ успешно создан!</strong> <br />
+            Ниже представлены поездки, подходящие к вашему заказу
+        </div>
+     {% endif %}
+    <div class="trips container-fluid bg0">
+        <input type="hidden" value="{{ recBuy.id }}" id="tripsRecommend" />
+        <div class="tripsList col-md-10 col-md-offset-1">
+            {% include "offer/sale/filter.html" %}
+        </div>
+    </div>
+    <div class="tripViewWrapper" style="display: none;">
+        <div class="tripViewBg">
+            <div class="tripViewGoBack" onClick="TripViewClose();">
+            </div>
+            <div class="tripView bg0">
+                <button type="button" class="tripViewCloseBtn btn btn-default" onClick="TripViewClose();">
+                    <span class="glyphicon glyphicon-remove-circle"></span>
+                </button>
+                <div class="tripViewContent">
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

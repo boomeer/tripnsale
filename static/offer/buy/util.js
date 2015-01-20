@@ -20,14 +20,16 @@ function BuysRefresh(page)
     var bo = $("#buysOwner");
     var fr = $("#buysFilterFrom");
     var to = $("#buysFilterTo");
+    var rec = $("#buysRecommend");
     $(".buysList").html("Загрузка...");
     $.post("/offer/buy/filter/", {
         "title": $("#buysTitle").val(),
         "fr": fr ? fr.val() : "",
         "to": to ? to.val() : "",
         "profile": bp ? bp.val() : "",
+        "recommend": rec ? rec.val() : "",
         "page": (page ? page : BuyGetPage()),
-        "owner": bo ? bo.val() : 0
+        "owner": bo ? bo.val() : 0,
     }, function(res) {
         $(".buysList").html(res);
         $(".owner.owner-right.buy-section").click(StopPropagationEvent);

@@ -108,29 +108,44 @@
             {% endif %}
             <div class="buttons">
                 {% if profileOwner == buy.owner %}
-                    {% if not buy.closed %}
-                        <a type="button" class="btn btn-primary" href="/offer/buy/edit/{{ buy.id }}{% if editBackref %}?backref={{ editBackref }}{% endif %}" title="Редактировать">
-                            <i class="ai ai-pencil"></i>
-                        </a>
-                    {% endif %}
-                    {% if buy.closed %}
-                        <button type="button" class="btn btn-success" onclick="BuyReopen({{ buy.id }});" title="Открыть">
-                            <i class="ai ai-unlocked"></i>
-                        </button>
-                    {% else %}
-                        <button type="button" class="btn btn-warning" onclick="BuyClose({{ buy.id }});" title="Закрыть">
-                            <i class="ai ai-lock"></i>
-                        </button>
-                    {% endif %}
+                    <div>
+                        {% if not buy.closed %}
+                            <a type="button" class="btn btn-primary" href="/offer/buy/edit/{{ buy.id }}{% if editBackref %}?backref={{ editBackref }}{% endif %}" title="Редактировать">
+                                <i class="ai ai-pencil"></i>
+                            </a>
+                        {% endif %}
+                        {% if buy.closed %}
+                            <button type="button" class="btn btn-success" onclick="BuyReopen({{ buy.id }});" title="Открыть">
+                                <i class="ai ai-unlocked"></i>
+                            </button>
+                        {% else %}
+                            <button type="button" class="btn btn-warning" onclick="BuyClose({{ buy.id }});" title="Закрыть">
+                                <i class="ai ai-lock"></i>
+                            </button>
+                        {% endif %}
                         <button type="button" class="btn btn-danger" onclick="BuyRemove({{ buy.id }});" title="Удалить">
                             <i class="ai ai-close"></i>
                         </button>
+                    </div>
+                    <div style="margin-top: 10px;">
+                        <a class="btn btn-primary" href="/offer/buy/recommend/{{ buy.id }}">Рекомендации</a>
+                    </div>
                 {% else %}
                     {% if not buy.closed %}
-                        <a type="button" class="btn btn-primary" href="/user/im?peer={{ buy.owner.id }}&buy={{ buy.id }}">
-                            <i class="glyphicon glyphicon-hand-up"></i>
-                            Связаться
-                        </a>
+                        {% if connected %}
+                            <div>
+                                <a type="button" class="btn btn-primary" href="/user/im?peer={{ buy.owner.id }}&buy={{ buy.id }}">
+                                    <i class="glyphicon glyphicon-hand-up"></i>
+                                    Перейти к диалогу
+                                </a>
+                            </div>
+                            <small>Вы уже связывались с создателем этого заказа</small>
+                        {% else %}
+                            <a type="button" class="btn btn-primary" href="/user/im?peer={{ buy.owner.id }}&buy={{ buy.id }}">
+                                <i class="glyphicon glyphicon-hand-up"></i>
+                                Связаться
+                            </a>
+                        {% endif %}
                     {% endif %}
                 {% endif %}
             </div>

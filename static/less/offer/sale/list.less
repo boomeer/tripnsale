@@ -173,6 +173,16 @@
             background-color: rgba(150, 150, 10, 0.1);
             border: 1px solid #994;
         }
+        &.tripItem-connected {
+            opacity: 0.8;
+            background-color: rgba(10, 150, 10, 0.1);
+            border: 1px solid #494;
+        }
+        &.tripItem-new {
+            opacity: 0.8;
+            background-color: rgba(150, 10, 10, 0.1);
+            border: 1px solid #944;
+        }
 
         &:hover {
             border-color: #5bb0c5;
@@ -182,7 +192,12 @@
         &.tripItem-closed:hover {
             background-color: rgba(150, 150, 10, 0.1);
         }
-
+        &.tripItem-connected:hover {
+            background-color: rgba(10, 150, 10, 0.1);
+        }
+        &.tripItem-new:hover {
+            background-color: rgba(150, 10, 10, 0.1);
+        }
 
         .tripSection {
             vertical-align: top;
@@ -199,18 +214,33 @@
 
         .tripMainSection {
             width: 100%;
+            padding: 0px;
             @media (min-width: 767px) {
                 margin-right: -@ownerPartWidth;
                 padding-right: @ownerPartWidth + 5;
                 float: left;
             }
 
-            .closed {
+            .status-box {
                 padding: 3px 6px;
                 border-radius: 3px;
-                border: 1px solid #994;
-                background-color: #eea;
-                color: #552;
+                border: 1px solid;
+
+                &.closed {
+                    border-color: #994;
+                    background-color: #eea;
+                    color: #552;
+                }
+                &.connected {
+                    border-color: #494;
+                    background-color: #aea;
+                    color: #252;
+                }
+                &.new {
+                    border-color: #944;
+                    background-color: #eaa;
+                    color: #522;
+                }
             }
 
             .tripFromTo {

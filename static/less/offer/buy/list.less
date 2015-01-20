@@ -150,6 +150,16 @@
             background-color: rgba(150, 150, 10, 0.1);
             border: 1px solid #994;
         }
+        &.buy-item-connected {
+            opacity: 0.8;
+            background-color: rgba(10, 150, 10, 0.1);
+            border: 1px solid #494;
+        }
+        &.buy-item-new {
+            opacity: 0.8;
+            background-color: rgba(150, 10, 10, 0.1);
+            border: 1px solid #994;
+        }
 
         &:hover {
             border-color: #5bb0c5;
@@ -160,13 +170,27 @@
             background-color: rgba(150, 150, 10, 0.1);
         }
 
-        .closed {
+        .status-box {
             padding: 0px 6px;
             border-radius: 3px;
-            border: 1px solid #994;
-            background-color: #eea;
-            color: #552;
+            border: 1px solid;
             display: inline-block;
+
+            &.closed {
+                border-color: #994;
+                background-color: #eea;
+                color: #552;
+            }
+            &.connected {
+                border-color: #494;
+                background-color: #aea;
+                color: #252;
+            }
+            &.new {
+                border-color: #944;
+                background-color: #eaa;
+                color: #522;
+            }
         }
 
         hr {
@@ -250,6 +274,11 @@
             }
         }
 
+        .owner-small {
+            a:hover {
+                color: #900;
+            }
+        }
         .owner {
             width: @ownerPartWidth;
             padding-right: 10px;

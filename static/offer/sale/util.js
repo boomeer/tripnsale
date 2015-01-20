@@ -20,13 +20,15 @@ function TripsRefresh(page)
     var so = $("#tripsOwner");
     var fr = $("#tripsFilterFrom");
     var to = $("#tripsFilterTo");
+    var rec = $("#tripsRecommend");
     $(".tripsList").html("Загрузка...");
     $.post("/offer/sale/filter/", {
         "from": fr ? fr.val() : "",
         "to": to ? to.val() : "",
         "profile": sp ? sp.val() : 0,
         "page": (page ? page : TripsGetPage()),
-        "owner": so ? so.val() : 0
+        "owner": so ? so.val() : 0,
+        "recommend": rec ? rec.val() : ""
     }, function(res) {
         $(".tripsList").html(res);
         $(".fast-profile-btn").click(StopPropagationEvent);

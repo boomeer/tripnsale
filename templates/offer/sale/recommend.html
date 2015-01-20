@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% load static %}
+{% load ccstatic %}
+
+{% block own_title %}
+Рекомендуемые заказы -
+{% endblock %}
+
+{% block own_head %}
+    <script src="{% ccstatic "offer/buy/list.js" %}"></script>
+    <script src="{% ccstatic "offer/buy/util.js" %}"></script>
+    <link rel="stylesheet" href="{% ccstatic "css/offer/buy/list.css" %}"/>
+{% endblock %}
+
+{% block main %}
+     <div class="page-header-wrap">
+       <div class="container">
+         <div class="page-header">
+           <h1>Рекомендуемые заказы</h1>
+         </div>
+       </div>
+     </div>
+     {% if firstTime %}
+        <div class="alert alert-success col-md-10 col-md-offset-1">
+            <strong>Поездка успешно создана!</strong> <br />
+            Ниже представлены заказы, подходящие к вашей поездке
+        </div>
+     {% endif %}
+    <div class="buys container-fluid container2 bg0">
+        <input type="hidden" value="{{ recSale.id }}" id="buysRecommend" />
+        <div class="buysList col-md-10 col-md-offset-1">
+            {% include "offer/buy/filter.html" %}
+        </div>
+    </div>
+    <div class="buyViewWrapper" style="display: none;">
+        <div class="buyViewBg">
+            <div class="buyViewGoBack" onClick="BuyViewClose();">
+            </div>
+            <div class="buyView bg0">
+                <button type="button" class="buyViewCloseBtn btn btn-default" onClick="BuyViewClose();">
+                    <span class="glyphicon glyphicon-remove-circle"></span>
+                </button>
+                <div class="buyViewContent">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="blueimp-gallery" class="blueimp-gallery">
+        <!-- The container for the modal slides -->
+        <div class="slides"></div>
+        <!-- Controls for the borderless lightbox -->
+        <h3 class="title"></h3>
+        <a class="prev">‹</a>
+        <a class="next">›</a>
+        <a class="close">×</a>
+        <a class="play-pause"></a>
+        <ol class="indicator"></ol>
+        <!-- The modal dialog, which will be used to wrap the lightbox content -->
+        <div class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title"></h4>
+                    </div>
+                    <div class="modal-body next">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left prev">
+                            <i class="glyphicon glyphicon-chevron-left"></i>
+                            Пред.
+                        </button>
+                        <button type="button" class="btn btn-default next">
+                            След.
+                            <i class="glyphicon glyphicon-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

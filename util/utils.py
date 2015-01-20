@@ -1,3 +1,5 @@
+#-*- coding:utf-8 -*-
+
 from django.shortcuts import HttpResponse, render_to_response, redirect
 from django.template import RequestContext
 from user.utils import GetCurrentUser, GetUnreadCount
@@ -69,6 +71,101 @@ def ValidFilter(text, filt):
         if not ok:
             return False
     return True
+
+def _PreprocessWord(w):
+    w = w.strip().lower()
+    while "  " in w:
+        w = w.replace("  ", " ")
+    return w
+
+# out is float in [0, 1]. 1 means, words are equals
+def _LevenshteinDist(w1, w2, preprocess=False):
+    if preprocess:
+        w1 = _PreprocessWord(w1)
+        w2 = _PreprocessWord(w2)
+
+    # must be: |w1| <= |w2|
+    if len(w1) > len(w2):
+        w1, w2 = w2, w1
+
+    def __b2i(b):
+        return 1 if b else 0
+
+    curD = [ i for i in range(len(w2) + 1) ]
+    for i in range(len(w1) + 1):
+        prevD, curD = curD, [i]
+        for j in range(1, len(w2) + 1):
+            curD.append( min(curD[j - 1] + 1, prevD[j] + 1, prevD[j - 1] + __b2i(w1[i] == w2[j])) )
+
+    ldist = curD[-1]
+    return 1.0 - ldist / max( len(w1), len(w2) )
+
+def _Translit(w, preprocess=False):
+    if preprocess:
+        w = _PreprocessWord(w)
+
+    repl = { "а": "a",
+             "б": "b",
+             "в": "v",
+             "г": "g",
+             "д": "d",
+             "е": "e",
+             "ё": "yo",
+             "ж": "zh",
+             "з": "z",
+             "и": "i",
+             "й": "i",
+             "к": "k",
+             "л": "l",
+             "м": "m",
+             "н": "n",
+             "о": "o",
+             "п": "p",
+             "р": "r",
+             "с": "s",
+             "т": "t",
+             "у": "u",
+             "ф": "f",
+             "х": "h",
+             "ц": "c",
+             "ч": "ch",
+             "ш": "sh",
+             "щ": "sh",
+             "ъ": "",
+             "ы": "i",
+             "ь": "",
+             "э": "e",
+             "ю": "yu",
+             "я": "ya", }
+    retw = ""
+    for s in w:
+        if s in repl:
+            retw += repl[s]
+        else:
+            retw += s
+    return ret
+
+def WordDiff(w1, w2, allowTransform=True):
+    if not allowTransform:
+        return _LevenshteinDist(w1, w2, preprocess=True)
+    else:
+        w1 = _PreprocessWord(w1)
+        w2 = _PreprocessWord(w2)
+        res = _LevenshteinDist(w1, w2, preprocess=False)
+
+        if res == 1.0:
+            return 1.0
+
+        tw1 = _Translit(w1)
+        tw2 = _Translit(w2)
+
+        if tw1 == w1 and tw2 == w2:
+            rest = 0.0
+        else:
+            rest = _LevenshteinDist(tw1, tw2, preprocess=False)
+
+        return max(res, rest)
+
 
 def ParseBool(text):
     return bool(text.strip()) and text.strip().lower() != "false" and text.strip() != "0"

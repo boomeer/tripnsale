@@ -12,6 +12,10 @@ import dkim
 HEADER_TAG = ("<<header>>", "<</header>>",)
 CONTENT_TAG = ("<<content>>", "<</content>>",)
 
+class MailErr (TsExc):
+    def __init__(self, msg):
+        super().__init__(msg)
+
 def _SendMail(user, msg):
     if not user.emailNotify:
         return

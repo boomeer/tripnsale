@@ -57,6 +57,7 @@ INSTALLED_APPS = (
     'guarant',
     'infos',
     'valute',
+    'mail',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -124,6 +125,22 @@ EMAIL_SENDER_NAME = "Trip & Sale"
 
 ENABLE_ACTIVATION = True
 
+EMAIL_DKIM_DOMAIN = None
+EMAIL_DKIM_SELECTOR = "info"
+
+# Use this structure in priv_settings (!!!!!) to make a pair with keys
+# DO NOT WRITE THE KEYS TO THE MAIN settings.py!
+class _EmailKeys:
+    def __init__(self, priv, pub, fromFiles=False):
+        if fromFiles:
+            with open(priv, 'r') as f:
+                self.private = priv.read()
+            with open(pub, 'r') as f:
+                self.public = pub.read()
+        else:
+            self.private = priv
+            self.public = pub
+EMAIL_DKIM_KEYS = None
 
 if os.path.isfile(os.path.join(BASE_DIR, "tripnsale", "priv_settings.py")):
     from tripnsale.priv_settings import *

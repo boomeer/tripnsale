@@ -1,0 +1,73 @@
+--- dkim/__init__.py	2015-01-24 21:14:55.000000000 +0300
++++ dkim-new/__init__.py	2015-01-24 21:09:45.483048600 +0300
+@@ -119,8 +119,8 @@ def select_headers(headers, include_head
+     return sign_headers
+
+ # FWS  =  ([*WSP CRLF] 1*WSP) /  obs-FWS ; Folding white space  [RFC5322]
+-FWS = r'(?:(?:\s*\r?\n)?\s+)?'
+-RE_BTAG = re.compile(r'([;\s]b'+FWS+r'=)(?:'+FWS+r'[a-zA-Z0-9+/=])*(?:\r?\n\Z)?')
++FWS = rb'(?:(?:\s*\r?\n)?\s+)?'
++RE_BTAG = re.compile(rb'([;\s]b'+FWS+rb'=)(?:'+FWS+rb'[a-zA-Z0-9+/=])*(?:\r?\n\Z)?')
+
+ def hash_headers(hasher, canonicalize_headers, headers, include_headers,
+                  sigheader, sig):
+@@ -256,24 +256,24 @@ class DKIM(object):
+   #: be in the default FROZEN list, but that could also make signatures
+   #: more fragile than necessary.
+   #: @since: 0.5
+-  RFC5322_SINGLETON = ('date','from','sender','reply-to','to','cc','bcc',
+-        'message-id','in-reply-to','references')
++  RFC5322_SINGLETON = (b'date',b'from',b'sender',b'reply-to',b'to',b'cc',b'bcc',
++        b'message-id',b'in-reply-to',b'references',)
+
+   #: Header fields to protect from additions by default.
+   #:
+   #: The short list below is the result more of instinct than logic.
+   #: @since: 0.5
+-  FROZEN = ('from','date','subject')
++  FROZEN = (b'from',b'date',b'subject',)
+
+   #: The rfc4871 recommended header fields to sign
+   #: @since: 0.5
+   SHOULD = (
+-    'sender', 'reply-to', 'subject', 'date', 'message-id', 'to', 'cc',
+-    'mime-version', 'content-type', 'content-transfer-encoding', 'content-id',
+-    'content- description', 'resent-date', 'resent-from', 'resent-sender',
+-    'resent-to', 'resent-cc', 'resent-message-id', 'in-reply-to', 'references',
+-    'list-id', 'list-help', 'list-unsubscribe', 'list-subscribe', 'list-post',
+-    'list-owner', 'list-archive'
++    b'sender', b'reply-to', b'subject', b'date', b'message-id', b'to', b'cc',
++    b'mime-version', b'content-type', b'content-transfer-encoding', b'content-id',
++    b'content- description', b'resent-date', b'resent-from', b'resent-sender',
++    b'resent-to', b'resent-cc', b'resent-message-id', b'in-reply-to', b'references',
++    b'list-id', b'list-help', b'list-unsubscribe', b'list-subscribe', b'list-post',
++    b'list-owner', b'list-archive',
+   )
+
+   #: The rfc4871 recommended header fields not to sign.
+@@ -357,6 +357,7 @@ class DKIM(object):
+     hset = self.should_sign | self.frozen_sign
+     include_headers = [ x for x,y in self.headers
+         if x.lower() in hset ]
++
+     return include_headers + [ x for x in include_headers
+         if x.lower() in self.frozen_sign]
+
+@@ -418,7 +419,7 @@ class DKIM(object):
+         include_headers = self.default_sign_headers()
+
+     # rfc4871 says FROM is required
+-    if 'from' not in ( x.lower() for x in include_headers ):
++    if b'from' not in ( x.lower() for x in include_headers ):
+         raise ParameterError("The From header field MUST be signed")
+
+     # raise exception for any SHOULD_NOT headers, call can modify
+@@ -556,7 +557,7 @@ class DKIM(object):
+     # fields when verifying.  Since there should be only one From header,
+     # this shouldn't break any legitimate messages.  This could be
+     # generalized to check for extras of other singleton headers.
+-    if 'from' in include_headers:
++    if b'from' in include_headers:
+       include_headers.append('from')
+     h = hasher()
+     self.signed_headers = hash_headers(

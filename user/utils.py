@@ -3,9 +3,7 @@ from util.exc import TsExc
 from django.contrib.auth.models import User as djUser
 from django.shortcuts import render
 from django.template.loader import render_to_string
-from mail.utils import (
-    SendMail,
-)
+import mail.utils as mail
 from datetime import datetime, timedelta
 
 

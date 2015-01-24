@@ -1,7 +1,7 @@
 {% load email_tags %}
 
 {% email_header %}
-From: Trip & Sale <{{ from_email }}>
+From: Trip & Sale <{{ fr_email }}>
 To: {{ to_email }}
 Subject: {% block subject %}{% endblock %}
 {% block own_headers %}{% endblock %}

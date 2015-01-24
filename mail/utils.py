@@ -8,27 +8,6 @@ from util.exc import TsExc
 import re
 
 import dkim
-# fix errors of dkim
-def _FixDkim():
-    try:
-        if dkim._FIXED:
-            return
-    except AttributeError:
-        pass
-
-    dkim.DKIM.RFC5322_SINGLETON = tuple([ x.encode('utf-8') for x in dkim.DKIM.RFC5322_SINGLETON])
-    dkim.DKIM.FROZEN = tuple([ x.encode('utf-8') for x in dkim.DKIM.FROZEN ])
-    dkim.DKIM.SHOULD = tuple([ x.encode('utf-8') for x in dkim.DKIM.SHOULD ])
-    dkim.DKIM.SHOULD_NOT = tuple([ x.encode('utf-8') for x in dkim.DKIM.SHOULD_NOT ])
-
-    dkim.FWS = rb'(?:(?:\s*\r?\n)?\s+)?'
-    dkim.RE_BTAG = re.compile(rb'([;\s]b' + dkim.FWS + rb'=)(?:' + dkim.FWS + \
-                              rb'[a-zA-Z0-9+/=])*(?:\r?\n\Z)?')
-    dkim._FIXED = True
-
-class MailErr (TsExc):
-    def __init__(self, msg):
-        super().__init__(msg)
 
 HEADER_TAG = ("<<header>>", "<</header>>",)
 CONTENT_TAG = ("<<content>>", "<</content>>",)
@@ -100,6 +79,9 @@ def SendMail(to, template, params={}, templateFromFile=True, dkimKeys=None, dkim
         if there aren't such keys, the mail won't be signed with dkim!
     @dkimSelector is a selector for dkim. if None, settings.EMAIL_DKIM_SELECTOR will be taken
     """
+    if not settings.ENABLE_EMAIL:
+        return
+
     fr = "info@tripnsale.com"
     params.update({ "to_email": to,
                     "fr_email": fr })
@@ -140,8 +122,6 @@ def SendMail(to, template, params={}, templateFromFile=True, dkimKeys=None, dkim
         rsaKeys = None
 
     if rsaKeys:
-        # _FixDkim()
-
         dkimmsg = dkim.DKIM(str(msg).encode("utf-8"))
         if dkimSelector:
             dkimsel = dkimSelector
@@ -156,4 +136,6 @@ def SendMail(to, template, params={}, templateFromFile=True, dkimKeys=None, dkim
         sigh, sigc = tuple(sig.split(': ', 1))
         msg[sigh] = sigc
 
-
+    sm = smtplib.SMTP("localhost")
+    sm.sendmail(fr, to, str(msg))
+    sm.quit()

@@ -128,6 +128,8 @@ ENABLE_ACTIVATION = True
 EMAIL_DKIM_DOMAIN = None
 EMAIL_DKIM_SELECTOR = "info"
 
+ENABLE_EMAIL = True
+
 # Use this structure in priv_settings (!!!!!) to make a pair with keys
 # DO NOT WRITE THE KEYS TO THE MAIN settings.py!
 class _EmailKeys:

@@ -16,17 +16,6 @@ class MailErr (TsExc):
     def __init__(self, msg):
         super().__init__(msg)
 
-def _SendMail(user, msg):
-    if not user.emailNotify:
-        return
-    fr = "info@tripnsale.com" # FORCE, yep
-    try:
-        sm = smtplib.SMTP("localhost")
-        sm.sendmail(fr, user.email, msg.encode("utf-8"))
-        sm.quit()
-    except:
-        raise
-
 class InvalidTagErr (MailErr):
     def __init__(self, msg):
         super().__init__(msg)
@@ -69,14 +58,15 @@ def SendMail(to, template, params={}, templateFromFile=True, dkimKeys=None, dkim
         from @template as a string else.
     template should have header and content section
         (separated with mail.utils.HEADER_TAG, mail.utils.CONTENT_TAG). For example:
-        <<header>>
-        Sublect: foo
+        {% load email_tags %}
+        {% email_header %} # will be replaced with mail.utils.HEADER_TAG[0]
+        Subject: foo
         To: foo@tripnsale.com
         From: bar@tripnsale.com
-        <</header>>
-        <<content>>
+        {% email_endheader %} # mail.utils.HEADER_TAG[1]
+        {% email_content %} # mail.utils.CONTENT_TAG[0]
         blahblahblah
-        <</content>>
+        {% email_endcontent %} # mail.utils.CONTENT_TAG[1]
     @params are used tor rendering the template
     @dkimKeys is a pair (private=priv_key, public=pub_key).
         if None, settings.EMAIL_DKIM_KEYS will be taken.
@@ -88,7 +78,8 @@ def SendMail(to, template, params={}, templateFromFile=True, dkimKeys=None, dkim
 
     fr = "info@tripnsale.com"
     params.update({ "to_email": to,
-                    "fr_email": fr })
+                    "fr_email": fr,
+                    "hostAddr": settings.CURRENT_HOST })
     if templateFromFile:
         rawmsg = templates.render_to_string(template, params)
     else:

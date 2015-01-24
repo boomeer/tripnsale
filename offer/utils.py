@@ -27,25 +27,26 @@ def CheckConnection(user, offer):
 
 
 def SendOfferMail(peer, offer, conf):
+    if not offer.owner.emailNotify:
+        return
+
     if type(offer) == BuyOffer:
-        content = render_to_string("mail/buy_offer.html", {
+        SendMail(offer.owner.email, "mail/buy_offer.html", {
             "user": offer.owner,
             "peer": peer,
             "buy": offer,
             "conf": conf,
-            "hostAddr": settings.CURRENT_HOST,
         })
     elif type(offer) == SaleOffer:
-        content = render_to_string("mail/sale_offer.html", {
+        SendMail(offer.owner.email, "mail/send_offer.html", {
             "user": offer.owner,
             "peer": peer,
             "sale": offer,
             "conf": conf,
-            "hostAddr": settings.CURRENT_HOST,
         })
     else:
         raise TsExc("bad_offer_type")
-    SendMail(offer.owner, content)
+
 
 class SaleEditErr (TsExc):
     def __init__(self, msg):

@@ -1,7 +1,13 @@
-From: Trip & Sale <info@tripnsale.com>
-To: {{ to }}
-Subject: {% block subject %}{% endblock %}
+{% load email_tags %}
 
+{% email_header %}
+From: Trip & Sale <{{ from_email }}>
+To: {{ to_email }}
+Subject: {% block subject %}{% endblock %}
+{% block own_headers %}{% endblock %}
+{% email_endheader %}
+
+{% email_content %}
 {% block main %}
 {% endblock %}
 
@@ -9,3 +15,4 @@ Subject: {% block subject %}{% endblock %}
 
 С уважением, команда Trip & Sale.
 info@tripnsale.com
+{% email_endcontent %}

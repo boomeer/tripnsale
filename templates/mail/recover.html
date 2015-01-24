@@ -1,13 +1,11 @@
-From: Trip & Sale <info@tripnsale.com>
-To: {{ user.email }}
-Subject: Восстановление пароля
+{% extends "mail/base.html" %}
 
+{% block subject %}Восстановление пароля{% endblock %}
+{% block main %}
 {{ user.first_name }},
 Вы делали запрос на изменение пароля.
 Ваш новый пароль: {{ newPassword }}.
 Войдите, используя новый пароль, здесь: http://{{ hostAddr }}/user/auth/.
 
---
-
-С уважением, команда Trip & Sale.
-info@tripnsale.com
+Спасибо, что Вы с нами!
+{% endblock %}

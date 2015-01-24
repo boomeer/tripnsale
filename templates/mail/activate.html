@@ -1,16 +1,12 @@
-From: Trip & Sale <info@tripnsale.com>
-To: {{ user.email }}
-Subject: {{ user.first_name }}, добро пожаловать на Trip&Sale! Пожалуйста, подтвердите вашу учетную запись
+{% extends "mail/base.html" %}
 
+{% block subject %}{{ user.first_name }}, добро пожаловать на Trip&Sale! Пожалуйста, подтвердите вашу учетную запись{% endblock %}
+{% block main %}
 {{ user.first_name }},
-добро пожаловать на Trip & Sale! Пожалуйста, подтвердите Вашу учетную запись.
+Добро пожаловать на Trip & Sale! Пожалуйста, подтвердите Вашу учетную запись.
 Для этого Вам необходимо перейти по ссылке:
 http://{{ hostAddr }}/user/activate/{{ user.activateCode }}
 
 Спасибо за выбор Trip & Sale!
 Желаем Вам удачи в поисках!
-
---
-
-С уважением, команда Trip & Sale.
-info@tripnsale.com
+{% endblock %}

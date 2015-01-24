@@ -34,32 +34,21 @@ def CheckAuth(request):
     if not GetCurrentUser(request):
         raise AuthErr
 
+def SendUserMail(user, template, params={}):
+    if not user.emailNotify:
+        return
+    updparams = dict(params)
+    updparams.update({ "user": user })
+    mail.SendMail(user.email, template, updparams)
 
 def SendActivateMail(user):
-    content = render_to_string("mail/activate.html", {
-        "user": user,
-        "hostAddr": settings.CURRENT_HOST,
-    })
-    SendMail(user, content)
-    
+    SendUserMail(user, "mail/activate.html")
 
 def SendRecoverMail(user, newPassword):
-    content = render_to_string("mail/recover.html", {
-        "user": user,
-        "newPassword": newPassword,
-        "hostAddr": settings.CURRENT_HOST,
-    })
-    SendMail(user, content)
-
+    SendUserMail(user, "mail/recover.html", { "newPassword": newPassword })
 
 def SendUnreadMsgMail(user, msg):
-    content = render_to_string("mail/unread.html", {
-        "to": user.email,
-        "user": user,
-        "msg": msg,
-        "hostAddr": settings.CURRENT_HOST,
-    })
-    SendMail(user, content)
+    SendUserMail(user, "mail/unread.html", { "msg": msg })
 
 
 def CheckUnreadMsgs(hours=12, checkNotified=True):
@@ -79,8 +68,8 @@ def CheckUnreadMsgs(hours=12, checkNotified=True):
             sends.add((u, msg.conf,))
             print("Send notification about unread msg for user {}({})".format(u.fullname(), u.email))
             SendUnreadMsgMail(u, msg)
-    
-    
+
+
 def CreateDialog(fr, to):
     conf = Conference()
     conf.save()

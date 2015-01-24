@@ -1,13 +1,10 @@
-From: Trip & Sale <info@tripnsale.com>
-To: {{ user.email }}
-Subject: На вашу заявку "{{ buy.title }}" откликнулись
+{% extends "mail/base.html" %}
 
+{% block subject %}На вашу заявку "{{ buy.title }}" откликнулись{% endblock %}
+
+{% block main %}
 {{ peer.fullname }} откликнулся на вашу заявку {{ buy.title }}.
 Вы можете перейти в диалог по этой ссылке: http://{{ hostAddr }}{{ conf.url }}.
 
 Спасибо, что Вы с нами!
-
---
-
-С уважением, команда Trip & Sale.
-info@tripnsale.com
+{% endblock %}

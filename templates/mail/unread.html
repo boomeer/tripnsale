@@ -1,8 +1,10 @@
 {% extends "mail/base.html" %}
 
-{% block subject %}У вас новое сообщение{% endblock %}
+{% block subject %}У Вас новое сообщение{% endblock %}
 
 {% block main %}
 Пользователь {{ msg.fr.fullname }} отправил Вам сообщение.
 Все непрочитанные сообщения Вы можете увидеть по этой ссылке: http://{{ hostAddr }}/user/mail.
+
+Спасибо, что Вы с нами!
 {% endblock %}

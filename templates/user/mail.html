@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% load ccstatic %}
+{% load cutlen %}
 
 {% block own_title %}
 Сообщения -
@@ -45,8 +46,11 @@
                                             {% if peer != profileOwner and not peer.guarant %}
                                                 <div style="padding: 4px 0px;">
                                                     <a href="{{ peer.profileUrl }}" target="_blank" class="bboldy">
-                                                        <img src="{{ peer.avatarThumbUrl }}" class="peerAv">
-                                                        {{ peer.first_name }} {{ peer.last_name }}
+                                                        <img src="{{ peer.avatarThumbUrl }}" class="peerAv" />
+                                                        <div class="peerName">
+                                                            {{ peer.first_name }} {{ peer.last_name }}
+                                                        </div>
+                                                        <br class="float-clear" />
                                                     </a>
                                                 </div>
                                             {% endif %}
@@ -69,7 +73,7 @@
                                         Я:
                                     </span>
                                 {% endif %}
-                                {{ conf.msg.content }}
+                                {{ conf.msg.content|cutlenw:100 }}
                             </div>
                             <div class="col-md-3">
                                 {{ conf.msg.time }}

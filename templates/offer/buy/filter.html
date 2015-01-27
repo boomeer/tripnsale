@@ -1,5 +1,6 @@
 {% load static %}
 {% load ccstatic %}
+{% load cutlen %}
 
 <input type="hidden" id="buysPage" value="{{ page|add:1 }}" />
 
@@ -95,7 +96,7 @@
                         Комментарий:
                     </span>
                     <span class="comment-content">
-                        {{ buy.content }}
+                        {{ buy.content|cutlenw:150 }}
                     </span>
                 </div>
             {% endif %}

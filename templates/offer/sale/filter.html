@@ -1,5 +1,6 @@
 {% load static %}
 {% load ccstatic %}
+{% load cutlen %}
 
 <input type="hidden" id="tripsPage" value="{{ page|add:1 }}" />
 {% for sale in saleblock %}
@@ -98,7 +99,7 @@
                             Комментарий:
                         </div>
                         <div class="tripComment-content">
-                            {{ sale.content }}
+                            {{ sale.content|cutlenw:150 }}
                         </div>
                     </div>
                 </div>

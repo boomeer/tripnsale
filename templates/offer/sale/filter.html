@@ -138,7 +138,81 @@
         </div>
     </div>
 {% empty %}
-    Нет поездок
+    {% if profile %}
+        Нет поездок
+    {% else %}
+        <div class="emptyList">
+          <div class="part1">
+            <h1>
+                {% if recBuy %}
+                    На данный момент рекомендуемых поездок не найдено :(
+                {% else %}
+                    На данный момент поездок не найдено :(
+                {% endif %}
+            </h1>
+
+              <ul class="icon-boxes list-unstyled" style="margin-top: 40px">
+                <li class="icon-btn icon-btn_man">
+                  {% if recBuy %}
+                    <a href="/offer/buy/list/#buy{{ recBuy.id }}">
+                  {% else %}
+                    <a href="/">
+                  {% endif %}
+                    <span class="icon-btn_icon">
+                      <i class="ai ai-arrow-left"></i>
+                    </span>
+                    <span class="icon-btn_text">
+                      Назад
+                    </span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div class="row space">
+              <p  style="font-weight:300; margin-top: -30px;" class="space text-center lead">Ссылки:</p>
+              <ul class="icon-boxes list-unstyled">
+                <li class="icon-btn icon-btn_man">
+                  {% if recBuy %}
+                    <a href="/offer/buy/list">
+                  {% else %}
+                    <a href="/">
+                  {% endif %}
+                    <span class="icon-btn_icon">
+                      <i class="glyphicon glyphicon-briefcase"></i>
+                    </span>
+                    <span class="icon-btn_text" >
+                      {% if recBuy %}
+                        Поездки
+                      {% else %}
+                        Главная
+                      {% endif %}
+                    </span>
+                  </a>
+                </li>
+                <li class="icon-btn icon-btn_cart">
+                  <a href="/info/faqs/">
+                    <span class="icon-btn_icon">
+                      <i class="ai ai-question"></i>
+                    </span>
+                    <span class="icon-btn_text">
+                      FAQ
+                    </span>
+                  </a>
+                </li>
+                <li class="icon-btn icon-btn_features">
+                  <a href="/info/contact-minimalist/">
+                    <span class="icon-btn_icon">
+                      <i class="ai ai-mail2"></i>
+                    </span>
+                    <span class="icon-btn_text">
+                      Контакты
+                    </span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+        </div>
+    {% endif %}
 {% endfor %}
 
 <div style="text-align: center;">

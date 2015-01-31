@@ -21,14 +21,24 @@
        </div>
      </div>
      {% if firstTime %}
-        <div class="alert alert-success col-md-10 col-md-offset-1 pagestatus">
+        <div class="alert alert-success col-md-12 pagestatus">
             <strong>Поездка успешно создана!</strong> <br />
             Ниже представлены заказы, подходящие к вашей поездке
         </div>
      {% endif %}
     <div class="buys container-fluid container2 bg0">
         <input type="hidden" value="{{ recSale.id }}" id="buysRecommend" />
-        <div class="buysList col-md-10 col-md-offset-1">
+        <div class="col-md-2 backSale">
+            <a href="/offer/sale/list/#trip{{ recSale.id }}" style="font-size: large;">
+                <span class="icon-btn_icon">
+                  <i class="ai ai-arrow-left"></i>
+                </span>
+                <span class="icon-btn_text">
+                  Назад
+                </span>
+            </a>
+        </div>
+        <div class="buysList col-md-10">
             {% include "offer/buy/filter.html" %}
         </div>
     </div>

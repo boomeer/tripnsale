@@ -1,14 +1,15 @@
 {% extends "base_list.html" %}
 {% load static %}
 {% load ccstatic %}
+{% load cutlen %}
 
 {% block own_title %}
 Рекомендуемые поездки -
 {% endblock %}
 
 {% block own_head %}
-    <script src="{% ccstatic "offer/sale/list.js" %}"></script>
     <script src="{% ccstatic "offer/sale/util.js" %}"></script>
+    <script src="{% ccstatic "offer/sale/list.js" %}"></script>
     <link rel="stylesheet" href="{% ccstatic "css/offer/sale/list.css" %}"/>
 {% endblock %}
 
@@ -20,16 +21,25 @@
          </div>
        </div>
      </div>
-
     {% if firstTime %}
-        <div class="alert alert-success col-md-10 col-md-offset-1 pagestatus">
+        <div class="alert alert-success col-md-12 pagestatus">
             <strong>Заказ успешно создан!</strong> <br />
             Ниже представлены поездки, подходящие к вашему заказу
         </div>
      {% endif %}
     <div class="trips container-fluid bg0">
-        <input type="hidden" value="{{ recBuy.id }}" id="tripsRecommend" />
-        <div class="tripsList col-md-10 col-md-offset-1">
+        <input type="hidden" value="{{ recrecBuy.id }}" id="tripsRecommend" />
+        <div class="col-md-2 backBuy">
+            <a href="/offer/buy/list/#buy{{ recBuy.id }}" style="font-size: large;">
+                <span class="icon-btn_icon">
+                  <i class="ai ai-arrow-left"></i>
+                </span>
+                <span class="icon-btn_text">
+                  Назад
+                </span>
+            </a>
+        </div>
+        <div class="tripsList col-md-10">
             {% include "offer/sale/filter.html" %}
         </div>
     </div>

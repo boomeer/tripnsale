@@ -40,7 +40,7 @@
                 {% else %}
                     <div class="msg msg-sys {% if msg.new %}bg1 msg-unread{% endif %} container-fluid">
                         <div class="content col-md-8">
-                            {{ msg.content }}
+                            {{ msg.content|safe }}
                         </div>
                         <div class="time col-md-4">
                             {{ msg.time|date:"d.m.Y" }} {{ msg.time|time:"H:i:s" }}

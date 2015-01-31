@@ -256,12 +256,36 @@ def ImView(request):
                         user=user,
                         buy=offer,
                     )
+                    msg = SystemMsg(
+                        conf=conf,
+                        content='Начало обсуждения заказа &laquo;<a target="_blank" href="/offer/buy/list/#buy{id}">{name}</a>&raquo;'.format(id=offer.id, name=offer.title),
+                        time=datetime.now(),
+                    )
                 else:
                     oc = OfferConnection(
                         user=user,
                         sale=offer,
                     )
+                    cont = \
+                        "Начало обсуждения поездки &laquo;<a target=\"_blank\" " + \
+                        "href=\"/offer/sale/list/#sale{id}\">" + \
+                        "{fr}{frcity} &rarr; {to}{tocity} (c {frTime} по {toTime})</a>&raquo;"
+                    cont = cont.format(
+                        id=offer.id,
+                        fr=offer.fr.title,
+                        frcity=" ({})".format(offer.frCity) if offer.frCity else "",
+                        to=offer.to.title,
+                        tocity=" ({})".format(offer.toCity) if offer.toCity else "",
+                        frTime=offer.frTime.strftime("%d.%m.%Y"),
+                        toTime=offer.toTime.strftime("%d.%m.%Y")
+                    )
+                    msg = SystemMsg(
+                        conf=conf,
+                        content=cont,
+                        time=datetime.now(),
+                    )
                 oc.save()
+                msg.save()
             return redirect("/user/im?conf={}".format(conf.id))
         conf = Conference.objects.get(id=params.get("conf", 0))
         user = GetCurrentUser(request)

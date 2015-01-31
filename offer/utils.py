@@ -25,9 +25,8 @@ def CheckConnection(user, offer):
         raise TsExc("bad_offer_type")
     return not oc.count()
 
-
 def SendOfferMail(peer, offer, conf):
-    if not offer.owner.emailNotify:
+    if not offer.owner.emailNotify or not offer.owner.connectionNotify:
         return
 
     if type(offer) == BuyOffer:
@@ -46,7 +45,6 @@ def SendOfferMail(peer, offer, conf):
         })
     else:
         raise TsExc("bad_offer_type")
-
 
 class SaleEditErr (TsExc):
     def __init__(self, msg):
@@ -148,7 +146,7 @@ def _SaleExtractList(params):
     sales = sorted(sales, key=lambda sale: (sale.closed, -sale.isCurrent(), sale.toEnd(),))
     return sales
 
-def SaleExtractRecommend(buy, user=None, limit=None):
+def SaleExtractRecommend(buy, user=None, limit=None, onlyNew=False, useAllVisits=False):
     sales = SaleOffer.objects.filter(fr__id=buy.to.id)
     sales = sales.exclude(owner__id=buy.owner.id)
     sales = sales.all()
@@ -159,7 +157,8 @@ def SaleExtractRecommend(buy, user=None, limit=None):
     else:
         visits = visits.filter(baseOffer__id=buy.id)
 
-    visits = visits.filter(visType=BuyRecommendVisit.VISITED)
+    if not useAllVisits:
+        visits = visits.filter(visType=BuyRecommendVisit.VISITED)
     visits = dict([ (visit.recOffer.id, visit.time + timedelta(minutes=5),) for visit in visits.all() ])
 
     if user:
@@ -196,7 +195,8 @@ def SaleExtractRecommend(buy, user=None, limit=None):
                   visits.get(sale.id, curTime) >= curTime
         sale.visited = sale.id in visits
         sale.rank = rank
-        rankedSales.append(sale)
+        if sale.new or not onlyNew:
+            rankedSales.append(sale)
 
     return sorted(rankedSales, key=lambda x: (not x.new, -x.rank, x.toTime))
 

@@ -33,8 +33,6 @@ def CheckAuth(request):
         raise AuthErr
 
 def SendUserMail(user, template, params={}):
-    if not user.emailNotify:
-        return
     updparams = dict(params)
     updparams.update({ "user": user })
     mail.SendMail(user.email, template, updparams)
@@ -46,8 +44,9 @@ def SendRecoverMail(user, newPassword):
     SendUserMail(user, "mail/recover.html", { "newPassword": newPassword })
 
 def SendUnreadMsgMail(user, msg):
+    if not user.emailNotify or not user.unreadNotify:
+        return
     SendUserMail(user, "mail/unread.html", { "msg": msg })
-
 
 def CheckUnreadMsgs(hours=12, checkNotified=True):
     timeToSend = datetime.now() - timedelta(hours=hours)

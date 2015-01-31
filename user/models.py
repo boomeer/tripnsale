@@ -22,7 +22,10 @@ class User(authModels.User):
     birthday = models.DateField(default=None, null=True, blank=True)
     about = models.TextField(default="", blank=True)
     hidden = models.BooleanField(default=False)
-    emailNotify = models.BooleanField(default=True)
+    emailNotify = models.BooleanField(default=True) # deprecated
+    connectionNotify = models.BooleanField(default=True)
+    unreadNotify = models.BooleanField(default=True)
+    recommendNotify = models.BooleanField(default=True)
 
     def avatarUrl(self):
         return self.avatar.url if self.avatar else os.path.join(settings.STATIC_URL, "user/av_default.png")

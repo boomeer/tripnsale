@@ -258,7 +258,7 @@ def ImView(request):
                     )
                     msg = SystemMsg(
                         conf=conf,
-                        content='Начало обсуждения заказа &laquo;<a target="_blank" href="/offer/buy/list/#buy{id}">{name}</a>&raquo;'.format(id=offer.id, name=offer.title),
+                        content='Приглашение к обсуждению заказа &laquo;<a target="_blank" href="/offer/buy/list/#buy{id}">{name}</a>&raquo;'.format(id=offer.id, name=offer.title),
                         time=datetime.now(),
                     )
                 else:
@@ -267,7 +267,7 @@ def ImView(request):
                         sale=offer,
                     )
                     cont = \
-                        "Начало обсуждения поездки &laquo;<a target=\"_blank\" " + \
+                        "Приглашение к обсуждению поездки &laquo;<a target=\"_blank\" " + \
                         "href=\"/offer/sale/list/#sale{id}\">" + \
                         "{fr}{frcity} &rarr; {to}{tocity} (c {frTime} по {toTime})</a>&raquo;"
                     cont = cont.format(

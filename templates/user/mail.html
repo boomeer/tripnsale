@@ -67,13 +67,17 @@
                                     </div>
                                 {% endif %}
                             </div>
-                            <div class="col-md-6 {% if conf.msg.new %}bg1 dialog-unread{% endif %}">
+                            <div class="col-md-6 dialog-preview {% if conf.msg.new %}bg1 dialog-unread{% elif not conf.msg.fr %}msg-sys{% endif %}">
                                 {% if profileOwner == conf.msg.fr %}
                                     <span class="itsMe">
                                         Я:
                                     </span>
                                 {% endif %}
-                                {{ conf.msg.content|cutlenw:100 }}
+                                {% if conf.msg.fr %}
+                                    {{ conf.msg.content|cutlenw:100 }}
+                                {% else %}
+                                    {{ conf.msg.content|safe }}
+                                {% endif %}
                             </div>
                             <div class="col-md-3">
                                 {{ conf.msg.time }}

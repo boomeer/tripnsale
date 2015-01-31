@@ -5,7 +5,7 @@
 <input type="hidden" id="buysPage" value="{{ page|add:1 }}" />
 
 {% for buy in buyblock %}
-    <div class="buy-item container-fluid {% if buy.closed %}buy-item-closed{% elif buy.connected %}buy-item-connected{% elif buy.new %}buy-item-new{% endif %}" onclick="location.hash = '#buy{{ buy.id }}';">
+    <div class="buy-item container-fluid {% if buy.closed %}buy-item-closed{% elif buy.connected %}buy-item-connected{% endif %}" onclick="location.hash = '#buy{{ buy.id }}';">
         <div class="buy-section photo hidden-xs">
             <img src="{{ buy.gallery.getHeadUrl }}" alt="">
         </div>

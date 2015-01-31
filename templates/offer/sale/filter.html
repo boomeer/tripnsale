@@ -4,7 +4,7 @@
 
 <input type="hidden" id="tripsPage" value="{{ page|add:1 }}" />
 {% for sale in saleblock %}
-    <div class="tripItem {% if sale.closed %}tripItem-closed{% elif sale.connected %}tripItem-connected{% elif sale.new %}tripItem-new{% endif %} row container-fluid" onclick="location.hash = '#trip{{ sale.id }}';">
+    <div class="tripItem {% if sale.closed %}tripItem-closed{% elif sale.connected %}tripItem-connected{% endif %} row container-fluid" onclick="location.hash = '#trip{{ sale.id }}';">
         <div class="tripSection tripMainSection">
             <div class="tripFromTo">
                 <div class="tripFrom tripPlace">
